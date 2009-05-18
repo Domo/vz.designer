@@ -1,0 +1,131 @@
+			<!-- start main content default template -->
+			<div id="left_column">
+					<h2>Booking Online</h2>
+	
+					<div id="main_content">
+								<!-- div id="bookings"></div -->
+
+								
+								
+										<form action="/ticket_booking/search_tickets" class="common-form" method="post">
+										
+											<!-- div id="menu2">
+												<ul class="clearfix">
+													<li class="{% if step == 1 %}checked{% endif %}"><a href="/">DATES</a></li>
+													<li class="{% if step == 2 %}checked{% endif %}"><a href="#">TICKETS</a></li>
+													<li class="{% if step == 3 %}checked{% endif %}"><a href="#">PAYMENT</a></li>
+													<li class="{% if step == 4 %}checked{% endif %}"><a href="#">CONFIRMATION</a></li>
+												</ul>
+											</div -->
+										 
+											{% if flash.error != blank -%}
+												<div class="BE-errorbox"><h3 class="flash-error">{{ flash.error }}</h3></div>
+											{% endif -%}
+											{% if flash.warning != blank -%}
+												<div class="BE-errorbox"><h3 class="flash-warning">{{ flash.warning }}</h3></div>
+											{% endif -%}
+											{% if flash.notice != blank -%}
+												<div class="BE-errorbox"><h3 class="flash-notice">{{ flash.notice }}</h3></div>
+											{% endif -%}
+										
+										
+										
+													 <input class="datefield" id="booking_date" name="booking[date]" value="{{ booking.date | format_date_to: 'eu' }}" type="text">&nbsp;
+														<img alt="Calendar" id="day_calendar" onmouseout="this.style.background=''" onmouseover="this.style.background='red';" src="/skin/images/calendar.png?1185985916" >
+														<script type="text/javascript">Calendar.setup({inputField :"booking_day", ifFormat:"%d.%m.%Y", button:"day_calendar"});</script>
+										
+														 <select id="booking_event_selected" name="booking[event_selected]" onchange="" >{{ booking.event_select_options }}</select>
+														 <input class="submit" type="submit" alt="Update search" value="Update search" style="margin-left: 5px; width: 110px;" />
+										
+										</form>
+
+					</div>
+					<!-- end main content -->
+			</div>
+			<!-- end left column -->
+		
+		
+			<!-- start right column -->
+			<div id="right_column">
+				<!-- start side nav -->
+				<div class="sidenav">
+				<ul>
+				<li class="title">In This Section</li>
+				<li><a href="#" title="Previous Newsletters">Previous Newsletters</a></li>
+				<li><a href="#" title="Touring Guides">Touring Guides</a></li>
+				<li class="current"><a href="#" title="Media">Media</a></li>
+				<li><a href="#" title="Membership">Membership</a></li>
+				<li><a href="#" title="Contact Us">Contact Us</a></li>
+				</ul>
+				</div>
+				<!-- end side nav -->
+			
+			<!-- start book ticket -->
+			<div id="book">
+			<h3>Book Your Ticket Here</h3>
+			<div class="form">
+			<!-- start region -->
+			<div class="filter">
+			<label for="selectregion">Select Region</label>
+			<select name="" id="selectregion">
+			<option selected="selected">All Regions</option>
+			<option>Dublin</option>
+			<option>Midlands East</option>
+			<option>South East</option>
+			<option>Cork Kerry</option>
+			<option>Shannon</option>
+			<option>Ireland West</option>
+			<option>The Northwest</option>
+			<option>Northern Ireland</option>
+			</select>
+			</div>
+			<!-- end region -->
+			<!-- start Category -->
+			<div class="filter">
+			<label for="selectcategory">Select Category</label>
+			<select name="" id="selectcategory">
+			<option selected="selected">All Categories</option>
+			<option>Education</option>
+			<option>House &amp; Gardens</option>
+			<option>Museum</option>
+			<option>Visitor Centre</option>
+			<option>Park</option>
+			<option>Castle</option>
+			<option>Heritage Town</option>
+			<option>Equestrian</option>
+			<option>Historical</option>
+			</select>
+			</div>
+			<!-- end Category -->
+			<!-- start Attracation -->
+			<div class="filter">
+			<label for="selectattrcation">Select Attraction *</label>
+			<select name="" id="selectattrcation">
+			<option selected="selected">Select Attraction</option>
+			<option>attraction 1</option>
+			<option>attraction 2</option>
+			<option>attraction 3</option>
+			<option>attraction 4</option>
+			<option>attraction 5</option>
+			<option>attraction 6</option>
+			<option>attraction 7</option>
+			<option>attraction 8</option>
+			<option>attraction 9</option>
+			<option>attraction 10</option>
+			</select>
+			<span class="note">* You must select an attraction</span>
+			</div>
+			<!-- end Attrcation -->
+			<!-- start find attraction button -->
+			<div class="button">
+			<input name="" type="button" value="Find Attraction" />
+			</div> 
+			<!-- end find attraction button -->
+			</div>
+			</div>
+			<!-- end book ticket -->
+			
+			</div>
+			<!-- end right column -->
+			
+			<!-- start anchor --><div class="anchor"></div><!-- end anchor -->

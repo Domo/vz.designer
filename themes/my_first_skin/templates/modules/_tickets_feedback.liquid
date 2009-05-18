@@ -1,0 +1,9 @@
+									{% if flash.error != blank -%}
+										<div class="BE-feedback"><div class="flash-error">{{ flash.error }}</div></div>
+									{% endif -%}
+									{% if flash.warning != blank -%}
+										<div class="BE-feedback"><div class="flash-warning">{{ flash.warning }}</div></div>
+									{% endif -%}
+									{% if flash.notice != blank -%}
+										<div class="BE-feedback"><div class="flash-notice">{{ flash.notice }}</div></div>
+									{% endif -%}

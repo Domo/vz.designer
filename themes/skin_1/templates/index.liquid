@@ -1,0 +1,29 @@
+<!--
+{% include 'modules/visualnav' -%}
+{% include 'modules/feedback' -%}
+
+{{ property.image_tag  }}
+{{ property.image_tags  }}
+{{ property.name  }}
+{{ property.description  }}
+-->
+	<div id="tab-hotels">
+	<script type="text/javascript">
+	/*<![CDATA[*/
+
+		function go()
+		{
+			/*
+			var arrival_date = $F("arrival_day")+"."+$F("arrival_month")+"."+$F("arrival_year");
+			$("arrival_date").value = arrival_date; */
+			Modalbox.show('<div id=\'loadingbox\'><h3>Checking Availability</h3><p>Please wait...</p><img src=\'/skin/images/ajax-loader_small.gif\' /></div>', {width: 600});
+			document.form_availability.submit();
+		}
+		/*]]>*/
+
+	</script>
+	</div>
+	<p>&nbsp;</p>
+ <br  style="clear:both" />
+	<h2 class="alt">Check Availability</h2>
+	<p>Please fill in the form above to check availability. </p>

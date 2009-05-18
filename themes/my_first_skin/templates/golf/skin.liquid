@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<title>Finnstown Country House Hotel - Dublin</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Finnstown Country House Hotel - Dublin, weekend hotel breaks" />
+	<meta name="keywords" content="Finnstown, Finnstown Country House Hotel, hotel, booking, accommodation, weddings, dining, leisure, leisure facilities, dublin, ireland" />
+	<meta name="author" content="Andrea Cima Serniotti - Visrez" />
+	
+	<!-- STYLESHEETS -->
+	<link href="/skin/stylesheets/website.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/skin/stylesheets/standard.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/skin/stylesheets/custom.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/skin/stylesheets/calendar.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/skin/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	
+	<!-- SCRIPTS -->
+	<script src="/skin/javascripts/core/prototype.js" type="text/javascript"></script>
+	<script src="/skin/javascripts/core/scriptaculous.js?load=builder,effects" type="text/javascript"></script>
+	<script src="/skin/javascripts/lib/application.js" type="text/javascript"></script>
+	<script src="/skin/javascripts/core/calendar.js" type="text/javascript"></script>
+	<script src="/skin/javascripts/core/calendar-setup.js" type="text/javascript"></script>
+	<script src="/skin/javascripts/core/calendar-en.js" type="text/javascript"></script>
+	<script src="/skin/javascripts/lib/validationhints.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/skin/javascripts/website/sifr.js"></script>
+      <script type="text/javascript">
+	  if(typeof sIFR == "function"){
+		sIFR();
+		sIFR.replaceElement(".title", named({sFlashSrc: "/skin/javascripts/website/times.swf", sColor: "#983a39", sWmode: "transparent", sCase: "upper"}));
+		sIFR.replaceElement(".subtitle", named({sFlashSrc: "/skin/javascripts/website/times.swf", sColor: "#812120", sWmode: "transparent", sCase: "upper"}));
+		};
+	  </script>
+	
+	{{ content_for_header }}
+</head>
+<body class="wide">
+{% if third_party.is_set %}<div id="thirdparty">Booking as 3th party: {{ third_party.name }}</div>{% endif %}
+
+<div id="wrapper"> 
+  	<!-- HIDDEN NAVIGATION -->
+  	<a name="A-top" title="A-top"></a> 
+	<ul id="skip" class="navigation">
+		<li><a href="#A-content">Skip to main content</a></li>
+		<li><a href="#A-mainMenu">Skip to main menu</a></li>
+		<li><a href="#A-sidebar">Skip to secondary menu</a></li>
+	</ul>
+	<!-- /HIDDEN NAVIGATION -->
+<hr />
+
+<!-- HEADER -->
+<div id="header">   
+	<h1><a href="http://www.finnstown-hotel.ie/" id="logo" title="Back home"><span class="alt">Finnstown Country House Hotel - Dublin</span></a></h1>
+     <hr />
+    
+    <div id="banner">
+      		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"
+                    width="709" height="220" title="Flash Banner">
+                    <param name="movie" value="http://www.finnstown-hotel.ie/Images/Finnstown_animation03.swf" />
+
+                    <param name="quality" value="high" />
+                    <embed src="http://www.finnstown-hotel.ie/Images/Finnstown_animation03.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                        type="application/x-shockwave-flash" width="709" height="220"></embed>
+      		</object>
+    </div>
+    
+	{% include 'modules/search' -%}
+
+ </div><!-- /HEADER -->
+
+<hr />
+
+<div id="mainMenu">
+	<a class="navigation" name="A-mainMenu" title="A-mainMenu"></a>
+	<h2 class="navigation">Menu</h2>
+	 	<ul>
+	    <li class="active"><a href="http://www.finnstown-hotel.ie/">Home</a></li>
+		<li><a href="http://www.finnstown-hotel.ie/accommodation-dublin.aspx">Accommodation</a></li>
+		<li><a href="http://www.finnstown-hotel.ie/weddings-dublin.aspx">Weddings</a></li>
+		<li><a href="http://www.finnstown-hotel.ie/dublin-restaurants.aspx">Dining</a></li>
+        <li><a href="http://www.finnstown-hotel.ie/conference-hotel.aspx">Meetings</a></li>
+        <li><a href="http://www.finnstown-hotel.ie/leisure-hotel.aspx">Leisure Facilities</a></li>
+        <li><a href="http://www.finnstown-hotel.ie/location.aspx">Location</a></li>
+        <li><a href="http://www.finnstown-hotel.ie/about_us.aspx">About Us</a></li>
+        
+	</ul>  
+</div>
+
+<hr />
+
+<!-- CONTENT -->
+<div id="content">
+    <a name="A-content" title="A-content"></a>  
+	
+	<div id="main">
+		<div id="booking">{{ content_for_layout }}</div>
+	</div>
+	
+    <div id="features"> 
+		<a name="A-sidebar" title="A-sidebar"></a>
+        
+        <div class="box">
+            <h3 id="newsletter"><span class="boxtitle">Newsletter</span></h3>
+            <form method="post" action="http://newsletters.visrez.com/t/1/s/dykkd/">
+                <p><label for="mb-name">Name:</label> <input type="text" value=" " id="mb-name" name="mb-name" /></p>
+                <p><label for="mb-dykkd-dykkd">Email:</label> <input type="text" value=" " id="mb-dykkd-dykkd" name="mb-dykkd-dykkd" /></p>
+                <p><button type="submit" value="Subscribe"><span class="alt">Subscribe</span></button></p>
+            </form>        
+        </div><hr />   
+           
+        <div class="box">
+            <h3 id="gifts"><span class="boxtitle">Gift Vouchers</span></h3>
+            <p>Find out how to purchase a gift vouchers. <a href="http://www.finnstown-hotel.ie/gift_vouchers.aspx">Read more..</a></p>
+        </div>
+    </div>	
+</div>
+<!-- /CONTENT -->
+<hr />
+
+        <div id="footer">
+            <p>
+                <span id="copy"><strong>&copy; 2008 Finnstown Country House Hotel</strong> - Part of The Mansfield Group<br />Newcastle Road, Lucan, Co.Dublin - Tel +353 1 6010700 - Fax +3531 6281088</span> <span id="service">
+
+                        <a href="javascript:void(window.external.AddFavorite(location.href, document.title))">
+                            Add to Favourites</a> | <a href="http://www.finnstown-hotel.ie/referafriend.aspx">Refer a friend</a>
+                        | <a href="http://www.finnstown-hotel.ie/feedback.aspx">Feedback</a>
+                        | <a href="http://www.finnstown-hotel.ie/links.aspx">Links</a>
+                        | <a href="http://www.finnstown-hotel.ie/sitemap.aspx">Site map</a> | <a href="/terms_conditions.aspx">
+
+                            T&amp;C</a> | <a href="http://www.finnstown-hotel.ie/careers.aspx">Careers</a> | <a href="http://www.finnstown-hotel.ie/contact_us.aspx">
+                            Contact Us</a><br />Designed by <a href="http://www.visrez.com" target="_blank">Visrez</a></span></p>
+        </div>
+
+</div>
+<!-- /WRAPPER -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-134115-56");
+pageTracker._trackPageview();
+</script>
+
+</body></html>	

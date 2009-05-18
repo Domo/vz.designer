@@ -1,0 +1,9 @@
+<!--
+{% include 'modules/visualnav' -%}
+{% include 'modules/feedback' -%}
+
+{{ property.image_tag  }}
+{{ property.image_tags  }}
+{{ property.name  }}
+{{ property.description  }}
+-->

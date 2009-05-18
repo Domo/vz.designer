@@ -1,0 +1,26 @@
+<div id="booking">
+  <h2>Vouchers</h2>  
+  {% for voucher in vouchers %}
+      <h2 class="subtitle"><span>{{ voucher.name }}</span></h2>
+          <div style="float: left; width: 60%">
+            {{ voucher.description }}  
+            <p>
+            <strong>{{ voucher.price | format_money: '&euro;' }}</strong><br/>
+            <a href="#shopping-card" onclick="new Ajax.Updater('shopping-card', '/web_vouchers/ajax_add_voucher/{{ voucher.id }}', {asynchronous:true, evalScripts:true, onComplete:function(request){window.scrollBy(0, 20000)}}); return false;">Purchase Voucher</a>  
+            </p>
+          </div>
+          
+          <div style="float: left; width: 40%">
+  					{{ voucher.thumb_tag }}
+  			  </div>
+        <br style="clear: both;"/>
+  {% endfor %}
+  <br style="clear: both"/>
+  <div id="cart" class="grey-box">
+    <h2>Selected Vouchers</h2>
+    <div id="shopping-card" class="clearfix">
+      Shopping cart is empty.
+    </div><!-- end of shopping card -->
+  </div>
+
+</div>

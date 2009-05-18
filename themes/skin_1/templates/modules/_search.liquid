@@ -1,0 +1,36 @@
+<div id="search">
+	<form action="{{ html.availability_action }}" id="availability_search_form" method="post">
+		<p><label for="arrival_date">Arrival</label>
+		<input class="datefield" id="arrival_date" name="rate_search_container[arrival_date]" type="text" value="{{ arrival_date }}" />
+		<img alt="Calendar" id="day_calendar" src="/skin/images/calendar.gif" />
+		<script type="text/javascript">Calendar.setup({inputField: "arrival_date", ifFormat: "%d.%m.%Y", button: "day_calendar"});</script>
+		</p>
+		
+		<p>
+		<label for="reservation_search_nights">Nights</label>
+		<select name="nights" id="reservation_search_nights" class="nights">
+		{% for i in (1..7) -%}
+			<option value="{{i}}"{% if nights == i -%} selected="selected"{% endif -%}>{{i}}</option>
+		{% endfor -%}
+		</select>
+		</p>
+	 
+		<!-- p class="reservation_search_nights">
+			<label for="property">Hotel</label>
+			<select name="property">
+				{% for p in properties %}
+					{% if p.shortcut != 'inec' %}
+						<option value="{{ p.id }}" {% if p.id == selected_property.id %}selected="selected"{% endif %}>{{ p.name }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</p -->
+		<p>&nbsp;
+		<input type="hidden" id="property" name="property"   value="1" />
+		</p>
+		<p>
+				<button onclick="Modalbox.show('<div id=\'loadingbox\'><h3>Checking Availability</h3><p>Please wait...</p><img src=\'/skin/images/ajax-loader_small.gif\' /></div>', {width: 600,top: 125}); " value="Check Availability" type="submit" id="searchbutton"><span class="alt">Check Availability</span></button>
+				<!--button id="searchbutton" type="submit" value="Check Availability"><span class="alt">Check Availability</span></button -->
+		</p>          
+	</form>
+</div>

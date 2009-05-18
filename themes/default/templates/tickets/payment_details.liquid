@@ -1,0 +1,165 @@
+<!-- start main content default template -->
+<div id="left_column">
+		<h2>Booking Online</h2>
+
+		<div id="main_content">
+
+				{% if flash.error != blank -%}
+					<div class="BE-errorbox"><h3 class="flash-error">{{ flash.error }}</h3></div>
+				{% endif -%}
+				{% if flash.warning != blank -%}
+					<div class="BE-errorbox"><h3 class="flash-warning">{{ flash.warning }}</h3></div>
+				{% endif -%}
+				{% if flash.notice != blank -%}
+					<div class="BE-errorbox"><h3 class="flash-notice">{{ flash.notice }}</h3></div>
+				{% endif -%}
+
+				<h3 class="title_form">Please provide payment details</h3>
+					<form action="/ticket_booking/do_payment" class="common-form" method="post">    
+						<fieldset>
+                  <p>
+                    <label for="contact_first_name" class="mandatory">First name <span class="active2">*</span></label>
+                    <input id="contact_first_name" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
+                    
+                    <span class="formError">{{ contact | error_messages_on: 'first_name' }}</span>
+                  </p>
+			
+                  <p>						 
+                    <label for="contact_last_name" class="mandatory">Last name</label>
+                    <input id="contact_last_name" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
+                    <span class="formError">{{ contact | error_messages_on: 'last_name' }}</span>
+                  </p>
+
+                  <p>											
+                    <label for="contact_email">Email  <span class="active2">*</span></label>
+                    <input id="contact_email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
+                    <span class="formError">{{ contact | error_messages_on: 'email' }}</span>
+                  </p>
+
+                  <p>									
+                    <label for="customer_country" class="mandatory">Country</label>
+                    <select id="customer_country" style="width: 70%;" name="customer[country]">
+                     {{ customer.country_options_for_select }}
+                    </select>
+                  </p>
+                       
+                  <p class="BE-creditcardtype clearfix">       
+                    <label>Card type:</label>
+                    <label for="creditcard_type_american">
+                    <input type="radio" id="creditcard_type_american" value="american_express" name="creditcard[type]"  class="BE-radio" checked="checked"/>
+                    <img src="/skin/images/ico_americanexpress.png" alt="American Express" /></label>
+
+                    <label for="creditcard_type_visa">
+                    <input type="radio" id="creditcard_type_visa" value="visa" name="creditcard[type]"  class="BE-radio"/>
+                    <img src="/skin/images/ico_visa.png" alt="Visa" /></label>
+
+                    <label for="creditcard_type_mastercard">
+                    <input type="radio" id="creditcard_type_mastercard" value="master" name="creditcard[type]" class="BE-radio"/>
+                    <img src="/skin/images/ico_mastercard.png" alt="Mastercard" /></label>
+
+                    <label for="creditcard_type_lasercard">
+                    <input type="radio" id="creditcard_type_lasercard"  value="laser" name="creditcard[type]" class="BE-radio"/>
+                    <img src="/skin/images/ico_laser.png" alt="Laser Card" /></label>
+                    <span class="hint {{ creditcard | set_style_for_error: 'type', 'visible' }}">{{ creditcard | error_messages_on: 'type' }}<!-- span class="pointer"></span --></span>                    
+                    <!-- span></span -->
+                  </p>
+
+                  <p>		
+                    <label>First name on card:  <span class="active2">*</span></label>
+                    <input id="creditcard_first_name" type="text" size="30" name="creditcard[first_name]" value="{{ creditcard.first_name }}" />
+                    <span class="formError">{{ creditcard | error_messages_on: 'first_name' }}</span>
+                  </p>
+
+                  <p>		
+                    <label>Last name on card: <span class="active2">*</span></label>
+                    <input id="creditcard_last_name" type="text" size="30" name="creditcard[last_name]" value="{{ creditcard.last_name }}" />
+                    <!-- br style="clear: both;" / -->
+                    <span class="formError">{{ creditcard | error_messages_on: 'last_name' }}</span>
+                  </p>
+
+                  <p>		
+                    <label>Card number: <span class="active2">*</span></label>
+                    <input id="creditcard_number" type="text" size="30" name="creditcard[number]" value="{{ creditcard.number }}"  />
+                    <span class="formError">{{ creditcard | error_messages_on: 'number' }} (no spaces)</span>
+                  </p>
+
+                  <p>		
+                    <label>CVV:</label>
+                    <input id="creditcard_verification_value" type="text" size="4" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" class="BE-creditcardccv"/> <span class="formError">(no spaces)</span>
+                   
+                  </p>
+
+                  <p>
+                    <label>Expiration Date <span class="active2">*</span></label>
+                    <select id="creditcard_month" style="width: 95px;" name="creditcard[month]">
+	                    {{ creditcard.options_for_months }}
+                    </select>
+                    <select id="creditcard_year" style="width: 70px;" name="creditcard[year]">
+	                    {{ creditcard.options_for_years }}
+                    </select>
+
+                  </p>				
+                  <div class="BE-buttons">
+                    		<!-- input type="submit" class="submit" style="float: right;" value="Proceed" -->
+												<input id="customer_name" type="hidden" size="30" name="customer[name]" value="none" />		
+												<input id="customer_address1" type="hidden" size="30" name="customer[address1]" value="none"/>
+												<input id="customer_address2" type="hidden" size="30" name="customer[address2]" value="none"/>
+												<input type="hidden" value="0" name="contact[ezine]"/>    
+												<input type="hidden" name="contact[contact_type]" value="Main contact" />
+												<input id="customer_postcode" type="hidden" size="30" name="customer[postcode]" value="00000" />
+												<input id="customer_city" type="hidden" size="30" name="customer[city]" value="none" />
+												<input id="contact_phone" type="hidden" size="30" name="contact[phone]"  value="00000" />							
+                    		<button type="submit"  value="Proceed" name="button_proceed">Proceed</button>
+                  </div>
+						</fieldset>
+					</form>
+
+
+
+
+	  </div>
+		<!-- end main_content -->
+</div>
+<!-- end left_column -->
+
+<!-- start right column -->
+<div id="right_column" class="BE-right">
+		<h4>Tickets Ordered</h4>
+
+			
+      <table cellpadding="0" cellspacing="0" id="BE-resume">
+      	<!--tr>
+          <td>Day:</td>
+          <td class="aright">{{ booking.day | format_date_to: 'eu' }}</td>
+        </tr -->
+        <tr>
+          <td>Event:</td>
+          <td class="aright">{{ booking.event.name }}</td>
+        </tr>
+        <tr>
+          <td>Location:</td>
+          <td class="aright">{{ booking.event.location }}</td>
+        </tr>
+        <!--tr>
+          <td>Time:</td>
+          <td class="aright">{{ booking.time.time }}</td>
+        </tr -->
+        {% for ticket in booking.requested_tickets %}
+        	<tr>
+        		<td>{{ ticket.quantity }} {{ ticket.name }} ticket(s)</td>
+        		<td class="aright">{{ ticket.total_price | format_money: '&euro;' }}</td>
+        	</tr>
+        {% endfor %}
+        
+        <!-- tr>
+          <td class="aright active1">Booking fee:</td>
+          <td class="aright active1">{{ booking.booking_fee | format_money: '&euro;' }}</td>
+        </tr -->
+        <tr>
+          <td class="aright active1"><label>Total cost:</label></td>
+          <td class="aright active1">{{ booking.total_price | format_money: '&euro;' }}</td>
+        </tr>
+      </table>
+</div>
+<!-- end right column -->
+

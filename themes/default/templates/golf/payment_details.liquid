@@ -1,0 +1,283 @@
+<div id="container2">
+
+    {% if flash.error != blank -%}
+    <h2 class="flash-error">{{ flash.error }}</h2>
+    {% endif -%}
+    {% if flash.warning != blank -%}
+    <h2 class="flash-warning">{{ flash.warning }}</h2>
+    {% endif -%}
+    {% if flash.notice != blank -%}
+    <h2 class="flash-notice">{{ flash.notice }}</h2>
+    {% endif -%}
+
+	<br/>
+<h3>Booking summary</h3>
+	<div class="box2">
+
+<div class="top">
+      <h3>Details</h3></div>
+      <table style="margin-left: 12px;" class="print-center" cellpadding="3" cellspacing="0">
+        <tbody>
+        <tr>
+          <td>Golf Course:</td>
+
+          <td class="count-money">{{ golf_course.name }}</td>
+        </tr>
+        
+        <tr>
+          <td colspan="2">
+            <strong>Tee times</strong>
+            <table>
+              <tr>
+                <td>Date</td>
+                <td>Time</td>
+                <td>Price</td>
+                <td></td>
+              </tr>
+            {% for golf_time in golf_times %}
+              <tr>
+                <td>
+                  {{ golf_time.date | format_date_to: 'eu' }}
+                </td>
+                <td>
+                  {{ golf_time.time }} 
+                </td>
+                <td>
+                  {{ golf_time.price | format_money: '&euro;' }}
+                  for {{ players }} player(s)   
+                </td>
+                <td>
+                  {% if golf_time.is_booked == true %}
+                    n/a
+                  {% else %}
+                    available  
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+            </table>        
+          </td>
+        </tr>
+        <tr>
+          <td class="total"><label>Total cost:</label></td>
+          <td class="total count-money">{{ total_price | format_money: '&euro;' }}</td>
+        </tr>
+      </tbody></table>
+          
+	</div><!-- box2  -->
+	
+	<br/>
+	
+	<form action="/golf_booking/do_payment" class="common-form" method="post">    
+	    <div class="box2 clearfix">
+	    <div class="top"><h3>Personal information</h3></div>
+	      <div class="grey-box">
+	        <table cellpadding="3" style="margin-left: 60px">
+	         <tr>
+	    		    <th><label for="contact_first_name" class="mandatory">First name</label></th>
+	    		    <td>
+	    		      <input id="contact_first_name" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
+	    		      <label style="color: red;">*</label>
+	    		      <br style="clear: both;" />
+	              <div class="formError">{{ contact | error_messages_on: 'first_name' }}</div>
+	    		    </td>
+	    		  </tr>
+	    		     
+	    			<tr><th><label for="contact_last_name" class="mandatory">Last name</label></th>
+	      			<td>
+	      			  <input id="contact_last_name" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
+	      			  <label style="color: red;">*</label>
+	      			  <br style="clear: both;" />
+	              <div class="formError">{{ contact | error_messages_on: 'last_name' }}</div>
+	      			</td>
+	    			</tr>
+	    			
+	    			<tr><th><label for="customer_name">Company name</label></th>
+	    			  <td>
+	    			    <input id="customer_name" type="text" size="30" name="customer[name]" value="{{ customer.name }}" />
+	    			  </td>
+	    		  </tr>
+	    		  	  
+	    		  <tr><th><label for="customer_address1">Address 1</label></th>
+	      		  <td>
+	      		    <input id="customer_address1" type="text" size="30" name="customer[address1]" value="{{ customer.address1 }}" />
+	      		    <label style="color: red;">*</label>
+	      		    <br style="clear: both;" />
+	              <div class="formError">{{ customer | error_messages_on: 'address1' }}</div>
+	      		  </td>
+	    		  </tr>
+	    		  
+	    		  <tr>
+	    		    <th><label for="customer_address2">Address 2</label></th>
+	      		  <td>
+	      		    <input id="customer_address2" type="text" size="30" name="customer[address2]" value="{{ customer.address2 }}"/>
+	      		  </td>
+	    		  </tr>
+	    		  
+	    		  <tr><th><label for="customer_city">City</label></th>
+	      		  <td>
+	      		    <input id="customer_city" type="text" size="30" name="customer[city]" value="{{ customer.city }}" />
+	      		    <label style="color: red;">*</label>
+	      		    <br style="clear: both;" />
+	              <div class="formError">{{ customer | error_messages_on: 'city' }}</div>
+	      		  </td>
+	    		  </tr>
+	    		  
+	    		  <tr><th><label for="customer_postcode">Postcode</label></th>
+	      		  <td>
+	      		    <input id="customer_postcode" type="text" size="30" name="customer[postcode]" value="{{ customer.postcode }}" />
+	      		    <label style="color: red;">*</label>
+	      		    <br style="clear: both;" />
+	              <div class="formError">{{ customer | error_messages_on: 'postcode' }}</div>
+	      		  </td>
+	    		  </tr>
+	    		  
+	    		  <tr>
+	    		  	<th><label for="customer_country" class="mandatory">Country</label></th>
+	    		  	<td>
+	    		  	  <select id="customer_country" style="width: 70%;" name="customer[country]">
+	    		  		 {{ customer.country_options_for_select }}
+	    		  	  </select>
+	    		  	</td>
+	    		  </tr>
+	    		  
+	    		  <tr><th><label for="contact_email">Email</label></th>
+	    			  <td>
+	    			    <input id="contact_email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
+	    			    <label style="color: red;">*</label>
+	    			    <br style="clear: both;" />
+	              <div class="formError">{{ contact | error_messages_on: 'email' }}</div>
+	    			  </td>
+	    			</tr>
+	    		     
+	    		  <tr><th><label for="contact_phone" class="mandatory">Phone</label></th>
+	      		  <td>
+	      		    <input id="contact_phone" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
+	      		    <label style="color: red;">*</label>
+	      		    <br style="clear: both;" />
+	              <div class="formError">{{ contact | error_messages_on: 'phone' }}</div>
+	      		  </td>
+	    		  </tr>
+	    		  		  
+	    		  <tr>
+	    		  	<th><label for="contact_ezine">Ezine</label></th>
+	    		  	<td>
+	    		  		<input id="contact_ezine" type="checkbox" value="{{ contact.ezine }}" style="width: 14px;" name="contact[ezine]"/>
+	              <input type="hidden" value="{{ contact.ezine }}" name="contact[ezine]"/>
+	              <input type="hidden" name="contact[contact_type]" value="Main contact" />
+	    		  	  <span class="help">Newsletter in form of email.</span>
+	    		  	</td>
+	    		  </tr>
+	        </table>
+	      </div>
+	    </div><!-- personal-details box -->
+	   
+	   <br/>
+	   
+	    <div class="box2">
+	    <div class="top"><h3>Payment Details</h3></div>
+	    <div class="grey-box">
+	      <table cellpadding="3" style="margin-left: 60px">
+	        <tr>
+	          <th>Card type:</th>
+	          <td>
+	            <select id="creditcard_type" onclick="card_cvv('creditcard_type','cvv_number'); return false;" name="creditcard[type]">
+	              <option value="master">Mastercard</option>
+	              <option value="laser">Laser</option>
+	              <option value="visa">Visa</option>
+	              <option value="american_express">American Express</option>
+	            </select>
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>First name on card:</th>
+	          <td>
+	            <input id="creditcard_first_name" type="text" size="30" name="creditcard[first_name]" value="{{ creditcard.first_name }}" />
+	            <label style="color: red;">*</label>
+	            <br style="clear: both;" />
+	            <div class="formError">{{ creditcard | error_messages_on: 'first_name' }}</div>
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>Last name on card:</th>
+	          <td>
+	            <input id="creditcard_last_name" type="text" size="30" name="creditcard[last_name]" value="{{ creditcard.last_name }}" />
+	            <label style="color: red;">*</label>
+	            <br style="clear: both;" />
+	            <div class="formError">{{ creditcard | error_messages_on: 'last_name' }}</div>
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>Card number:</th>
+	          <td>
+	            <input id="creditcard_number" type="text" size="30" name="creditcard[number]" value="{{ creditcard.number }}" />
+	            <label style="color: red;">*</label>
+	            (no spaces)
+	            <br style="clear: both;" />
+	            <div class="formError">{{ creditcard | error_messages_on: 'number' }}</div>
+	          </td>
+	        </tr>
+	        <tr id="cvv_number">
+	          <th>CVV:</th>
+	          <td>
+	            <input id="creditcard_verification_value" type="text" size="30" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" />
+	            (no spaces)
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>&nbsp;</th>
+	          <td style="font-style: italic;">
+	            <span style="padding-right: 5em;">Month</span>Year
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>Expiry date:</th>
+	          <td style="{% if creditcard.error_on_date %}style='border: 2px solid red;'{% endif %}">
+	            <select id="creditcard_month" style="width: 95px;" name="creditcard[month]">
+	              {{ creditcard.options_for_months }}
+	            </select>
+	            <select id="creditcard_year" style="width: 70px;" name="creditcard[year]">
+	              {{ creditcard.options_for_years }}
+	            </select>
+	            <label style="color: red;">*</label>
+	          </td>
+	        </tr>
+	      </table>
+	    </div><!-- .grey-box -->
+	  </div><!-- credit-details -->
+	  
+	  <br/>
+	  
+	  <div class="box2">
+	    <div class="grey-box">
+	    <div class="top"><h3>Terms &amp; Conditions</h3></div>
+	      <table style="margin-left: 60px">
+	        <tr>
+	          <td colspan="2">
+	            <div class="terms-conditions">
+	              {{ booking.terms_and_conditions }}
+	            </div>
+	          </td>
+	        </tr>
+	        <tr>
+	          <td class="terms_conditions clearfix" colspan="2" style="text-align: left;">
+	            <input id="booking_terms_conditions" type="checkbox" style="width: 14px;" name="booking[terms_conditions]"/>
+	            <input type="hidden" value="0" name="booking[terms_conditions]"/>
+	            <label style="color: red;">*</label>
+	            <label>I accept Terms & Conditions</label>
+	            <br style="clear: both;"/>
+	            <div class="formError">{{ booking | error_messages_on: 'terms_conditions' }}</div>
+	          </td>
+	        </tr>
+	      </table>
+	    </div>
+	  </div><!-- conditions -->
+	  
+	  <script type="text/javascript">
+	    card_cvv('creditcard_type','cvv_number');
+	  </script>
+	     
+		<input type="submit" class="submit" style="float: right;" value="Proceed"/>
+	</form>
+	</div>
+<br/><br/>

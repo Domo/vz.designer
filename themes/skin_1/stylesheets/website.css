@@ -1,0 +1,373 @@
+/* --------------------------------------------------
+file: abberley.css
+website: www.abberley.ie
+version: 1.0
+created: 21/11/07
+author: Oriana Pagano
+contact: http://www.webmedia.ie
+---------------------------------------------------*/
+
+body {
+background-color: #383846;
+/* background-image:url(/skin/images/website/body_bg.gif); */
+background-image: url(/skin/images/website/background-hotel.png);
+background-repeat:no-repeat;
+background-position:left top;
+margin:0;
+padding:0;
+}
+
+
+#wrapper {
+width:910px;
+margin:98px auto 0 auto;
+}
+
+#flags {
+width:886px;
+height:27px;
+float:left;
+display:inline;
+padding:5px 24px 0 0;
+}
+
+#flags img {
+margin:0 2px 0 0;
+}
+
+/*MENU *************************************************/
+
+#menubar {
+width:910px;
+height:50px;
+background-image:url(/skin/images/website/menu_bg.jpg);
+background-repeat:no-repeat;
+background-position:top left;
+float:left;
+display:inline;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+font-weight:600;
+color:#FFFFFF;
+}
+
+#menubar ul {
+list-style:none;
+margin:0;
+padding:0;
+}
+
+#menubar ul li {
+float:left;
+height:30px;
+padding:20px 22px 0 20px;
+background-image:url(/skin/images/website/divider.jpg);
+background-repeat:no-repeat;
+background-position:center right;
+}
+
+
+#menubar ul li.end {
+float:right;
+height:30px;
+padding:20px 22px 0 20px;
+background-image:none;
+}
+
+#menubar ul a {
+color:#FFFFFF;
+text-decoration:none;
+}
+
+#menubar ul a.active {
+color:#D8693C;
+text-decoration:none;
+}
+
+#menubar ul a:hover {
+color:#D8693C;
+text-decoration:none;
+}
+
+/* MAIN*****************************************************/
+
+#banner {
+width:910px;
+height:216px;
+background-image:url(/skin/images/website/banner-hotel.jpg);
+background-repeat:no-repeat;
+background-position:top left;
+float:left;
+display:block;
+}
+
+#mainContent {
+width:910px;
+float:left;
+display:inline;
+background-image:url(/skin/images/website/main_bg.jpg);
+background-repeat:repeat-y;
+background-position:top left;
+}
+
+#pageContent {
+width:auto;
+/*float:left;
+display:inline;*/
+margin:15px 35px 0 40px;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#333333;
+padding:0 0 20px 0;
+}
+
+#pageContent  a {
+color:#FF6600;
+text-decoration:underline;
+}
+
+#pageContent a:hover {
+color:#FF6600;
+text-decoration:none;
+}
+
+#pageContent h1,
+#pageBooking h1 {
+width:570px;
+border-bottom:1px solid #999999;
+font-family:"Century Gothic", Arial, Verdana;
+font-size:18px;
+color:#595856;
+padding:0 0 3px 0;
+margin:0 0 15px 0;
+}
+
+#pageContent h3 {
+font-family:"Century Gothic", Arial, Verdana;
+font-size:14px;
+margin:0;
+}
+
+#pageContent h2 {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#FF6600;
+display:block;
+width:570px;
+padding:0;
+margin:20px 0px 0px 0px;
+}
+
+#gallery {
+width:550px;
+margin-left:15px;
+}
+
+#gallery img {
+float:left;
+border:1px solid #999999;
+margin:0 10px 10px 0;
+}
+
+/* RIGHT BOXES *******************************************************/
+
+#rightPanels {
+width:220px;
+padding-right: 30px;
+float:left;
+margin:15px 0 45px 0;
+}
+
+.box {
+width:210px;
+background-color:#E6E4DF;
+border:1px solid #918F8D;
+padding:4px;
+margin-bottom:10px;
+}
+.box a {
+color:#595856;
+text-decoration:underline;
+}
+.box a:hover {
+color:#595856;
+text-decoration:none;
+}
+
+.box p {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:9px;
+color:#595856;
+padding:5px 0 10px 0;
+margin:0;
+}
+
+.boxBE {
+width:210px;
+height:28px;
+background-color:#C8C6C2;
+}
+
+.boxSpof {
+width:205px;
+background-color:#C8C6C2;
+padding: 0px 5px 0px 0px;
+}
+
+.box h3
+{
+	font-family: Trebuchet MS;
+	color: #6B6967;
+	border-bottom: 2px solid #AEADA9;
+	padding: 10px 0px 5px 0px;
+	margin-top: 0px;
+	margin-right: 6px;
+	margin-left: 6px;
+	font-size: 15px;
+}
+
+.boxSpof img {
+margin:0px 0px 5px 10px; 
+}
+
+.boxSpof ul {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:9px;
+color:#595856;
+margin:0 0 0 25px;
+padding:0;
+clear:both
+}
+
+.boxSpof li {
+padding:0 0 5px 0;
+}
+
+
+.boxEvents {
+width:210px;
+height:80px;
+background-image:url(../images/spofpanel_bg.gif);
+background-repeat:no-repeat;
+background-position:bottom left;
+background-color:#C8C6C2;
+}
+
+.boxEvents p {
+padding: 0px 10px 10px 75px;
+clear:both;
+}
+
+.boxEvents img {
+margin:0px 0px 5px 10px;
+}
+
+.boxApts {
+width:210px;
+background-color:#C8C6C2;
+}
+
+.boxApts img {
+margin:0px 0px 5px 10px;
+border:0px;
+}
+
+.boxApts p {
+padding:0 10px 10px 10px;
+clear:both;
+}
+
+.boxVt {
+width:210px;
+height:72px;
+background-image:url(../images/vtpanel_bg.gif);
+background-repeat:no-repeat;
+background-position:bottom left;
+background-color:#C8C6C2;
+}
+
+.boxVt img {
+margin-left:63px;
+}
+.boxVt select {
+margin-left:65px;
+margin-top:10px;
+clear:both
+}
+
+
+
+/* FOOTER *************************************************************/
+#footer {
+width:888px;
+height:48px;
+display:block;
+clear:both;
+background-image:url(/skin/images/website/footer_bg.jpg);
+background-repeat:no-repeat;
+background-position:top left;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#999894;
+padding:5px 0 0 22px;
+margin:0 0 20px 0;
+text-align:center;
+}
+
+#footer a {
+color:#999894;
+text-decoration:underline;
+}
+
+#footer a:hover {
+color:#999894;
+text-decoration:none;
+}
+
+/* OTHER ***********************************/
+
+#specials01, #specials02, #amenities01, #amenities02, #amenities03, #amenities04, #amenities05, #amenities06 {
+width:500px;
+background-color:#F4F4F3;
+display:none;
+border-bottom:1px dashed #CDCDCD;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#626161;
+padding:10px 20px 10px 10px;
+margin:0 0 10px
+}
+
+#map {
+width:530px;
+height:500px;
+border:1px dotted #999999;
+margin:7px 0 0 0;
+}
+
+.title {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#FF6600;
+}
+
+.titleSpof {
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#FF6600;
+display:block;
+width:570px;
+border-bottom:1px solid #999999;
+padding:0 0 3px 0;
+margin:20px 0px 0px 0px;
+}
+
+.spofPanels {
+margin-left:8px;
+}
+
+.ExpandableContent
+{
+	background-color: #FFF;
+	padding: 10px;
+}

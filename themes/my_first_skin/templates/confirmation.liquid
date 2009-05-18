@@ -1,0 +1,41 @@
+<div id="confirmation">
+	{% assign step = '5' -%}
+	{% include 'modules/visualnav' -%}
+	{% include 'modules/feedback' -%}
+	
+	<h2>Summary</h2>
+	<div class="box">
+		{% for reservation in reservations -%}
+		<p class="clearfix"><strong>Reservation id:</strong>{{ reservation.id }}</p>
+		<p class="clearfix"><strong>Check in:</strong>{{ reservation.arrival_date | format_date_to: 'eu' }}</p>
+		<p class="clearfix"><strong>Check out:</strong>{{ reservation.departure_date | format_date_to: 'eu' }}</p>
+		{% for room in reservation.reservation_room_types -%}
+			<p><strong>Room type ({{ forloop.index + 1 }}):</strong><span>{{ room.room_type_name }} ({{ room.adults | pluralize: 'adult' }}, {{ room.children | pluralize: 'child' }}) - Price {{ room.price | format_money: '&euro;' }}</span></p>	
+			{% if room.is_ticket_rate %}
+				<p class="clearfix"><strong>Tickets:</strong><span>{% for event in room.event_names -%}{{ room.people }} ticket(s) for {{ event }} on {{ reservation.arrival_date | format_date_to: 'eu' }}{% endfor -%}</span></p>	
+			{% endif %}
+		 {% endfor -%}
+		<p class="clearfix"><strong>Total price:</strong>{{ reservation.sell_price | format_money: '&euro;' }}</p>	  
+		{% endfor -%}
+	</div>
+	
+	<h2>Customer Details</h2>
+	<div class="box">
+		<p class="clearfix"><strong>First name:</strong>{{ contact.first_name }}</p>
+		<p class="clearfix"><strong>Last name:</strong>{{ contact.last_name }}</p>
+		<p class="clearfix"><strong>Address 1:</strong>{{ customer.address1 }}</p>
+		<p class="clearfix"><strong>Address 2:</strong>{{ customer.address2 }}</p>
+		<p class="clearfix"><strong>City:</strong>{{ customer.city }}</p>
+		<p class="clearfix"><strong>Postcode:</strong>{{ customer.postcode }}</p>
+		<p class="clearfix"><strong>Country:</strong>{{ customer.country }}</p>
+		<p class="clearfix"><strong>Email:</strong>{{ contact.email }}</p>
+		<p class="clearfix"><strong>Phone:</strong>{{ contact.phone }}</p>
+		<p class="clearfix"><strong>Receive updates and news:</strong> &nbsp;{{ contact.ezine }}</p>
+		{% if group_id != null -%}
+			<p class="clearfix"><strong>Group reservation id:</strong>{{ group_id }}</p>
+		{% endif -%}
+	</div>
+	
+	<div class="button"><button id="print" type="button" value="Print" onclick="javascript:window.print();">Print</button></div>	
+
+</div>

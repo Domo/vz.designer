@@ -1,0 +1,120 @@
+
+
+/* ----------------------- GENERAL STYLES --------------------------- */
+hr {display:none;}
+h2{}
+
+#pageContent h3 {margin:0 0 10px;}
+#pageContent h2 {margin:20px 0 6px;}
+.box p {font-size:1em}
+/* ----------------------- STRUCTURE --------------------------- */
+
+#booking .box{background:#c8c6c2;border:1px solid #999999}
+#booking img {display:block;}
+#booking { position:static; min-height:300px; height:auto !important; height:300px}
+#visualnav {margin-top:14px}
+#booking form p{padding:3px 0;}
+
+
+/* ----------------------- SEARCH --------------------------- */
+
+#search form{margin:0;padding:9px 0 0 0;float:right}
+#search p{float:left;margin-bottom:0}
+#search #day_calendar{position:relative;top:2px}
+#search input,#search select{margin:0;padding:0;position:relative}
+	#search #arrival_date{width:65px}
+	#search #reservation_search_nights{width:35px}
+#search label{margin-left:10px}
+#search p.reservation_search_nights{padding-right:10px}
+
+#search #searchbutton{
+background:url(/skin/images/checkavailability.jpg) 0 0 no-repeat;
+width:131px;height:26px;
+position:relative;top:-2px;
+border:0;cursor:pointer;
+text-indent:-9999em;
+display:block;
+}
+
+
+/* ----------------------- FEEDBACKS --------------------------- */
+
+#booking p.feedback-error,#booking p.feedback-warning,#booking p.feedback-notice {
+	background:#fcbfbf url(/skin/images/flasherror.gif) 6px 3px no-repeat;
+	border:1px solid #e90000;
+	color:#bd0b0b;
+	font-size:1.2em;
+}
+#booking p.feedback-warning {background:#d1e3f6 url(/skin/images/flashwarning.gif) 6px 3px no-repeat;border-color:#84b3e1;color:#5791c8}
+#booking p.feedback-notice {background:#d1ee99 url(/skin/images/flashnotice.gif) 6px 3px no-repeat;border-color:#8dbd32;color:#6d9421}
+
+
+/* ----------------------- AVAILABILITY --------------------------- */
+
+#booking .available td,#booking .available th{border:1px solid #ccc;}
+#booking .available th{color:#EEE}
+#booking .available td{color:#333}
+	#booking .available th{background:#C4C7CC url(/skin/images/thavailability.jpg) 0 0 repeat-x}
+	#booking .available th.roomtype{background:#ddd; }
+	#booking .available td.day-available{background:#fff;color:#5B040D;}
+	#booking .available td.total{background:#F9FAFC; color:#5B040D;}
+	#booking .available .book{width:43px;height:24px;background-image:url(/skin/images/book.gif)}
+
+#booking .available th.ratename {padding-left:10px;}
+
+
+/* ----------------------- OCCUPANCY --------------------------- */
+#booking .box { float:none; width:auto; position:relative;}
+#booking .box .loading-room{
+background:#fde4b5;
+border-bottom:1px solid #999999;
+border-left:1px solid #999999;
+font-size:1.3em;font-weight:bold;
+color:#999999;
+position:absolute; 
+top:0; right:0; width:245px; text-align:left;
+}
+#booking .occupancy fieldset {}
+#booking #proceed {background-image:url(/skin/images/proceed.jpg);width:224px;height:30px}
+#booking #proceed a { text-decoration:none;}
+#booking .occupancy { padding-bottom:0;}
+#booking form p { position:static;}
+#booking form {position:relative;}
+#booking .roomprice{ text-align:right;}
+
+/*----------------- FORM -----------------*/
+
+#booking fieldset{background:#c8c6c2;border:1px solid #999999; }
+#booking legend{ display:block; color:#FFF; font-size:1.2em; width:140px; background-color:#999999; border:1px solid #999999; margin-left:5px;
+padding:2px 5px;}
+
+#booking input,#booking select,#booking textarea{border:1px solid #ccc;width:200px}
+#booking select{width:213px}
+
+#booking #terms-conditions li{background:url(/skin/images/tick.gif) 0 3px no-repeat}
+	
+#makereservation{background-image:url(/skin/images/makereservation.jpg);width:224px;height:30px}
+
+#booking .box p {
+line-height:150%;
+padding:2px 0;
+}
+#booking #terms-conditions label {width:30px;margin-bottom:13px;}
+
+/*----------------- FORM VALIDATION-----------------*/
+
+#booking span.hint, #booking span.formError {
+	border:1px solid #ffcc00;
+	background:#fffdca;
+	width:230px;
+	font-size:.9em;
+	color:#555555;
+}
+#booking span.formError {background-color:#fda3a3;border:1px solid #c35d5d}
+
+#booking span.hint .pointer, #booking span.formError .pointer{background-image:url(/skin/images/bg-span-hint-base.gif)}
+	#booking span.formError .pointer{background-image:url(/skin/images/bg-span-hint-error.gif)}
+
+#booking p.welldone {background:transparent url(/skin/images/bg-p-welldone.gif) no-repeat 407px 0px}
+#booking p.welldone span.hint{background:#d5f0a1;border-color:#8dbd32; color:#166708}
+	#booking p.welldone span.hint .pointer {background:#9fd680 url(/skin/images/bg-span-welldone.jpg) no-repeat top left}

@@ -1,0 +1,15 @@
+{% assign step = '2' -%}
+{% include 'modules/visualnav' -%}
+{% include 'modules/feedback' -%}
+
+{% for rate_search_drop in rate_search_drops %}  
+	<!-- h3>{{ rate_search_drop.property_name }}</h3 -->
+	{{ rate_search_drop.property_short_description }}
+	{% for rate in rate_search_drop.rates -%}
+		{% include 'modules/availability' -%}
+	{% endfor -%}
+{% endfor %}
+
+{% if selected_property.has_rates != true  %}
+<p><br/><br/><strong>Sorry, no rates available for that date / hotel.</strong></p>
+{% endif %}

@@ -1,0 +1,37 @@
+  <div id="v-sbar">
+    <ul id="controls">
+      <li>
+        <a href="#" id="collapse" onclick="Vision.remove(); return false;"></a>
+        <a href="/dashboard/">Dashboard</a>
+      </li>
+      <li id="theme-list">
+        <label for="themes">Theme:</label> 
+        <select name="themes" id="themes" onchange="Cookie.set('theme', this.value); window.location.reload(); return false;">
+        <% for theme in @themes %>
+          <option value="<%= theme %>" <%= 'selected="selected"' if theme == @current_theme %>><%= theme %></option>
+        <% end %>
+        </select>
+      </li>
+      <li>
+        <label for="templates">Template:</label> 
+        <select name="templates" id="templates" onchange="eval(this.value); return false;">
+	        <% for template in @templates %>
+	          <option value="<%= template.first %>" <%= 'selected="selected"' if File.basename(template.last)  == @current_template + '.liquid' %>> <%= template.last %></option>
+	        <% end %>
+        </select>
+      </li>
+      <li>
+      	<label for="template_type">Show:</label>
+      	<select name="template_type" id="template_type" onchange="Cookie.set('template_type', this.value); window.location.href = '/'; return false;">
+	        <% for tt in @template_types.keys %>
+	          <option value="<%= tt.to_s %>" <%= 'selected="selected"' if tt.to_s == @current_template_type %>><%= @template_types[tt] %></option>
+	        <% end %>
+        </select>
+      </li>
+    </ul>
+    <ul id="searches">
+      <li>
+        <a href="http://help.shopify.com/design/show/<%= @current_template %>.liquid" target="vision-help"><%= @current_template %>.liquid</a> help
+      </li>
+    </ul>
+  </div>

@@ -1,0 +1,31 @@
+{% assign common_version = 'v_001' %}
+
+<div id="occupancy">
+	{% assign step = '3' -%}
+	{% include 'modules/visualnav' -%}
+	{% include 'modules/feedback' -%}
+	
+	<div class="room-actions">
+		<a href="#" class="new_search" onclick="Modalbox.show($('loadingbox1'),{width: 600, top:125,inactiveFade:false});Modalbox.deactivate();$('availability_search_form').submit();">Add another room type</a>
+	</div>
+	
+	<div class="occupancy-checkin"> 
+	<p><strong>Check in:</strong> {{ arrival_date }} - <strong>Nights:</strong> {{ nights }}</p>
+	</div>
+	
+	<div id="rooms" class="occupancy-rooms"> 
+		{% include 'rooms_table' -%}
+	</div>
+
+	<div class="button"><a href="{{ html.checkout_action }}" id="proceed" onclick="Modalbox.show($('loadingbox2'),{width: 600,top: 125,inactiveFade:false});Modalbox.deactivate();"><span class="alt">Proceed</span></a></div>
+	<div id="loadingbox2" class="loadingbox" style="display:none;"><h3>Proceeding</h3><p>Please wait...</p><img src="{{ "" | skin_asset  }}images/ajax-loader_small.gif" alt="Loading..."/></div>
+
+	<script type="text/javascript">
+		Ajax.Responders.register({
+			onComplete: function() {
+				new Effect.Highlight("occupancy-total");
+			}
+		}); 
+	</script>
+
+</div>
