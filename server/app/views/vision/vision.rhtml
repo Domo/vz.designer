@@ -13,8 +13,8 @@
         </select>
       </li>
       <li>
-        <label for="templates">Template:</label> 
-        <select name="templates" id="templates" onchange="eval(this.value); return false;">
+        <label for="templates"><a href="#" onclick="window.location = 'view-source:' + window.location.href; return false;">Template:</a></label> 
+        <select name="templates" id="templates" onchange="eval(this.value); return false;" style="max-width: 200px;">
 	        <% for template in @templates %>
 	          <option value="<%= template.first %>" <%= 'selected="selected"' if File.basename(template.last)  == @current_template + '.liquid' %>> <%= template.last %></option>
 	        <% end %>

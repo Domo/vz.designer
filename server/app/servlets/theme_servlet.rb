@@ -3,6 +3,9 @@ require 'database'
 require 'html_drop'
 require 'flash_drop'
 require 'property_drop'
+require 'rate_search_drop'
+require 'rate_search_item_drop'
+require 'rate_drop'
 require 'wsession'
 
 class ThemeServlet < LiquidServlet
@@ -21,6 +24,14 @@ class ThemeServlet < LiquidServlet
   
   def availability
   	@step = '2'
+  	
+  	@rate_search_drops = []
+  	
+  	prop = Database.find(@selected_property.id, :properties)
+  	drop = RateSearchDrop.new(prop)
+  	
+  	@rate_search_drops << drop
+
   	render :type => :liquid, :action => 'availability'
 	end
 	
@@ -122,6 +133,7 @@ class ThemeServlet < LiquidServlet
     
     @flash = FlashDrop.new({})
     @arrival_date = Time.new.strftime("%d.%m.%Y")
+    @nights = @params[:nights] || '1'
     
     @properties = Database.find(:all, :properties).collect {|p| PropertyDrop.new(p) }
     

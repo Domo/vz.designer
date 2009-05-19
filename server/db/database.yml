@@ -80,3 +80,56 @@ properties:
   shortcut: 'Watergardens'
   google_map_code: ''
   url: 'www.watergardenshotel.com'
+
+#--------------------------------------------
+#                   Rates
+#--------------------------------------------
+
+rates:
+-
+  id: 1
+  code: 'TIASR'
+  name: 'Standard Rate'
+  description: 'This is a standard rate'
+  property_id: 1
+-
+  id: 2
+  code: 'THISAUCH'
+  name: 'Auch Standard Rate'
+  description: 'This is auch a standard rate'
+  property_id: 2
+-
+  id: 3
+  code: 'THISAUCHNOCH'
+  name: 'Auch noch Standard Rate'
+  description: 'This is auch noch a standard rate'
+  property_id: 3
+  
+#--------------------------------------------
+#                 Room Types 
+#--------------------------------------------
+
+room_types:
+-
+  id: 1
+  name: 'Single Room'
+  adults: 5
+  children: 0
+  min_adults: 1
+  max_children: 0
+  description: 'This is a single room'
+  short_description: ''
+  code: 'SR'
+  type: ''
+  
+#--------------------------------------------
+#             Rate room types
+#--------------------------------------------
+
+rate_room_types:
+-
+	id: 1
+	rate_id: 1
+	room_type_id: 1
+	allocation: 10
+	position: 0
