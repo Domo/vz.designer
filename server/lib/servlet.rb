@@ -64,7 +64,8 @@ class Servlet < WEBrick::HTTPServlet::AbstractServlet
   alias_method :do_DELETE, :handle
   
   def controller_name
-    self.class.name.to_filename
+  	self.my_name
+    # self.class.name.to_filename
   end
   
   def action_name
@@ -111,7 +112,6 @@ class Servlet < WEBrick::HTTPServlet::AbstractServlet
     return options[:text] if options[:text]    
     file_type = options[:type] || 'rhtml'
     file = options[:file] || "#{template_path}/#{options[:action] || action_name}.#{file_type}"
-    $rendered_template = file.gsub(template_path + '/', "").gsub(file_type, '')
     
     logger.info " - rendering #{normalize_path(file)}"
     layout = options[:layout].nil? ? self.class.layout_name : options[:layout]
@@ -122,7 +122,7 @@ class Servlet < WEBrick::HTTPServlet::AbstractServlet
       logger.info " - rendering layout #{normalize_path(layoutfile)}"
       render_file(layoutfile, options)
     else
-      render_file(file, options)
+      	render_file(file, options)
     end
     
   end

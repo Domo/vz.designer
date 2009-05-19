@@ -18,9 +18,7 @@
 			<label for="property">Hotel</label>
 			<select name="property" id="property">
 				{% for p in properties %}
-					{% if p.shortcut != 'inec' %}
-						<option value="{{ p.id }}" {% if p.id == selected_property.id %}selected="selected"{% endif %}>{{ p.name }}</option>
-					{% endif %}
+					<option value="{{ p.id }}">{{ p.name }}</option>
 				{% endfor %}
 			</select>
 		</p>

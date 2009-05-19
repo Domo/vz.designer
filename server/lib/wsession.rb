@@ -8,10 +8,10 @@ module WSession
 	end
 	
 	#Important: It's really just the id, not an object like in vz.rooms!
-	def self.property_id
+	def self.property
 		cookie = $request.cookies.find { |c| c.name == 'property' }
-		p_id = cookie.value rescue ""
-		return {:id => p_id}
+		p_id = cookie.value rescue 1
+		return Database.find(p_id, :properties)
 	end
 	
 	#shortcuts and ähnliches
@@ -21,12 +21,11 @@ module WSession
 	end
 	
 	def self.get_theme_file(file)
-		puts "File: " + file
-		file = File.join(self.theme_path, file)
+		puts "Vz.File: " + file
 		if File.exists? file
 			content = File.read(file)
 		else
-			content = ""
+			content = "Not found."
 		end
 		ext = file.split(".").last
 		return {:content => content, :mime_type => self.mime_types(ext)}

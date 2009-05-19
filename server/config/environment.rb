@@ -39,3 +39,17 @@ Liquid::Template.register_tag('form', CommentForm)
 # Require mount points. thats where the servlets of this server are setup
 require File.dirname(__FILE__) + '/mounts'
 
+#Extended Hash2Class-Function for Ruby-Hashes
+class Hash
+  def to_mod
+    hash = self
+    Class.new do
+    	hash.each do |k,v|
+	      self.instance_variable_set("@#{k}", v)
+	      self.class.send(:define_method, k, proc{self.instance_variable_get("@#{k}")})
+	      self.class.send(:define_method, "#{k}=", proc{|v| self.instance_variable_set("@#{k}", v)})
+    	end
+    end
+  end
+end
+

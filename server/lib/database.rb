@@ -2,29 +2,24 @@ require 'yaml'
 
 module Database
   
-  def self.find(what, table)
+  def self.find(what, table, condition = '')
     case what 
     when Numeric
-      db[table.to_s].find { |r| r['id'] == what } 
+      db[table.to_s].map { |r| r if r['id'] == what }.first.to_mod
     when :all
-      db[table.to_s]
+      db[table.to_s].map {|i| i.to_mod }
     when :first
-      db[table.to_s].find { |a| r['id'] == 1 } 
+      # db[table.to_s].find { |a| a['id'] == 1 } 
+      db[table.to_s].first.to_mod
+    when :condition
+    	cond1 = condition.split("=").first
+    	cond2 = condition.split("=").last
+    	db[table.to_s].map { |r| r['cond1'] == cond2 }
     end
   end
   
   def self.db
-    db = YAML.load(File.read("#{ROOT}/db/database.yml"))
-    
-    # We need to add collections to the products    
-    db['products'].each do |product|
-      collections = db['collections'].find_all do |collection|
-        collection['products'].any? { |p| p['id'].to_i == product['id'].to_i }
-      end      
-      product['collections'] = collections      
-    end
-        
-    db
+    YAML::load_file("#{ROOT}/db/database.yml")
   end
   
 end

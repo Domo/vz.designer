@@ -10,11 +10,11 @@
 		<meta name="Description" content="The Abberley Court Hotel located in Dublin, Tallaght offers unbeaten comfort in stylish surroundings." />
 
 		<!-- STYLESHEETS -->
-			{{ "website.css" | style_sheet }}
-			{{ "standard.css" | style_sheet }}
+			{{ "website" | style_sheet }}
+			{{ "standard" | style_sheet }}
 			<link href="{{ "stylesheets/modalbox.css" | common_asset: common_version }}" media="screen" rel="stylesheet" type="text/css" />
 			<link href="{{ "stylesheets/jscalendar/calendar-win2k-cold-2.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
-			{{ "custom.css " | style_sheet }}
+			{{ "custom" | style_sheet }}
 
 			<link href="{{ "stylesheets/print.css" | common_asset: common_version }}" media="print" rel="stylesheet" type="text/css" />
 			{{ "print.custom.css" | style_sheet }}
@@ -70,9 +70,7 @@
 								
 					<div id="mainContent">
 						<div id="pageContent">
-											{% if step != '1' -%}
 												{% include 'modules/search' -%} 
-											{% endif -%}
 											<div id="content">
 													<div id="booking">{{ content_for_layout }}</div>
 											</div>

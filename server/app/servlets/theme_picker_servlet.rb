@@ -1,6 +1,10 @@
 require 'servlet'
 
 class ThemePickerServlet < Servlet      
+	
+	def my_name
+		"theme_picker"
+	end
 
   def choose    
     cookie = WEBrick::Cookie.new('theme', @params['theme'].to_s)

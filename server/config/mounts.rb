@@ -3,12 +3,17 @@ def mount(server)
   require 'static_assets_servlet'
   require 'theme_picker_servlet'
   require 'vision_servlet'
+  require 'skin_asset_servlet'
   
   # setup all the mounts for the server here
   server.mount('/', ThemeServlet)
+  server.mount('/web_reservations/', ThemeServlet)
+  server.mount('/ticket_booking/', ThemeServlet)
 
   server.mount('/stylesheets/vision/', VisionServlet)
   server.mount('/javascripts/vision/', VisionServlet)
+  
+  server.mount('/skin/', SkinAssetServlet)
 
   server.mount('/files/shops/random_number/assets/', StaticAssetsServlet)
 

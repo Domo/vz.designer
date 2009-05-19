@@ -1,6 +1,10 @@
 require 'servlet'
 
 class VisionServlet < Servlet      
+	
+	def my_name
+		"vision"
+	end
   
   def vision_js
     @response["Content-Type"] = 'text/javascript'    
@@ -30,7 +34,9 @@ class VisionServlet < Servlet
 
 	def template_types_for_view
 		tt = {}
-		tt[:rooms] = 'Rooms-Templates'
+		if File.exists?(theme_template_path + '/skin.liquid')
+			tt[:rooms] = 'Rooms-Templates'
+		end
 		if File.exists?(theme_template_path + '/tickets')
 			tt[:events] = 'Events-Templates'
 		end
@@ -40,7 +46,7 @@ class VisionServlet < Servlet
 
   def templates_for_view
 
-    available_templates = [["Cookie.destroy('#{@params['action']}'); window.location.reload();", "#{$rendered_template}.liquid"]]
+    available_templates = [["Cookie.destroy('#{@params['action']}'); window.location.reload();", "#{current_template}.liquid"]]
     
     Dir["#{theme_template_path}/#{@params['action']}.*.liquid"].each do |f|
       variant = File.basename(f, File.extname(f))
@@ -129,6 +135,10 @@ class VisionServlet < Servlet
   
   private
   
+  def current_template
+  	template_cookie ? template_cookie.value : @params['action']
+	end
+  
   def theme_cookie
     @request.cookies.find { |c| c.name == 'theme' }
   end
@@ -138,9 +148,8 @@ class VisionServlet < Servlet
 	end
 	
 	def template_type
-		template_type_cookie.value || "rooms" rescue "rooms"
+		template_type_cookie.value || template_types_for_view.keys.first.to_s rescue template_types_for_view.keys.first.to_s
 	end
-
 
   def template_cookie
     @request.cookies.find { |c| c.name == "template_#{@params['action']}" }
