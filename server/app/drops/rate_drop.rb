@@ -1,9 +1,8 @@
 class RateDrop < Liquid::Drop
   def initialize(_rate)
     @rate = _rate 
-    rate_room_types = @rate.rate_room_types
-    rate_room_types = rate_room_types.sort{|y,x| y.room_type.position <=> x.room_type.position}
-    @room_types ||= rate_room_types.collect { |x| RateRoomTypeDrop.new(x, @rate, @rate_search_container) }
+    rate_room_types = Database.find(:condition, :rate_room_types, "rate_id=" + @rate.id.to_s)
+    @room_types ||= rate_room_types.collect { |x| RateRoomTypeDrop.new(x, @rate) }
   end
   
   def id

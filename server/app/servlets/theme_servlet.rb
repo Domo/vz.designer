@@ -6,6 +6,7 @@ require 'property_drop'
 require 'rate_search_drop'
 require 'rate_search_item_drop'
 require 'rate_drop'
+require 'rate_room_type_drop'
 require 'wsession'
 
 class ThemeServlet < LiquidServlet

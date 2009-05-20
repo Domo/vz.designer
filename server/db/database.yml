@@ -88,21 +88,39 @@ properties:
 rates:
 -
   id: 1
-  code: 'TIASR'
+  code: 'BMDSR'
   name: 'Standard Rate'
   description: 'This is a standard rate'
   property_id: 1
 -
   id: 2
-  code: 'THISAUCH'
-  name: 'Auch Standard Rate'
-  description: 'This is auch a standard rate'
-  property_id: 2
+  code: 'BMDCR'
+  name: 'Cheap Rate'
+  description: 'This rate is for books cheaper than 20€'
+  property_id: 1
 -
   id: 3
-  code: 'THISAUCHNOCH'
-  name: 'Auch noch Standard Rate'
-  description: 'This is auch noch a standard rate'
+  code: 'HHSR'
+  name: 'Standard Rate'
+  description: 'This is a standard rate'
+  property_id: 2
+-
+  id: 4
+  code: 'HHGR'
+  name: 'Group Rate'
+  description: 'This is a group rate'
+  property_id: 2
+-
+  id: 5
+  code: 'WHSR'
+  name: 'Standard Rate'
+  description: 'This is a standard rate'
+  property_id: 3
+-
+  id: 6
+  code: 'WHSpR'
+  name: 'Special Rate'
+  description: 'This is a special rate'
   property_id: 3
   
 #--------------------------------------------
@@ -121,15 +139,180 @@ room_types:
   short_description: ''
   code: 'SR'
   type: ''
-  
+-
+  id: 2
+  name: '6 Bed Room'
+  adults: 2
+  children: 4
+  min_adults: 1
+  max_children: 5
+  description: 'This is a 6 bed room for familys or groups'
+  short_description: '6 bed room'
+  code: 'SB'
+  type: ''
+-
+  id: 3
+  name: 'Express room'
+  adults: 4
+  children: 1
+  min_adults: 1
+  max_children: 8
+  description: 'This is a room for just a day'
+  short_description: 'one night room'
+  code: 'EX'
+  type: ''
+-
+  id: 4
+  name: '20 Bed Room'
+  adults: 6
+  children: 6
+  min_adults: 0
+  max_children: 20
+  description: 'This is a 20 bed room'
+  short_description: '20Bed room'
+  code: 'TW'
+  type: ''
+-
+  id: 5
+  name: 'Children Room'
+  adults: 0
+  children: 3
+  min_adults: 0
+  max_children: 15
+  description: 'This room can be used just by children 5-16 years'
+  short_description: 'this is a children room'
+  code: 'CR'
+  type: ''
+-
+  id: 6
+  name: 'president suit'
+  adults: 2
+  children: 0
+  min_adults: 1
+  max_children: 0
+  description: 'This is our best room with all kind of equipments'
+  short_description: 'This is the suit'
+  code: 'PS'
+  type: ''
+-
+  id: 7
+  name: 'Students room'
+  adults: 6
+  children: 0
+  min_adults: 1
+  max_children: 10
+  description: 'This is a students room with 10 beds and badroom'
+  short_description: 'students room'
+  code: 'ST'
+  type: ''
+-
+  id: 8
+  name: 'jacuzzi room'
+  adults: 1
+  children: 1
+  min_adults: 1
+  max_children: 4
+  description: 'We have a jacuzzi in this room for clients'
+  short_description: 'jacuzzi room'
+  code: 'JR'
+  type: ''
+-
+  id: 9
+  name: 'VIP room'
+  adults: 3
+  children: 0
+  min_adults: 1
+  max_children: 6
+  description: 'This room is reserved for special customers with an invitation'
+  short_description: 'VIP room for special clients'
+  code: 'VR'
+  type: ''
+-
+  id: 10
+  name: 'Double room'
+  adults: 2
+  children: 2
+  min_adults: 1
+  max_children: 4
+  description: 'This room has 4 beds and a badroom'
+  short_description: 'double room'
+  code: 'DR'
+  type: ''
+
 #--------------------------------------------
 #             Rate room types
 #--------------------------------------------
 
 rate_room_types:
 -
-	id: 1
-	rate_id: 1
-	room_type_id: 1
-	allocation: 10
-	position: 0
+  id: 1
+  rate_id: 1
+  room_type_id: 1
+  allocation: 10
+  position: 0
+-
+  id: 2
+  rate_id: 1
+  room_type_id: 7
+  allocation: 5
+  position: 0
+-
+  id: 3
+  rate_id: 2
+  room_type_id: 5
+  allocation: 2
+  position: 0
+-
+  id: 4
+  rate_id: 2
+  room_type_id: 10
+  allocation: 15
+  position: 0
+-
+  id: 5
+  rate_id: 3
+  room_type_id: 2
+  allocation: 12
+  position: 0
+-
+  id: 6
+  rate_id: 3
+  room_type_id: 3
+  allocation: 6
+  position: 0
+-
+  id: 7
+  rate_id: 4
+  room_type_id: 6
+  allocation: 4
+  position: 0
+-
+  id: 8
+  rate_id: 4
+  room_type_id: 8
+  allocation: 9
+  position: 0
+-
+  id: 9
+  rate_id: 5
+  room_type_id: 1
+  allocation: 8
+  position: 0
+-
+  id: 10
+  rate_id: 5
+  room_type_id: 9
+  allocation: 12
+  position: 0
+-
+  id: 11
+  rate_id: 6
+  room_type_id: 5
+  allocation: 7
+  position: 0
+-
+  id: 12
+  rate_id: 6
+  room_type_id: 4
+  allocation: 5
+  position: 0
