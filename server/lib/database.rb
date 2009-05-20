@@ -15,7 +15,7 @@ module Database
     when :condition
     	cond1 = condition.split("=").first
     	cond2 = condition.split("=").last
-    	cond2 = cond2.to_i if cond2.is_a?(Numeric)
+    	cond2 = cond2.to_i if cond2.to_i.to_s == cond2
     	add_specials(table, db[table.to_s].map { |r| r if r['cond1'] == cond2 }.compact)
     end
   end
@@ -29,7 +29,15 @@ module Database
   			for rrt in _result
 					rrt["room_type"] = self.find(rrt["room_type_id"], "room_types")
 				end  
-			end		
+			end
+		when :rates
+			if _result.is_a?(Hash)
+				_result["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + _result["id"].to_s)
+			else
+				for rate in _result
+					rate["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + rate["id"].to_s)
+				end  
+			end
   	end
   	
   	if _result.is_a?(Hash)
