@@ -349,7 +349,7 @@ contacts:
   id: 1
   first_name: 'Steve'
   last_name: 'Bond'
-  email: 'stefanbond007@programmer.com'
+  email: 'stevebond007@programmer.com'
   phone: '086543571'
   ezine: true
 -

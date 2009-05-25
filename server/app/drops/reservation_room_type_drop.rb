@@ -80,7 +80,7 @@ class ReservationRoomTypeDrop < Liquid::Drop
   
   #event stuff
   def is_ticket_rate
-    return @reservation_room_type.rate.is_ticket_rate?
+    return @reservation_room_type.rate.is_ticket_rate
   end
   
   def rate

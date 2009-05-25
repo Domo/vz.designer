@@ -37,17 +37,27 @@ module Database
 		when :rates
 			if _result.is_a?(Hash)
 				_result["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + _result["id"].to_s)
+				_result["is_ticket_rate"] = false
 			else
 				for rate in _result
 					rate["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + rate["id"].to_s)
+					rate["is_ticket_rate"] = false
 				end  
 			end
 		when :reservations
 			if _result.is_a?(Hash)
-				_result["reservation_room_types"] = [ReservationRoomType.new(_result.to_mod)]
+				rooms = []
+				(rand(2)+1).times do
+					rooms << ReservationRoomType.new(_result.to_mod)
+				end
+				_result["reservation_room_types"] = rooms
 			else
 				for reservation in _result
-					reservation["reservation_room_types"] = [ReservationRoomType.new(rate.to_mod)]
+					rooms = []
+					(rand(2)+1).times do
+						rooms << ReservationRoomType.new(_result.to_mod)
+					end
+					reservation["reservation_room_types"] = rooms
 				end  
 			end
   	end
