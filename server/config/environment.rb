@@ -8,6 +8,7 @@ $LOAD_PATH.unshift(ROOT + '/app/tags')
 $LOAD_PATH.unshift(ROOT + '/vendor/liquid/lib')
 $LOAD_PATH.unshift(ROOT + '/vendor/rubyzip/lib')
 $LOAD_PATH.unshift(ROOT + '/lib')
+$LOAD_PATH.unshift(ROOT + '/app/models')
 
 
 require 'webrick'
@@ -22,6 +23,7 @@ require 'zip/zip'
 require 'paginate'
 require 'comment_form'
 require 'active_support/json'
+require 'date'
 
 require File.dirname(__FILE__) + '/version'
 
@@ -51,5 +53,18 @@ class Hash
     	end
     end
   end
+  def stringify_keys
+		inject({}) do |options, (key, value)|
+			options[key.to_s] = value
+			options
+		end
+	end
+end
+
+#Same for Strings... I miss Rails :/
+class String
+	def to_date
+		Date.parse(self)
+	end
 end
 

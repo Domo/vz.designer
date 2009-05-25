@@ -7,6 +7,11 @@ require 'rate_search_drop'
 require 'rate_search_item_drop'
 require 'rate_drop'
 require 'rate_room_type_drop'
+require 'contact_drop'
+require 'customer_drop'
+require 'reservation_drop'
+require 'reservation_room_type_drop'
+require 'reservation_room_type'
 require 'wsession'
 
 class ThemeServlet < LiquidServlet
@@ -49,6 +54,9 @@ class ThemeServlet < LiquidServlet
 	def confirmation
 		if template_type == 'rooms'
 			@step = '5'
+			@contact = ContactDrop.new(Database.find(:random, :contacts))
+			@customer = CustomerDrop.new(Database.find(:random, :customers))
+			@reservations = [ReservationDrop.new(Database.find(:random, :reservations))]
 			render :type => :liquid
 		else
 			@step = '4'

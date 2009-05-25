@@ -1,6 +1,45 @@
 require 'wsession'
 
 module ShopFilter
+	
+	def format_decimal(input)    
+   return "0" if input.nil?
+   
+   parts = input.to_s.split('.')
+   if parts.length == 1
+     parts[1] = "00"
+   end
+   
+   if parts[1].length == 1
+     parts[1] = parts[1] + "0"
+   end
+   
+   if parts[1].length > 2
+     parts[1] = parts[1][0..1]
+   end  
+   
+   return parts.join(".")
+ end 
+ 
+  def format_without_decimal(input)
+    return "0" if input.nil?
+    parts = input.to_s.split('.')
+    return parts[0]  
+  end
+ 
+  def with_new_lines(input)
+    return input.to_s.gsub(/\n/, '<br />')# rescue ""
+  end
+  		
+  
+  def ready_for_javascript(input)
+	  new_input = input
+	  new_input = new_input.to_s.gsub(/\r/, '')
+	  new_input = new_input.to_s.gsub(/[']/, '\\\\\'')
+	  new_input = new_input.to_s.gsub(/["]/, '&quot;')
+	  new_input = new_input.to_s.gsub(/\n/, "")
+	  return new_input
+  end
 	      
   def asset_url(input)
     "/files/shops/random_number/assets/#{input}"

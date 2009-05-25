@@ -10,7 +10,7 @@ properties:
   country: 'Dublin'
   fax: '+353 1 804 9152'
   phone: '+353 1 804 9100'
-  email: 'julen@visrez.com'
+  email: 'gustavgans@disney.com'
   checkin_checkout_details: 'reservation paid before stay'
   facilities_details: 'our hotel has many big and beautiful rooms, internet a wi-fi zone and a big kitchen for our customers'
   location_details: '5 minits walking from the bus station, and 10 minits by bus to the airport'
@@ -37,7 +37,7 @@ properties:
   country: 'Chile'
   fax: '+75 5 359 9422'
   phone: '+75 5 507 6598'
-  email: 'morales0_00@hotmail.com'
+  email: 'daisyduck@disney.com'
   checkin_checkout_details: 'just paid with creditcard or visa'
   facilities_details: 'our hotel is great for little groups, and couples who want to enjoy our city'
   location_details: '10 minits walking from the bus station, and 30 minits by bus to the airport, youre in the city center'
@@ -64,7 +64,7 @@ properties:
   country: 'Dublin'
   fax: '+353 9 406 9792'
   phone: '+353 9 406 9793'
-  email: 'julenkini@gmail.com'
+  email: 'donaldduck@disney.com'
   checkin_checkout_details: 'we accept all kind of reservation modes'
   facilities_details: 'very big and confortable rooms, ideal for stay in here long time, TV and internet in each room'
   location_details: '5 minits walking from the bus station, and 1 hour by bus to the airport'
@@ -316,3 +316,65 @@ rate_room_types:
   room_type_id: 4
   allocation: 5
   position: 0
+  
+#--------------------------------------------
+#           Customers and Contacts
+#--------------------------------------------
+
+customers:
+-
+  id: 1
+  city: 'Dublin'
+  postcode: '954'
+  country: 'Ireland'
+  address1: 'popehouse Rd 45'
+  address2: 'Dublin 4'
+-
+  id: 2
+  city: 'San sebastian'
+  postcode: '209'
+  country: 'Spain'
+  address1: 'borroto kalea 34'
+  address2: 'aiete auzoa 2'
+-
+  id: 3
+  city: 'cork'
+  postcode: '653'
+  country: 'Ireland'
+  address1: 'Three Rivers RD'
+  address2: 'co. cork'
+  
+contacts:
+-
+  id: 1
+  first_name: 'Steve'
+  last_name: 'Bond'
+  email: 'stefanbond007@programmer.com'
+  phone: '086543571'
+  ezine: true
+-
+  id: 2
+  first_name: 'julien'
+  last_name: 'obama'
+  email: 'julienator@machine.com'
+  phone: '086996542'
+  ezine: false
+-
+  id: 3
+  first_name: 'bob'
+  last_name: 'sponge'
+  email: 'bobsponge@cartoon.com'
+  phone: '080224564'
+  ezine: false
+  
+#--------------------------------------------
+#              Reservations
+#--------------------------------------------
+
+reservations:
+-
+  id: 1
+  sell_price: 100.00
+  paid: 100.00
+  arrival_date: '01.07.2009'
+  departure_date: '02.07.2009'

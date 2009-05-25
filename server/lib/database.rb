@@ -1,22 +1,26 @@
 require 'yaml'
+require 'reservation_room_type'
 
 module Database
   
   def self.find(what, table, condition = '')
     case what 
     when Numeric
-    	puts 'database: find: numeric => ' + what.to_s
+    	puts 'database >> find >> numeric => ' + what.to_s
       add_specials(table, db[table.to_s].map { |r| r if r['id'] == what }.compact.first)
     when :all
       add_specials(table, db[table.to_s])
     when :first
-      # db[table.to_s].find { |a| a['id'] == 1 } 
       add_specials(table, db[table.to_s].first)
     when :condition
     	cond1 = condition.split("=").first
     	cond2 = condition.split("=").last
     	cond2 = cond2.to_i if cond2.to_i.to_s == cond2
+    	puts "database >> find >> condition => " + condition
     	add_specials(table, db[table.to_s].map { |r| r if r['cond1'] == cond2 }.compact)
+    when :random
+    	random = rand(db[table.to_s].size)
+    	add_specials(table, db[table.to_s][random])
     end
   end
   
@@ -36,6 +40,14 @@ module Database
 			else
 				for rate in _result
 					rate["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + rate["id"].to_s)
+				end  
+			end
+		when :reservations
+			if _result.is_a?(Hash)
+				_result["reservation_room_types"] = [ReservationRoomType.new(_result.to_mod)]
+			else
+				for reservation in _result
+					reservation["reservation_room_types"] = [ReservationRoomType.new(rate.to_mod)]
 				end  
 			end
   	end
