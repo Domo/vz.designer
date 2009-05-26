@@ -1,6 +1,6 @@
 require 'wsession'
 
-module ShopFilter
+module VisrezFilter
 	
 	def format_decimal(input)    
    return "0" if input.nil?
