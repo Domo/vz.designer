@@ -3,21 +3,17 @@ require 'reservation_room_type'
 
 module Database
   
-  def self.find(what, table, condition = '')
+  def self.find(what, table, condition = ["", ""])
+  	puts "Database >> find >> " + table.to_s + " >> " + what.to_s + " (" + condition.to_s + ")"
     case what 
     when Numeric
-    	puts 'database >> find >> numeric => ' + what.to_s
       add_specials(table, db[table.to_s].map { |r| r if r['id'] == what }.compact.first)
     when :all
       add_specials(table, db[table.to_s])
     when :first
       add_specials(table, db[table.to_s].first)
     when :condition
-    	cond1 = condition.split("=").first
-    	cond2 = condition.split("=").last
-    	cond2 = cond2.to_i if cond2.to_i.to_s == cond2
-    	puts "database >> find >> condition => " + condition
-    	add_specials(table, db[table.to_s].map { |r| r if r['cond1'] == cond2 }.compact)
+    	add_specials(table, db[table.to_s].map { |r| r if r[condition[0]] == condition[1] }.compact)
     when :random
     	random = rand(db[table.to_s].size)
     	add_specials(table, db[table.to_s][random])
@@ -72,7 +68,11 @@ module Database
 	end
   
   def self.db
-    YAML::load_file("#{ROOT}/db/database.yml")
+  	db_files = ["database.yml"]
+  	for dbf in db_files
+  		c = YAML::load_file("#{ROOT}/db/" + dbf)
+		end
+		return c
   end
   
 end

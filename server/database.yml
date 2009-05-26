@@ -1,4 +1,4 @@
-properties:
+﻿properties:
 -
   id: 1
   name: 'Basement Midtown Plaza'
@@ -447,12 +447,12 @@ reservations:
 -
   id: 5
   sell_price: 200.00
-  paid: 200.00
+  paid: 20.00
   arrival_date: '28.10.2009'
   departure_date: '02.10.2009'
 -
   id: 6
   sell_price: 70.00
-  paid: 70.00
+  paid: 35.00
   arrival_date: '24.11.2009'
   departure_date: '28.11.2009'

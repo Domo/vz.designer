@@ -42,16 +42,11 @@ module ShopFilter
   end
 	      
   def asset_url(input)
-    "/files/shops/random_number/assets/#{input}"
+    "/skin/#{input}"
   end
 
-  def global_asset_url(input)
-    req = @context.registers[:request]
-    "http://#{req.host}:#{req.port}/global/#{input}"
-  end
-  
-  def shopify_asset_url(input)
-    "/shopify/#{input}"
+  def global_asset_url(input, version = "v_001")
+    common_asset(input, version)
   end
   
   def script_tag(url)
@@ -67,7 +62,9 @@ module ShopFilter
   end
   
   def common_asset(input, version = "v_001")
-	  File.join("http://assets.visrez.com", "roomsandevents/common", version, input)
+	  # File.join("http://assets.visrez.com", "roomsandevents/common", version, input)
+	  req = @context.registers[:request]
+    "http://#{req.host}:#{req.port}/common/#{version}/#{input}"
   end
   
   def	google_include(input)

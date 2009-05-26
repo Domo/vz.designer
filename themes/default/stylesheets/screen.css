@@ -215,7 +215,7 @@ hr { display:none;}
 #occupancy p#occupancy-total {font-size:1.3em;margin-left:86%; margin-top:10px;text-align:right;width:120px;}
 
 #occupancy .room-actions {margin-bottom:5px;}
-#occupancy .room-actions a {background:transparent url('') no-repeat left 1px; padding:0 0 5px 20px;}
+#occupancy .room-actions a {background:transparent url('') no-repeat left 3px; padding-left:20px;}
 #occupancy .room-actions a.add_room{background-image:url(../images/ico_add.png); }
 #occupancy .room-actions a.new_search{background-image:url(../images/ico_add.png); }
 #occupancy .room-actions a.rem_room{margin-left:10px; background-image:url(../images/ico_error.png);}

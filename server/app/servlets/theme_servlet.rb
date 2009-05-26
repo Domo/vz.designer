@@ -48,6 +48,7 @@ class ThemeServlet < LiquidServlet
 	
 	def checkout
 		@step = '4'
+		@rate_search_container = ReservationDrop.new(Database.find(:random, :reservations))
 		render :type => :liquid
 	end
 	
@@ -131,8 +132,8 @@ class ThemeServlet < LiquidServlet
   
   #assigns, which are always needed 
   def build_global_assigns options = {}
-    @selected_property = WSession.property
-    @property = WSession.property
+    @selected_property = Database.find(:first, :properties)
+    @property = Database.find(:random, :properties)
     # csetting = CustomerSetting.find(:first) 
     # csetting = CustomerSetting.new if csetting.nil?    
     
