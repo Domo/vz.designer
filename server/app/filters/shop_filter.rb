@@ -45,7 +45,7 @@ module ShopFilter
     "/skin/#{input}"
   end
 
-  def global_asset_url(input, version = "v_001")
+  def common_asset_url(input, version = "v_001")
     common_asset(input, version)
   end
   
