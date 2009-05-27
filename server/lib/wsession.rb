@@ -21,10 +21,11 @@ module WSession
 	end
 	
 	def self.get_theme_file(file)
-		puts "Vz.File: " + file
 		if File.exists? file
 			content = File.read(file)
+			puts "File loaded: " + file
 		else
+			puts "File not found: " + file
 			content = "Not found."
 		end
 		ext = file.split(".").last
@@ -36,7 +37,11 @@ private
 	def self.mime_types(ext)
 		types = {
 			:css => "text/css",
-			:js => "text/javascript"
+			:js => "text/javascript",
+			:png => "image/png",
+			:gif => "image/gif",
+			:jpg => "image/jpeg",
+			:jpeg => "image/jpeg"
 		}
 		return types[ext.to_sym]
 	end
