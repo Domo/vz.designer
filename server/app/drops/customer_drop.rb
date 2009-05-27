@@ -52,7 +52,12 @@ class CustomerDrop < Liquid::Drop
   end
   
   def country_options_for_select
-    helper.country_options_for_select(@customer.country || "Ireland")
+    countries = ["Please select something", "Ireland", "England", "Scottland"]
+    tag = ""
+    for country in countries
+    	tag << '<option value="' + country.downcase + '">' + country + '</option>'
+    end
+    return tag
   end
   
   def contacts

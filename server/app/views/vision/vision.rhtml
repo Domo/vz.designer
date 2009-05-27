@@ -5,7 +5,7 @@
         <a href="/dashboard/">Dashboard</a>
       </li>
       <li id="theme-list">
-        <label for="themes">Theme:</label> 
+        <label for="themes">Skin:</label> 
         <select name="themes" id="themes" onchange="Cookie.set('theme', this.value); Cookie.destroy('template_type'); window.location.reload(); return false;">
         <% for theme in @themes %>
           <option value="<%= theme %>" <%= 'selected="selected"' if theme == @current_theme %>><%= theme %></option>

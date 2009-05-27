@@ -6,7 +6,7 @@
 
 	<h2>Reservation Details</h2>
 	<div class="box"> 
-			<p class="clearfix"><strong>Check in:</strong> {{ rate_search_container.arrival_date | format_date_to: 'eu' }} ({{ rate_search_container.nights }} nights)</p>	
+			<p class="clearfix"><strong>Check in:</strong> {{ rate_search_container.arrival_date | format_date_to: 'eu' }} ({{ rate_search_container.nights | pluralize: 'night' }})</p>	
 			<p class="clearfix"><strong>Check out:</strong> {{ rate_search_container.leave_date | format_date_to: 'eu' }}</p>	
 			<p class="clearfix"><strong>Number of rooms:</strong> {{ rate_search_container.rooms | pluralize: 'room'  }}</p>	
 				{% for room in rate_search_container.items -%}

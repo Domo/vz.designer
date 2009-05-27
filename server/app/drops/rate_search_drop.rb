@@ -1,8 +1,9 @@
 class RateSearchDrop < Liquid::Drop
 	require 'database'
-  def initialize(_property)
+  def initialize(_property, _rate_search_container)
     @property = _property
     @db_rates = Database.find(:condition, :rates, ["property_id", @property.id])
+    @rate_search_container = _rate_search_container
   end  
   
   #get list of RateDrops

@@ -12,6 +12,8 @@ require 'customer_drop'
 require 'reservation_drop'
 require 'reservation_room_type_drop'
 require 'reservation_room_type'
+require 'rate_search_container'
+require 'creditcard_drop'
 require 'wsession'
 
 class ThemeServlet < LiquidServlet
@@ -34,7 +36,7 @@ class ThemeServlet < LiquidServlet
   	@rate_search_drops = []
   	
   	prop = Database.find(@selected_property.id, :properties)
-  	drop = RateSearchDrop.new(prop)
+  	drop = RateSearchDrop.new(prop, RateSearchContainer.new)
   	
   	@rate_search_drops << drop
 
@@ -48,7 +50,8 @@ class ThemeServlet < LiquidServlet
 	
 	def checkout
 		@step = '4'
-		@rate_search_container = ReservationDrop.new(Database.find(:random, :reservations))
+		@customer = CustomerDrop.new(Database.find(:random, :customers))
+		@creditcard = CreditcardDrop.new
 		render :type => :liquid
 	end
 	
@@ -132,8 +135,10 @@ class ThemeServlet < LiquidServlet
   
   #assigns, which are always needed 
   def build_global_assigns options = {}
-    @selected_property = Database.find(:first, :properties)
-    @property = Database.find(:random, :properties)
+    @selected_property = PropertyDrop.new(Database.find(:random, :properties))
+    @property = PropertyDrop.new(Database.find(:random, :properties))
+    @rate_search_container = RateSearchDrop.new(@property, RateSearchContainer.new)
+    
     # csetting = CustomerSetting.find(:first) 
     # csetting = CustomerSetting.new if csetting.nil?    
     
@@ -143,7 +148,7 @@ class ThemeServlet < LiquidServlet
     
     @flash = FlashDrop.new({})
     @arrival_date = Time.new.strftime("%d.%m.%Y")
-    @nights = @params[:nights] || '1'
+    @nights = @params[:nights] || rand(5) + 1
     
     @properties = Database.find(:all, :properties).collect {|p| PropertyDrop.new(p) }
     

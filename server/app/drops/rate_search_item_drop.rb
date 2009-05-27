@@ -206,7 +206,8 @@ class RateSearchItemDrop < Liquid::Drop
   
   #event stuff
   def is_ticket_rate
-    return @rate_search_container_item.rate_room_type.rate.is_ticket_rate?
+    # return @rate_search_container_item.rate_room_type.rate.is_ticket_rate?
+    return false
   end
   
   def event_names
