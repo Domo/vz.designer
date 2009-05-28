@@ -9,6 +9,7 @@ $LOAD_PATH.unshift(ROOT + '/vendor/liquid/lib')
 $LOAD_PATH.unshift(ROOT + '/vendor/rubyzip/lib')
 $LOAD_PATH.unshift(ROOT + '/lib')
 $LOAD_PATH.unshift(ROOT + '/app/models')
+$LOAD_PATH.unshift(ROOT + '/app/filters')
 
 
 require 'webrick'

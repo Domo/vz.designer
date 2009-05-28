@@ -14,6 +14,7 @@ require 'reservation_room_type_drop'
 require 'reservation_room_type'
 require 'rate_search_container'
 require 'creditcard_drop'
+require 'money_filters'
 require 'wsession'
 
 class ThemeServlet < LiquidServlet
@@ -99,6 +100,15 @@ class ThemeServlet < LiquidServlet
 	
 	def remove_room
 		redirect_to '/occupancy'
+	end
+	
+	def ajax_update_room
+		new_price = rand(100) + 10
+		@response['Content-Type'] = "text/javascript"
+		money = MoneyFilter.new
+		innerhtml = money.format_money(new_price, '&euro;')
+		tag = "$('total_price').innerHTML = '" + innerhtml + "';"
+		render :text => tag
 	end
 	
 	def template_type_cookie
