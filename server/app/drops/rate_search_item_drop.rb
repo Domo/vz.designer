@@ -65,15 +65,11 @@ class RateSearchItemDrop < Liquid::Drop
 
   def build_adult_options
     options = []
-    #make sure, the room can not contain more people then set in the rate
-    rate_room_type = @rate_search_container_item.rate_room_type
-    maximum = rate_room_type.maximum_occ
 
-    min = self.min_adults  
-    max = self.max_adults
+    min = 1
+    max = rand(6) + 1
     
     for n in (min..max).to_a
-      next if (maximum - children - n) < 0
       selected = ""
       selected = " selected=\"selected\" " if n == self.adults
       options << "<option value=\"#{n}\" #{selected}>" + n.to_s + "</option>"
@@ -83,12 +79,11 @@ class RateSearchItemDrop < Liquid::Drop
 
   def build_children_options
      options = []
-    #make sure, the room can not contain more people then set in the rate
-    rate_room_type = @rate_search_container_item.rate_room_type
-    maximum = rate_room_type.maximum_occ
+	
+		min = 1
+    max = rand(6) + 1	
 
-    for n in (self.min_children..self.max_children).to_a
-      next if (maximum - adults - n) < 0
+    for n in (min..max).to_a
       selected = ""
       selected = " selected=\"selected\" " if n == self.children
       options << "<option value=\"#{n}\" #{selected}>" + n.to_s + "</option>"

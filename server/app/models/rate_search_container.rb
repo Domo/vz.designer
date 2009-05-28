@@ -20,5 +20,16 @@ class RateSearchContainer
 		@reservation.reservation_room_types
 	end	
 	
+	def adults
+		@reservation.adults
+	end
 	
+	def children
+		@reservation.children
+	end
+
+	def charged_price
+		@reservation.paid
+	end
+
 end

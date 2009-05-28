@@ -90,5 +90,5 @@ class ReservationRoomTypeDrop < Liquid::Drop
   def event_names
     return "" if not is_ticket_rate
     return @reservation_room_type.rate.assigned_events_names
-  end  
+  end
 end

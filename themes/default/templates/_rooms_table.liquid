@@ -7,9 +7,6 @@
 	
 	<div class="box">
 		<form id="room_form_{{ room.id }}" class="occupancy" action="ajax_update_room" method="post" onsubmit="new Ajax.Updater('rooms', 'ajax_update_room', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;">			
-		<!--			
-		{{ link_to_remote "Delete", :url => { :action => "ajax_delete_item", :id => room.id }, :update => :rooms }}
-		-->
 		<fieldset>
 			<p class="title">Occupancy:</p>
 			<p><label>Adults:</label>{{ room.select_adults }}</p>
@@ -43,7 +40,7 @@
 	
 <p id="occupancy-total">
 	<strong>Total:</strong> <span id="total_price">&euro;{{ rate_search_container.total_price | format_decimal}}</span><br />
-	<span style="font-size: 0.8em"><strong>Deposit:</strong> &euro;{{ rate_search_container.charged_price | format_decimal }}</span>
+	{% if rate_search_container.deposit_chared %}<span style="font-size: 0.8em"><strong>Deposit:</strong> &euro;{{ rate_search_container.charged_price | format_decimal }}</span>{% endif %}
 </p>
 {% if customer_setting.booking_fee > 0 %}<p>Total Price includes a booking fee of {{ customer_setting.booking_fee | format_money: '&euro;' }} </p>{% endif %}
 <!--All of these rooms are bookable? {{ rate_search_container.valid }}-->

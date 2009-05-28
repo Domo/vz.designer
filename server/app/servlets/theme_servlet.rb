@@ -34,9 +34,8 @@ class ThemeServlet < LiquidServlet
   	@step = '2'
   	
   	@rate_search_drops = []
-  	
-  	prop = Database.find(@selected_property.id, :properties)
-  	drop = RateSearchDrop.new(prop, RateSearchContainer.new)
+  
+  	drop = RateSearchDrop.new(@property, RateSearchContainer.new)
   	
   	@rate_search_drops << drop
 
@@ -91,6 +90,15 @@ class ThemeServlet < LiquidServlet
 	
 	def do_payment
 		redirect_to confirmation
+	end
+	
+	#other need methods... man weiß ja nie, worauf der user alles klicken will...
+	def add_room
+		redirect_to '/occupancy'
+	end
+	
+	def remove_room
+		redirect_to '/occupancy'
 	end
 	
 	def template_type_cookie
