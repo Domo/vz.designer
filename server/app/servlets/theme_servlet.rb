@@ -35,8 +35,10 @@ class ThemeServlet < LiquidServlet
   	@step = '2'
   	
   	@rate_search_drops = []
+  	property = Database.find(:random, :properties)
+  	property = Database.find(@params[:property], :properties) if @params[:properties]
   
-  	drop = RateSearchDrop.new(@property, RateSearchContainer.new)
+  	drop = RateSearchDrop.new(property, RateSearchContainer.new)
   	
   	@rate_search_drops << drop
 
@@ -129,7 +131,7 @@ class ThemeServlet < LiquidServlet
     end
 
     # export drops
-    @theme    = cookie.value        
+    @theme    = cookie.value      
 		
     build_global_assigns
 
@@ -164,9 +166,11 @@ class ThemeServlet < LiquidServlet
     htmloptions = { :host => 'localhost', :local => true, :port => '3232', :controller => "" }  
     @html = HtmlDrop.new(htmloptions)
     
-    @flash = FlashDrop.new({})
+    @flash = FlashDrop.new(build_flash)
     @arrival_date = Time.new.strftime("%d.%m.%Y")
     @nights = @params[:nights] || rand(5) + 1
+    
+    @link_to_remote = nil
     
     @properties = Database.find(:all, :properties).collect {|p| PropertyDrop.new(p) }
     
@@ -194,6 +198,23 @@ class ThemeServlet < LiquidServlet
     end    
   end
   
+  def build_flash
+  	flash = {:error => '', :warning => '', :notice => ''}
+  	if @params["show_warning"]
+  		puts "found a warning"
+  		flash[:warning] = 'This is a warning!!!'
+  	end
+  	if @params["show_notice"]
+  		puts "found a warning"
+  		flash[:notice] = 'This is a notice!!!'
+  	end
+  	if @params["show_error"]
+  		puts "found a warning"
+  		flash[:error] = 'This is an error!!!'
+  	end
+  	return flash
+	end
+	  
   def path_scan
     
     matches = @request.path_info.gsub(/\+/,' ').scan(/\/([\w\s\-\.\+]+)/).flatten

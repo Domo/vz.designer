@@ -62,3 +62,13 @@ function initVisionPalette() {
   new Vision.Palette(vision_html);
 };
 
+function toggle_element(element) {
+	el = document.getElementById(element);
+	oldstyle = el.style.display;
+	if (oldstyle == 'none') {
+		el.style.display = 'block';
+	} else {
+		el.style.display = 'none';
+	}
+}
+

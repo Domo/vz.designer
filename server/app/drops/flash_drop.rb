@@ -1,7 +1,7 @@
 class FlashDrop < Liquid::Drop
   
   def initialize(flash)
-    @flash = flash || {}
+    @flash = flash || {:error => '', :notice => ''}
   end
   
   def message

@@ -6,10 +6,6 @@
 	<a href="/web_reservations/remove_room/?room_item={{ room.id }}" style="margin-left: 10px;" class="occupancy rem_room">Remove this room</a>
 	<div class="box">
 		<form id="room_form_{{ room.id }}" class="occupancy" action="ajax_update_room" method="post" onsubmit="new Ajax.Updater('rooms', 'ajax_update_room', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;">			
-		<!--			
-		{{ link_to_remote "Delete", :url => { :action => "ajax_delete_item", :id => room.id }, :update => :rooms }}
-		-->
-		
 		<fieldset>
 			<p class="title">Occupancy:</p>
 				

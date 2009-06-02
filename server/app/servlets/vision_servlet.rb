@@ -27,6 +27,9 @@ class VisionServlet < Servlet
     @templates = templates_for_view   
     @template_types = template_types_for_view
     
+    @options = [{ :name => 'show_error', :caption => 'Show an error notification' },
+								 { :name => 'show_notice', :caption => 'Show a notification' },
+								 { :name => 'show_warning', :caption => 'Show a warning notification' }]
     rhtml = render(:action => 'vision', :type => 'rhtml')
     "var vision_html = '#{escape_javascript(rhtml)}';"
   end
@@ -43,6 +46,13 @@ class VisionServlet < Servlet
 		return tt
 	end
 	
+	def options_for_action
+		options =  [{ :name => 'show_error', :caption => 'Show an error notification' },
+								 { :name => 'show_notice', :caption => 'Show a notification' },
+								 { :name => 'show_warning', :caption => 'Show a warning notification' }]
+		
+		return options
+	end
 
   def templates_for_view
 
@@ -86,6 +96,9 @@ class VisionServlet < Servlet
     return st[template_type.to_sym]
   end
 
+	def options_for_action
+		
+	end
 
   def listify_docs(docs)
     result = ["<ul>"]
