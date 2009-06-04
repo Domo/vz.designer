@@ -2,8 +2,6 @@ require 'yaml'
 require 'reservation_room_type'
 require 'room_type_image'
 require 'rate_room_type'
-require 'rubygems'
-require "ruby-debug"
 
 module Database
   
