@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'ruby-debug'
-
 class RateRoomTypeDrop < Liquid::Drop
 
 	require 'rate_day_drop'	

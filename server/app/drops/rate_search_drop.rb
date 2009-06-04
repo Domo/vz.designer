@@ -78,7 +78,6 @@ class RateSearchDrop < Liquid::Drop
   end
   
   def has_rates
-    debugger
     a = 1
     available = Property.has_rates[@property.id]
     return false if available.nil?
