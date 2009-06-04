@@ -38,7 +38,8 @@ class ThemeServlet < LiquidServlet
   	property = Database.find(:random, :properties)
   	property = Database.find(@params[:property], :properties) if @params[:properties]
   
-  	drop = RateSearchDrop.new(property, RateSearchContainer.new)
+  	rate_search_container = RateSearchContainer.new(property)
+  	drop = RateSearchDrop.new(property, rate_search_container)
   	
   	@rate_search_drops << drop
 
@@ -104,6 +105,10 @@ class ThemeServlet < LiquidServlet
 		redirect_to '/occupancy'
 	end
 	
+	def room_occupancy
+		redirect_to '/occupancy'
+	end
+	
 	def ajax_update_room
 		new_price = rand(100) + 10
 		@response['Content-Type'] = "text/javascript"
@@ -134,6 +139,8 @@ class ThemeServlet < LiquidServlet
     @theme    = cookie.value      
 		
     build_global_assigns
+    
+    @nights = @params[:nights] || rand(5) + 1
 
     @template     = @action_name
     @handle       = @params['handle'] if @params['handle']
@@ -148,6 +155,12 @@ class ThemeServlet < LiquidServlet
     <script type="text/javascript">
       window.onload = function() { initVisionPalette(); }
     </script>
+    <script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/fancyzoom.js" type="text/javascript"></script>
+    <script type="text/javascript">$(document).observe('dom:loaded', function() { $$('a.room_type_image_link').each(function(el) { new FancyZoom(el) }); } );</script>
+    <style media="screen,projection" type="text/css">
+    	#zoom table, #zoom table tr, #zoom table td {border: none;} 
+			.room_type_image_link {cursor:url(http://assets.visrez.comroomsandevents/common/v_001/images/fancyzoom/zoomin.cur), pointer;}
+		</style>
     <!-- end inject -->  
     HEADERS
 #    @content_for_header = ""    
@@ -168,9 +181,6 @@ class ThemeServlet < LiquidServlet
     
     @flash = FlashDrop.new(build_flash)
     @arrival_date = Time.new.strftime("%d.%m.%Y")
-    @nights = @params[:nights] || rand(5) + 1
-    
-    @link_to_remote = nil
     
     @properties = Database.find(:all, :properties).collect {|p| PropertyDrop.new(p) }
     

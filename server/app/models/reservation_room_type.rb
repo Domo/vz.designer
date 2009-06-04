@@ -1,4 +1,9 @@
 class ReservationRoomType
+	
+	def my_name
+		"ReservationRoomType"
+	end
+	
 	require 'database'
 	attr_accessor :adults, :children, :reservation_id, :occupancy, :sell_price, :room_type, :rate, :price
 	def initialize(_reservation)

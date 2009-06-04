@@ -1,8 +1,14 @@
 class RateDrop < Liquid::Drop
-  def initialize(_rate)
+	
+	def my_name
+		"RateDrop"
+	end
+	
+  def initialize(_rate, _rate_search_container)
     @rate = _rate 
-    rate_room_types = Database.find(:condition, :rate_room_types, "rate_id=" + @rate.id.to_s)
-    @room_types ||= rate_room_types.collect { |x| RateRoomTypeDrop.new(x, @rate) }
+    @rate_search_container = _rate_search_container
+    rate_room_types = @rate.rate_room_types
+    @room_types ||= rate_room_types.collect { |x| RateRoomTypeDrop.new(x, @rate, @rate_search_container) }
   end
   
   def id
@@ -60,23 +66,13 @@ class RateDrop < Liquid::Drop
  
   #rate available at all?
   def is_available
-    return @is_available if not @is_available.nil?
-    @is_available = false
-    return false if @room_types.nil? or @room_types.length == 0
-    not_available = 0
-    for room_type in @room_types
-      not_available += 1 if (not room_type.is_bookable or not room_type.is_available_for_period)
-    end
-    return false if not_available == @room_types.length
-    @rate.property.has_rates = {} if @rate.property.has_rates.nil?
-    Property.has_rates[@rate.property.id] = true
-    @is_available = true
-    return @is_available
+		return true
   end
   
   #true if there are ticketbundles
   def is_ticket_rate
-    return @rate.is_ticket_rate?
+    # return @rate.is_ticket_rate?
+    return @rate.is_ticket_rate
   end  
   
   def image_tag

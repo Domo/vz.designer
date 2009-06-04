@@ -123,7 +123,6 @@ class VisionServlet < Servlet
   
   def render_as_js_string(name, html)
     result = []
-    html.gsub!(/\'/, 'wadasdas!!!!')
     
     result << %|var #{name} = ''+|
     result << html.to_a.collect do |line|

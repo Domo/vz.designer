@@ -1,6 +1,17 @@
+require 'rubygems'
+require 'ruby-debug'
+
 class RateRoomTypeDrop < Liquid::Drop
-  def initialize(_rate_room_type, _rate)
+
+	require 'rate_day_drop'	
+	
+	def my_name
+		"RateRoomTypeDrop"
+	end
+	
+  def initialize(_rate_room_type, _rate, _rate_search_container)
     @rate_room_type = _rate_room_type
+    @rate_search_container = _rate_search_container
     @rate = _rate
   end  
   

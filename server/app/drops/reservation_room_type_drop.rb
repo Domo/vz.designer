@@ -1,5 +1,9 @@
 class ReservationRoomTypeDrop < Liquid::Drop
   
+	def my_name
+		"ReservationRoomTypeDrop"
+	end
+	
   def initialize(_reservation_room_type)
     @reservation_room_type = _reservation_room_type
   end

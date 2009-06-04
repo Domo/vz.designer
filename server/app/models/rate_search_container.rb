@@ -1,15 +1,21 @@
 class RateSearchContainer
 	require 'database'
 	
-	attr_accessor :nights
+	def my_name
+		"RateSearchContainer"
+	end
 	
-	def initialize()
+	attr_accessor :nights, :property
+	
+	def initialize(_property = nil)
 		@reservation = Database.find(:random, :reservations)
+		@property = _property
+		self.property = _property
 		self.nights =  rand(5) + 1
 	end
 	
 	def arrival_date
-		@reservation.arrival_date
+		@reservation.arrival_date.to_date
 	end
 	
 	def total_price

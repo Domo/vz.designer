@@ -1,5 +1,9 @@
 require 'yaml'
 require 'reservation_room_type'
+require 'room_type_image'
+require 'rate_room_type'
+require 'rubygems'
+require "ruby-debug"
 
 module Database
   
@@ -32,11 +36,19 @@ module Database
 			end
 		when :rates
 			if _result.is_a?(Hash)
-				_result["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + _result["id"].to_s)
+				rate_room_types = self.find(:condition, :rate_room_types, ["rate_id", _result["id"]])
+				_result["rate_room_types"] = []
+				for rrt in rate_room_types
+					_result["rate_room_types"] << RateRoomType.new(rrt)
+				end
 				_result["is_ticket_rate"] = false
 			else
 				for rate in _result
-					rate["rate_room_types"] = self.find(:condition, :rate_room_types, "rate_id=" + rate["id"].to_s)
+					rate_room_types = self.find(:condition, :rate_room_types, ["rate_id", rate["id"]])
+					rate["rate_room_types"] = []
+					for rrt in rate_room_types
+						rate["rate_room_types"] << RateRoomType.new(rrt)
+					end
 					rate["is_ticket_rate"] = false
 				end  
 			end
@@ -56,12 +68,24 @@ module Database
 					reservation["reservation_room_types"] = rooms
 				end  
 			end
+		when :room_types
+			if _result.is_a?(Hash)
+				_result["images"] = [RoomTypeImage.new]
+			else
+				for rt in _result
+					rt["images"] = [RoomTypeImage.new]
+				end  
+			end
   	end
   	
   	if _result.is_a?(Hash)
+  		_result["my_name"] = 'Database => ' + _table.to_s
   		return _result.to_mod
   	else
   		puts 'mapping table ' + _table.to_s
+  		for r in _result
+  			r["my_name"] = 'Database => ' + _table.to_s
+  		end
   		return _result.map { |r| r.to_mod }
 		end
 		

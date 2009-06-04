@@ -13,7 +13,7 @@ class SkinAssetServlet < Servlet
 		@response['Content-Type'] = mime_types[File.extname(file)[1..-1]]         
       File.open(file, "rb") do |fp|
    			render :text => fp.read
-      end    
+      end
 	end 
   
   protected
