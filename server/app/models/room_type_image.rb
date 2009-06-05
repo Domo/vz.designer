@@ -5,14 +5,14 @@ class RoomTypeImage
 	
 	def initialize
 		
-		types = ["geometry", "geomety", "large", "medium", "normal", "thumb", "thumbnail"]
+		types = ["geometry", "geomety", "large", "medium", "normal", "thumb", "thumbnail", "custom"]
 		
-		files = Dir.glob(ROOT + "/public/roomimages/*.*")
+		files = Dir.glob(ROOT + "/public/roomimages/**/*.*")
 		images = []
 		begin
 			for filename in files
 				next if types.include? filename.split("/").last.split(".").first.split("_").last
-				images << "/roomimages/" + filename.split("/").last
+				images << filename.gsub(ROOT + "/public", "")
 			end
 		rescue
 		end
