@@ -139,6 +139,9 @@ function SetCreditCardType()
 function CreateCreditCardTypeChecker(_field) {
 	CreditCardOptions['number_field'] = _field;
 	$(_field).onchange = SetCreditCardType;
+	if ($F(_field) != '') {
+		SetCreditCardType();
+	}
 }
 
 function AddClassToElement(_element, _class) {

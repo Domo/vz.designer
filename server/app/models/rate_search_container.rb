@@ -15,7 +15,7 @@ class RateSearchContainer
 	end
 	
 	def arrival_date
-		@reservation.arrival_date.to_date
+		@reservation.arrival_date
 	end
 	
 	def total_price

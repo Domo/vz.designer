@@ -141,7 +141,7 @@ class RateSearchDrop < Liquid::Drop
     d = @rate_search_container.nights if @rate_search_container.nights > 7 
     
     while n < d
-      list << @rate_search_container.arrival_date + n
+      list << @rate_search_container.arrival_date.to_date + n rescue Time.now
       n += 1
     end
     list
