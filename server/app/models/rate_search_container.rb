@@ -15,7 +15,9 @@ class RateSearchContainer
 	end
 	
 	def arrival_date
-		@reservation.arrival_date
+		a = @reservation.arrival_date
+		d = a.split(".")
+		return d[2] + '-' + d[1] + '-' + d[0]
 	end
 	
 	def total_price
