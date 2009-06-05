@@ -23,13 +23,13 @@ module Database
   end
   
   def self.add_specials(_table, _result)
-  	case _table
+  	case _table.to_sym
 		when :rate_room_types
 			if _result.is_a?(Hash)
-  			_result["room_type"] = self.find(_result["room_type_id"], "room_types")
+  			_result["room_type"] = self.find(_result["room_type_id"], :room_types)
   		else
   			for rrt in _result
-					rrt["room_type"] = self.find(rrt["room_type_id"], "room_types")
+					rrt["room_type"] = self.find(rrt["room_type_id"], :room_types)
 				end  
 			end
 		when :rates
@@ -39,6 +39,7 @@ module Database
 				for rrt in rate_room_types
 					_result["rate_room_types"] << RateRoomType.new(rrt)
 				end
+				_result["images"] = [RoomTypeImage.new]
 				_result["is_ticket_rate"] = false
 			else
 				for rate in _result
@@ -46,6 +47,7 @@ module Database
 					rate["rate_room_types"] = []
 					for rrt in rate_room_types
 						rate["rate_room_types"] << RateRoomType.new(rrt)
+						rate["images"] = [RoomTypeImage.new]
 					end
 					rate["is_ticket_rate"] = false
 				end  
