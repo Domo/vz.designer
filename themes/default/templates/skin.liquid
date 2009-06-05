@@ -2,29 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 	{% assign common_version = 'v_001' %}
-	{% assign skin_asset = 'http://vz-assets.s3.amazonaws.com/roomsandevents/defaults/skins/rooms/' %}
 	
   	<title>Visrez - ClearSkin v. 2.0</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <meta http-equiv="content-language" content="en" />
-  	<meta name="robots" content="index, follow" />
+	<meta name="robots" content="follow, all" />
 	<meta name="description" content="Rooms Manager - Visrez" />
 	<meta name="keywords" content="room,rooms,manager,booking,accommodation,visrez" />
 	<meta name="cache-control" content="no-cache" />
+	<meta name="distribution" content="global" />
+	<meta name="language" content="en" />
+
 
 <!-- STYLESHEETS -->
-	<link href="{{ skin_asset }}stylesheets/website.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="{{ skin_asset }}stylesheets/screen.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="{{ "" | common_asset: common_version }}stylesheets/jscalendar/calendar-green.css" media="screen,projection" rel="stylesheet" type="text/css" />
-<!--[if lte IE 7.0]>
-	<link href="{{ skin_asset }}stylesheets/ie.css" media="screen,projection" rel="stylesheet" type="text/css" />
-<![endif]-->
+	{{ "website" | style_sheet }}
+	{{ "screen" | style_sheet }}
+	<link href="{{ "" | common_asset: common_version }}stylesheets/jscalendar/calendar-blue2.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<!--[if IE]>
+		{{ "ie" | style_sheet }}
+	<![endif]-->
 	<link href="{{ "" | common_asset: common_version }}stylesheets/modalbox.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="{{ skin_asset }}stylesheets/screen.rooms.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	
+	{{ "screen.rooms" | style_sheet }}
+
 	<link href="{{ "" | common_asset: common_version }}stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
-	<link href="{{ skin_asset }}stylesheets/print.custom.css" media="print" rel="stylesheet" type="text/css" />
+	{{ "print.custom" | style_sheet: "print" }}
 
 
 <!-- SCRIPTS -->

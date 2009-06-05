@@ -17,7 +17,7 @@
 		{% include 'rooms_table' -%}
 	</div>
 
-	<div class="button"><a href="{{ html.checkout_action }}" id="proceed" onclick="Modalbox.show($('loadingbox2'),{width: 600,top: 125,inactiveFade:false});Modalbox.deactivate();"><span class="alt">Proceed</span></a></div>
+	<div class="buttons"><a href="{{ html.checkout_action }}" id="proceed" onclick="Modalbox.show($('loadingbox2'),{width: 600,top: 125,inactiveFade:false});Modalbox.deactivate();"><span class="alt">Proceed</span></a></div>
 	<div id="loadingbox2" class="loadingbox" style="display:none;"><h3>Proceeding</h3><p>Please wait...</p><img src="{{ "" | skin_asset  }}images/ajax-loader_small.gif" alt="Loading..."/></div>
 
 	<script type="text/javascript">

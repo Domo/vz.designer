@@ -1,8 +1,8 @@
-
-@import url('calendar/calendar_small.screen.css');
-@import url('calendar/calendar_week.screen.css');
-@import url('calendar/calendar.screen.css');
-
+/*
+@import url("calendar/calendar_small.screen.css");
+@import url("calendar/calendar_week.screen.css");
+@import url("calendar/calendar.screen.css");
+*/
 
 /* 		RESET.css  		*/ 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {  
@@ -133,6 +133,8 @@ img		{border:0;display:block;} /* Mozilla: no margini sotto le IMG per STRICT DO
 #skiplinks {display:none;} 
 hr { display:none;}
 .hide,.alt {display:none;}
+.buttons {margin:0 auto; text-align:center;}
+
 
 
 #content {position:relative; min-height:400px; height:auto !important; height:400px;}
@@ -143,7 +145,7 @@ hr { display:none;}
 #search {position:absolute; top:0; right:0; height:50px;}
 #search  p{float:left; margin-left:10px;}
 #search #day_calendar {display:inline;}
-
+#search input#booking_date { width:70px;}
 #feedback { margin-bottom:20px; display:block;} /* it's a separator for the "content" */
 
 
@@ -156,86 +158,39 @@ hr { display:none;}
 
 
 /* VISUALNAV */
-#visualnav { position:absolute; top:40px; right:0; width:640px; height:30px;} /*relative to .content */ 
-#visualnav ol{padding:0;margin:0; background:transparent url('') no-repeat 63px top;}
-#visualnav ol li{ text-indent:-9999em; list-style-type:none;padding:0;margin:0;}
-#visualnav ol.step1{background-image: url(../images/visualnav_1.png);}
-#visualnav ol.step2{background-image: url(../images/visualnav_2.png);}
-#visualnav ol.step3{background-image: url(../images/visualnav_3.png);}
-#visualnav ol.step4{background-image: url(../images/visualnav_4.png);}
-#visualnav ol.step5{background-image: url(../images/visualnav_5.png);}
+#visualnav { position:absolute; right:20px;top:40px; height:20px; width:580px; } /*relative to .content...if ie6 doens work look at ie.css */ 
+#visualnav ol{ height:20px; padding:0;margin:0;}
+#visualnav ol li{ text-indent:-9999em; list-style-type:none;padding:0;margin:0; height:1px;}
 
 
-/* --------------------------- INDEX ------------------------------- */
-#index {padding-top:50px;}
+#visualnav ol.step1 {width:91px;}
+#visualnav ol.step2 {width:222px}
+#visualnav ol.step3 {width:336px}
+#visualnav ol.step4 {width:483px}
+#visualnav ol.step5 {width:580px;}
+
+
 
 
 /* ----------------------- AVAILABILITY --------------------------- */
-
 #availability {padding-top:50px;}
 
-#availability table.available{border-collapse:collapse;width:100%;margin-bottom:3em;}
-#availability table.available th.ratename{width:28%;text-align:left}
-#availability table.available th.roomtype{text-align:left;}
-#availability table.available td,
-#availability table.available th {text-align:center; border:1px solid #ccc;}
-#availability table.available td a,
-#availability table.available td .no-book{ display:block; width:55px;height:25px;}
-#availability table.available td a.book{ background-image:url(../images/butt_book.png);}
-#availability table.available td.butt-book{ border:0;}
-#availability table.available tr.room-desc td{padding:0;border-bottom:1px solid #fff;border-top:1px solid #fff;border-right:1px solid #ccc;border-left:1px solid #ccc;}
-#availability table.available tr.room-desc div {border-bottom:1px solid #ccc;}
-#availability table.available tr.room-desc td.butt-book {border-right:0px solid #fff;}
-
-
-
 /* ----------------------- OCCUPANCY --------------------------- */
-
 #occupancy {padding-top:50px;}
-#occupancy h2 {margin-bottom:5px;margin-top:2em;}
-#occupancy .occupancy-checkin,
-#occupancy .box { padding:20px 10px; border:1px solid #ccc}
-#occupancy .occupancy-checkin {background-color:#eee;}
-#occupancy .occupancy-checkin p {margin:0;}
-
-#occupancy .box {background-color:#eee; position:relative;}
-#occupancy .box p {float:left;}
-#occupancy .box label {width:auto;padding-top:4px;}
-#occupancy .box select {width:55px;margin-left:5px; margin-right:10px;}
-#occupancy .box fieldset {margin:0;padding:0;}
-#occupancy .box p.roomprice {clear:left; float:none;margin-top:20px;}
-#occupancy .box p.title{font-weight:bold;}
-#occupancy .box p.title,
-#occupancy .box p.roomprice strong { width:90px; float:left; display:block; }
-#occupancy .box p.roomprice span { }
-
-#occupancy p.loading-room { width:230px;font-weight:bold;float:none; margin:0;position:absolute; right:10px;top:60px;} /* dont use bottom for IE6*/
-#occupancy p.loading-room img {margin-left:-5px;}
-
-#occupancy p#occupancy-total {font-size:1.3em;margin-left:86%; margin-top:10px;text-align:right;width:120px;}
-
-#occupancy .room-actions {margin-bottom:5px;}
-#occupancy .room-actions a {background:transparent url('') no-repeat left 3px; padding-left:20px;}
-#occupancy .room-actions a.add_room{background-image:url(../images/ico_add.png); }
-#occupancy .room-actions a.new_search{background-image:url(../images/ico_add.png); }
-#occupancy .room-actions a.rem_room{margin-left:10px; background-image:url(../images/ico_error.png);}
-
-#occupancy .button a{background-image:url(../images/butt_proceed.png);width:200px;height:30px;display:block;margin:0 auto;}
 
 
 
 /* ----------------------- CHECK OUT --------------------------- */
 
-#checkout {padding-top:0px;}
-#checkout #visualnav { top:0;}
 
-#checkout .box {padding:20px 20px 4px; margin-bottom:20px;}
+
+#checkout .box {padding:20px; margin-bottom:20px;}
 #checkout .box strong {display:block;float:left;width:160px;}
 #checkout form p{margin:15px 20px 15px 15px;padding:2px 0;}
 
 /* form */
 #checkout fieldset {margin-bottom:30px;}
-#checkout legend {padding:2px 8px;margin-left:10px;}
+#checkout legend {padding:2px 8px;margin-left:10px; font-weight:bold}
 #checkout label{float:left;width:160px; line-height:23px; padding-left:5px;}
 #checkout input,
 #checkout select,
@@ -256,20 +211,10 @@ hr { display:none;}
 #checkout .button {text-align:center;}
 
 /* POP CVV2 */
-#cvv_popup {padding:10px;}
+#cvv_popup { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:91%; padding:10px;}
 
-#checkout #makereservation {margin:0 auto; background:url(../images/butt_makereservation.png) 0 0 no-repeat;width:224px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
+#checkout #makereservation {margin:0 auto; background:url("/skin/images/butt_makereservation.png") 0 0 no-repeat;width:224px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
 
 
-/* ----------------------- CONFIRMATION --------------------------- */
-
-#confirmation {padding-top:90px;}
-
-#confirmation h2 {margin-bottom:5px;}
-#confirmation .box {padding:20px 20px 4px; margin-bottom:20px;}
-#confirmation .box p strong { width:180px; float:left; display:block; }
-
-#confirmation .button {text-align:center;}
-#confirmation #print {margin:0 auto; background:url(../images/butt_print.png) 0 0 no-repeat;width:104px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 

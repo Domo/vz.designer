@@ -1,82 +1,65 @@
-/* changes */ 
-
+ 
 #content {padding:20px 20px;}
-#search { right:20px;}
-td.go-right,
-th.go-right { text-align:right;}
-#visualnav ol{ background-position:30px top;}
+#visualnav {right:15px;top:40px;width:580px;}
+#visualnav {background:transparent url("/skin/images/visualnav_events.png") no-repeat right top; }  
+#visualnav ol{background:transparent url("/skin/images/visualnav_events.png") no-repeat right bottom;}
 
-
-
-.feedback-error { background: #59191A; color: #ffffff; font-weight: bold;}
-.feedback-warning { background: #5555aa; color: #ffffff; font-weight: bold;}
-.feedback-notice { background: #55aa55; color: #ffffff; font-weight: bold;}
 
 
 /* SEARCH MODULE */
-#search #booking_date { width:65px;}
-#search #searchbutton {width:130px;height:26px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
+#search { right:17px;}
+#search #arrival_date { width:65px;}
+#search #searchtickets {margin:0 auto; background:url("/skin/images/butt_searchtickets.png") 0 0 no-repeat;width:121px;height:26px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
-/* modalbox vertically centered  */
+/* modalbox vertically centered 
+*/
 #MB_window {top:125px;} /* to center modalbox: remove the title and put this 2 line  */
 #MB_content {border-top: 0;}
 
 
-/* CART MODULE */
-table#BE-resume th, table#BE-resume td {border:0px; border-bottom:1px solid #ccc;}
-	   
 
-/* SEARCH TICKET */
-#search_tickets {padding-top:50px;}
+/* DIDNT FIND TICKET */
+#didnt_found_tickets {padding-top:40px;}
+
+#didnt_found_tickets .didnt-found-wrapper { padding:20px;}
+#didnt_found_tickets h2 { font-size:1.4em;}
+#didnt_found_tickets h3 { font-size:1.2em;}
+#didnt_found_tickets #nav_menu { width:300px; margin:0 auto; }
+#didnt_found_tickets #nav_menu_aux div { display:inline; margin:0 15px;}
+#didnt_found_tickets #event_calendar_wrapper { text-align:center;}
+#didnt_found_tickets table#calendar_overview { width:500px; margin:10px auto}
+#didnt_found_tickets table#calendar_overview th,
+#didnt_found_tickets table#calendar_overview td { vertical-align:top; padding:13px 3px 8px 3px; border-bottom:1px solid #DDDDDD;border-left:1px solid #DDDDDD;}
+#didnt_found_tickets table#calendar_overview th {width:14%; background-color:#4273a6; color:#fff; padding:8px 3px;}
+#didnt_found_tickets table#calendar_overview {border-right:1px solid #DDDDDD;}
+#didnt_found_tickets table#calendar_overview td.weekendDay { background-color:#eee}
+#didnt_found_tickets table#calendar_overview td a.ticket_available {display:block;font-weight:bold;margin-top:3px;text-decoration:underline;}
 
 
 /* FOUND TICKET */
 #found_tickets {padding-top:50px;}
+#found_tickets .found-image { width:28%; float:left}
+#found_tickets .found-text{ width:71.5%; float:left}
+
+#found_tickets .found-item { background-color:#f00; border:1px solid #96c3dd;float:left;margin:5px 10px 5px 0;padding:15px 15px;width:42%;}
+#found_tickets .found-item span { float:left;}
+#found_tickets .found-item select { float:right;}
+#found_tickets #totalcost {font-size:1.4em;padding:10px 20px 0 0;}
+#found_tickets .buttons {margin-top:20px}
+
 
 
 /* TERMS AND CONDITIONS */
-#terms_tickets {padding-top:50px;}
-#terms_tickets .BE-left { float:left; width:650px}
-#terms_tickets .BE-right { float:left;width:260px; margin-top:25px;}
-#terms_tickets .buttons { margin-top:25px;}
+#terms_and_conditions  {padding-top:40px;}
+#terms_and_conditions .terms-terms { width:72%; float:left; margin-right:3%}
+#terms_and_conditions .terms-cart { width:25%; float:left}
+#terms_and_conditions table td,
+#terms_and_conditions table th { border:0px;}
+#terms_and_conditions h2 { margin-top:0;}
 
 
-/* CHECKOUT */
-#checkout {padding-top:10px;}
-#checkout .BE-left { float:left; width:630px; margin-right:20px;}
-#checkout .BE-right { float:left; width:260px;}
-#checkout .box { background-color:#eee; border:1px solid #ccc;}
-#checkout fieldset {border:1px solid #ccc;	background:#eee;}
-#checkout legend {background:#eee; color:#111;border:1px solid #ccc;}
-
-
-
-
-/* CONFIRMATION */
-#confirmation .box {background-color:#eee; border:1px solid #ccc;}
-
-
-
-
-
-
-
-
-
-
-
-/* EX VALIDATION.css */
-input.validation-failed {background-color:#ff6666;}
-input.validation-passed {} /* impossible to use that!
-								background:transparent ('/skin/images/ico_ok.png') no-repeat 0 0;
-								padding-right:30px;
-							*/
-#checkout .validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;
-background:transparent url(../images/ico_error.png) no-repeat scroll 0 center;
-padding-left:22px;}
-#checkout input#terms_conditions.validation-failed {border:5px solid #ff6666; outline:5px solid #ff6666}
-#checkout #advice-required-terms_conditions {text-indent:-5000em; display:none;}
-
-/* EX GLOBALFUNCTION.css */
-.focusonelement {background-color: #FFF7C0;}
-
+/* FEEDBACK */
+.flash-error, .flash-warning, .flash-notice {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.flash-error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+.flash-warning {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.flash-notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}
