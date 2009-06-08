@@ -22,7 +22,7 @@ public/*/admin.*
 tmp/*
 
 #no themes
-themes/*
+themes/**/*
 
 # no local theme / product images either
 public/files
