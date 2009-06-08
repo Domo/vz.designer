@@ -57,7 +57,10 @@ class VisionServlet < Servlet
 	end
 	
 	def options_for_template
-		options =  [{ :name => 'show_rate_images', :caption => 'Show Rate images', :for => 'availability' }]
+		options =  [{ :name => 'show_rate_images', :caption => 'Rates have images', :for => 'availability' },
+									{ :name => 'show_property_images', :caption => 'Properties have images (used nowhere atm)', :for => 'availability' },
+									{ :name => 'dont_show_room_images', :caption => 'Rooms have <b>no</b> images', :for => 'availability' }
+		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact
 	end

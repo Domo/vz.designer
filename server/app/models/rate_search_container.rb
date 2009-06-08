@@ -6,12 +6,13 @@ class RateSearchContainer
 		"RateSearchContainer"
 	end
 	
-	attr_accessor :nights, :property
+	attr_accessor :nights, :property, :options
 	
 	def initialize(_property = nil, _options = nil)
 		@reservation = Database.find(:random, :reservations)
 		@property = _property
 		@options = _options
+		self.options = @options
 		self.property = _property
 		self.nights =  rand(5) + 1
 	end

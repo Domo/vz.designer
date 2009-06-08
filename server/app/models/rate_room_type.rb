@@ -1,6 +1,7 @@
 class RateRoomType
+	require 'room_type_image'
 	
-	attr_accessor :room_type, :id, :total
+	attr_accessor :room_type, :id, :total, :rsc
 	
 	def my_name
 		"RateRoomType"
@@ -28,6 +29,11 @@ class RateRoomType
 			i += 1
 		end	
 		return days
+	end
+	
+	def rate_search_container rsc
+		self.rsc = rsc
+		self.room_type.images << RoomTypeImage.new unless self.rsc.options.include? "dont_show_room_images"
 	end
 	
 	def has_prices_for_period(_rate_search_container)

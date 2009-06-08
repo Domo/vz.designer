@@ -70,10 +70,10 @@ module Database
 			end
 		when :room_types
 			if _result.is_a?(Hash)
-				_result["images"] = [RoomTypeImage.new]
+				_result["images"] = []
 			else
 				for rt in _result
-					rt["images"] = [RoomTypeImage.new]
+					rt["images"] = []
 				end  
 			end
 		when :properties

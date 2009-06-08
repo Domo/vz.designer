@@ -8,6 +8,9 @@ class RateDrop < Liquid::Drop
     @rate = _rate 
     @rate_search_container = _rate_search_container
     rate_room_types = @rate.rate_room_types
+    for rrt in rate_room_types
+    	rrt.rate_search_container _rate_search_container
+  	end
     @room_types ||= rate_room_types.collect { |x| RateRoomTypeDrop.new(x, @rate, @rate_search_container) }
   end
   

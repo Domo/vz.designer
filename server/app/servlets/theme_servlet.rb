@@ -38,6 +38,7 @@ class ThemeServlet < LiquidServlet
   	@rate_search_drops = []
   	property = Database.find(:random, :properties)
   	property = Database.find(@params[:property], :properties) if @params[:properties]
+		property.images = [RoomTypeImage.new("property")] if @options.include? "show_property_images"
   	rate_search_container = RateSearchContainer.new(property, @options)
   	drop = RateSearchDrop.new(property, rate_search_container)
   	
