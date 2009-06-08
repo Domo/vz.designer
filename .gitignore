@@ -21,6 +21,9 @@ public/*/admin.*
 # no love for tmp files
 tmp/*
 
+#no themes
+themes/*
+
 # no local theme / product images either
 public/files
 private/files
