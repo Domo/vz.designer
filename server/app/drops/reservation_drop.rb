@@ -20,11 +20,15 @@ class ReservationDrop < Liquid::Drop
   end
   
   def arrival_date
-    @reservation.arrival_date.to_date
+    a = @reservation.arrival_date
+		d = a.split(".")
+		return (d[2] + '-' + d[1] + '-' + d[0]).to_date
   end
   
   def departure_date
-    @reservation.departure_date.to_date
+    a = @reservation.departure_date
+		d = a.split(".")
+		return (d[2] + '-' + d[1] + '-' + d[0]).to_date
   end
   
   def is_package_reservation

@@ -76,6 +76,14 @@ module Database
 					rt["images"] = [RoomTypeImage.new]
 				end  
 			end
+		when :properties
+			if _result.is_a?(Hash)
+				_result["images"] = []
+			else
+				for prop in _result
+						prop["images"] = []
+				end
+			end
   	end
   	
   	if _result.is_a?(Hash)

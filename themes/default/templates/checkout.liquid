@@ -17,7 +17,7 @@
 								{% endfor %}
 						{% endif %}
 				{% endfor %}
-			<p class="clearfix"><strong>Total price:</strong> {{ rate_search_container.total_price | format_money: '&euro;' }}</p>
+			<p class="clearfix"><strong>Total price:</strong> {{ rate_search_container.total_price | format_money: '&euro;' }} {% if customer_setting.booking_fee %} (including Booking Fee of {{ customer_setting.booking_fee | format_money: '&euro;' }}) {% endif %}</p>
 	</div>
 
 		<p class="forminfo">Please complete our secure form below to make your reservation.</p>
