@@ -56,10 +56,10 @@
 #options-panel {
 	z-index: 1000;
 	position: fixed;
-	top: 200px;
-	left: 300px;
+	top: 100px;
+	left: 100px;
 	width: 400px;
-	height: 200px;
+	height: 400px;
 	padding: 15px;
 	background-color:#DDDDDD;
 	border-color:white black black white;
@@ -67,6 +67,18 @@
 	border-width:1px;
 }
 
+	#options-panel fieldset {
+		border: 1px solid black;
+		padding: 5px;
+	}
+
+.buttons_area {
+	border-top:2px solid #111111;
+	margin-top:20px;
+	padding:12px 0 0;
+	text-align:right;
+	width:96%;
+}
 
 
 /*

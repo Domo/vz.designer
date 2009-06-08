@@ -3,11 +3,11 @@ class RoomTypeImage
 	
 	attr_accessor :id
 	
-	def initialize
+	def initialize(owner = "room")
 		
 		types = ["geometry", "geomety", "large", "medium", "normal", "thumb", "thumbnail", "custom"]
 		
-		files = Dir.glob(ROOT + "/public/roomimages/**/*.*")
+		files = Dir.glob(ROOT + "/public/" + owner + "images/**/*.*")
 		images = []
 		begin
 			for filename in files

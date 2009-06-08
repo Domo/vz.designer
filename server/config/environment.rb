@@ -69,3 +69,13 @@ class String
 	end
 end
 
+def nested_params? _outer, _inner, params, _allow_blank = false
+	if params
+		if params[_outer]
+			return params[_outer][_inner] if _allow_blank == true
+			return params[_outer][_inner] unless params[_outer][_inner].blank?
+		end
+	end
+	return nil
+end
+

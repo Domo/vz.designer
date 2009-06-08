@@ -7,7 +7,6 @@ class RateSearchDrop < Liquid::Drop
 	
   def initialize(_property, _rate_search_container)
     @property = _property
-    @db_rates = Database.find(:condition, :rates, ["property_id", @property.id])
     @rate_search_container = _rate_search_container
   end  
   
@@ -52,7 +51,7 @@ class RateSearchDrop < Liquid::Drop
   def rates
     return @rates if not @rates.nil?
     
-    @rates = @db_rates.collect { |x| RateDrop.new(x, @rate_search_container) } 
+    @rates = @rate_search_container.rates.collect { |x| RateDrop.new(x, @rate_search_container) } 
 
     #drop uniq rates. could happen when there was a search for a rate code
     @rates = uniq_rates @rates

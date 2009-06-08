@@ -26,10 +26,14 @@ class VisionServlet < Servlet
     @themes = themes_for_view
     @templates = templates_for_view   
     @template_types = template_types_for_view
+    @params = @params
     
     @options = [{ :name => 'show_error', :caption => 'Show an error notification' },
 								 { :name => 'show_notice', :caption => 'Show a notification' },
 								 { :name => 'show_warning', :caption => 'Show a warning notification' }]
+								 
+		@template_options = options_for_template
+								 
     rhtml = render(:action => 'vision', :type => 'rhtml')
     "var vision_html = '#{escape_javascript(rhtml)}';"
   end
@@ -47,11 +51,15 @@ class VisionServlet < Servlet
 	end
 	
 	def options_for_action
-		options =  [{ :name => 'show_error', :caption => 'Show an error notification' },
+		return [{ :name => 'show_error', :caption => 'Show an error notification' },
 								 { :name => 'show_notice', :caption => 'Show a notification' },
 								 { :name => 'show_warning', :caption => 'Show a warning notification' }]
+	end
+	
+	def options_for_template
+		options =  [{ :name => 'show_rate_images', :caption => 'Show Rate images', :for => 'availability' }]
 		
-		return options
+		return options.map {|o| o if o[:for].include?(@current_template)}.compact
 	end
 
   def templates_for_view

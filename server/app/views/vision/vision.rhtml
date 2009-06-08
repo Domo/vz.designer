@@ -40,9 +40,23 @@
   </div>
   <div id="options-panel" style="display: none;">
   	<form action="/<%= @current_template %>">
+  		<fieldset>
+  			<legend>General Options</legend>
   		<% for option in @options %>
-  			<input type="checkbox" name="<%= option[:name] %>" value="1"> <%= option[:caption] %> <br />
+  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" value="1"> <%= option[:caption] %> <br />
   		<% end %>
-  		<p><input type="submit"></p>
+  		</fieldset>
+  		<% unless @template_options.empty? %>
+	  		<fieldset>
+	  			<legend>Template options</legend>
+	  			<% for option in @template_options %>
+	  			<% next unless option[:for].include? @current_template %>
+	  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" value="1"> <%= option[:caption] %> <br />
+	  		<% end %>
+	  		</fieldset>
+  		<% end %>
+  		<div class="buttons_area">
+  			<input type="submit"> or <a href="#" onclick="toggle_element('options-panel'); return false;">close</a>
+  		</div>
   	</form>
   </div>

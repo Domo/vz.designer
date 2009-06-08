@@ -1,5 +1,6 @@
 class RateSearchContainer
 	require 'database'
+	require 'servlet'
 	
 	def my_name
 		"RateSearchContainer"
@@ -7,9 +8,10 @@ class RateSearchContainer
 	
 	attr_accessor :nights, :property
 	
-	def initialize(_property = nil)
+	def initialize(_property = nil, _options = nil)
 		@reservation = Database.find(:random, :reservations)
 		@property = _property
+		@options = _options
 		self.property = _property
 		self.nights =  rand(5) + 1
 	end
@@ -38,6 +40,15 @@ class RateSearchContainer
 
 	def charged_price
 		@reservation.paid
+	end
+	
+	def rates
+		rates = Database.find(:condition, :rates, ["property_id", @property.id])
+		for rate in rates
+			if @options.include? "show_rate_images"
+				rate.images = [RoomTypeImage.new("rate")]
+			end
+		end
 	end
 
 end

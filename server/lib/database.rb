@@ -39,7 +39,7 @@ module Database
 				for rrt in rate_room_types
 					_result["rate_room_types"] << RateRoomType.new(rrt)
 				end
-				_result["images"] = [RoomTypeImage.new]
+				_result["images"] = []
 				_result["is_ticket_rate"] = false
 			else
 				for rate in _result
@@ -47,7 +47,7 @@ module Database
 					rate["rate_room_types"] = []
 					for rrt in rate_room_types
 						rate["rate_room_types"] << RateRoomType.new(rrt)
-						rate["images"] = [RoomTypeImage.new]
+						rate["images"] = []
 					end
 					rate["is_ticket_rate"] = false
 				end  

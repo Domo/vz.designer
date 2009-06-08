@@ -17,6 +17,7 @@ require 'creditcard_drop'
 require 'money_filters'
 require 'wsession'
 
+
 class ThemeServlet < LiquidServlet
 	layout 'skin'
 	
@@ -37,8 +38,7 @@ class ThemeServlet < LiquidServlet
   	@rate_search_drops = []
   	property = Database.find(:random, :properties)
   	property = Database.find(@params[:property], :properties) if @params[:properties]
-  
-  	rate_search_container = RateSearchContainer.new(property)
+  	rate_search_container = RateSearchContainer.new(property, @options)
   	drop = RateSearchDrop.new(property, rate_search_container)
   	
   	@rate_search_drops << drop
@@ -138,6 +138,7 @@ class ThemeServlet < LiquidServlet
     # export drops
     @theme    = cookie.value      
 		
+    build_options_from_params
     build_global_assigns
     
     @nights = @params[:nights] || rand(5) + 1
@@ -146,11 +147,13 @@ class ThemeServlet < LiquidServlet
     @handle       = @params['handle'] if @params['handle']
     @current_page = @params['handle'] == 'paginated-sale' ? 5 : 1 
     
+    options_for_vision = @options.join("=1&") + "=1"
+    
     @content_for_header = <<-HEADERS
     <!-- We inject some stuff here which you won't find on the live server. -->
     <!-- if you need prototype yourself you need to manually include it in your layout --> 
     <link rel="stylesheet" href="/stylesheets/vision/vision.css" type="text/css" media="screen" charset="utf-8" />
-    <script type="text/javascript" src="/javascripts/vision/vision_html.js?action=#{@action_name}"></script>
+    <script type="text/javascript" src="/javascripts/vision/vision_html.js?action=#{@action_name}&#{options_for_vision}"></script>
     <script type="text/javascript" src="/javascripts/vision/vision.js?action=#{@action_name}"></script>
     <script type="text/javascript">
       window.onload = function() { initVisionPalette(); }
@@ -195,6 +198,14 @@ class ThemeServlet < LiquidServlet
     #   'customer_setting' => CustomerSettingDrop.new(csetting)
     # }
   end
+  
+  def build_options_from_params
+  	@options = []
+  	for param in @params.keys
+  		next unless param.include? "options_"
+  		@options << param.gsub("options_", "")
+		end
+	end
     
   def template_path
     "#{THEMES}/#{@theme}/templates"
@@ -210,15 +221,15 @@ class ThemeServlet < LiquidServlet
   
   def build_flash
   	flash = {:error => '', :warning => '', :notice => ''}
-  	if @params["show_warning"]
+  	if @options.include? "show_warning"
   		puts "found a warning"
   		flash[:warning] = 'This is a warning!!!'
   	end
-  	if @params["show_notice"]
+  	if @options.include? "show_notice"
   		puts "found a warning"
   		flash[:notice] = 'This is a notice!!!'
   	end
-  	if @params["show_error"]
+  	if @options.include? "show_error"
   		puts "found a warning"
   		flash[:error] = 'This is an error!!!'
   	end
