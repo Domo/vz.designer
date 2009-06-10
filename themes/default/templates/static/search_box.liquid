@@ -1,0 +1,50 @@
+<h3>
+	<a name="book_online" title="book_online"></a>Check for Availability
+</h3> 
+<form id="visrez_form" action="http://oneillsdublin.visrez.com/web_reservations/availability" method="post">
+ 	<p>
+ 		<label for="arrival_date">Arrival</label>
+ 		
+ 		<!-- Generate Arrival Date Form Field -->
+ 		<script type="text/javascript">
+ 			var currentTime = new Date();
+ 			var month = currentTime.getMonth() + 1;
+ 			var day = currentTime.getDate();
+ 			var year = currentTime.getFullYear();
+ 			document.write('<input class=\"datefield\" id=\"arrival_date\" name=\"rate_search_container[arrival_date]\" type=\"text\" value=\"' + day + '.' + month + '.' + year + '\" />');
+ 		</script>
+ 		
+ 		<img id="day_calendar" src="http://assets.visrez.com/roomsandevents/common/v_001/images/calendar.gif" border="0" alt="Calendar" />
+ 		
+ 		<!-- Include Calendar Javascript Files -->
+		<script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/calendar.js" type="text/javascript"/></script>
+		<script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/calendar-setup.js" type="text/javascript"/></script>
+		<script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/calendar-en.js" type="text/javascript"/></script>
+ 		
+		<!-- Include Calendar Stylesheet file -->
+ 		<link type="text/css" rel="stylesheet" media="screen,projection" href="http://assets.visrez.com/roomsandevents/common/v_001/stylesheets/jscalendar/calendar-red.css" />
+ 		
+ 		<!-- Create Calendar --> 	
+ 		<script type="text/javascript">
+ 			Calendar.setup({inputField: "arrival_date", ifFormat: "%d.%m.%Y", button: "day_calendar", cache: true, showOthers: true});
+ 		</script>
+ 	</p>
+ 	<p>
+ 		<label for="reservation_search_nights">Nights</label>
+ 		<select name="nights" id="reservation_search_nights" class="nights">
+ 			<option value="1">1</option>
+ 			<option value="2">2</option>
+ 			<option value="3">3</option>
+ 			<option value="4">4</option>
+ 			<option value="5">5</option>
+ 			<option value="6">6</option>
+ 			<option value="7">7</option>
+ 		</select>
+ 	</p>
+ 	<p class="reservation_search_nights">
+ 		<input type="hidden" name="property" value="1" />
+ 	</p>
+ 	<p>
+ 		<img src="http://assets.visrez.com/roomsandevents/skins/oneillsdublin/oneills_skin_v01_2/images/checkavailability.jpg" border="0" title="Check Availability" onclick="document.getElementById('visrez_form').submit();" style="cursor: pointer" />
+ 	</p>
+</form>

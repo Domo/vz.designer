@@ -16,10 +16,10 @@
 				{% endif %}
 			 {% endfor -%}
 			<p>
-				<strong>Total price:</strong>{{ reservation.sell_price | format_money: '&euro;' }}
+				<strong>Total price:</strong>{{ reservation.sell_price | format_money: '&euro;' }}{% if customer_settings.booking_fee %} (including Booking Fee of {{ customer_settings.booking_fee | format_money: '&euro;' }}) {% endif %}
 			</p>	  
 			{% if reservation.deposit_charged %}
-				<p class="clearfix"><strong>Deposit:</strong>{{ reservation.deposit | format_money: '&euro;' }} {% if customer_settings.booking_fee %} (including Booking Fee of {{ customer_settings.booking_fee | format_money: '&euro;' }}) {% endif %}</p>
+				<p class="clearfix"><strong>Pay Deposit Now:</strong>{{ reservation.deposit | format_money: '&euro;' }}</p>
 			{% endif %}
 		{% endfor -%}
 	</div>
