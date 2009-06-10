@@ -1,71 +1,37 @@
-<h1>Events Booking</h1>
-
-<ul id="check-box" class="step2">
-	<li>Step 1 - Search</li>
-	<li><strong>Step 2 - Tickets</strong></li>
-	<li>Step 3 - Complete Booking</li>
-	<li>Step 4 - Confirmation</li>
-</ul>
-
-<form id="search" action="/web_booking/search_tickets" method="post">
-	<h2><span class="alt">Check availability</span></h2>
-	<p>
-	<label for="booking_day" style="margin:0">Dates</label>
-	<input id="booking_day" name="booking[day]" type="text" value="{{ booking.day | format_date_to: 'eu' }}" />
-	<img class="calendar-ico" alt="Calendar - Select a date" id="day_calendar" src="/skin/images/calendar.png" />
-	<script type="text/javascript">Calendar.setup({inputField :"booking_day", ifFormat:"%d.%m.%Y", button:"day_calendar"});</script>
-	</p>
-	
-	<p>
-	<label for="booking_event_selected">Event</label>
-	<select id="booking_event_selected" name="booking[event_selected]" onchange="new EventQuantity().loadNewQuantity('booking_event_selected', 'booking_quantity'); return false;">
-		{{ booking.event_select_options }}
-	</select>
-	</p>
+{% assign common_version = 'v_001' %}
+{% assign step = 2 -%}
+<div id="didnt_found_tickets">
+	{% include 'modules/tickets_visualnav' -%}
+	{% include 'modules/tickets_feedback' -%}	
 		
-	<p style="display:none">
-	<label for="booking_quantity" style="width:63px">Quantity</label>
-	<select id="booking_quantity" name="booking[quantity]">
-		{{ booking.quantity_for_event_select_options }}
-	</select>
-	</p>
-	
-	<p><button type="submit" id="searchbutton" value="Update Search"><span class="alt">Update Search</span></button></p>       
-</form>
+		<div class="didnt_found-wrapper">
+					<h2>Events Booking</h2>
+			
+					<h3>No tickets available</h3>
+					<p>Unfortunately we have no tickets available for this event at present. 
+					If you would like to be added to a waiting list please 
+					<a href="/ticket_booking/waiting_list_form?event_id={{ booking.event_selected }}&day={{ booking.day }}&quantity={{ booking.quantity }}">click here</a><br />
+					Alternative search additional events below:</p>
+			
+			
+					<div id="event_calendar_wrapper">
+						{{ booking.format_calendar }}
+					</div><!-- event_calendar_wrapper -->
+				
+					<div id="ticketslist">
+						<h2>Events list</h2>
+						<ul>
+							{% for event in events %}
+							<li><a href="/ticket_booking/calendar_overview/?event_id={{ event.id }}" {% if event.is_selected %}id="active" {% endif %}>{{ event.name }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				
+					<div id="calendar_cont">
+						{{ calendar }}
+					</div>
+		</div><!-- didnt_found-wrapper -->
 
-{% if flash.error != blank -%}
-<p class="flash-error"><span>{{ flash.error }}</span></p>
-{% endif -%}
-{% if flash.warning != blank -%}
-<p class="flash-warning"><span>{{ flash.warning }}</span></p>
-{% endif -%}
-{% if flash.notice != blank -%}
-<p class="flash-notice"><span>{{ flash.notice }}</span></p>
-{% endif -%}
-
-<div class="boxbe">
-<h2>No tickets available</h2>
-<p style="padding: 15px 0">Unfortunately we have no tickets available for this event at present. 
-	If you would like to be added to a waiting list please 
-	<a href="/web_booking/waiting_list_form?event_id={{ booking.event_selected }}&day={{ booking.day }}&quantity={{ booking.quantity }}">click here</a><br />
-	Alternative search additional events below:</p>
-</div>
-
-<div id="event_calendar_wrapper">
-	{{ booking.format_calendar }}
-</div><!-- event_calendar_wrapper -->
-
-<div id="ticketslist">
-	<h2>Events list</h2>
-	<ul>
-		{% for event in events %}
-		<li><a href="/web_booking/calendar_overview/?event_id={{ event.id }}" {% if event.is_selected %}id="active" {% endif %}>{{ event.name }}</a></li>
-		{% endfor %}
-	</ul>
-</div>
-
-<div id="calendar_cont">
-{{ calendar }}
 </div>
 		
 

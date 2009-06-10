@@ -1,162 +1,85 @@
-<!-- start main content default template -->
-<div id="left_column">
-		<h2>Booking Online</h2>
+{% assign common_version = 'v_001' %}
+{% assign step = 2 -%}
+<div id="found_tickets">
+		{% include 'modules/tickets_visualnav' -%}
+		{% include 'modules/tickets_feedback' -%}	
+		
+		<!-- h2>Found tickets</h2 -->
 
-		<div id="main_content">
-							
-									{% if flash.error != blank -%}
-										<div class="BE-errorbox"><h3 class="flash-error">{{ flash.error }}</h3></div>
-									{% endif -%}
-									{% if flash.warning != blank -%}
-										<div class="BE-errorbox"><h3 class="flash-warning">{{ flash.warning }}</h3></div>
-									{% endif -%}
-									{% if flash.notice != blank -%}
-										<div class="BE-errorbox"><h3 class="flash-notice">{{ flash.notice }}</h3></div>
-									{% endif -%}
-							
-							
-										<!-- start BE-wrapper -->
-										<div class="BE-wrapper clearfix">
-										
-												{% if event.has_image -%}
-												<div class="BE-image">
-													<img src="{{ event.thumbnail_image }}" alt="Event image" />
-												</div>
-												{% endif %}
-											 
-												<div class="BE-text">
-													<h3>{{ event.name }}</h3>
-													<p><strong>Location:</strong>&nbsp;{{ event.location }}</p>
-												</div>
-											
-										</div>
-										<!-- End BE-wrapper -->
-										
-										<h4>Enter Tickets and click next</h4>
-										{% for at in ats -%} 
-											<div id="time_{{ at.id }}" class="time_element" {% if at != ats.first %}style="display: none;"{% endif %} >  </div>
-												<form action="/ticket_booking/terms_and_conditions" method="post">
-												
-												{% unless at.name == '' -%}  
-														<div id="BE-items" class="clearfix">
-														{% for ticket in at.tickets %}
-																<div class="BE-item">
-																<strong>{{ ticket.name }}</strong><span class="price">{{ ticket.price | format_money: '&euro;' }}</span>{{ ticket.ticket_select_options }} 
-																</div>
-														{% endfor %}
-														</div>
-														{% if at.contains_website_discount -%}
-																Web discount( {{ at.website_discount | format_percent }} ) : - {{ at.website_discount_price | format_money: '&euro;' }}
-														{% endif -%}   
-														<div class="BE-total" style="display: none;" id="totalcost">
-															<!-- Booking fee: {{ at.booking_fee | format_money: '&euro;' }}<br /> -->
-															Total cost: <div id="ticket_{{ at.id }}_price">{{ at.total_cost | format_money: '&euro;' }}</div>
-														</div>
-														<input type="hidden" name="booking[date]" value="{{ booking.date }}" />
-														<input type="hidden" name="booking[quantity]" value="{{ booking.quantity }}" />
-														<input type="hidden" name="booking[customer_type_selected]" value="{{ booking.customer_type_selected }}" />
-														<input type="hidden" name="booking[pa_selected]" value="{{ at.id }}" />
-														
-														<div class="BE-buttons">
-															<button type="submit"  value="button_next" name="button_next">Next</button>
-														</div>
-												{% endunless -%}
-                        {% for extra in at.extras %}
-                            <p>        
-                              <label><input type="checkbox" name="extra[{{ extra.id }}]" value="1" /></label>
-                              {{ extra.name }}
-                              ( {{extra.available}})
-                            </p>
-                        {% endfor %}
-										 </form>
-										 {% endfor -%}		
-					</div>
-					<!-- end main content -->
-			</div>
-			<!-- end left column -->
+		<div class="found-wrapper clearfix">
 		
-		
-			<!-- start right column -->
-			<div id="right_column">
-				<!-- start side nav -->
-				<div class="sidenav">
-				<ul>
-				<li class="title">In This Section</li>
-				<li><a href="#" title="Previous Newsletters">Previous Newsletters</a></li>
-				<li><a href="#" title="Touring Guides">Touring Guides</a></li>
-				<li class="current"><a href="#" title="Media">Media</a></li>
-				<li><a href="#" title="Membership">Membership</a></li>
-				<li><a href="#" title="Contact Us">Contact Us</a></li>
-				</ul>
+				{% if event.has_image -%}
+				<div class="found-image">
+					{{ event.image_tag }}
 				</div>
-				<!-- end side nav -->
-			
-			<!-- start book ticket -->
-			<div id="book">
-			<h3>Book Your Ticket Here</h3>
-			<div class="form">
-			<!-- start region -->
-			<div class="filter">
-			<label for="selectregion">Select Region</label>
-			<select name="" id="selectregion">
-			<option selected="selected">All Regions</option>
-			<option>Dublin</option>
-			<option>Midlands East</option>
-			<option>South East</option>
-			<option>Cork Kerry</option>
-			<option>Shannon</option>
-			<option>Ireland West</option>
-			<option>The Northwest</option>
-			<option>Northern Ireland</option>
-			</select>
-			</div>
-			<!-- end region -->
-			<!-- start Category -->
-			<div class="filter">
-			<label for="selectcategory">Select Category</label>
-			<select name="" id="selectcategory">
-			<option selected="selected">All Categories</option>
-			<option>Education</option>
-			<option>House &amp; Gardens</option>
-			<option>Museum</option>
-			<option>Visitor Centre</option>
-			<option>Park</option>
-			<option>Castle</option>
-			<option>Heritage Town</option>
-			<option>Equestrian</option>
-			<option>Historical</option>
-			</select>
-			</div>
-			<!-- end Category -->
-			<!-- start Attracation -->
-			<div class="filter">
-			<label for="selectattrcation">Select Attraction *</label>
-			<select name="" id="selectattrcation">
-			<option selected="selected">Select Attraction</option>
-			<option>attraction 1</option>
-			<option>attraction 2</option>
-			<option>attraction 3</option>
-			<option>attraction 4</option>
-			<option>attraction 5</option>
-			<option>attraction 6</option>
-			<option>attraction 7</option>
-			<option>attraction 8</option>
-			<option>attraction 9</option>
-			<option>attraction 10</option>
-			</select>
-			<span class="note">* You must select an attraction</span>
-			</div>
-			<!-- end Attrcation -->
-			<!-- start find attraction button -->
-			<div class="button">
-			<input name="" type="button" value="Find Attraction" />
-			</div> 
-			<!-- end find attraction button -->
-			</div>
-			</div>
-			<!-- end book ticket -->
-			
-			</div>
-			<!-- end right column -->
-			
-			<!-- start anchor --><div class="anchor"></div><!-- end anchor -->
+				{% endif %}
+			 
+				<div class="found-text">
+						<h3>{{ event.name }}</h3>
+						<p><strong>Location: </strong> {{ event.location }}</p>
+						<p><strong>Description: </strong {{ event.description }}></p>
+						
+						<div class="found-ticket">			
+								<!-- h4>Enter Tickets and click next</h4 -->
+								<!-- 
+									<select onchange="showAvailabilityTime(this)">
+									{% for at in ats -%}
+										<option value="{{ at.id }}">{{ at.time }}</option>  
+									{% endfor %}
+									</select>
+								-->
+								{% for at in ats -%} 
+									<div id="time_{{ at.id }}" class="time_element" {% if at != ats.first %}style="display: none;"{% endif %}>
+									</div>
+									
+									<form action="/ticket_booking/terms_and_conditions" method="post">
+										
+										{% unless at.name == '' -%}  
+												<!-- 
+												Name {{ at.id }} {{ at.weekday }} <br />
+												{{ at.name }}<br />
+												
+												Date: {{ booking.day | format_date_to: 'eu' }}<br />
+												Time: {{ at.time_frame }}<br />
+												<br />
+												-->
+												<div class="found-items clearfix">
+												{% for ticket in at.tickets %}
+														<div class="found-item">
+														<span class="price"><strong>{{ ticket.name }}</strong>: {{ ticket.price | format_money: '&euro;' }}</span> {{ ticket.ticket_select_options }} 
+														</div>
+												{% endfor %}
+												</div>
+												
+												{% if at.contains_website_discount -%}
+												<div class="found-discount">
+													Web discount( {{ at.website_discount | format_percent }} ): - {{ at.website_discount_price | format_money: '&euro;' }}
+												</div>
+												{% endif -%}   
+												
+												<div class="found-total active1" style="display: none;" id="totalcost">
+													<!-- Booking fee: {{ at.booking_fee | format_money: '&euro;' }}<br /> -->
+													<strong>Total cost</strong>: <span id="ticket_{{ at.id }}_price" class="price">{{ at.total_cost | format_money: '&euro;' }}</span>
+													<input type="hidden" name="booking[date]" value="{{ booking.date }}" />
+													<input type="hidden" name="booking[quantity]" value="{{ booking.quantity }}" />
+													<input type="hidden" name="booking[customer_type_selected]" value="{{ booking.customer_type_selected }}" />
+													<input type="hidden" name="booking[pa_selected]" value="{{ at.id }}" />
+												</div>
+												<div class="buttons">
+													<button type="submit" value="button_next" name="button_next">Next</button>
+												</div>
+										{% endunless -%}
+								 </form>
+								 {% endfor -%}
+								 <div id="price"> </div>
+						</div><!-- found-ticket -->
+
+
+
+				</div><!-- found-text -->
+				
+				
+				
+		</div><!-- End found-wrapper -->
+		
+</div><!-- End found_tickets -->

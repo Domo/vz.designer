@@ -12,10 +12,6 @@
 #search #searchbutton {background:url(../images/butt_checkavailability.png) 0 0 no-repeat;width:130px;height:26px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
 
-/* modalbox vertically centered 
-*/
-#MB_window {top:125px;} /* to center modalbox: remove the title and put this 2 line  */
-#MB_content {border-top: 0;}
 
 
 /* --------------------------- INDEX ------------------------------- */
@@ -25,24 +21,27 @@
 
 
 /* AVAILABILITY */
-
+#availability h3 {margin-bottom:0;}
+#availability .rate_image {margin:10px 0;}
 #availability table.available{border-collapse:collapse;width:100%;margin-bottom:3em;}
 #availability table.available th.ratename{width:28%;text-align:left}
-#availability table.available th.roomtype{text-align:left;}
+#availability table.available th.roomtype{text-align:left; background-color:#daffae}
 #availability table.available td,
 #availability table.available th {text-align:center; border:1px solid #ccc;}
-#availability table.available th { background-color:#CCCCCC;}
+#availability table.available th { background-color:#6a8407; color:#fff;}
 #availability table.available td a,
 #availability table.available td .no-book{ display:block; width:55px;height:25px;}
 #availability table.available td a.book{ background-image:url("/skin/images/butt_book.png");}
 #availability table.available td.butt-book{ border:0;}
-#availability table.available td.day-available { background-color:#FF0000}
+#availability table.available td.day-available { background-color:#96C3DD}
+#availability table.available td.not-available { text-indent:-9999em; background:transparent url("/skin/images/ico_not_available.png") no-repeat center;}
 #availability table.available tr.room-desc td{padding:0;border-bottom:1px solid #fff;border-top:1px solid #fff;border-right:1px solid #ccc;border-left:1px solid #ccc;}
 #availability table.available tr.room-desc .long-desc {border-bottom:1px solid #ccc;}
 #availability table.available tr.room-desc td.butt-book {border-right:0px solid #fff;}
 #availability .long_desc { padding:0.5em;text-align:left;}
-#availability .long_desc img {float:left; padding:0 1em 0.5em 0;}
-#availability .long_desc .long_description {float:left; width:83%}
+#availability .long_desc .long_image {float:left; padding:0 1em 0.5em 0;}
+#availability .long_desc .long_image a { display:inline;}
+#availability .long_desc .long_description {float:right; width:83%}
 
 
 /* ----------------------- OCCUPANCY --------------------------- */
@@ -101,28 +100,5 @@
 
 
 
-
-
-
-/* VALIDATION */
-input.validation-failed {background-color:#ff6666;}
-input.validation-passed {} /* impossible to use that!
-								background:transparent ('/skin/images/ico_ok.png') no-repeat 0 0;
-								padding-right:30px;
-							*/
-
-#checkout .validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;
-background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png") no-repeat scroll 0 center;
-padding-left:22px;}
-#checkout input#terms_conditions.validation-failed {border:5px solid #ff6666; outline:5px solid #ff6666}
-#checkout #advice-required-terms_conditions {text-indent:-5000em; display:none;}
-.focusonelement {background-color: #FFF7C0;}
-
-
-/* FEEDBACK */
-.feedback-error, .feedback-warning, .feedback-notice {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
-.feedback-error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
-.feedback-warning {background:#FFF6BF;color:#514721;border-color:#FFD324;}
-.feedback-notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}
 
 

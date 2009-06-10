@@ -1,6 +1,6 @@
 {% if rate.is_available -%}
 
-{{ rate.image_tag }}
+<div class="rate_image">{{ rate.image_tag }}</div>
 
 {% if rate.is_ticket_rate %}
 	{% for ticket in rate.tickets %}
@@ -21,7 +21,7 @@
 			{% for day in rate_search_drop.days -%}
 				<th scope="col">{{ day | date: "%d %b" }}<br />{{ day | date: "%a" }}</th>
 			{% endfor -%}				
-			<th scope="col">Total</th>
+			<th scope="col">Total <br />&euro;</th>
 			<td class="butt-book"></td>
 		</tr>
 		</thead>	
@@ -30,9 +30,11 @@
 		<tr>
 			<th scope="row" class="roomtype"><a href="#" onclick="toggle_room('long_desc_{{ room_type.id }}'); return false;" id="room_{{ room_type.id }}">{{ room_type.name }}</a></th>
 			{% for day in room_type.days -%}
-				<td class="{{ day.available_class }}" >
-					{% if day.is_available %}&euro;{{ day.price_for_day | format_decimal }}{% endif %}
-				</td>
+				{% if day.is_available %}
+					<td class="{{ day.available_class }}" >&euro;{{ day.price_for_day | format_decimal }}</td>
+				{% else -%}
+					<td class="not-available">n/a</td>
+				{% endif %}
 			{% endfor -%}
 			<td class="total">{{ room_type.room_price_for_period | format_decimal }}</td>
 			<td class="butt-book">
@@ -46,8 +48,8 @@
 		<tr class="room-desc">
 			<td colspan="9">
 				<div id="long_desc_{{ room_type.id }}" style="display:none" class="long_desc clearfix">
-				{{ room_type.image_link }}
-				{{ room_type.long_description }}
+					<div class="long_image">{{ room_type.image_link }}</div>
+					<div class="long_description">{{ room_type.long_description }}</div>
 				</div>
 			</td>
 			<td class="butt-book"></td>

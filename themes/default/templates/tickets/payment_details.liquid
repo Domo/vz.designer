@@ -1,165 +1,154 @@
-<!-- start main content default template -->
-<div id="left_column">
-		<h2>Booking Online</h2>
+{% assign common_version = 'v_001' %}
+{% assign step = '4' -%}
+<div id="checkout" >
+		{% include 'modules/tickets_visualnav' -%}
+				
+		<!-- h2>Payment Details</h2 -->
+		<div class="chekout-wrapper clearfix">
+		
+			<div class="checkout-form">
+					{% include 'modules/tickets_feedback' -%}	
 
-		<div id="main_content">
-
-				{% if flash.error != blank -%}
-					<div class="BE-errorbox"><h3 class="flash-error">{{ flash.error }}</h3></div>
-				{% endif -%}
-				{% if flash.warning != blank -%}
-					<div class="BE-errorbox"><h3 class="flash-warning">{{ flash.warning }}</h3></div>
-				{% endif -%}
-				{% if flash.notice != blank -%}
-					<div class="BE-errorbox"><h3 class="flash-notice">{{ flash.notice }}</h3></div>
-				{% endif -%}
-
-				<h3 class="title_form">Please provide payment details</h3>
-					<form action="/ticket_booking/do_payment" class="common-form" method="post">    
+					<p class="forminfo">Please complete our secure form below to make your reservation.</p>
+					
+					<form action="/ticket_booking/do_payment" class="common-form" method="post" id="form_reservation">
 						<fieldset>
-                  <p>
-                    <label for="contact_first_name" class="mandatory">First name <span class="active2">*</span></label>
-                    <input id="contact_first_name" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
-                    
-                    <span class="formError">{{ contact | error_messages_on: 'first_name' }}</span>
-                  </p>
+							<legend>Personal Details</legend>        
+					
+							<p class="clearfix"><label for="contact_first_name">First name</label><input id="contact_first_name" class="required" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
+							<!-- span class="formError {{ contact | set_style_for_error: 'first_name', 'visible' }}">{{ contact | error_messages_on: 'first_name' }}</span -->
+							</p>
+							
+							<p class="clearfix"><label for="contact_last_name">Last name</label>
+								<input id="contact_last_name" class="required" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
+								<!-- span class="formError {{ contact | set_style_for_error: 'last_name', 'visible' }}">{{ contact | error_messages_on: 'last_name' }}</span -->
+							</p>
+							
+							<p class="clearfix"><label for="customer_address1">Address 1</label>
+								<input id="customer_address1" class="required" type="text" size="30" name="customer[address1]" value="{{ customer.address1 }}" />
+								<!-- span class="formError {{ customer | set_style_for_error: 'address1', 'visible' }}">{{ customer | error_messages_on: 'address1' }}</span -->
+							</p>
+							
+							<p class="clearfix"><label for="customer_address2">Address 2 <!-- span class="optional">(optional)</span --></label>
+								<input id="customer_address2" type="text" size="30" name="customer[address2]" value="{{ customer.address2 }}"/>
+								<!-- span></span -->
+							</p>
+									
+							<p class="clearfix"><label for="customer_city">City</label>
+								<input id="customer_city" class="required" type="text" size="30" name="customer[city]" value="{{ customer.city }}" />
+								<!-- span class="formError {{ customer | set_style_for_error: 'city', 'visible' }}">{{ customer | error_messages_on: 'city' }}</span -->
+							</p>	
+							
+							<p class="clearfix"><label for="customer_postcode">Postcode</label>
+								<input id="customer_postcode" class="required" type="text" size="30" name="customer[postcode]" value="{{ customer.postcode }}" />
+								<!-- span class="formError {{ customer | set_style_for_error: 'postcode', 'visible' }}">{{ customer | error_messages_on: 'postcode' }}</span -->
+							</p>	
+							
+							<p class="clearfix"><label for="customer_country">Country</label>
+							<select id="customer_country" name="customer[country]" class="required validate-selection">{{ customer.country_options_for_select }}</select>
+							<!-- span></span -->
+							</p>
+						
+							<p class="clearfix"><label for="contact_email">Email</label>
+								<input id="contact_email" class="required validate-email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
+								<!-- span class="hint">Insert a valid email address in the pattern of blah@blah.blah</span -->
+								<!-- span class="formError {{ contact | set_style_for_error: 'email', 'visible' }}">{{ contact | error_messages_on: 'email' }}</span -->
+							</p>  
+								
+							<p class="clearfix"><label for="contact_phone">Phone</label>
+								<input id="contact_phone" class="required validate-number" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
+								<!-- span class="formError {{ contact | set_style_for_error: 'phone', 'visible' }}">{{ contact | error_messages_on: 'phone' }}</span -->
+							</p>
+						
+							<p class="clearfix" id="contact-ezine"><label for="contact_ezine">To accept updates and news <!-- span class="optional">(optional)</span --></label>
+									<input id="contact_ezine" class="checkbox" type="checkbox" checked="checked" value="{{ contact.ezine }}" name="contact[ezine]" />
+									<input type="hidden" value="{{ contact.ezine }}" name="contact[ezine]"/>
+									<input type="hidden" name="contact[contact_type]" value="Main contact" />
+									<!-- span></span-->
+							</p>
+						</fieldset><!-- end of Personal details -->
+					
+					
+					
+						<fieldset>
+							<legend>Payment Details</legend>
+							<p>Please note that a non-refundable booking deposit will be charged to your credit card. The remaining amount is to be paid on departure from the hotel.</p>
+							
+							<p class="clearfix"><label for="creditcard_first_name">First name on card</label>
+									<input id="creditcard_first_name" class="required" type="text" size="29" name="creditcard[first_name]" value="{{ creditcard.first_name }}" />
+									<!-- span class="formError {{ creditcard | set_style_for_error: 'first_name', 'visible' }}">{{ creditcard | error_messages_on: 'first_name' }}</span -->
+							</p>
+							
+							<p class="clearfix"><label for="creditcard_last_name">Last name on card</label>
+									<input id="creditcard_last_name" class="required" type="text" size="29" name="creditcard[last_name]" value="{{ creditcard.last_name }}" />
+									<!-- span class="formError {{ creditcard | set_style_for_error: 'last_name', 'visible' }}">{{ creditcard | error_messages_on: 'last_name' }}</span -->
+							</p>
+									
+							<p class="clearfix"><label for="creditcard_number">Card number</label>
+									<img src="{{ "images/ico_card_none.png" | common_asset: common_version }}" id="creditcard_image" alt="credit card type"/>
+									<input id="creditcard_number" class="required validate-number validate-luhn"  type="text" size="29" name="creditcard[number]" value="{{ creditcard.number }}" style=" width:160px" /> 
+									<input type="hidden" name="creditcard[type]" id="creditcard_type" />
+									<!-- span class="hint">Do not insert spaces</span>
+									<span class="formError {{ creditcard | set_style_for_error: 'number', 'visible' }}">{{ creditcard | error_messages_on: 'number' }}</span -->
+							</p>
+					
+							<p id="cvv_text" class="clearfix">
+										<label for="creditcard_verification_value">CVV</label>
+									<input id="creditcard_verification_value" class="validate-number" type="text" size="10" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" />
+									<span class="whatsthis"><a href="javascript:void(0);" onclick="Modalbox.show($('cvv_popup'),{title:'What\'s CVV Number?',width: 600});">What's CVV Number?</a></span>
+									<!-- span class="hint">Do not insert spaces. CCV (Card Code Verification) is a three-digit number on the back printed of your credit card. American Express has a four-digit number on the front.</span -->
+							</p>
+							<div id="cvv_popup"  style="display:none;">
+								<p>CVV2 is an extra 3-4 digit number located on your credit card and is used to help prevent credit card fraud. It is in no way associated with your credit card's PIN number. We request that you include this number for security purposes. Visa, Mastercard, Discover.</p>
+								<p>Your CVV2 number can be located on the back of your credit card. It is a 3 digit number located in the top-right corner of the signature box. Please refer to the images below for more information. American Express: Your CVV2 number can be located on the front of your credit card. </p>
+								<p>It is a 4 digit number located directly to the upper-right of your credit card number. Please refer to the images below for more information.</p>
+								<p><img src="{{ "images/cvv2.gif" | common_asset: common_version }}" alt="cvv2" /></p>
+							</div>
 			
-                  <p>						 
-                    <label for="contact_last_name" class="mandatory">Last name</label>
-                    <input id="contact_last_name" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
-                    <span class="formError">{{ contact | error_messages_on: 'last_name' }}</span>
-                  </p>
+							<p class="clearfix"><label for="creditcard_month">Expiry Date</label>
+									<select id="creditcard_month" style="width: 95px;" name="creditcard[month]">{{ creditcard.options_for_months }}</select>
+									<select id="creditcard_year" style="width: 70px;" name="creditcard[year]">{{ creditcard.options_for_years }}</select>
+									<!-- span class="hint">The expiry date must be next your booking arrival date</span -->
+							</p>
+							<!-- script type="text/javascript">card_cvv('creditcard_type','cvv_number');</script -->	
+						</fieldset><!-- end of Payment details -->
+					
+						<!-- fieldset id="terms-conditions">
+								<legend>Terms &amp; Conditions</legend>
+								<p class="clearfix">
+										<label for="terms_conditions">
+										<input id="terms_conditions" class="required"  type="checkbox" name="terms_conditions" /></label>
+										<a href="javascript:void(0);" onclick="javascript:$('terms_and_condictions').toggle();">I accept the Terms &amp; Conditions </a>	
+								</p>
+								<p id="terms_and_condictions" style="display:none;">{{ selected_property.terms_and_conditions | with_new_lines }}</p>
+								<input type="hidden" value="0" name="terms_conditions" />		
+						</fieldset -->
+						
+						<div class="buttons"><button id="makereservation" type="submit" value="Make Reservation">Make Reservation</button></div>	
+						<script type="text/javascript">
+							new Validation('form_reservation', {immediate : true});
+							CreateFieldFocusColorChanges("form_reservation");
+							CreditCardOptions['cvv_field'] = 'cvv_text';
+							CreditCardOptions['image_path'] = "https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/";
+							CreateCreditCardTypeChecker("creditcard_number");
+						</script>
+	
 
-                  <p>											
-                    <label for="contact_email">Email  <span class="active2">*</span></label>
-                    <input id="contact_email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
-                    <span class="formError">{{ contact | error_messages_on: 'email' }}</span>
-                  </p>
-
-                  <p>									
-                    <label for="customer_country" class="mandatory">Country</label>
-                    <select id="customer_country" style="width: 70%;" name="customer[country]">
-                     {{ customer.country_options_for_select }}
-                    </select>
-                  </p>
-                       
-                  <p class="BE-creditcardtype clearfix">       
-                    <label>Card type:</label>
-                    <label for="creditcard_type_american">
-                    <input type="radio" id="creditcard_type_american" value="american_express" name="creditcard[type]"  class="BE-radio" checked="checked"/>
-                    <img src="/skin/images/ico_americanexpress.png" alt="American Express" /></label>
-
-                    <label for="creditcard_type_visa">
-                    <input type="radio" id="creditcard_type_visa" value="visa" name="creditcard[type]"  class="BE-radio"/>
-                    <img src="/skin/images/ico_visa.png" alt="Visa" /></label>
-
-                    <label for="creditcard_type_mastercard">
-                    <input type="radio" id="creditcard_type_mastercard" value="master" name="creditcard[type]" class="BE-radio"/>
-                    <img src="/skin/images/ico_mastercard.png" alt="Mastercard" /></label>
-
-                    <label for="creditcard_type_lasercard">
-                    <input type="radio" id="creditcard_type_lasercard"  value="laser" name="creditcard[type]" class="BE-radio"/>
-                    <img src="/skin/images/ico_laser.png" alt="Laser Card" /></label>
-                    <span class="hint {{ creditcard | set_style_for_error: 'type', 'visible' }}">{{ creditcard | error_messages_on: 'type' }}<!-- span class="pointer"></span --></span>                    
-                    <!-- span></span -->
-                  </p>
-
-                  <p>		
-                    <label>First name on card:  <span class="active2">*</span></label>
-                    <input id="creditcard_first_name" type="text" size="30" name="creditcard[first_name]" value="{{ creditcard.first_name }}" />
-                    <span class="formError">{{ creditcard | error_messages_on: 'first_name' }}</span>
-                  </p>
-
-                  <p>		
-                    <label>Last name on card: <span class="active2">*</span></label>
-                    <input id="creditcard_last_name" type="text" size="30" name="creditcard[last_name]" value="{{ creditcard.last_name }}" />
-                    <!-- br style="clear: both;" / -->
-                    <span class="formError">{{ creditcard | error_messages_on: 'last_name' }}</span>
-                  </p>
-
-                  <p>		
-                    <label>Card number: <span class="active2">*</span></label>
-                    <input id="creditcard_number" type="text" size="30" name="creditcard[number]" value="{{ creditcard.number }}"  />
-                    <span class="formError">{{ creditcard | error_messages_on: 'number' }} (no spaces)</span>
-                  </p>
-
-                  <p>		
-                    <label>CVV:</label>
-                    <input id="creditcard_verification_value" type="text" size="4" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" class="BE-creditcardccv"/> <span class="formError">(no spaces)</span>
-                   
-                  </p>
-
-                  <p>
-                    <label>Expiration Date <span class="active2">*</span></label>
-                    <select id="creditcard_month" style="width: 95px;" name="creditcard[month]">
-	                    {{ creditcard.options_for_months }}
-                    </select>
-                    <select id="creditcard_year" style="width: 70px;" name="creditcard[year]">
-	                    {{ creditcard.options_for_years }}
-                    </select>
-
-                  </p>				
-                  <div class="BE-buttons">
-                    		<!-- input type="submit" class="submit" style="float: right;" value="Proceed" -->
-												<input id="customer_name" type="hidden" size="30" name="customer[name]" value="none" />		
-												<input id="customer_address1" type="hidden" size="30" name="customer[address1]" value="none"/>
-												<input id="customer_address2" type="hidden" size="30" name="customer[address2]" value="none"/>
-												<input type="hidden" value="0" name="contact[ezine]"/>    
-												<input type="hidden" name="contact[contact_type]" value="Main contact" />
-												<input id="customer_postcode" type="hidden" size="30" name="customer[postcode]" value="00000" />
-												<input id="customer_city" type="hidden" size="30" name="customer[city]" value="none" />
-												<input id="contact_phone" type="hidden" size="30" name="contact[phone]"  value="00000" />							
-                    		<button type="submit"  value="Proceed" name="button_proceed">Proceed</button>
-                  </div>
-						</fieldset>
 					</form>
-
-
-
-
-	  </div>
-		<!-- end main_content -->
-</div>
-<!-- end left_column -->
-
-<!-- start right column -->
-<div id="right_column" class="BE-right">
-		<h4>Tickets Ordered</h4>
-
+		
+			 </div>
+			<!-- end checkout-form -->
 			
-      <table cellpadding="0" cellspacing="0" id="BE-resume">
-      	<!--tr>
-          <td>Day:</td>
-          <td class="aright">{{ booking.day | format_date_to: 'eu' }}</td>
-        </tr -->
-        <tr>
-          <td>Event:</td>
-          <td class="aright">{{ booking.event.name }}</td>
-        </tr>
-        <tr>
-          <td>Location:</td>
-          <td class="aright">{{ booking.event.location }}</td>
-        </tr>
-        <!--tr>
-          <td>Time:</td>
-          <td class="aright">{{ booking.time.time }}</td>
-        </tr -->
-        {% for ticket in booking.requested_tickets %}
-        	<tr>
-        		<td>{{ ticket.quantity }} {{ ticket.name }} ticket(s)</td>
-        		<td class="aright">{{ ticket.total_price | format_money: '&euro;' }}</td>
-        	</tr>
-        {% endfor %}
-        
-        <!-- tr>
-          <td class="aright active1">Booking fee:</td>
-          <td class="aright active1">{{ booking.booking_fee | format_money: '&euro;' }}</td>
-        </tr -->
-        <tr>
-          <td class="aright active1"><label>Total cost:</label></td>
-          <td class="aright active1">{{ booking.total_price | format_money: '&euro;' }}</td>
-        </tr>
-      </table>
+			
+			<div class="checkout-cart">
+				<h3>Tickets Ordered</h3>
+				{% include 'modules/tickets_cart' -%}
+			</div>
+			<!-- end checkout-cart -->
+	</div>
+	<!-- end wrapper -->	
+
 </div>
-<!-- end right column -->
+<!-- end payment_tickets -->
+
 

@@ -1,159 +1,104 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <title>Heritage Island</title>
+	<!-- common_version =  v_001 --> 
+	{% assign common_version = 'v_001' %}
+	
+  	<title>Visrez - ClearSkin v. 3.0 - Events</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta http-equiv="content-language" content="en" />
+  	<meta name="robots" content="index, follow" />
+	<meta name="description" content="Events Manager - Visrez" />
+	<meta name="keywords" content="Event,tickets,manager,booking,ticket,visrez" />
+	<meta name="cache-control" content="no-cache" />
 
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="content-language" content="en" />
- 
-    <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="Heritage, Island, Irish, visitor attractions, all island, visitor centres, aquariums, historic houses, castle, cave, interpretative centre, folk park, garden, distilleries, Ireland, Northern Ireland, tours, holiday, meeting, rooms, conference, meetings" />
-    <meta name="description" content="Heritage Island - Meeting Rooms - Visrez" />
-    <meta name="author" content="Visrez" />
-    <meta name="copyright" content="visrez" />
-         
-    <script src="/skin/javascripts/prototype.js" type="text/javascript"></script>
-    <script src="/skin/javascripts/effects.js" type="text/javascript"></script>
-    <script src="/skin/javascripts/application.js" type="text/javascript"></script>
-    
-    <script src="/skin/javascripts/calendar.js" type="text/javascript"></script>
-    <script src="/skin/javascripts/calendar-setup.js" type="text/javascript"></script>
-    <script src="/skin/javascripts/calendar-en.js" type="text/javascript"></script> 
-		<script src="/skin/javascripts/validationhints.js" type="text/javascript"></script>
-		<script src="/skin/javascripts/original_scripts.js" type="text/javascript"></script>
-		
-		<link rel="shortcut icon" href="/skin/images/website/favicon.ico" />
-		<link rel="home" title="Home" href="/" /> 
 
-		<link href="/skin/stylesheets/screen.css" media="screen" rel="Stylesheet" type="text/css" />
-		<link href="http://heritage.roomstest.visrez.com/skin/stylesheets/be.css" media="screen" rel="Stylesheet" type="text/css" />
-    <!--link href="/skin/stylesheets/original.css" media="screen" rel="Stylesheet" type="text/css" /-->
-    <link href="/skin/stylesheets/print.css" media="print" rel="Stylesheet" type="text/css" />
-		<link href="/skin/stylesheets/calendar-blue.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="/skin/stylesheets/calendar/blue/style.css" media="screen" rel="Stylesheet" type="text/css" />
+	<!-- STYLESHEETS -->
+	{{ "website" | style_sheet }}
+	{{ "screen" | style_sheet }}
+	<!--[if IE ]>
+	{{ "ie" | style_sheet }}
+	<![endif]-->
+	<link href="/common-asset/stylesheets/modalbox.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="/common-asset/stylesheets/jscalendar/calendar-green.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="/common-asset/stylesheets/validation.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="/common-asset/stylesheets/globalfunctions.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	{{ "screen.tickets" | style_sheet }}
+	
+	<link href="/common-asset/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	{{ "print.custom" | style_sheet: 'print' }}
 
-    
-    <!--[if lte IE 6]><link href="/skin/stylesheets/ieScreen.css" media="screen" rel="Stylesheet" type="text/css" /><![endif]-->
-		<!--[if gt IE 6]><link href="/skin/stylesheets/ie7Screen.css" media="screen" rel="Stylesheet" type="text/css" /><![endif]-->
+	<!-- SCRIPTS -->
+	{{ "prototype" | google_include }}
+	{{ "scriptaculous" | google_include }}
+	<script src="/common-asset/javascripts/application_tickets.js" type="text/javascript"></script>
+	<script src="/common-asset/javascripts/calendar.js" type="text/javascript"></script>
+	<script src="/common-asset/javascripts/calendar-setup.js" type="text/javascript"></script>
+	<script src="/common-asset/javascripts/calendar-en.js" type="text/javascript"></script>
+	<script src="/common-asset/javascripts/modalbox.js" type="text/javascript"></script>
+	<script src="/common-asset/javascripts/sxmglobalfunctions.js" type="text/javascript"></script>
+	<script src="/common-asset/javascripts/validation.js" type="text/javascript"></script>
 
-    {{ content_for_header }}
-
+	{{ content_for_header }}
 </head>
-
 <body>
-	{% if third_party.is_set %}
-	<div id="thirdparty">Booking as 3th party: {{ third_party.name }}</div>
-	{% endif %}
+{% if third_party.is_set %}<div id="thirdparty">Booking as 3th party: {{ third_party.name }}</div>{% endif %}
+<div id="pagewidth">
+	<div id="wrapped">
+			<!-- HEADER -->
+			<div id="header">
+					<div id="logo"><h1><a href="/index.shtml" title="Home Page">Visrez Ticket Booking Engine</a></h1></div>
+					<div id="text-info"><p>Standard Skin for Events</p></div>
+					<!-- skip links START -->
+					<div id="skiplinks">
+						<ul>
+							<li><a accesskey="M" href="#content">Go to Main Content</a></li>
+							<li><a accesskey="F" href="#footer">Go to Footer</a></li>
+						</ul>
+					</div>
+					<!--  skip links END -->
+					
+					<div id="green-bar"> </div>
+			</div>
+			<!-- HEADER -->
+			
+			<hr/>
 
-<!-- start wrapper -->
-<div id="wrapper_2col">
+			<!-- BOOKING -->
+			<div id="content">
+					{% if (step == 1) -%}
+						{% include 'modules/ticket_search' -%} 
+					{% endif -%}
 
-		<!-- start header -->
-		<div id="header">
-		<!-- start skip links-->
-		<div id="skiplinks">
-		<ul>
-		<li><a class="skiplink" accesskey="S" href="#navigation_top">Skip to Main Navigation</a></li>
-		<li><a class="skiplink" accesskey="2" href="#main_column">Skip to Main Content</a></li>
-		<li><a class="skiplink" accesskey="4" href="#search">Skip to Search</a></li>
-		</ul>
-		</div>
-		<!-- end skip links-->
-		
-		<!-- start breadcrumb -->
-		<div class="breadcrumb">
-		<ul>
-		<li>You are here:</li> 
-		<li><a href="#" accesskey="1" title="Heritage Island Home">Heritage Island Home</a> / </li>
-		<li class="current"><a href="#" title="Attractions">Booking</a></li>
-		</ul>
-		</div>
-		<!-- end breadcrumb -->
-		
-		<!-- start search -->
-		<div class="search">
-		<label for="keyword">Search Heritage Island</label>
-		<input name="" type="text" class="keyword" id="keyword" value="type keyword/s"/>
-		<div class="button"><input name="" type="button" value="Go" accesskey="4"/></div>
-		</div>
-		<!-- end search -->
-		
-		<!-- start logo -->
-		<div class="logo">
-		<a href="/" accesskey="1" title="Heritage Island Homepage"><img src="/skin/images/website/heritage_island_logo.gif" alt="Heritage Island, Ireland's Visitor Attractions" width="300" height="70" /></a>
-		<h1>Heritage Island, Ireland's Visitor Attractions</h1>
-		</div>
-		<!-- end logo -->
-		
-		<!-- start newsletter -->
-		<div class="newsletter">
-		<span class="title">Sign up to our Heritage Island Newsletter:</span>
-		<label for="email">Get news and updates on what's on</label>
-		<input name="" type="text" id="email" class="email" value="type email address"/>
-		<div class="button">
-			<input name="input" type="button" value="SignUp"/>
-		</div>
-		</div>
-		<!-- end newsletter -->
-		</div>
-		<!-- end header -->
+					{% if (step == 2) -%}
+						{% include 'modules/ticket_search' -%} 
+					{% endif -%}
 
+					{% if (step == 3) -%}
+						{% include 'modules/ticket_search' -%} 
+					{% endif -%}
 
-	<!-- start top nav -->
-	<div class="navigation_top">
-		<ul>
-			<li><a href="#" title="Home">Home</a></li>
-			<li><a href="#" title="Attractions">Attractions</a></li>
-			<li><a href="#" title="Itineraries">Itineraries</a></li>
-			<li><a href="#" title="Travel Trade">Travel Trade</a></li>
-			<li><a href="#" title="Schools">Schools</a></li>
-			<li><a href="#" title="About Us" accesskey="7">About Us</a></li>
-		</ul>
+					<div id="booking">
+					{{ content_for_layout }}
+					</div>
+
+			</div>
+			<!-- BOOKING -->
+
 	</div>
-	<!-- end top nav -->
-
-
-	<!-- start main column -->
-	<div id="main_column">
-		<div id="BE" class="clearfix">
-			{{ content_for_layout }}
-		</div>	
+	
+	<hr />
+	
+	<!-- FOOTER -->
+	<div id="footer">
+		<p><strong>Visrez</strong>, 22 South William Street, Dublin 2 - Tel: +353 (0)1 6792212 - Fax: +353 (0)1 6708599
+		<br />Visrez Ltd, Registered in Ireland No: 315037, Vat Reg: IE6335037T</p>
 	</div>
-	<!-- end main column -->
+	<!-- FOOTER -->
+	
 </div>
-<!-- end wrapper2column -->
-<!-- start footer -->
-<div id="footer">
-<!-- start address -->
-<div class="address">
-<ul>
-<li>Heritage Island, Marina House, 1/13 Clarence Street, Dun Laoghaire, Co. Dublin</li>
-<li><span>Tel: +353 1 236 6890</span><span>Fax: +353 1 236 6895</span><span>Email: <a href="mailto:info@heritageisland.com" title="Email Heritage Island" accesskey="5">info@heritageisland.com</a></span></li>
-<li>Registered in Dublin, Ireland. No. 190634.</li>
-</ul>
-</div>
-<!-- end address -->
-<!-- start utilities -->
-<div class="utilities">
-<ul>
-<li>
-<!-- AddThis Button BEGIN -->
-<a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);" onkeypress="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);" target="_blank"><img src="http://s9.addthis.com/button1-share.gif" width="125" height="16" border="0" alt="Bookmark and Share" /></a> <script type="text/javascript">var addthis_pub = 'niamhohora';</script><script type="text/javascript" src="http://s9.addthis.com/js/widget.php?v=10"></script>  
-<!-- AddThis Button END -->
-</li>
-<li><a href="#" title="RSS" accesskey="6">RSS</a></li>
-<li><a href="#" title="Sitemap" accesskey="3">Sitemap</a></li>
-<li><a href="#" title="Legal" accesskey="8">Legal</a></li>
-</ul>
-</div>
-<!-- end utilities -->
-<!-- start contact us -->
-<div class="contact">
-How was your visit to Ireland? Why not <a href="mailto:info@heritageisland.com" title="Email Heritage Island" accesskey="5">email us at Heritage Island</a> with your comments and suggestions?
-</div>
-<!-- end contact us -->
-</div>
-<!-- end footer -->
+
 {{ google_analytics_code }}
+
 </body>
 </html>

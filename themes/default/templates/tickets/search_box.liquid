@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs">
+  <head>
+    <title> </title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="en" />
+    <meta http-equiv="MSThemeCompatible" content="no" />
+    <meta http-equiv="imagetoolbar" content="no" />
+
+ 
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="mozilla, firefox, explorer, internet explorer" />
+    <meta name="description" content="Arlington Hotel Dublin" />
+    <meta name="author" content="webmedia (www.webmedia.cz)" />
+    <meta name="webmaster" content="webmedia (www.webmedia.cz)" />
+    <meta name="copyright" content="webmedia (www.webmedia.cz)" />
+    <meta name="MS.LOCALE" content="en" />
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow,snippet,archive" />
+
+    <meta name="dc.language" content="en" />
+    <meta name="geo.country" content="EN" />
+    
+    {{ "prototype" | google_include }}
+    {{ "scriptaculous" | google_include }}
+      
+     <!--
+     <link rel="shortcut icon" type="image/x-icon" href="http://www.skvely.cz/image/favicon.ico" />
+     -->
+     
+     <style type="text/css">
+	     body {
+			  margin: 0;
+			  padding: 0;
+			  font-family: verdana;  
+			  font-size: 8pt;
+			  background: #5F0101;
+			  color: #ffffff;
+			  font-weight: bold;
+			}
+			.submit {
+				background:transparent url(http://legends.events.europe5.visrez.com/skin/images/sb-button.png) no-repeat scroll 0 4px;
+				border:medium none;
+				color:#FFFFFF;
+				cursor:pointer;
+				font-size:14px;
+				font-weight:600;
+				height:30px;
+				width:76px;
+			}
+		</style>
+		
+		<script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/calendar.js" type="text/javascript"/></script>
+
+    <script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/calendar-setup.js" type="text/javascript"/></script>
+
+    <script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/calendar-en.js" type="text/javascript"/></script>
+
+    <link href="http://assets.visrez.com/roomsandevents/common/v_001/stylesheets/jscalendar/calendar-win2k-cold-2.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<form id="search" action="{{ html.search_tickets_action }}" method="post" target="_blank">
+	
+	<p style="float: none; margin: 10px">
+    <label for="booking_day" style="width: 50px;">Date</label>
+
+    <input class="datefield" id="booking_day" name="booking[date]" value="{{ booking.date | format_date_to: 'eu' }}" type="text" style="width: 70px;">&nbsp;
+
+     <img alt="Calendar" id="day_calendar" src="http://assets.visrez.com/roomsandevents/common/v_001/images/calendar.gif" />
+
+    <script type="text/javascript">Calendar.setup({inputField :"booking_day", ifFormat:"%d.%m.%Y", button:"day_calendar"});</script>
+
+  </p>
+  
+  <p style="float: none; margin: 10px">
+    <label for="booking_event_selected" style="width: 50px;">Event</label>
+
+    <select id="booking_event_selected" name="booking[event_selected]" onChange="" >{{ booking.event_select_options }}</select>
+
+  </p>	
+
+  <p style="float: none; margin: 10px">
+    <button id="searchtickets" value="Search Tickets" class="submit" type="submit">Search</button>
+  </p>
+
+</form>
+<script type="text/javascript">
+Event.observe($('booking_event_selected'), 'change', function() {
+ new Ajax.Request('/ticket_booking/get_first_date/', {asynchronous:true, evalScripts:true, parameters:Form.serialize($('search'))});
+});
+</script>
+
+</body>
+

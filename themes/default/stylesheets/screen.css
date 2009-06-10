@@ -1,9 +1,3 @@
-/*
-@import url("calendar/calendar_small.screen.css");
-@import url("calendar/calendar_week.screen.css");
-@import url("calendar/calendar.screen.css");
-*/
-
 /* 		RESET.css  		*/ 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {  
 	    margin:0; 
@@ -148,9 +142,9 @@ hr { display:none;}
 #search input#booking_date { width:70px;}
 #feedback { margin-bottom:20px; display:block;} /* it's a separator for the "content" */
 
-
-
-/* ----------------------- LOADING MODALBOX --------------------------- */
+/*  MODALBOX  vertically centered  */
+#MB_window {top:125px;} /* to center modalbox: remove the title and put this 2 line  */
+#MB_content {border-top: 0;}
 .loadingbox 		{text-align:center;}
 .loadingbox h3 	{color:#7D7D7E;font-size:2em;font-weight:normal;margin-bottom:15px; margin-top:1em;}
 .loadingbox p 		{color:#7D7D7E;font-size:1em; margin-bottom:15px; } 
@@ -158,10 +152,9 @@ hr { display:none;}
 
 
 /* VISUALNAV */
-#visualnav { position:absolute; right:20px;top:40px; height:20px; width:580px; } /*relative to .content...if ie6 doens work look at ie.css */ 
+#visualnav { position:absolute; right:20px;top:40px; height:20px; width:580px;} /*relative to .content...if ie6 doens work look at ie.css */ 
 #visualnav ol{ height:20px; padding:0;margin:0;}
 #visualnav ol li{ text-indent:-9999em; list-style-type:none;padding:0;margin:0; height:1px;}
-
 
 #visualnav ol.step1 {width:91px;}
 #visualnav ol.step2 {width:222px}
@@ -196,7 +189,7 @@ hr { display:none;}
 #checkout select,
 #checkout textarea{ width:200px; padding:3px 4px;float:left;}
 #checkout select { padding-right:0;width:auto; margin-right:5px}
-#checkout input.checkbox{width:14px; border:0; margin-top:6px;}
+#checkout input.checkbox {width:14px; border:0; margin-top:6px;}
 
 #checkout p#contact-ezine label { width:185px;}
 
@@ -208,7 +201,7 @@ hr { display:none;}
 /* terms and condictions */
 #checkout fieldset#terms-conditions label {width:30px;}
 #checkout fieldset#terms-conditions input {width:auto;}
-#checkout .button {text-align:center;}
+#checkout .buttons {text-align:center;}
 
 /* POP CVV2 */
 #cvv_popup { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:91%; padding:10px;}
@@ -217,4 +210,25 @@ hr { display:none;}
 
 
 
+
+/* VALIDATION */
+input.validation-failed {background-color:#ff6666;}
+input.validation-passed {} /* impossible to use that!
+								background:transparent ('/skin/images/ico_ok.png') no-repeat 0 0;
+								padding-right:30px;
+							*/
+
+#checkout .validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;
+background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png") no-repeat scroll 0 center;
+padding-left:22px;}
+#checkout input#terms_conditions.validation-failed {border:5px solid #ff6666; outline:5px solid #ff6666}
+#checkout #advice-required-terms_conditions {text-indent:-5000em; display:none;}
+.focusonelement {background-color: #FFF7C0;}
+
+
+/* FEEDBACK */
+.feedback-error, .feedback-warning, .feedback-notice {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.feedback-error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+.feedback-warning {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.feedback-notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}
 

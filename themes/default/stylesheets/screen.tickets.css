@@ -11,11 +11,6 @@
 #search #arrival_date { width:65px;}
 #search #searchtickets {margin:0 auto; background:url("/skin/images/butt_searchtickets.png") 0 0 no-repeat;width:121px;height:26px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
-/* modalbox vertically centered 
-*/
-#MB_window {top:125px;} /* to center modalbox: remove the title and put this 2 line  */
-#MB_content {border-top: 0;}
-
 
 
 /* DIDNT FIND TICKET */
@@ -58,8 +53,3 @@
 #terms_and_conditions h2 { margin-top:0;}
 
 
-/* FEEDBACK */
-.flash-error, .flash-warning, .flash-notice {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
-.flash-error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
-.flash-warning {background:#FFF6BF;color:#514721;border-color:#FFD324;}
-.flash-notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}

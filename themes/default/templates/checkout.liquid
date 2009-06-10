@@ -104,7 +104,7 @@
 				<p class="clearfix"><label for="creditcard_number">Card number</label>
 						<img src="{{ "images/ico_card_none.png" | common_asset: common_version }}" id="creditcard_image" alt="credit card type"/>
 						<input id="creditcard_number" class="required validate-number validate-luhn"  type="text" size="29" name="creditcard[number]" value="{{ creditcard.number }}" style=" width:160px" /> 
-						<input type="hidden" name="creditcard[type]" id="creditcard_type">
+						<input type="hidden" name="creditcard[type]" id="creditcard_type" />
 						<!-- span class="hint">Do not insert spaces<span class="pointer"></span></span>
 						<span class="formError {{ creditcard | set_style_for_error: 'number', 'visible' }}">{{ creditcard | error_messages_on: 'number' }}<span class="pointer"></span></span -->
 				</p>
@@ -140,14 +140,25 @@
 					<input type="hidden" value="0" name="terms_conditions" />		
 			</fieldset>
 			
-			<div class="button"><button id="makereservation" type="submit" value="Make Reservation">Make Reservation</button></div>	
+			<div class="buttons"><button id="makereservation" type="submit" value="Make Reservation">Make Reservation</button></div>	
 			<script type="text/javascript">
-				new Validation('form_reservation', {immediate : true});
+				function ValidationResult(result, form_reference)
+				{
+					if (result == true) { 
+						// ValidationResult Function
+					}
+				}
+				new Validation('form_reservation', {immediate : true, onFormValidate : ValidationResult});
+				Validation.add('mobile-validation', 'At least 10 characters', {
+					minLength : 10, // value must be at least 10 characters
+				});
 				CreateFieldFocusColorChanges("form_reservation");
 				CreditCardOptions['cvv_field'] = 'cvv_text';
 				CreditCardOptions['image_path'] = "https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/";
 				CreateCreditCardTypeChecker("creditcard_number");
 			</script>
+			
+
 		</form>   
 </div>
 

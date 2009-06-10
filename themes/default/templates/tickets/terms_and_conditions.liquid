@@ -1,92 +1,40 @@
-
-	<!-- start main content default template -->
-	<div id="left_column">
-			<h2>Booking Online</h2>
-	
-			<div id="main_content">
-							
-						<!-- start BE-wrapper -->
-						<div class="BE-wrapper clearfix">
-								<form action="/ticket_booking/payment_details" method="post">
-									{{ customer_settings.terms_conditions }}
-									{{ customer_settings.hallo }}
-								
-									<div class="BE-buttons clearfix">
-										<button type="button"  value="Disagree" name="Disagree" class="button_disagree" onclick="location.href='http://www.heritageisland.com'">I DISAGREE</button>
-										<button type="submit"  value="Accept" name="button_agree" class="button_agree">I AGREE</button>
-									</div>
-									<input type="hidden" name="accept" value="1" />
-								</form>
-						</div>
-			</div>
-			<!-- end main content -->
-	</div>
-	<!-- end left column -->
-
-	<!-- start right column -->
-	<div id="right_column" class="BE-right">
-		<h4>Tickets Ordered</h4>
+{% assign common_version = 'v_001' %}
+{% assign step = 3 -%}
+<div id="terms_and_conditions">
+		{% include 'modules/tickets_visualnav' -%}
+		{% include 'modules/tickets_feedback' -%}	
 		
+		<!-- h2>Found tickets</h2 -->
 
-
-      <table cellpadding="0" cellspacing="0" id="BE-resume">
-      	<!--tr>
-          <td>Day:</td>
-          <td class="aright">{{ booking.day | format_date_to: 'eu' }}</td>
-        </tr -->
-        <tr>
-          <td>Event:</td>
-          <td class="aright">{{ booking.event.name }}</td>
-        </tr>
-        <tr>
-          <td>Location:</td>
-          <td class="aright">{{ booking.event.location }}</td>
-        </tr>
-        <!--tr>
-          <td>Time:</td>
-          <td class="aright">{{ booking.time.time }}</td>
-        </tr -->
-        {% for ticket in booking.requested_tickets %}
-        	<tr>
-        		<td>{{ ticket.quantity }} {{ ticket.name }} ticket(s)</td>
-        		<td class="aright">{{ ticket.total_price | format_money: '&euro;' }}</td>
-        	</tr>
-        {% endfor %}
-        
-        <!-- tr>
-          <td class="aright active1">Booking fee:</td>
-          <td class="aright active1">{{ booking.booking_fee | format_money: '&euro;' }}</td>
-        </tr-->
-        <tr>
-          <td class="aright active1"><label>Total cost:</label></td>
-          <td class="aright active1">{{ booking.total_price | format_money: '&euro;' }}</td>
-        </tr>
-      </table>
-
-
-
-
-
-
+		<div class="terms-wrapper clearfix">
+				<div class="terms-terms">
+						<h2>Terms &amp; Conditions</h2>
+						
+						{{ customer_settings.terms_conditions }}
+						{{ customer_settings.hallo }}
+			
+						<form action="/ticket_booking/payment_details" method="post">
+							<fieldset>
+							<input type="hidden" name="accept" value="1" />
+							<div class="buttons clearfix">
+								<button type="button"  value="Disagree" name="Disagree" class="button_disagree" onclick="location.href='{{ third_party.website }}'">I Disagree</button>
+								<button type="submit"  value="Accept" name="button_agree" class="button_agree">I Agree</button>
+							</div>
+							</fieldset>
+						</form>
+			
+				</div>
+				<!-- end terms-terms -->
 		
-			<!-- table border="0" cellspacing="0" cellpadding="0" id="BE-resume">
-					<tr>
-							<td>2 x Family<br />(2 adults, 4 children)</td>
-							<td class="aright">&euro;  32.00</td>
-					</tr>
-					<tr>
-							<td>1 x Student</td>
-							<td class="aright">&euro;  8.00</td>
-					</tr>
-					<tr>
-							<td class="aright active1"><strong>Total:</strong></td>
-							<td class="aright active1"><strong>&euro; 40.00</strong></td>
-					</tr>
-			</table -->
-	
-	</div>
-	<!-- end right column -->
+		
+				<div class="terms-cart">
+					<h3>Tickets Ordered</h3>
+					{% include 'modules/tickets_cart' -%}
+				</div>
+				<!-- end terms-cart -->
+		</div>
+
+</div>
 
 
-	<!-- start anchor --><div class="anchor"></div><!-- end anchor -->
 
