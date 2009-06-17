@@ -113,17 +113,7 @@
 							<!-- script type="text/javascript">card_cvv('creditcard_type','cvv_number');</script -->	
 						</fieldset><!-- end of Payment details -->
 					
-						<!-- fieldset id="terms-conditions">
-								<legend>Terms &amp; Conditions</legend>
-								<p class="clearfix">
-										<label for="terms_conditions">
-										<input id="terms_conditions" class="required"  type="checkbox" name="terms_conditions" /></label>
-										<a href="javascript:void(0);" onclick="javascript:$('terms_and_condictions').toggle();">I accept the Terms &amp; Conditions </a>	
-								</p>
-								<p id="terms_and_condictions" style="display:none;">{{ selected_property.terms_and_conditions | with_new_lines }}</p>
-								<input type="hidden" value="0" name="terms_conditions" />		
-						</fieldset -->
-						
+		
 						<div class="buttons"><button id="makereservation" type="submit" value="Make Reservation">Make Reservation</button></div>	
 						<script type="text/javascript">
 							new Validation('form_reservation', {immediate : true});

@@ -134,10 +134,11 @@
 					<legend>Terms &amp; Conditions</legend>
 					<p class="clearfix">
 							<label for="terms_conditions">
-							<input id="terms_conditions" class="required" onchange="checkCheckbox(this);" type="checkbox" name="terms_conditions" /></label>	<!-- span></span -->
-							<a href="javascript:void(0);" onclick="javascript:$('terms_and_condictions').toggle();">I accept the Terms &amp; Conditions </a>	
+							<input id="terms_conditions" class="required" type="checkbox" name="terms_conditions" /></label>	<!-- span></span -->
+							<a href="javascript:void(0);" onclick="Effect.toggle('terms_and_conditions', 'appear'); return false;">I accept the Terms &amp; Conditions </a>	
 					</p>
-					<p id="terms_and_condictions" style="display:none;">{{ selected_property.terms_and_conditions | with_new_lines }}</p>
+
+					<p id="terms_and_conditions" style="display:none;">{{ selected_property.terms_and_conditions | with_new_lines }}</p>
 					<input type="hidden" value="0" name="terms_conditions" />		
 			</fieldset>
 			
