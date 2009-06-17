@@ -1,10 +1,10 @@
-
+	{% assign common_version = 'v_001' %}
 	<div id="search">
 			<form action="/ticket_booking/search_tickets" method="post">
 				<p>
 					<label for="booking_date">Booking date</label>
 					<input id="booking_date" name="booking[date]" value="{{ booking.date | format_date_to: 'eu' }}" type="text" />
-					<a href="#"><img alt="Calendar" id="day_calendar" src="/skin/images/calendar.gif" /></a>
+					<a href="#"><img alt="Calendar" id="day_calendar" src="{{ "images/calendar.gif" | common_asset: common_version }}" /></a>
 					<script type="text/javascript">Calendar.setup({inputField :"booking_date", ifFormat:"%d.%m.%Y", button:"day_calendar"});</script>
 				</p>
 				
@@ -17,5 +17,5 @@
 					<button type="submit" onclick="Modalbox.show($('loadingbox1'),{width: 600,top:125});" value="Search Tickets" id="searchtickets">Search Tickets</button>
 				</p>   
 			</form>
-			<div id="loadingbox1" class="loadingbox" style="display:none;"><h3>Searching Tickets</h3><p>Please wait...</p><img src="/skin/images/ajax-loader_small.gif" alt="Loading..."/></div>
+			<div id="loadingbox1" class="loadingbox" style="display:none;"><h3>Searching Tickets</h3><p>Please wait...</p><img src="{{ "images/ajax-loader_220x19.gif" | asset_url }}" alt="Loading..."/></div>
 	</div>

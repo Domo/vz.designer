@@ -32,8 +32,8 @@
 			</fieldset>		
 		{% endif %}
 		</form>
-		<p class="roomprice"><strong>Room price:</strong><span id="price_{{ room.id }}"> &euro;{{ room.price | format_decimal }}</span></p>
-		<p class="loading-room" id="loading_{{ room.id }}" style="display:none;">Loading <img src="/skin/images/ajax-loader_small.gif" alt="Loading" /></p>
+		<p class="roomprice clearfix"><strong>Room price:</strong><span id="price_{{ room.id }}"> &euro;{{ room.price | format_decimal }}</span></p>
+		<div class="loading-room" id="loading_{{ room.id }}" style="display:none;">Loading...</div>
 	</div>
 {% endfor -%}
 

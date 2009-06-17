@@ -2,8 +2,8 @@
 /* changes */ 
 #content {padding:20px 20px;}
 #search { right:20px;}
-#visualnav {background:transparent url("/skin/images/visualnav.png") no-repeat right top; }  
-#visualnav ol{ background:transparent url("/skin/images/visualnav.png") no-repeat left bottom;}
+#visualnav {background:transparent url("../images/visualnav.png") no-repeat right top; }  
+#visualnav ol{ background:transparent url("../images/visualnav.png") no-repeat left bottom;}
 
 
 
@@ -31,10 +31,10 @@
 #availability table.available th { background-color:#6a8407; color:#fff;}
 #availability table.available td a,
 #availability table.available td .no-book{ display:block; width:55px;height:25px;}
-#availability table.available td a.book{ background-image:url("/skin/images/butt_book.png");}
+#availability table.available td a.book{ background-image:url("../images/butt_book.png");}
 #availability table.available td.butt-book{ border:0;}
 #availability table.available td.day-available { background-color:#96C3DD}
-#availability table.available td.not-available { text-indent:-9999em; background:transparent url("/skin/images/ico_not_available.png") no-repeat center;}
+#availability table.available td.not-available { text-indent:-9999em; background:transparent url("../images/ico_not_available.png") no-repeat center;}
 #availability table.available tr.room-desc td{padding:0;border-bottom:1px solid #fff;border-top:1px solid #fff;border-right:1px solid #ccc;border-left:1px solid #ccc;}
 #availability table.available tr.room-desc .long-desc {border-bottom:1px solid #ccc;}
 #availability table.available tr.room-desc td.butt-book {border-right:0px solid #fff;}
@@ -64,17 +64,22 @@
 #occupancy .box p.roomprice strong { width:90px; float:left; display:block; }
 #occupancy .box p.roomprice span { }
 
-#occupancy p.loading-room { width:230px;font-weight:bold;float:none; margin:0;position:absolute; right:10px;top:60px;} /* dont use bottom for IE6*/
-#occupancy p.loading-room img {margin-left:-5px;}
+#occupancy .loading-room { padding: 0 0 0 25px; width:230px; height:30px;font-weight:bold;float:none; margin:0;position:absolute; left:350px;top:22px;
+ display:block; background:url("../images/ajax-loader_16x16.gif") no-repeat left 1px;}/* dont use bottom for IE6*/
+ 
 
 #occupancy p#occupancy-total {font-size:1.3em;margin-left:86%; margin-top:10px;text-align:right;width:120px;}
 
 #occupancy .room-actions {margin-bottom:5px;}
 #occupancy .room-actions a {background:transparent url("") no-repeat left 1px;  padding-left:20px; padding-bottom:10px;}
-#occupancy .room-actions a.add_room{background-image:url("/skin/images/ico_add.png"); }
-#occupancy .room-actions a.new_search{background-image:url("/skin/images/ico_add.png"); }
+#occupancy .room-actions a.add_room{background-image:url("../images/ico_add.png"); }
+#occupancy .room-actions a.new_search{background-image:url("../images/ico_add.png"); }
 #occupancy .room-actions a.rem_room{margin-left:10px; background-image:url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png");}
-#occupancy .buttons a{background-image:url("/skin/images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 auto;}
+#occupancy .buttons a{background-image:url("../images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 auto;}
+/*
+#occupancy .room-actions a.add_room,
+#occupancy .room-actions a.new_search { behavior: url("/iepngfix.htc") }
+*/
 
 
 
@@ -96,7 +101,7 @@
 #confirmation .box p strong {width:180px; float:left; display:block; }
 #confirmation .box {background-color:#eee; border:1px solid #ccc;}
 #confirmation .buttons {text-align:center;}
-#confirmation #print {margin:0 auto; background:url("/skin/images/butt_print.png") 0 0 no-repeat;width:104px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
+#confirmation #print {margin:0 auto; background:url("../images/butt_print.png") 0 0 no-repeat;width:104px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
 
 

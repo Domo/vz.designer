@@ -18,14 +18,14 @@
 <!-- STYLESHEETS -->
 	{{ "website" | style_sheet }}
 	{{ "screen" | style_sheet }}
-	<link href="{{ "" | common_asset: common_version }}stylesheets/jscalendar/calendar-green.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/jscalendar/calendar-green.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
 	<!--[if IE]>
 		{{ "ie" | style_sheet }}
 	<![endif]-->
-	<link href="{{ "" | common_asset: common_version }}stylesheets/modalbox.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/modalbox.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
 	{{ "screen.rooms" | style_sheet }}
 
-	<link href="{{ "" | common_asset: common_version }}stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/print.css" | common_asset: common_version }}" media="print" rel="stylesheet" type="text/css" />
 	{{ "print.custom" | style_sheet: "print" }}
 
 

@@ -206,7 +206,7 @@ hr { display:none;}
 /* POP CVV2 */
 #cvv_popup { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:91%; padding:10px;}
 
-#checkout #makereservation {margin:0 auto; background:url("/skin/images/butt_makereservation.png") 0 0 no-repeat;width:224px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
+#checkout #makereservation {margin:0 auto; background:url("../images/butt_makereservation.png") 0 0 no-repeat;width:224px;height:30px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
 
 
@@ -214,7 +214,7 @@ hr { display:none;}
 /* VALIDATION */
 input.validation-failed {background-color:#ff6666;}
 input.validation-passed {} /* impossible to use that!
-								background:transparent ('/skin/images/ico_ok.png') no-repeat 0 0;
+								background:transparent ('../images/ico_ok.png') no-repeat 0 0;
 								padding-right:30px;
 							*/
 

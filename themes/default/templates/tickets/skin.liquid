@@ -19,25 +19,28 @@
 	<!--[if IE ]>
 	{{ "ie" | style_sheet }}
 	<![endif]-->
-	<link href="/common-asset/stylesheets/modalbox.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="/common-asset/stylesheets/jscalendar/calendar-green.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="/common-asset/stylesheets/validation.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="/common-asset/stylesheets/globalfunctions.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	{{ "screen.tickets" | style_sheet }}
 	
-	<link href="/common-asset/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/modalbox.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/jscalendar/calendar-green.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/validation.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/globalfunctions.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
+
+	{{ "screen.tickets" | style_sheet }}
+
+	<link href="{{ "stylesheets/print.css" | common_asset: common_version }}" media="print" rel="stylesheet" type="text/css" />
 	{{ "print.custom" | style_sheet: 'print' }}
 
 	<!-- SCRIPTS -->
 	{{ "prototype" | google_include }}
 	{{ "scriptaculous" | google_include }}
-	<script src="/common-asset/javascripts/application_tickets.js" type="text/javascript"></script>
-	<script src="/common-asset/javascripts/calendar.js" type="text/javascript"></script>
-	<script src="/common-asset/javascripts/calendar-setup.js" type="text/javascript"></script>
-	<script src="/common-asset/javascripts/calendar-en.js" type="text/javascript"></script>
-	<script src="/common-asset/javascripts/modalbox.js" type="text/javascript"></script>
-	<script src="/common-asset/javascripts/sxmglobalfunctions.js" type="text/javascript"></script>
-	<script src="/common-asset/javascripts/validation.js" type="text/javascript"></script>
+
+	<script src="{{ "javascripts/application_tickets.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/calendar.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/calendar-setup.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/calendar-en.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/modalbox.visrez.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/sxmglobalfunctions.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/validation.js" | common_asset: common_version }}" type="text/javascript"></script>
 
 	{{ content_for_header }}
 </head>

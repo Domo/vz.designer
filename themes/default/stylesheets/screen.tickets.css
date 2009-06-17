@@ -1,15 +1,15 @@
  
 #content {padding:20px 20px;}
 #visualnav {right:15px;top:40px;width:580px;}
-#visualnav {background:transparent url("/skin/images/visualnav_events.png") no-repeat right top; }  
-#visualnav ol{background:transparent url("/skin/images/visualnav_events.png") no-repeat right bottom;}
+#visualnav {background:transparent url("../images/visualnav_events.png") no-repeat right top; }  
+#visualnav ol{background:transparent url("../images/visualnav_events.png") no-repeat right bottom;}
 
 
 
 /* SEARCH MODULE */
 #search { right:17px;}
 #search #arrival_date { width:65px;}
-#search #searchtickets {margin:0 auto; background:url("/skin/images/butt_searchtickets.png") 0 0 no-repeat;width:121px;height:26px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
+#search #searchtickets {margin:0 auto; background:url("../images/butt_searchtickets.png") 0 0 no-repeat;width:121px;height:26px;border:0;cursor:pointer; text-indent:-5000em; display:block;}
 
 
 
