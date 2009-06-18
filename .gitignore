@@ -38,6 +38,9 @@ private/files
 # ignore schema.rb -- update and restore from schema.versioned.rb when appropriate
 db/schema.rb
 
+#ignore windows thumbnail-db-files
+thumbs.db
+
 # ignore backups
 db/backup
 
