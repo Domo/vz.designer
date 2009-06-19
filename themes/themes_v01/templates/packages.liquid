@@ -1,0 +1,8 @@
+{% assign step = '2' -%}
+{% include 'modules/visualnav' -%}
+{% include 'modules/feedback' -%}
+
+  
+{% for rate in rate_search_drop.package_rates -%}
+	{% include 'modules/availability' %}	
+{% endfor -%}

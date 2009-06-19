@@ -1,0 +1,211 @@
+.buttons {margin:0 auto; text-align:center;}
+
+
+#content {position:relative; min-height:400px; height:auto !important; height:400px;}
+
+/* #content h3 {font-size:1.5em;}*/
+
+/* SEARCH MODULE */
+#search {position:absolute; top:15px; right:0; height:35px;}
+#search  p{float:left; margin-left:10px;}
+#search #day_calendar {display:inline;}
+#search input#booking_date { width:70px;}
+#feedback { margin-bottom:20px; display:block;} /* it's a separator for the "content" */
+
+/*  MODALBOX  vertically centered  */
+#MB_window {top:125px;} /* to center modalbox: remove the title and put this 2 line  */
+#MB_content {border-top: 0;}
+.loadingbox 		{text-align:center;}
+.loadingbox h3 	{color:#7D7D7E;font-size:2em;font-weight:normal;margin-bottom:15px; margin-top:1em;}
+.loadingbox p 		{color:#7D7D7E;font-size:1em; margin-bottom:15px; } 
+.loadingbox img 	{margin:0 auto; vertical-align:sub; padding-bottom:20px;}
+
+
+/* VISUALNAV */
+#visualnav { position:absolute; right:20px;top:60px; height:20px; width:580px;} /*relative to .content...if ie6 doens work look at ie.css */ 
+#visualnav ol{ height:20px; padding:0;margin:0;}
+#visualnav ol li{ text-indent:-9999em; list-style-type:none;padding:0;margin:0; height:1px;}
+
+#visualnav ol.step1 {width:91px;}
+#visualnav ol.step2 {width:222px}
+#visualnav ol.step3 {width:336px}
+#visualnav ol.step4 {width:483px}
+#visualnav ol.step5 {width:580px;}
+
+
+
+
+
+
+
+/* ----------------------- CHECK OUT --------------------------- */
+
+#checkout .box {padding:20px; margin-bottom:20px;}
+#checkout .box strong {display:block;float:left;width:160px;}
+#checkout form p{margin:15px 20px 15px 15px;padding:2px 0;}
+
+/* form */
+#checkout fieldset {margin-bottom:30px;}
+#checkout legend {padding:2px 8px;margin-left:10px; font-weight:bold}
+#checkout label{float:left;width:160px; line-height:23px; padding-left:5px;}
+#checkout input,
+#checkout select,
+#checkout textarea{ width:200px; padding:3px 4px;float:left;}
+#checkout select { padding-right:0;width:auto; margin-right:5px}
+#checkout input.checkbox {width:14px; border:0; margin-top:6px;}
+
+#checkout p#contact-ezine label { width:185px;}
+
+/* credit card */
+#checkout img#creditcard_image {width: 34px; height: 21px;float:left; display:inline; margin-right:5px;} 
+#checkout #cvv_text input {width:60px; float:left;}
+#checkout .whatsthis { float:left; display:block;margin-left:5px}
+
+/* terms and condictions */
+#checkout fieldset#terms-conditions label {width:30px;}
+#checkout fieldset#terms-conditions input {width:auto;}
+#checkout .buttons {text-align:center;}
+
+/* POP CVV2 */
+#cvv_popup { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:91%; padding:10px;}
+
+#checkout #makereservation {margin:0 auto;}
+
+
+
+
+/* VALIDATION */
+input.validation-failed {background-color:#ff6666;}
+input.validation-passed {} /* impossible to use that!
+								background:transparent ('../images/ico_ok.png') no-repeat 0 0;
+								padding-right:30px;
+							*/
+
+#checkout .validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;
+background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png") no-repeat scroll 0 center;
+padding-left:22px;}
+#checkout input#terms_conditions.validation-failed {border:5px solid #ff6666; outline:5px solid #ff6666}
+#checkout #advice-required-terms_conditions {text-indent:-5000em; display:none;}
+.focusonelement {background-color: #FFF7C0;}
+
+
+/* FEEDBACK */
+.feedback-error, .feedback-warning, .feedback-notice {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.feedback-error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+.feedback-warning {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.feedback-notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}
+
+
+
+
+
+
+
+
+
+
+/* screen.rooms.css */
+
+#confirmation .box {background-color:#eee; border:1px solid #ccc;}
+/* changes */ 
+#content {padding:20px 20px;}
+#search { right:20px;}
+
+
+
+/* SEARCH MODULE */
+#search #arrival_date { width:65px;}
+#search #searchbutton { }
+
+
+
+
+/* INDEX  */
+#index {padding-top:100px;}
+
+
+
+/* AVAILABILITY */
+#availability {padding-top:80px;}
+#availability h3 {margin-bottom:0;}
+#availability .rate_image {margin:10px 0;}
+#availability table.available{border-collapse:collapse;width:100%;margin-bottom:3em;}
+#availability table.available th.ratename{width:28%;text-align:left}
+#availability table.available th.roomtype{text-align:left;}
+#availability table.available td,
+#availability table.available th {text-align:center; border:1px solid #ccc;}
+#availability table.available td a,
+#availability table.available td .no-book{ display:block; width:55px;height:25px;}
+#availability table.available td.butt-book{ border:0;}
+#availability table.available tr.room-desc td{padding:0;border-bottom:1px solid #fff;border-top:1px solid #fff;border-right:1px solid #ccc;border-left:1px solid #ccc;}
+#availability table.available tr.room-desc .long-desc {border-bottom:1px solid #ccc;}
+#availability table.available tr.room-desc td.butt-book {border-right:0px solid #fff;}
+#availability .long_desc { padding:0.5em;text-align:left; border-bottom:1px solid #ccc;}
+#availability .long_desc .long_image {float:left; padding:0 1em 0.5em 0;}
+#availability .long_desc .long_image a { display:inline;}
+#availability .long_desc .long_description {float:right; width:83%}
+
+
+/* ----------------------- OCCUPANCY --------------------------- */
+
+#occupancy {padding-top:80px;}
+#occupancy h2 {margin-bottom:5px;margin-top:2em;}
+#occupancy .occupancy-checkin,
+#occupancy .box { padding:20px 10px; border:1px solid #ccc}
+#occupancy .occupancy-checkin {background-color:#eee;}
+#occupancy .occupancy-checkin p {margin:0;}
+
+#occupancy .box {background-color:#eee; position:relative;}
+#occupancy .box p {float:left;}
+#occupancy .box label {width:auto;padding-top:4px;}
+#occupancy .box select {width:55px;margin-left:5px; margin-right:10px;}
+#occupancy .box fieldset {margin:0;padding:0;}
+#occupancy .box p.roomprice {clear:left; float:none;margin-top:20px;}
+#occupancy .box p.title{font-weight:bold;}
+#occupancy .box p.title,
+#occupancy .box p.roomprice strong { width:90px; float:left; display:block; }
+#occupancy .box p.roomprice span { }
+
+#occupancy .loading-room { padding: 0 0 0 25px; width:230px; height:30px;font-weight:bold;float:none; margin:0;position:absolute; left:350px;top:22px;
+ display:block; background:url("../images/ajax-loader_16x16.gif") no-repeat left 1px;}/* dont use bottom for IE6*/
+ 
+
+#occupancy p#occupancy-total {font-size:1.3em;margin-top:10px;text-align:right;}
+
+#occupancy .room-actions {margin-bottom:5px;}
+#occupancy .room-actions a {background:transparent url("") no-repeat left 1px;  padding-left:20px; padding-bottom:10px;}
+#occupancy .room-actions a.add_room{background-image:url("../images/ico_add.png"); }
+#occupancy .room-actions a.new_search{background-image:url("../images/ico_add.png"); }
+#occupancy .room-actions a.rem_room{margin-left:10px; background-image:url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png");}
+#occupancy .buttons a{background-image:url("../images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 auto;}
+/*
+#occupancy .room-actions a.add_room,
+#occupancy .room-actions a.new_search { behavior: url("/iepngfix.htc") }
+*/
+
+
+
+
+/* CHECKOUT */
+#checkout {padding-top:30px;}
+#checkout #visualnav { top:15px;}
+#checkout .box { background-color:#eee; border:1px solid #ccc;}
+#checkout fieldset {border:1px solid #ccc;	background:#eee;}
+#checkout legend {background:#eee; color:#111;border:1px solid #ccc;}
+
+
+
+/* ----------------------- CONFIRMATION --------------------------- */
+#confirmation {padding-top:30px;}
+#confirmation #visualnav { top:15px;}
+#confirmation h2 {margin-bottom:5px;}
+#confirmation .box {padding:20px 20px 4px; margin-bottom:20px;}
+#confirmation .box p strong {width:180px; float:left; display:block; }
+#confirmation .box {background-color:#eee; border:1px solid #ccc;}
+#confirmation .buttons {text-align:center;}
+#confirmation #print {margin:0 auto;}
+
+
+
+
+

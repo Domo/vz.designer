@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	{% assign common_version 	= 'v_001' %}
+	{% assign theme_version 	= 'theme_51_green' %}
+	
+  	<title>Visrez - Demo Skin</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="en" />
+	<meta name="robots" content="follow, all" />
+	<meta name="description" content="Rooms Manager - Visrez" />
+	<meta name="keywords" content="room,rooms,manager,booking,accommodation,visrez" />
+	<meta name="cache-control" content="no-cache" />
+	<meta name="distribution" content="global" />
+	<meta name="language" content="en" />
+
+
+<!-- STYLESHEETS -->
+	{{ "reset" | style_sheet }}
+	<link href="{{ "stylesheets/jscalendar/calendar-green.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="{{ "stylesheets/modalbox.css" | common_asset: common_version }}" media="screen,projection" rel="stylesheet" type="text/css" />
+	{{ "screen" | style_sheet }}
+	<!--[if IE]> {{ "ie" | style_sheet }} <![endif]-->
+	{{ theme_version | style_sheet }}
+
+	<link href="{{ "stylesheets/print.css" | common_asset: common_version }}" media="print" rel="stylesheet" type="text/css" />
+	{{ "print.custom" | style_sheet: "print" }}
+
+
+<!-- SCRIPTS -->
+	{{ "prototype" | google_include }}
+	{{ "scriptaculous" | google_include }}
+	<script src="{{ "javascripts/application.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/calendar.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/calendar-setup.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/calendar-en.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/modalbox.visrez.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/sxmglobalfunctions.js" | common_asset: common_version }}" type="text/javascript"></script>
+	<script src="{{ "javascripts/validation.js" | common_asset: common_version }}" type="text/javascript"></script>
+
+	{{ content_for_header }}
+</head>
+<body>
+{% if third_party.is_set %}<div id="thirdparty">Booking as 3th party: {{ third_party.name }}</div>{% endif %}
+<div id="pagewidth">
+
+	<div id="skiplinks">
+		<ul>
+			<li><a accesskey="M" href="#content">Go to Main Content</a></li>
+			<li><a accesskey="F" href="#footer">Go to Footer</a></li>
+		</ul>
+	</div><!--  skip links END -->
+
+	<div id="wrapper">
+	
+			<div id="header">
+					<div id="logo"><h1><a href="/index.shtml" title="Home Page">Visrez Hotel Booking Engine</a></h1></div>
+					<div id="info"><p><strong>Visrez</strong><br />
+											22 South William Street - Dublin 2<br />
+											Tel: +353 (0)1 6792212 - Email: info@visrez.com</p></div>
+					<div id="navbar">
+						<ul class="clearfix">
+							<li class="first"><a href="#">Link1</a></li>
+							<li><a href="#">Link2</a></li>
+							<li><a href="#">Link3</a></li>
+							<li><a href="#">Link4</a></li>
+							<li><a href="#">Link5</a></li>
+							<li><a href="#">Link6</a></li>
+							<li><a href="#">Link7</a></li>
+						</ul>
+					</div> 
+					<div id="banner"> </div>
+			</div><!-- HEADER -->
+			
+			<hr/>
+
+			<!-- BOOKING -->
+			<div id="content">
+					{% if (step == '1') -%}
+						{% include 'modules/search' -%} 
+					{% endif -%}
+
+					{% if (step == '2') -%}
+						{% include 'modules/search' -%} 
+					{% endif -%}
+
+					{% if (step == '3') -%}
+						{% include 'modules/search' -%} 
+					{% endif -%}
+
+					<div id="booking">
+					{{ content_for_layout }}
+					</div>
+
+			</div>
+			<!-- BOOKING -->
+			
+			<hr/>
+			
+			<div id="footer" class="clearfix">
+					<div id="footer-a">
+							<div id="footer-navbar">
+								<ul class="clearfix">
+									<li class="first"><a href="#">Link1</a></li>
+									<li><a href="#">Link2</a></li>
+									<li><a href="#">Link3</a></li>
+									<li><a href="#">Link4</a></li>
+									<li><a href="#">Link5</a></li>
+									<li><a href="#">Link6</a></li>
+									<li><a href="#">Link7</a></li>
+								</ul>
+							</div><!-- FOOTER-NAVBAR -->
+		
+							<div id="footer-info">
+								<p><strong>Visrez</strong>, 22 South William Street, Dublin 2 - Tel: +353 (0)1 6792212 - Fax: +353 (0)1 6708599
+								<br />Visrez Ltd, Registered in Ireland No: 315037, Vat Reg: IE6335037T</p>
+							</div><!-- FOOTER-INFO -->
+					</div><!-- FOOTER-A -->
+					
+					<div id="footer-b">
+						<p><strong>Visrez</strong><br/>Maecenas iaculis, sem sit amet molestie malesuada Ut tempus dignissim sem, et tristique ante blandit quis.</p>
+					</div><!-- FOOTER-B -->
+
+			</div><!-- FOOTER -->
+	
+	</div><!-- WRAPPER -->
+
+</div><!-- PAGEWITDH  -->
+
+{{ google_analytics_code }}
+
+</body>
+</html>

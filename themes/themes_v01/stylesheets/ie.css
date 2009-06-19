@@ -1,0 +1,8 @@
+
+/* only ie6 */
+* html #availability table.available td a.book{width:105px;}
+* html #visualnav ol li{ display:inline;}
+
+/* all ie */
+#checkout fieldset 	{position:relative;margin-top:30px;padding-top:30px;}
+#checkout legend 		{position:absolute;top:-10px;left:0px;}

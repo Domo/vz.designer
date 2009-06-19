@@ -26,6 +26,7 @@ themes/**/*
 
 #... but default
 !themes/default/**
+!themes/themes_v01/**
 
 # no local theme / product images either
 public/files
