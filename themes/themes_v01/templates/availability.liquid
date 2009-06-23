@@ -13,5 +13,8 @@
 
 {% if selected_property.has_rates != true  %}
 	<p>Sorry, no rates available for that date / hotel.</p>
+{% else %}
+	<h4>Legend</h4>
+	<p class="legend"><img alt="Icon Not Available" src="{{ "images/ico_not_available.png" | asset_url }}" /> = No availability for the dates marked.</p>
 {% endif %}
 </div>
