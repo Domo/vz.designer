@@ -132,7 +132,7 @@ class ThemeServlet < LiquidServlet
 		@item_id = @params['id']
 		
 		room_price = money.format_money(rand(50) + 10, '&euro;')
-		tag = "$('price_" + @item_id + "').innerHTML = '" + room_price + "';"
+		tag += "$('price_" + @item_id + "').innerHTML = '" + room_price + "';"
 		
 		
 		images = build_images_for_occupancy_selects
