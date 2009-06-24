@@ -115,6 +115,7 @@ class Servlet < WEBrick::HTTPServlet::AbstractServlet
     
     logger.info " - rendering #{normalize_path(file)}"
     layout = options[:layout].nil? ? self.class.layout_name : options[:layout]
+    layout = nil if layout == 'none'
     if layout
       @content_for_layout = render_file(file, options)            
 

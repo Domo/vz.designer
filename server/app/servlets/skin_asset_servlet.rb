@@ -4,7 +4,7 @@ require 'wsession'
 class SkinAssetServlet < Servlet      
 
   def index
-  	file = "#{template_path}#{@params['file']}"
+  	file = "#{theme_path}#{@params['file']}"
   	file = file.gsub("/", "\\") if RUBY_PLATFORM.include?("win")
 		# rfile = WSession.get_theme_file(file)
 		# 		content = rfile[:content]
@@ -18,7 +18,7 @@ class SkinAssetServlet < Servlet
   
   protected
   
-  def template_path
+  def theme_path
   	File.join(THEMES, @theme)
   end
   

@@ -5,7 +5,7 @@ class ReservationRoomType
 	end
 	
 	require 'database'
-	attr_accessor :adults, :children, :reservation_id, :occupancy, :sell_price, :room_type, :rate, :price
+	attr_accessor :adults, :children, :reservation_id, :occupancy, :sell_price, :room_type, :rate, :price, :id
 	def initialize(_reservation)
 		self.room_type = Database.find(:random, :room_types)
 		self.rate = Database.find(:random, :rates)
@@ -16,6 +16,7 @@ class ReservationRoomType
 		self.occupancy = self.adults + self.children
 		self.sell_price = rand(75) + 1
 		self.price = self.sell_price
+		self.id = self.room_type.id
 	end
 	
 	def property_room_type

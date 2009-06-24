@@ -171,7 +171,12 @@ class VisionServlet < Servlet
 	end
 	
 	def template_type
-		template_type_cookie.value || template_types_for_view.keys.first.to_s rescue template_types_for_view.keys.first.to_s
+		template_type_cookie.value || default_template_type rescue default_template_type
+	end
+	
+	def default_template_type
+		default = template_types_for_view.keys.first.to_s
+		default = :rooms if template_types_for_view.keys.include? :rooms
 	end
 
   def template_cookie

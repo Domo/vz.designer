@@ -17,7 +17,6 @@ require 'creditcard_drop'
 require 'money_filters'
 require 'wsession'
 
-
 class ThemeServlet < LiquidServlet
 	layout 'skin'
 	
@@ -97,6 +96,20 @@ class ThemeServlet < LiquidServlet
 		redirect_to confirmation
 	end
 	
+	#static page
+	
+	def static_page
+		page = "static/" + @params["page"]
+		layout = "skin" if template_type == 'rooms'
+		layout = "tickets/skin" if template_type == 'events'
+		# debugger
+		if @params["no_layout"]
+			render :type => :liquid, :action => page, :layout => 'none'
+		else
+			render :type => :liquid, :action => page, :layout => layout unless @params["no_layout"]
+		end
+	end
+	
 	#other need methods... man weiß ja nie, worauf der user alles klicken will...
 	def add_room
 		redirect_to '/occupancy'
@@ -114,8 +127,22 @@ class ThemeServlet < LiquidServlet
 		new_price = rand(100) + 10
 		@response['Content-Type'] = "text/javascript"
 		money = MoneyFilter.new
-		innerhtml = money.format_money(new_price, '&euro;')
-		tag = "$('total_price').innerHTML = '" + innerhtml + "';"
+		total_price = money.format_money(new_price, '&euro;')
+		tag = "$('total_price').innerHTML = '" + total_price + "';"
+		@item_id = @params['id']
+		
+		room_price = money.format_money(rand(50) + 10, '&euro;')
+		tag = "$('price_" + @item_id + "').innerHTML = '" + room_price + "';"
+		
+		
+		images = build_images_for_occupancy_selects
+		
+		#Check if the skin contains space for the images, if yes, insert them.
+		tag += "if (document.getElementById('img_adults_#{@item_id}')) {"
+		tag += "$('img_adults_#{@item_id}').innerHTML = '" + images[:adults].join + "';"
+		tag += "$('img_children_#{@item_id}').innerHTML = '" + images[:children].join + "';"
+		tag += "}"
+		
 		render :text => tag
 	end
 	
@@ -224,15 +251,15 @@ class ThemeServlet < LiquidServlet
   	flash = {:error => '', :warning => '', :notice => ''}
   	if @options.include? "show_warning"
   		puts "found a warning"
-  		flash[:warning] = 'This is a warning!!!'
+  		flash[:warning] = 'This is a warning coming from the server, maybe a validation error.'
   	end
   	if @options.include? "show_notice"
   		puts "found a warning"
-  		flash[:notice] = 'This is a notice!!!'
+  		flash[:notice] = 'This is a notice, e.g. something like "Reservation successfully created"'
   	end
   	if @options.include? "show_error"
   		puts "found a warning"
-  		flash[:error] = 'This is an error!!!'
+  		flash[:error] = 'This is an error, e.g. something like a payment gateway error.'
   	end
   	return flash
 	end
@@ -245,15 +272,30 @@ class ThemeServlet < LiquidServlet
     @params['handle'] = matches[1] if matches[1]
     @params['tags']   = matches[2] if matches[2]
     
-    if @action_name == "skin"
-    	@req_file = []
-    	for match in matches
-    		next if match == matches[0]
-    		@req_file << match
-  		end
-  		@req_file = @req_file.join("/")
-    end
+    #Sonderfälle
+    if @action_name
+	    if @action_name.include?('.html')
+	    	@params['page'] = @action_name.gsub('.html', "")
+	    	@action_name = 'static_page'
+	    end
+  	end
+    
   end
+  
+  
+  private
+  
+  def build_images_for_occupancy_selects
+  	images = {:adults => [], :children => []}
+		@params['adults'].to_i.times do
+			images[:adults] << '<img src="http://assets.visrez.com/roomsandevents/common/v_001/images/adults.png" style="float:left;" class="adult-image" />'
+		end
+		@params['children'].to_i.times do
+			images[:children] << '<img src="http://assets.visrez.com/roomsandevents/common/v_001/images/child.png" style="float:left;" class="child-image" />'
+		end
+		return images
+	end
+
   
 end
 

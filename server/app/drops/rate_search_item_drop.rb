@@ -91,6 +91,24 @@ class RateSearchItemDrop < Liquid::Drop
     
     options
   end
+  
+    #Images for Adults
+  def images_adults
+  	images = ""
+		self.adults.times do
+			images << '<img src="http://assets.visrez.com/roomsandevents/common/v_001/images/adults.png" style="float:left;" class="adult-image" />'
+		end
+		return images
+	end
+	
+	#Images for Children
+	def images_children
+  	images = ""
+		self.children.times do
+			images << '<img src="http://assets.visrez.com/roomsandevents/common/v_001/images/child.png" style="float:left;" class="child-image" />'
+		end
+		return images
+	end
 
   def show_breakfast
     @rate_search_container_item.rate_room_type.rate.show_breakfast_option
