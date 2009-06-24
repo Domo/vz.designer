@@ -58,6 +58,10 @@ class ThemeServlet < LiquidServlet
 		render :type => :liquid
 	end
 	
+	def process_reservation
+		redirect_to '/confirmation'
+	end
+	
 	def confirmation
 		if template_type == 'rooms'
 			@step = '5'
@@ -110,7 +114,7 @@ class ThemeServlet < LiquidServlet
 		end
 	end
 	
-	#other need methods... man weiß ja nie, worauf der user alles klicken will...
+	#sonstige untermethoden, man weiß ja nie, worauf die Leute klicken...
 	def add_room
 		redirect_to '/occupancy'
 	end
@@ -124,17 +128,21 @@ class ThemeServlet < LiquidServlet
 	end
 	
 	def ajax_update_room
-		new_price = rand(100) + 10
+		#get params, prepare modules, set header
+		@item_id = @params['id']
 		@response['Content-Type'] = "text/javascript"
 		money = MoneyFilter.new
+		
+		#update total price
+		new_price = rand(100) + 10
 		total_price = money.format_money(new_price, '&euro;')
 		tag = "$('total_price').innerHTML = '" + total_price + "';"
-		@item_id = @params['id']
 		
+		#Update price for the changed room
 		room_price = money.format_money(rand(50) + 10, '&euro;')
 		tag += "$('price_" + @item_id + "').innerHTML = '" + room_price + "';"
 		
-		
+		#Get image lists
 		images = build_images_for_occupancy_selects
 		
 		#Check if the skin contains space for the images, if yes, insert them.
