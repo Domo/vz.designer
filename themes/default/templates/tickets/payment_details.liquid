@@ -1,4 +1,4 @@
-{% assign common_version = 'v_001' %}
+{% assign common_version = 'v_002' %}
 {% assign step = '4' -%}
 <div id="checkout" >
 		{% include 'modules/tickets_visualnav' -%}
@@ -66,6 +66,12 @@
 									<input type="hidden" name="contact[contact_type]" value="Main contact" />
 									<!-- span></span-->
 							</p>
+							
+							<p class="clearfix">
+								<label for="booking[special_request]">Special requests</label>
+								<textarea name="booking[special_request]" cols="20" rows="5" id="booking[special_request]" type="text"></textarea>
+							</p>
+
 						</fieldset><!-- end of Personal details -->
 					
 					
@@ -119,7 +125,7 @@
 							new Validation('form_reservation', {immediate : true});
 							CreateFieldFocusColorChanges("form_reservation");
 							CreditCardOptions['cvv_field'] = 'cvv_text';
-							CreditCardOptions['image_path'] = "https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/";
+							CreditCardOptions['image_path'] = "https://ssl_assets.visrez.com/roomsandevents/common/v_002/images/";
 							CreateCreditCardTypeChecker("creditcard_number");
 						</script>
 	
