@@ -82,7 +82,7 @@ input.validation-passed {} /* impossible to use that!
 							*/
 
 #checkout .validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;
-background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png") no-repeat scroll 0 center;
+background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_002/images/ico_error.png") no-repeat scroll 0 center;
 padding-left:22px;}
 #checkout input#terms_conditions.validation-failed {border:5px solid #ff6666; outline:5px solid #ff6666}
 #checkout #advice-required-terms_conditions {text-indent:-5000em; display:none;}
@@ -144,45 +144,40 @@ padding-left:22px;}
 #availability .long_desc .long_image {float:left; padding:0 1em 0.5em 0;}
 #availability .long_desc .long_image a { display:inline;}
 #availability .long_desc .long_description {float:right; width:83%}
-
+#availability p.legend  img { display:inline; vertical-align:middle; } 
 
 /* ----------------------- OCCUPANCY --------------------------- */
 
 #occupancy {padding-top:80px;}
-#occupancy h2 {margin-bottom:5px;margin-top:2em;}
-#occupancy .occupancy-checkin,
-#occupancy .box { padding:20px 10px; border:1px solid #ccc}
-#occupancy .occupancy-checkin {background-color:#eee;}
-#occupancy .occupancy-checkin p {margin:0;}
+#occupancy h2 {margin-bottom:5px; color:#333;}
+#occupancy .occupancy-summary { font-size:1.1em;padding:.8em;margin-bottom:1.5em;border:2px solid #ddd;background:#FBE3E4;color:#111;border-color:#FBC2C4;}
 
-#occupancy .box {background-color:#eee; position:relative;}
-#occupancy .box p {float:left;}
+#occupancy .box {background-color:#f1f1f1; position:relative; margin-bottom:20px; padding:15px 10px 15px 10px;border:1px solid #ccc }
+#occupancy .box h3 { margin-top:0;font-size:1.2em; display:inline;  padding-right:10px;}
+#occupancy .box p {float:left;margin-bottom:0.8em;}
 #occupancy .box label {width:auto;padding-top:4px;}
 #occupancy .box select {width:55px;margin-left:5px; margin-right:10px;}
-#occupancy .box fieldset {margin:0;padding:0;}
-#occupancy .box p.roomprice {clear:left; float:none;margin-top:20px;}
+#occupancy .box fieldset {padding:0; margin-bottom:0;}
+#occupancy .box p.roomprice {clear:left; float:none;}
 #occupancy .box p.title{font-weight:bold;}
 #occupancy .box p.title,
 #occupancy .box p.roomprice strong { width:90px; float:left; display:block; }
 #occupancy .box p.roomprice span { }
+#occupancy .box fieldset span{ float:left;}
+#occupancy .box fieldset p{ margin-right:20px;}
+#occupancy .box img.adult-image { float:left;}
+#occupancy .box img.child-image { float:left;}
 
-#occupancy .loading-room { padding: 0 0 0 25px; width:230px; height:30px;font-weight:bold;float:none; margin:0;position:absolute; left:350px;top:22px;
- display:block; background:url("../images/ajax-loader_16x16.gif") no-repeat left 1px;}/* dont use bottom for IE6*/
- 
+#occupancy .loading-room { color:#8a1f11;display:inline; padding: 0 0 0 25px; width:230px; height:30px;font-weight:bold;float:none; margin:0;  background:url("../images/ajax-loader_16x16.gif") no-repeat left 1px;}/* dont use bottom for IE6*/
+#occupancy .occupancy-title { padding-bottom:10px;}
+#occupancy p#occupancy-total {font-size:1.3em; margin:10px 0 10px auto;text-align:right;width:120px;}
 
-#occupancy p#occupancy-total {font-size:1.3em;margin-top:10px;text-align:right;}
-
-#occupancy .room-actions {margin-bottom:5px;}
-#occupancy .room-actions a {background:transparent url("") no-repeat left 1px;  padding-left:20px; padding-bottom:10px;}
-#occupancy .room-actions a.add_room{background-image:url("../images/ico_add.png"); }
-#occupancy .room-actions a.new_search{background-image:url("../images/ico_add.png"); }
-#occupancy .room-actions a.rem_room{margin-left:10px; background-image:url("https://ssl_assets.visrez.com/roomsandevents/common/v_001/images/ico_error.png");}
-#occupancy .buttons a{background-image:url("../images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 auto;}
-/*
-#occupancy .room-actions a.add_room,
-#occupancy .room-actions a.new_search { behavior: url("/iepngfix.htc") }
-*/
-
+#occupancy .room-actions { position:absolute; top:8px; right:10px;margin-bottom:2px; font-size:0.9em; text-align:right;}
+#occupancy .room-actions a {}
+#occupancy .room-actions a.rem_room {margin-left:10px;}
+#occupancy .room-newsearch {margin-bottom:2px; font-size:0.9em; text-align:right;}
+#occupancy .buttons { text-align:right;}
+#occupancy .buttons a{background-image:url("../images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 0 0 auto;}
 
 
 

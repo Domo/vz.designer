@@ -2,7 +2,7 @@
 	<form action="{{ html.availability_action }}" method="post" id="availability_search_form">
 		<p><label for="arrival_date">Arrival</label>
 		<input type="text" id="arrival_date" name="rate_search_container[arrival_date]" value="{{ arrival_date }}" />
-		<a href="#"><img alt="Calendar" id="day_calendar" src="{{ "images/calendar.gif" | common_asset }}" /></a>
+		<a href="#"><img alt="Calendar" id="day_calendar" src="{{ "images/calendar.gif" | common_asset: common_version }}" /></a>
 		<script type="text/javascript">Calendar.setup({inputField: "arrival_date", ifFormat: "%d.%m.%Y", button: "day_calendar"});</script>
 		</p>
 		

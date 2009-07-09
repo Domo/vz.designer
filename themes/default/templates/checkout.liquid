@@ -1,4 +1,4 @@
-{% assign common_version = 'v_002' %}
+{% assign common_version = 'v_003' %}
 <div id="checkout">
 	{% assign step = '4' -%}
 	{% include 'modules/visualnav' -%}
@@ -163,7 +163,7 @@
 				});
 				CreateFieldFocusColorChanges("form_reservation");
 				CreditCardOptions['cvv_field'] = 'cvv_text';
-				CreditCardOptions['image_path'] = "https://ssl_assets.visrez.com/roomsandevents/common/v_002/images/";
+				CreditCardOptions['image_path'] = '{{ "images/" | common_asset: common_version }}';
 				CreateCreditCardTypeChecker("creditcard_number");
 			</script>
 			

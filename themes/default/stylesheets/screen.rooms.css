@@ -74,6 +74,8 @@
 #occupancy .room-actions { position:absolute; top:8px; right:10px;margin-bottom:2px; font-size:0.9em; text-align:right;}
 #occupancy .room-actions a {}
 #occupancy .room-actions a.rem_room {margin-left:10px;}
+#occupancy .room-newsearch {margin-bottom:2px; font-size:0.9em; text-align:right;}
+
 #occupancy .buttons { text-align:right;}
 #occupancy .buttons a{background-image:url("../images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 0 0 auto;}
 

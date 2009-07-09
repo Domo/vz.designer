@@ -1,13 +1,13 @@
-{% assign common_version = 'v_002' %}
+{% assign common_version = 'v_003' %}
 
 <div id="occupancy">
 	{% assign step = '3' -%}
 	{% include 'modules/visualnav' -%}
 	{% include 'modules/feedback' -%}
 	
-	<!-- div class="room-actions">
+	<div class="room-newsearch">
 		<a href="#" class="new_search" onclick="Modalbox.show($('loadingbox1'),{width: 600, top:125,inactiveFade:false});Modalbox.deactivate();$('availability_search_form').submit();">Add another room type</a>
-	</div -->
+	</div>
 	
 	<h2>Booking Summary</h2>
 	<div class="occupancy-summary">

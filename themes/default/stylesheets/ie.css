@@ -2,6 +2,7 @@
 /* only ie6 */
 * html #availability table.available td a.book{width:105px;}
 * html #visualnav ol li{ display:inline;}
+* html #occupancy .room-actions { right:30px;}
 
 /* all ie */
 #checkout fieldset 	{position:relative;margin-top:30px;padding-top:30px;}
