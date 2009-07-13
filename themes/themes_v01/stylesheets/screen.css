@@ -69,7 +69,7 @@
 /* POP CVV2 */
 #cvv_popup { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:91%; padding:10px;}
 
-#checkout #makereservation {margin:0 auto;}
+#checkout #makereservation {margin:0 auto;padding:5px 20px;}
 
 
 
@@ -150,9 +150,10 @@ padding-left:22px;}
 
 #occupancy {padding-top:80px;}
 #occupancy h2 {margin-bottom:5px; color:#333;}
+#occupancy h2.tit {margin-top:0em;}
 #occupancy .occupancy-summary { font-size:1.1em;padding:.8em;margin-bottom:1.5em;border:2px solid #ddd;background:#FBE3E4;color:#111;border-color:#FBC2C4;}
 
-#occupancy .box {background-color:#f1f1f1; position:relative; margin-bottom:20px; padding:15px 10px 15px 10px;border:1px solid #ccc }
+#occupancy .box {background-color:#f1f1f1; position:relative; margin-bottom:20px; padding:15px 20px;border:1px solid #ccc }
 #occupancy .box h3 { margin-top:0;font-size:1.2em; display:inline;  padding-right:10px;}
 #occupancy .box p {float:left;margin-bottom:0.8em;}
 #occupancy .box label {width:auto;padding-top:4px;}
@@ -176,7 +177,7 @@ padding-left:22px;}
 #occupancy .room-actions a {}
 #occupancy .room-actions a.rem_room {margin-left:10px;}
 #occupancy .room-newsearch {font-size:0.9em; text-align:right;}
-#occupancy .buttons { text-align:right;}
+#occupancy .buttons { text-align:right; }
 #occupancy .buttons a{background-image:url("../images/butt_proceed.png");width:200px;height:30px;display:block;margin:0 0 0 auto;}
 
 
@@ -198,5 +199,5 @@ padding-left:22px;}
 #confirmation .box p strong {width:180px; float:left; display:block; }
 #confirmation .box {background-color:#eee; border:1px solid #ccc;}
 #confirmation .buttons {text-align:center;}
-#confirmation #print {margin:0 auto;}
+#confirmation #print {margin:0 auto;  }
 

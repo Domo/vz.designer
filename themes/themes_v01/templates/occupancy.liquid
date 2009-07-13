@@ -9,11 +9,11 @@
 		<a href="#" class="new_search" onclick="Modalbox.show($('loadingbox1'),{width: 600, top:125,inactiveFade:false});Modalbox.deactivate();$('availability_search_form').submit();">Add another room type</a>
 	</div>
 	
-	<h2>Booking Summary</h2>
+	<h2 class="tit">Booking Summary</h2>
 	<div class="occupancy-summary">
 		<ul>
 			<li><strong>Check in</strong>: {{ arrival_date }}</li>
-			<li><strong>Check out</strong>: {{ departure_date }}</li>
+			<li><strong>Check out</strong>:  {{ rate_search_container.departure_date }}</li>
 			<li><strong>Nights</strong>: {{ nights }}</li>
 		</ul>
 	</div>

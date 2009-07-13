@@ -69,7 +69,7 @@
 				</p>
 			
 				<p class="clearfix"><label for="contact_phone">Phone</label>
-					<input id="contact_phone" class="required validate-number" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
+					<input id="contact_phone" class="required validate-mobile" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
 					<!-- span class="formError {{ contact | set_style_for_error: 'phone', 'visible' }}">{{ contact | error_messages_on: 'phone' }}<span class="pointer"></span></span -->
 				</p>
 			
@@ -131,10 +131,11 @@
 			</fieldset><!-- end of Payment details -->
 
 			<fieldset id="special-request">
-				<legend>Special Requests</legend>
+				<legend>Comments / Special Request</legend>
 				<p class="clearfix"><label for="special_request">Special Requests</label>
-				<textarea id="special_request" type="text" size="29" name="special_request"></textarea></p>
-			</fieldset>						
+						<textarea id="special_request" rows="5" cols="20" name="special_request"> </textarea>
+				</p>
+			</fieldset>					
 
 			<fieldset id="terms-conditions">
 					<legend>Terms &amp; Conditions</legend>
@@ -154,11 +155,13 @@
 				{
 					if (result == true) { 
 						// ValidationResult Function
+						Modalbox.show($('loadingbox2'),{width: 600,top: 125,inactiveFade:false});
+						Modalbox.deactivate();
 					}
 				}
 				new Validation('form_reservation', {immediate : true, onFormValidate : ValidationResult});
-				Validation.add('mobile-validation', 'At least 10 characters', {
-					minLength : 10, // value must be at least 10 characters
+				Validation.add('validate-mobile', 'At least 10 characters', {
+					minLength : 10 // value must be at least 10 characters
 				});
 				CreateFieldFocusColorChanges("form_reservation");
 				CreditCardOptions['cvv_field'] = 'cvv_text';
@@ -169,6 +172,7 @@
 
 		</form>   
 </div>
+<div id="loadingbox2" class="loadingbox" style="display:none;"><h3>Proceeding...</h3><p>Please wait...</p><img src="{{ "images/ajax-loader_220x19.gif" | asset_url }}" alt="Loading..."/></div>
 
 
 
