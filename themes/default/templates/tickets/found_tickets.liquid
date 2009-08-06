@@ -17,7 +17,7 @@
 				<div class="found-text">
 						<h3>{{ event.name }}</h3>
 						<p><strong>Location: </strong> {{ event.location }}</p>
-						<p><strong>Description: </strong {{ event.description }}></p>
+						<p><strong>Description: </strong> {{ event.description }}</p>
 						
 						<div class="found-ticket">			
 								<!-- h4>Enter Tickets and click next</h4 -->
@@ -32,7 +32,7 @@
 									<div id="time_{{ at.id }}" class="time_element" {% if at != ats.first %}style="display: none;"{% endif %}>
 									</div>
 									
-									<form action="/ticket_booking/terms_and_conditions" method="post">
+									<form action="{{ html.terms_and_conditions_action }}" method="post">
 										
 										{% unless at.name == '' -%}  
 												<!-- 

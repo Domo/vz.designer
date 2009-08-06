@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<meta http-equiv="Content-Language" content="en-us" />
-		<title>Vision Setup</title>
+		<title>vz.Designer Setup</title>
 		<link rel="stylesheet" href="/stylesheets/wizard.css" type="text/css" media="screen" title="Wizard" charset="utf-8" />
 	</head>
 	
@@ -27,7 +27,15 @@
               <% end %>        
             </select>    
           </dd>
-        <dt><label for="name">And name it this</label></dt>
+        <dt><label for="type">set it's application type to</label></dt>
+        <dd>
+        	<select name="type">
+              <% @types.each do |type| %>
+              	<option value="<%= type[:option] %>"><%= type[:name] %></option> 
+              <% end %>        
+            </select>    
+      	</dd>
+        <dt><label for="name">and name it this</label></dt>
         <dd><input type="text" name="to" value="" id="name" class="big" /></dd>
         
         <dd><input type="submit" value="Create &rarr;" /> or <a href="/dashboard/">go back</a>

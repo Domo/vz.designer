@@ -15,8 +15,10 @@
 
       <form action="zip_theme" method="post">
       <dl>
-        <dt><label for="readme">Need to update your Readme?</label></dt>
-        <dd><textarea name="readme" rows="7" cols="54"><%= @readme %></textarea></dd>
+        <dt><label for="name">Please give your new skin a name:</label></dt>
+        <dd><input type="text" name="name" id="name" /></dd>
+        <dt><label for="description">And a short description:</label></dt>
+        <dd><textarea name="description" id="description" cols="40" rows="7"></textarea></dd>
         
         <dt>
           <input type="hidden" name="theme" value="<%= @theme %>" />

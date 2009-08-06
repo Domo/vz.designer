@@ -1,3 +1,7 @@
+#--------------------------------------------
+#               Properties
+#--------------------------------------------
+
 properties:
 -
   id: 1
@@ -419,6 +423,8 @@ contacts:
 #              Reservations
 #--------------------------------------------
 
+#Reservations are also used instead of rate_search_containers, so we don't have to insert this data twice.
+
 reservations:
 -
   id: 1
@@ -456,3 +462,34 @@ reservations:
   paid: 70.00
   arrival_date: '24.11.2009'
   departure_date: '28.11.2009'
+  
+#--------------------------------------------
+#      Bookings / booked tickets / extras
+#--------------------------------------------
+
+ticket_types:
+-
+  id: 1
+  name: 'Adult'
+  description: 'An Adult Ticket'
+-
+  id: 2
+  name: 'Child'
+  description: 'A Child Ticket'
+
+#--------------------------------------------
+#    Events / EventAvailabilities / Times
+#--------------------------------------------
+
+events:
+-
+  id: 1
+  name: 'Test Event 1'
+  description: 'This is just a test event'
+  short_description: 'This is a short description'
+  location: 'Somewhere in Japan'
+  show_on_front: true
+
+event_availabilities:
+-
+  name: 'Test Event Availability 1'

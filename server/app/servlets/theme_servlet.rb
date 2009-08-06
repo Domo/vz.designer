@@ -14,6 +14,12 @@ require 'reservation_room_type_drop'
 require 'reservation_room_type'
 require 'rate_search_container'
 require 'creditcard_drop'
+require 'booking_drop'
+require 'booking_extra_drop'
+require 'event_drop'
+require 'event_availability_time'
+require 'event_availability_time_drop'
+require 'booking'
 require 'money_filters'
 require 'wsession'
 
@@ -82,6 +88,10 @@ class ThemeServlet < LiquidServlet
 		if @params[:act] == 'didnt_find_tickets'
 			render :type => :liquid, :action => 'tickets/didnt_find_tickets', :layout => 'tickets/skin'
 		else
+			@ats = []
+			(rand(3)+1).times do
+				@ats << EventAvailabilityTimeDrop.new(EventAvailabilityTime.new(@options), @booking.date)
+			end
 			render :type => :liquid, :action => 'tickets/found_tickets', :layout => 'tickets/skin'
 		end
 	end
@@ -159,7 +169,22 @@ class ThemeServlet < LiquidServlet
 	end
 	
 	def template_type
-		template_type_cookie.value || "rooms" rescue "rooms"
+		if template_type_cookie.value
+			if template_type_cookie.value != ''
+				return template_type_cookie.value 
+			end
+		end
+		return available_template_types.first
+	end
+	
+	def available_template_types
+		types = []
+		types << "rooms" if File.exists? File.join(template_path, "skin.liquid")
+		types << "events" if File.exists? File.join(template_path, "tickets")
+		cookie = WEBrick::Cookie.new('template_type', types.first)
+    cookie.path = '/'
+    @response.cookies.push(cookie)
+		return types
 	end
   
   protected
@@ -194,15 +219,30 @@ class ThemeServlet < LiquidServlet
     <script type="text/javascript">
       window.onload = function() { initVisionPalette(); }
     </script>
-    <script src="http://assets.visrez.com/roomsandevents/common/v_001/javascripts/fancyzoom.js" type="text/javascript"></script>
-    <script type="text/javascript">$(document).observe('dom:loaded', function() { $$('a.room_type_image_link').each(function(el) { new FancyZoom(el) }); } );</script>
-    <style media="screen,projection" type="text/css">
-    	#zoom table, #zoom table tr, #zoom table td {border: none;} 
-			.room_type_image_link {cursor:url(http://assets.visrez.comroomsandevents/common/v_001/images/fancyzoom/zoomin.cur), pointer;}
+    <script src="http://assets.visrez.com/roomsandevents/common/v_003/javascripts/fancyzoom.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	$(document).observe('dom:loaded', function() { 
+    		$$('a.room_type_image_link').each(function(el) { new FancyZoom(el) }); } );
+    		if (typeof Validation == 'undefined') {
+					document.write('<script src=\"http://assets.visrez.com/roomsandevents/common/v_003/javascripts/validation.js\" type=\"text/javascript\"></scr' + 'ipt>');
+				};
+		</script>
+		<script src="http://assets.visrez.com/roomsandevents/common/v_003/javascripts/date_validation_05.js" type="text/javascript"></script>
+		<style media="screen,projection" type="text/css">
+			#zoom table, #zoom table tr, #zoom table td {border: none;} 
+			.room_type_image_link {cursor:url(http://assets.visrez.com/roomsandevents/common/v_003/images/fancyzoom/zoomin.cur), pointer;}
+			.date_advice {
+				z-index: 1000;
+				width: 300px; 
+				position: absolute; 
+				top: 10px; 
+				left: 10px; 
+				padding:.5em;margin-bottom:1em;border:2px solid #ddd; 
+				background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;
+			}
 		</style>
     <!-- end inject -->  
     HEADERS
-#    @content_for_header = ""    
   end
   
   #assigns, which are always needed 
@@ -211,6 +251,8 @@ class ThemeServlet < LiquidServlet
     @property = PropertyDrop.new(Database.find(:random, :properties))
     @rate_search_container = RateSearchDrop.new(@property, RateSearchContainer.new)
     
+    @booking = BookingDrop.new(Booking.new, Database.find(:random, :properties))
+    @event = EventDrop.new(Database.find(:random, :events))
     # csetting = CustomerSetting.find(:first) 
     # csetting = CustomerSetting.new if csetting.nil?    
     

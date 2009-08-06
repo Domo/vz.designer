@@ -9,7 +9,11 @@ class ThemePickerServlet < Servlet
   def choose    
     cookie = WEBrick::Cookie.new('theme', @params['theme'].to_s)
     cookie.path = '/'
+    @response.cookies.push(cookie)
     
+    
+    cookie = WEBrick::Cookie.new('template_type', "")
+    cookie.path = '/'
     @response.cookies.push(cookie)
     
     redirect_to '/'
@@ -21,14 +25,18 @@ class ThemePickerServlet < Servlet
   
   def zip_theme
     theme = @params['theme']
-    
-    if @params['readme']
-      File.open(THEMES + "/#{theme}/README", 'w+') do |fp|
-        fp << @params['readme']
-      end
-    end
         
-    location = "#{ROOT}/../exports/#{theme}.theme.zip"
+	  name = @params['name'].to_s
+    description = @params['description'].to_s
+    
+    skin_info = {:description => description, :name => name}
+    
+    yml_file = File.join(THEMES, theme, 'info.yml')
+    a = File.new(yml_file, "w+")
+			a.puts(YAML.dump(skin_info))
+		a.close
+        
+    location = "#{ROOT}/../exports/#{theme}.zip"
     
     zip(theme, location) do |zip|
       
@@ -55,8 +63,10 @@ class ThemePickerServlet < Servlet
       return
     end
     
+    to_param = @params['to'].gsub(/[ :()+]/, "_")
+    
     from  = THEMES + "/#{@params['from']}"
-    to    = THEMES + "/#{@params['to']}"    
+    to    = THEMES + "/#{to_param}"    
     
     if not File.exist?(from)
       @message = 'Source theme does not exist...'
@@ -68,12 +78,27 @@ class ThemePickerServlet < Servlet
     end
     
     FileUtils.cp_r(from, to)
+    
+    case @params['type']
+  	when "rooms"
+  		FileUtils.rm_rf(to + '/templates/tickets')
+  		FileUtils.rm_rf(to + '/templates/golf')
+  		FileUtils.rm_rf(to + '/templates/vouchers')
+		when "events"
+			Dir[to + '/templates/*.liquid'].each do |rooms_template|
+				FileUtils.rm_rf(rooms_template)
+			end
+			FileUtils.rm_rf(to + '/templates/static')
+			cookie = WEBrick::Cookie.new('template_type', 'events')
+	    cookie.path = '/'
+	    @response.cookies.push(cookie)
+		end
 
     Dir[to + '/**/.svn'].each do |svndir|
       FileUtils.rm_rf(svndir)
     end
     
-    cookie = WEBrick::Cookie.new('theme', @params['to'])
+    cookie = WEBrick::Cookie.new('theme', to_param)
     cookie.path = '/'
     
     @response.cookies.push(cookie)
@@ -82,12 +107,11 @@ class ThemePickerServlet < Servlet
   end
   
   def export  
-    @themes = available_themes    
+    @theme = @params['theme'] 
   end
   
   def export_theme
     @theme = @params['theme']
-    @readme = File.read(THEMES + "/#{@theme}/README")
   end
   
   def update_readme
@@ -102,7 +126,8 @@ class ThemePickerServlet < Servlet
   end
   
   def create
-    @themes = available_themes    
+    @themes = available_themes
+    @types = [{:name => 'Rooms', :option => 'rooms'}, {:name => 'Events', :option => 'events'}, {:name => 'Rooms and Events', :option => 'roomsevents'}]
   end
     
   private
@@ -119,6 +144,7 @@ class ThemePickerServlet < Servlet
   end
   
   def zip(theme, location)
+  	theme_path = File.join(THEMES, theme)
     
     begin      
       FileUtils.mkdir_p(File.dirname(location))
@@ -131,26 +157,9 @@ class ThemePickerServlet < Servlet
         end
         
       else
-
-        Zip::ZipFile.open(location, Zip::ZipFile::CREATE) do |zip|
-          zip.mkdir(theme)
-          zip.mkdir(theme + '/assets')
-          zip.mkdir(theme + '/layout')
-          zip.mkdir(theme + '/templates')
-        
-          base = THEMES + "/"
-          files = []
-          files += Dir["#{base}#{theme}/assets/*"]
-          files += Dir["#{base}#{theme}/templates/*.liquid"]
-          files += Dir["#{base}#{theme}/layout/theme.liquid"]
-          files += Dir["#{base}#{theme}/README"]
-        
-          files.each do |file|
-            position = file[base.size..-1]          
-            zip.add(position, file)
-          end
-                
-        end        
+				Zip::ZipFile::open(location, true) { |zf|
+					Dir[theme_path + '/**/*'].each { |f| zf.add(f.gsub(theme_path + "/", ""), f) }
+				}
       end
                   
       File.open(location, "rb") { |fp| yield fp }

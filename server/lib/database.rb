@@ -2,6 +2,7 @@ require 'yaml'
 require 'reservation_room_type'
 require 'room_type_image'
 require 'rate_room_type'
+require 'ticket'
 
 module Database
   
@@ -82,6 +83,16 @@ module Database
 			else
 				for prop in _result
 						prop["images"] = []
+				end
+			end
+		when :events
+			if _result.is_a?(Hash)
+				_result["images"] = []
+				_result["max_tickets"] = rand(10)+5
+			else
+				for ev in _result
+						ev["images"] = []
+						ev["max_tickets"] = rand(10)+5
 				end
 			end
   	end

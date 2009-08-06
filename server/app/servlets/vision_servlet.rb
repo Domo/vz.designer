@@ -59,7 +59,8 @@ class VisionServlet < Servlet
 	def options_for_template
 		options =  [{ :name => 'show_rate_images', :caption => 'Rates have images', :for => 'availability' },
 									{ :name => 'show_property_images', :caption => 'Properties have images (used nowhere atm)', :for => 'availability' },
-									{ :name => 'dont_show_room_images', :caption => 'Rooms have <b>no</b> images', :for => 'availability' }
+									{ :name => 'dont_show_room_images', :caption => 'Rooms have <b>no</b> images', :for => 'availability' },
+									{ :name => 'show_website_discount', :caption => 'Show Website Discount', :for => 'search_tickets'}
 		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact
@@ -95,7 +96,7 @@ class VisionServlet < Servlet
        ['/checkout', 'Checkout Page (Customer Details)'], 
        ['/confirmation', 'Confirmation Page']
        ],
-      :events => [  ['/', 'Frontpage (Index)'], 
+      :events => [  ['/', 'Frontpage (Search Tickets)'], 
        ['/search_tickets', 'Found Tickets Page'], 
        ['/terms_and_conditions', 'Terms & Conditions Page'], 
        ['/payment_details', 'Payment Details Page'], 
@@ -171,12 +172,21 @@ class VisionServlet < Servlet
 	end
 	
 	def template_type
-		template_type_cookie.value || default_template_type rescue default_template_type
+		if template_type_cookie.value
+			if template_type_cookie.value != ''
+				return template_type_cookie.value 
+			end
+		end
+		return default_template_type
 	end
 	
 	def default_template_type
-		default = template_types_for_view.keys.first.to_s
 		default = :rooms if template_types_for_view.keys.include? :rooms
+		default = template_types_for_view.keys.first.to_s
+		cookie = WEBrick::Cookie.new('template_type', default)
+    cookie.path = '/'
+    @response.cookies.push(cookie)
+    return default
 	end
 
   def template_cookie

@@ -6,7 +6,7 @@
       </li>
       <li id="theme-list">
         <label for="themes">Skin:</label> 
-        <select name="themes" id="themes" onchange="Cookie.set('theme', this.value); Cookie.destroy('template_type'); window.location.reload(); return false;">
+        <select name="themes" id="themes" onchange="Cookie.set('theme', this.value); Cookie.set('template_type', ''); window.location.reload(); return false;">
         <% for theme in @themes %>
           <option value="<%= theme %>" <%= 'selected="selected"' if theme == @current_theme %>><%= theme %></option>
         <% end %>
@@ -34,7 +34,7 @@
     </ul>
     <ul id="searches">
       <li>
-        <a href="http://help.shopify.com/design/show/<%= @current_template %>.liquid" target="vision-help"><%= @current_template %>.liquid</a> help
+        <a href="http://sites.google.com/a/visrez.com/rooms-events/skins/templates/<%= @current_template_type %>/<%= @current_template.gsub(".", "-") %>-liquid" target="vision-help"><%= @current_template %>.liquid</a> help
       </li>
     </ul>
   </div>
@@ -43,7 +43,7 @@
   		<fieldset>
   			<legend>General Options</legend>
   		<% for option in @options %>
-  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" value="1"> <%= option[:caption] %> <br />
+  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" id="<%= option[:name] %>" value="1"> <label for="<%= option[:name] %>"><%= option[:caption] %></label> <br />
   		<% end %>
   		</fieldset>
   		<% unless @template_options.empty? %>
@@ -51,7 +51,7 @@
 	  			<legend>Template options</legend>
 	  			<% for option in @template_options %>
 	  			<% next unless option[:for].include? @current_template %>
-	  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" value="1"> <%= option[:caption] %> <br />
+	  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" id="<%= option[:name] %>" value="1"><label for="<%= option[:name] %>"><%= option[:caption] %></label> <br />
 	  		<% end %>
 	  		</fieldset>
   		<% end %>

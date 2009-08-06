@@ -69,6 +69,19 @@ class String
 	end
 end
 
+class Time
+  def self.random(years_forward = 1)
+    year = Time.now.year + rand(years_forward)+1
+    month = rand(12) + 1
+    day = rand(31) + 1
+    Time.local(year, month, day)
+  end
+  def to_us_date
+  	self.strftime("%Y-%m-%d")
+	end
+end
+
+
 def nested_params? _outer, _inner, params, _allow_blank = false
 	if params
 		if params[_outer]

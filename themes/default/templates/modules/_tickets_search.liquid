@@ -1,6 +1,6 @@
 	{% assign common_version = 'v_003' %}
 	<div id="search">
-			<form action="/ticket_booking/search_tickets" method="post">
+			<form action="{{ html.search_tickets_action }}" method="post">
 				<p>
 					<label for="booking_date">Booking date</label>
 					<input id="booking_date" name="booking[date]" value="{{ booking.date | format_date_to: 'eu' }}" type="text" />
@@ -17,5 +17,7 @@
 					<button type="submit" onclick="Modalbox.show($('loadingbox1'),{width: 600,top:125});" value="Search Tickets" id="searchtickets">Search Tickets</button>
 				</p>   
 			</form>
-			<div id="loadingbox1" class="loadingbox" style="display:none;"><h3>Searching Tickets</h3><p>Please wait...</p><img src="{{ "images/ajax-loader_220x19.gif" | asset_url }}" alt="Loading..."/></div>
+			<div id="loadingbox1" class="loadingbox" style="display:none;">
+				<h3>Searching Tickets</h3><p>Please wait...</p><img src="{{ "images/ajax-loader_220x19.gif" | asset_url }}" alt="Loading..."/>
+			</div>
 	</div>
