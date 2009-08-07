@@ -9,11 +9,9 @@
 		<div class="terms-wrapper clearfix">
 				<div class="terms-terms">
 						<h2>Terms &amp; Conditions</h2>
-						
 						{{ customer_settings.terms_conditions }}
-						{{ customer_settings.hallo }}
 			
-						<form action="/ticket_booking/payment_details" method="post">
+						<form action="{{ html.payment_details_action }}" method="post">
 							<fieldset>
 							<input type="hidden" name="accept" value="1" />
 							<div class="buttons clearfix">

@@ -489,6 +489,7 @@ events:
   short_description: 'This is a short description'
   location: 'Somewhere in Japan'
   show_on_front: true
+  terms_and_conditions: 'These are event specific terms and conditions'
 
 event_availabilities:
 -

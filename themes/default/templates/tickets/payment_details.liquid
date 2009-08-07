@@ -5,6 +5,11 @@
 				
 		<!-- h2>Payment Details</h2 -->
 		<div class="chekout-wrapper clearfix">
+			
+			<div class="checkout-cart">
+				<h3>Tickets Ordered</h3>
+				{% include 'modules/tickets_cart' -%}
+			</div>
 		
 			<div class="checkout-form">
 					{% include 'modules/tickets_feedback' -%}	
@@ -66,13 +71,15 @@
 									<input type="hidden" name="contact[contact_type]" value="Main contact" />
 									<!-- span></span-->
 							</p>
-							
+						</fieldset><!-- end of Personal details -->
+						
+						<fieldset>
+							<legend>Special Request</legend>        
 							<p class="clearfix">
 								<label for="booking[special_request]">Special requests</label>
 								<textarea name="booking[special_request]" cols="20" rows="5" id="booking[special_request]" type="text"></textarea>
 							</p>
-
-						</fieldset><!-- end of Personal details -->
+						</fieldset>
 					
 					
 					
@@ -136,10 +143,7 @@
 			<!-- end checkout-form -->
 			
 			
-			<div class="checkout-cart">
-				<h3>Tickets Ordered</h3>
-				{% include 'modules/tickets_cart' -%}
-			</div>
+			
 			<!-- end checkout-cart -->
 	</div>
 	<!-- end wrapper -->	

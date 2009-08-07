@@ -29,6 +29,8 @@
 									</select>
 								-->
 								{% for at in ats -%} 
+								<fieldset>
+								<legend>{{ at.time }}</legend>
 									<div id="time_{{ at.id }}" class="time_element" {% if at != ats.first %}style="display: none;"{% endif %}>
 									</div>
 									
@@ -57,17 +59,19 @@
 												</div>
 												{% endif -%}   
 												
-												<div class="found-total active1" style="display: none;" id="totalcost">
+												<div class="found-total active1 pricecontainer" style="display: none;" id="ticket_{{ at.id }}_totalcost">
 													<!-- Booking fee: {{ at.booking_fee | format_money: '&euro;' }}<br /> -->
 													<strong>Total cost</strong>: <span id="ticket_{{ at.id }}_price" class="price">{{ at.total_cost | format_money: '&euro;' }}</span>
 													<input type="hidden" name="booking[date]" value="{{ booking.date }}" />
 													<input type="hidden" name="booking[quantity]" value="{{ booking.quantity }}" />
 													<input type="hidden" name="booking[customer_type_selected]" value="{{ booking.customer_type_selected }}" />
 													<input type="hidden" name="booking[pa_selected]" value="{{ at.id }}" />
-												</div>
+
 												<div class="buttons">
-													<button type="submit" value="button_next" name="button_next" onclick="javascript:alert('fix event with time');">Next</button>
+													<button type="submit" value="button_next" name="button_next">Next</button>
 												</div>
+											</div>
+											</fieldset>
 										{% endunless -%}
 								 </form>
 								 {% endfor -%}

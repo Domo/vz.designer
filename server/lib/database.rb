@@ -95,6 +95,20 @@ module Database
 						ev["max_tickets"] = rand(10)+5
 				end
 			end
+		when :customers
+			if _result.is_a?(Hash)
+				c = self.find(:random, :contacts)
+				_result["main_contact"] = c
+				_result["email"] = c.email
+				_result["fullname"] = c.first_name + " " + c.last_name
+			else
+				for ev in _result
+						c = self.find(:random, :contacts)
+						ev["main_contact"] = c
+						ev["email"] = c.email
+						ev["fullname"] = c.first_name + " " + c.last_name
+				end
+			end
   	end
   	
   	if _result.is_a?(Hash)

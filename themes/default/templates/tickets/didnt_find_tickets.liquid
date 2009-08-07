@@ -22,7 +22,7 @@
 						<h2>Events list</h2>
 						<ul>
 							{% for event in events %}
-							<li><a href="/ticket_booking/calendar_overview/?event_id={{ event.id }}" {% if event.is_selected %}id="active" {% endif %}>{{ event.name }}</a></li>
+								<li><a href="/ticket_booking/calendar_overview/?event_id={{ event.id }}" {% if event.is_selected %}id="active" {% endif %}>{{ event.name }}</a></li>
 							{% endfor %}
 						</ul>
 					</div>

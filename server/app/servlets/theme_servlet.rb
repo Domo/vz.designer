@@ -21,6 +21,9 @@ require 'event_availability_time'
 require 'event_availability_time_drop'
 require 'booking'
 require 'money_filters'
+require 'customer_setting'
+require 'customer_setting_drop'
+require 'customer_setting_events_drop'
 require 'wsession'
 
 class ThemeServlet < LiquidServlet
@@ -77,6 +80,8 @@ class ThemeServlet < LiquidServlet
 			render :type => :liquid
 		else
 			@step = '4'
+			@contact = ContactDrop.new(Database.find(:random, :contacts))
+			@customer = CustomerDrop.new(Database.find(:random, :customers))
 			render :type => :liquid, :action => 'tickets/confirmation', :layout => 'tickets/skin'
 		end
 	end
@@ -85,7 +90,11 @@ class ThemeServlet < LiquidServlet
 	
 	def search_tickets
 		@step = '2'
-		if @params[:act] == 'didnt_find_tickets'
+		if @params['act'] == 'didnt_find_tickets'
+			@events = []
+			(rand(3)+1).times do
+				@events << EventDrop.new(Database.find(:random, :events))
+			end
 			render :type => :liquid, :action => 'tickets/didnt_find_tickets', :layout => 'tickets/skin'
 		else
 			@ats = []
@@ -103,6 +112,8 @@ class ThemeServlet < LiquidServlet
 	
 	def payment_details
 		@step = '3'
+		@customer = CustomerDrop.new(Database.find(:random, :customers))
+		@creditcard = CreditcardDrop.new
 		render :type => :liquid, :action => 'tickets/payment_details', :layout => 'tickets/skin'
 	end
 	
@@ -252,9 +263,14 @@ class ThemeServlet < LiquidServlet
     @rate_search_container = RateSearchDrop.new(@property, RateSearchContainer.new)
     
     @booking = BookingDrop.new(Booking.new, Database.find(:random, :properties))
-    @event = EventDrop.new(Database.find(:random, :events))
-    # csetting = CustomerSetting.find(:first) 
-    # csetting = CustomerSetting.new if csetting.nil?    
+    event = Database.find(:random, :events)
+    @event = EventDrop.new(event)
+    
+    if template_type == 'events'
+    	@customer_settings = CustomerSettingEventsDrop.new(CustomerSetting.new, event)
+    else
+    	@customer_settings = CustomerSettingDrop.new(CustomerSetting.new)
+    end
     
     #build options for HtmlDrop
     htmloptions = { :host => 'localhost', :local => true, :port => '3232', :controller => "" }  

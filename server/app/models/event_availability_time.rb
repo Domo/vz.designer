@@ -10,7 +10,7 @@ class EventAvailabilityTime
 	
 	attr_accessor :id, :event_availability
 	
-	def initialize(_options)
+	def initialize(_options = [])
 		self.id = rand(100) + 1
 		self.event_availability = EventAvailability.new
 		@options = _options
