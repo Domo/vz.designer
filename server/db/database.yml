@@ -489,8 +489,38 @@ events:
   short_description: 'This is a short description'
   location: 'Somewhere in Japan'
   show_on_front: true
-  terms_and_conditions: 'These are event specific terms and conditions'
+  terms_and_conditions: 'These are event specific terms and conditions. They are set directly in the event settings. <br /> If these were not present, the global ones would be used.'
+-
+  id: 2
+  name: 'Test Event 2'
+  description: 'This is just another a test event'
+  short_description: 'This is a short description'
+  location: 'Somewhere in Ireland'
+  show_on_front: true
+  terms_and_conditions: 'These are event specific terms and conditions. They are set directly in the event settings. <br /> If these were not present, the global ones would be used.'
+-
+  id: 3
+  name: 'Test Event 3'
+  description: 'This is just a test event'
+  short_description: 'This is a short description'
+  location: 'Somewhere in the USA'
+  show_on_front: true
+  terms_and_conditions: 'These are event specific terms and conditions. They are set directly in the event settings. <br /> If these were not present, the global ones would be used.'
+-
+  id: 4
+  name: 'Test Event 4'
+  description: 'This is just a test event'
+  short_description: 'This is a short description'
+  location: 'Somewhere in Iceland'
+  show_on_front: true
+  terms_and_conditions: 'These are event specific terms and conditions. They are set directly in the event settings. <br /> If these were not present, the global ones would be used.'
 
 event_availabilities:
 -
-  name: 'Test Event Availability 1'
+  name: 'Evening Show'
+-
+  name: 'Afternoon Show'
+-
+  name: 'Morning Show'
+-
+  name: 'Lunch Show'

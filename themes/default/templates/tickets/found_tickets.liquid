@@ -30,7 +30,7 @@
 								-->
 								{% for at in ats -%} 
 								<fieldset>
-								<legend>{{ at.time }}</legend>
+								<legend>{{ at.time }}: {{ at.name }}</legend>
 									<div id="time_{{ at.id }}" class="time_element" {% if at != ats.first %}style="display: none;"{% endif %}>
 									</div>
 									
