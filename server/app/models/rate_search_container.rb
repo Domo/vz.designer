@@ -1,5 +1,6 @@
 class RateSearchContainer
 	require 'database'
+	require 'rate'
 	require 'servlet'
 	
 	def my_name
@@ -44,12 +45,7 @@ class RateSearchContainer
 	end
 	
 	def rates
-		rates = Database.find(:condition, :rates, ["property_id", @property.id])
-		for rate in rates
-			if @options.include? "show_rate_images"
-				rate.images = [RoomTypeImage.new("rate")]
-			end
-		end
+		rates = Database.find(:condition, :rates, ["property_id", @property.id]).map {|r| Rate.new(r, @options)}
 	end
 
 end

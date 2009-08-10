@@ -25,6 +25,7 @@ require 'customer_setting'
 require 'customer_setting_drop'
 require 'customer_setting_events_drop'
 require 'wsession'
+require 'rate'
 
 class ThemeServlet < LiquidServlet
 	layout 'skin'
@@ -57,6 +58,8 @@ class ThemeServlet < LiquidServlet
 	
 	def occupancy
 		@step = '3'
+		event = Database.find(:random, :events)
+		@event = event.name
 		render :type => :liquid
 	end
 	
@@ -212,6 +215,8 @@ class ThemeServlet < LiquidServlet
 		
     build_options_from_params
     build_global_assigns
+    
+    Rate.options = @options
     
     @nights = @params[:nights] || rand(5) + 1
 

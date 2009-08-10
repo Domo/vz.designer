@@ -2,6 +2,7 @@ require 'yaml'
 require 'reservation_room_type'
 require 'room_type_image'
 require 'rate_room_type'
+require 'rate'
 require 'ticket'
 
 module Database
@@ -33,26 +34,6 @@ module Database
 					rrt["room_type"] = self.find(rrt["room_type_id"], :room_types)
 				end  
 			end
-		when :rates
-			if _result.is_a?(Hash)
-				rate_room_types = self.find(:condition, :rate_room_types, ["rate_id", _result["id"]])
-				_result["rate_room_types"] = []
-				for rrt in rate_room_types
-					_result["rate_room_types"] << RateRoomType.new(rrt)
-				end
-				_result["images"] = []
-				_result["is_ticket_rate"] = false
-			else
-				for rate in _result
-					rate_room_types = self.find(:condition, :rate_room_types, ["rate_id", rate["id"]])
-					rate["rate_room_types"] = []
-					for rrt in rate_room_types
-						rate["rate_room_types"] << RateRoomType.new(rrt)
-						rate["images"] = []
-					end
-					rate["is_ticket_rate"] = false
-				end  
-			end
 		when :reservations
 			if _result.is_a?(Hash)
 				rooms = []
@@ -67,14 +48,6 @@ module Database
 						rooms << ReservationRoomType.new(_result.to_mod)
 					end
 					reservation["reservation_room_types"] = rooms
-				end  
-			end
-		when :room_types
-			if _result.is_a?(Hash)
-				_result["images"] = []
-			else
-				for rt in _result
-					rt["images"] = []
 				end  
 			end
 		when :properties

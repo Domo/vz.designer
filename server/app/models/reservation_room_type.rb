@@ -4,11 +4,15 @@ class ReservationRoomType
 		"ReservationRoomType"
 	end
 	
+	require 'room_type'
+	require 'rate_room_type'
+	require 'rate'
+	
 	require 'database'
 	attr_accessor :adults, :children, :reservation_id, :occupancy, :sell_price, :room_type, :rate, :price, :id
 	def initialize(_reservation)
-		self.room_type = Database.find(:random, :room_types)
-		self.rate = Database.find(:random, :rates)
+		self.room_type = RoomType.new
+		self.rate = Rate.new(Database.find(:random, :rates), Rate.options)
 		self.adults = (rand(self.room_type.adults) + self.room_type.min_adults).to_i
 		self.adults = self.adults + 1 if self.adults == 0
 		self.children = (rand(self.room_type.max_children) + self.room_type.children).to_i
@@ -24,7 +28,7 @@ class ReservationRoomType
 	end
 	
 	def rate_room_type
-		self.property_room_type
+		RateRoomType.new(Database.find(:random, :rate_room_types))
 	end
 	
 end

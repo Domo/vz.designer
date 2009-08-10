@@ -1,6 +1,11 @@
 class RoomTypeImage
 	require 'database'
 	
+	
+	def my_name
+		"RoomTypeImage"
+	end
+	
 	attr_accessor :id
 	
 	def initialize(owner = "room")

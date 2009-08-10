@@ -1,7 +1,8 @@
 class RateRoomType
 	require 'room_type_image'
+	require 'rate'
 	
-	attr_accessor :room_type, :id, :total, :rsc
+	attr_accessor :room_type, :id, :total, :rsc, :rate
 	
 	def my_name
 		"RateRoomType"
@@ -9,7 +10,7 @@ class RateRoomType
 	
 	def initialize(_rate_room_type)
 		@rate_room_type = _rate_room_type
-		
+		self.rate = Rate.new(Database.find(:random, :rates), Rate.options)
 		self.room_type = @rate_room_type.room_type
 		self.id = @rate_room_type.id
 	end

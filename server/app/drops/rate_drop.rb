@@ -1,4 +1,5 @@
 class RateDrop < Liquid::Drop
+	require 'ticket_bundle_drop'
 	
 	def my_name
 		"RateDrop"
@@ -75,7 +76,7 @@ class RateDrop < Liquid::Drop
   #true if there are ticketbundles
   def is_ticket_rate
     # return @rate.is_ticket_rate?
-    return @rate.is_ticket_rate
+    return @rate.is_ticket_rate?
   end  
   
   def image_tag
