@@ -13,7 +13,7 @@ class CustomerSetting
 	
 	def booking_fee
 		b = rand(3)
-		return false if b = 0
+		return false if b == 0
 		b
 	end
 	

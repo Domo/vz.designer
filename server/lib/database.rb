@@ -26,14 +26,6 @@ module Database
   
   def self.add_specials(_table, _result)
   	case _table.to_sym
-		when :rate_room_types
-			if _result.is_a?(Hash)
-  			_result["room_type"] = self.find(_result["room_type_id"], :room_types)
-  		else
-  			for rrt in _result
-					rrt["room_type"] = self.find(rrt["room_type_id"], :room_types)
-				end  
-			end
 		when :reservations
 			if _result.is_a?(Hash)
 				rooms = []
