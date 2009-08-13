@@ -2,8 +2,12 @@
 #content {padding:20px 20px;}
 #visualnav {right:15px;top:40px;width:580px;}
 #visualnav {background:transparent url("../images/visualnav_events.png") no-repeat right top; }  
-#visualnav ol{background:transparent url("../images/visualnav_events.png") no-repeat right bottom;}
+#visualnav ol{background:transparent url("../images/visualnav_events.png") no-repeat left bottom;}
 
+
+#visualnav ol.step2 {width:154px}
+#visualnav ol.step3 {width:322px}
+#visualnav ol.step4 {width:462px}
 
 
 /* SEARCH MODULE */
@@ -51,5 +55,13 @@
 #terms_and_conditions table td,
 #terms_and_conditions table th { border:0px;}
 #terms_and_conditions h2 { margin-top:0;}
+
+/* CHECKOUT */
+#checkout {padding-top:20px;}
+#checkout #visualnav { top:0;}
+#checkout .box { background-color:#eee; border:1px solid #ccc;}
+#checkout .box p { margin-bottom:0.5em;}
+#checkout fieldset {border:1px solid #ccc;	background:#eee;}
+#checkout legend {background:#eee; color:#111;border:1px solid #ccc;}
 
 
