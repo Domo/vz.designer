@@ -183,7 +183,7 @@ class ThemeServlet < LiquidServlet
 	end
 	
 	def template_type
-		if template_type_cookie.value
+		unless template_type_cookie.nil?
 			if template_type_cookie.value != ''
 				return template_type_cookie.value 
 			end
