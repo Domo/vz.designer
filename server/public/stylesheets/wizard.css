@@ -37,7 +37,7 @@ code {
   border-top: 5px solid #fff;
   border-bottom: 5px solid #fff;
   background: #ffd200 url(../images/logo.gif) no-repeat;
-  height: 250px;
+  height: 330px;
 }
 
 #tasks {
@@ -56,8 +56,8 @@ code {
   background: #f2f2f2;
   border: 3px solid #fff;
   line-height: 140%;
+  margin-bottom: 10px;
 }
-
 
 dl, dt, dd {
   margin: 0;

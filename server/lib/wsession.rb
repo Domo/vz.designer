@@ -1,4 +1,6 @@
-module WSession
+class WSession
+	
+	cattr_accessor :current_template
 	
 	#'Session'-Funktionen
 	

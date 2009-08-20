@@ -1,4 +1,7 @@
 require 'servlet'
+require 'wsession'
+require 'rubygems'
+require 'ruby-debug'
 
 class VisionServlet < Servlet      
 	
@@ -20,7 +23,7 @@ class VisionServlet < Servlet
   
   def vision_html_js
     @current_theme = theme_cookie.value || 'None selected'
-    @current_template = template_cookie ? template_cookie.value : @params['action']
+    @current_template = WSession.current_template
     @current_template_type = template_type
     
     @themes = themes_for_view
@@ -68,12 +71,14 @@ class VisionServlet < Servlet
 	end
 
   def templates_for_view
-
-    available_templates = [["Cookie.destroy('#{@params['action']}'); window.location.reload();", "#{current_template}.liquid"]]
+		#current template
+		available_templates = [["Cookie.destroy('#{@params['action']}'); window.location.reload();", "#{WSession.current_template}.liquid"]]
     
-    Dir["#{theme_template_path}/#{@params['action']}.*.liquid"].each do |f|
+		#static templates
+		available_templates << ['', '---- Static Templates ----'] 
+    Dir["#{theme_template_path}/static/*.liquid"].each do |f|
       variant = File.basename(f, File.extname(f))
-      available_templates << ["Cookie.set('#{@params['action']}', '#{variant}'); window.location.reload();", "#{variant}.liquid"]
+      available_templates << ["window.location='#{variant}.html';", "#{variant}.liquid"]
     end
     
     available_templates << ['', '-------------']      

@@ -1,4 +1,5 @@
 require 'logging'
+require 'wsession'
 
 class Servlet < WEBrick::HTTPServlet::AbstractServlet
   attr_reader :request, :response
@@ -123,7 +124,7 @@ class Servlet < WEBrick::HTTPServlet::AbstractServlet
       logger.info " - rendering layout #{normalize_path(layoutfile)}"
       render_file(layoutfile, options)
     else
-      	render_file(file, options)
+      render_file(file, options)
     end
     
   end

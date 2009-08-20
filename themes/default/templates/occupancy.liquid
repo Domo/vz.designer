@@ -20,52 +20,49 @@
 
 	<h2>Occupancy</h2>
 	<div id="rooms" class="occupancy-rooms"> 
-			{% for room in rate_search_container.items -%}
-
-				<div class="box">
-						<div class="occupancy-title"><h3>{{ room.room_type_name}}</h3><div class="loading-room" id="loading_{{ room.id }}" style="display:none;">Loading...</div></div>
-					
-						<form id="room_form_{{ room.id }}" class="occupancy" action="ajax_update_room" method="post" onsubmit="new Ajax.Updater('rooms', 'ajax_update_room', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;">			
-						<fieldset>
-							<p class="title">Occupancy:</p>
-							<p class="clearfix"><span><label>Adults:</label>{{ room.select_adults }}</span><span id="img_adults_{{ room.id }}">{{ room.images_adults }}</span></p>
-							<p class="clearfix"><span><label>Children:</label>{{ room.select_children }}</span><span id="img_children_{{ room.id }}">{{ room.images_children }}</span></p>
-							<p class="hide"><input type="hidden" name="id" value="{{ room.id}}" /></p>
-						</fieldset>
-						
-						<!-- fieldset>
-							<p class="title">Options:</p>				
-							<p class="hide"><input type="hidden" name="breakfast" value="0" id="breakfast" /></p>
-							<p><label for="breakfast">Breakfast:</label>{{ room.select_breakfast }}</p>			
-						</fieldset -->
-						
-						{% if room.is_ticket_rate %}
-							<fieldset>
-								<p class="title">Tickets:</p>				
-								<p><label>
-									{% for event in room.event_names %}
-										{{ room.people }} ticket(s) for {{ event }} on {{ rate_search_container.arrival_date | format_date_to: 'eu' }}
-									{% endfor %}
-									</label>			
-								</p>			
-							</fieldset>		
-						{% endif %}
-						</form>
-						<div class="room-actions">
-							<a href="/web_reservations/add_room?rate_room_type={{ room.rate_room_type_id }}" onclick="Modalbox.show($('loadingbox2'),{width: 600,top:125,inactiveFade:false});Modalbox.deactivate();" class="add_room">add another {{ room.room_type_name }}</a>
-							<a href="/web_reservations/remove_room/?room_item={{ room.id }}" class="rem_room">remove this room</a>
-						</div>
-						<p class="roomprice clearfix"><strong>Room price:</strong><span id="price_{{ room.id }}"> &euro;{{ room.price | format_decimal }}</span></p>
-				</div>
-			{% endfor -%}
-			
+		{% for room in rate_search_container.items -%}
+			<div class="box">
+					<div class="occupancy-title"><h3>{{ room.room_type_name}}</h3><div class="loading-room" id="loading_{{ room.id }}" style="display:none;">Loading...</div></div>
 				
-			<p id="occupancy-total">
-				<strong>Total:</strong> <span id="total_price">&euro;{{ rate_search_container.total_price | format_decimal}}</span><br />
-				{% if rate_search_container.deposit_chared %}<span style="font-size: 0.8em"><strong>Deposit:</strong> &euro;{{ rate_search_container.charged_price | format_decimal }}</span>{% endif %}
-			</p>
-			{% if customer_setting.booking_fee > 0 %}<p>Total Price includes a booking fee of {{ customer_setting.booking_fee | format_money: '&euro;' }} </p>{% endif %}
-			<!--All of these rooms are bookable? {{ rate_search_container.valid }}-->
+					<form id="room_form_{{ room.id }}" class="occupancy" action="ajax_update_room" method="post" onsubmit="new Ajax.Updater('rooms', 'ajax_update_room', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;">			
+					<fieldset>
+						<p class="title">Occupancy:</p>
+						<p class="clearfix">
+							<span><label>Adults:</label>{{ room.select_adults }}</span><span id="img_adults_{{ room.id }}">{{ room.images_adults }}</span>
+						</p>
+						<p class="clearfix">
+							<span><label>Children:</label>{{ room.select_children }}</span><span id="img_children_{{ room.id }}">{{ room.images_children }}</span>
+						</p>
+						<p class="hide"><input type="hidden" name="id" value="{{ room.id}}" /></p>
+					</fieldset>
+					
+					{% if room.is_ticket_rate %}
+						<fieldset>
+							<p class="title">Tickets:</p>				
+							<p><label>
+								{% for event in room.event_names %}
+									{{ room.people }} ticket(s) for {{ event }} on {{ rate_search_container.arrival_date | format_date_to: 'eu' }}
+								{% endfor %}
+								</label>			
+							</p>			
+						</fieldset>		
+					{% endif %}
+					</form>
+					<div class="room-actions">
+						<a href="/web_reservations/add_room?rate_room_type={{ room.rate_room_type_id }}" onclick="Modalbox.show($('loadingbox2'),{width: 600,top:125,inactiveFade:false});Modalbox.deactivate();" class="add_room">add another {{ room.room_type_name }}</a>
+						<a href="/web_reservations/remove_room/?room_item={{ room.id }}" class="rem_room">remove this room</a>
+					</div>
+					<p class="roomprice clearfix"><strong>Room price:</strong><span id="price_{{ room.id }}"> &euro;{{ room.price | format_decimal }}</span></p>
+			</div>
+		{% endfor -%}
+		
+				
+		<p id="occupancy-total">
+			<strong>Total:</strong> <span id="total_price">&euro;{{ rate_search_container.total_price | format_decimal}}</span><br />
+			{% if rate_search_container.deposit_chared %}<span style="font-size: 0.8em"><strong>Deposit:</strong> &euro;{{ rate_search_container.charged_price | format_decimal }}</span>{% endif %}
+		</p>
+		
+		{% if customer_setting.booking_fee > 0 %}<p>Total Price includes a booking fee of {{ customer_setting.booking_fee | format_money: '&euro;' }} </p>{% endif %}
 	</div>
 
 	<div class="buttons"><a href="{{ html.checkout_action }}" id="proceed" onclick="Modalbox.show($('loadingbox2'),{width: 600,top: 125,inactiveFade:false});Modalbox.deactivate();"><span class="alt">Proceed</span></a></div>
@@ -73,7 +70,6 @@
 		<h3>Proceeding</h3>
 		<p>Please wait...</p>
 		<div class="loader"> </div>
-		<!-- img src="{{ "images/ajax-loader_220x19.gif" | asset_url  }}" alt="Loading..." / -->
 	</div>
 
 	<script type="text/javascript">

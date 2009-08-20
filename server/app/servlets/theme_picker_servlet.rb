@@ -129,6 +129,12 @@ class ThemePickerServlet < Servlet
     @themes = available_themes
     @types = [{:name => 'Rooms', :option => 'rooms'}, {:name => 'Events', :option => 'events'}, {:name => 'Rooms and Events', :option => 'roomsevents'}]
   end
+  
+  def common_assets
+  	@v = 'v_003'
+  	@assets = Dir[ROOT + "/public/common/" + @v + "/**/*"]
+  	@assets = @assets.map {|x| x.gsub(ROOT + "/public/common/" + @v + "/", "") unless File.directory? x}.compact
+	end
     
   private
   

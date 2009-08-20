@@ -1,5 +1,7 @@
 require 'servlet'
-
+require 'wsession'
+require 'rubygems'
+require 'ruby-debug'
 class LiquidServlet < Servlet
   
   protected
@@ -10,9 +12,19 @@ class LiquidServlet < Servlet
       raise "The layout is missing the required {{ content_for_header }} in the html head" unless content =~ /content_for_header/
       raise "The layout is missing the required {{ content_for_layout }} in the body part" unless content =~ /content_for_layout/      
     end
-    template_path = file.gsub(file.split("/").last, "")
-    template_path = template_path.gsub(template_path.split("/").last, "") if template_path.split("/").last == 'tickets'
-    Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
+    template_path = file
+    while template_path.split("/").last != "templates"
+    	template_path = template_path.gsub("/" + template_path.split("/").last, "")
+    end
+    
+    f = file.split("/").last.split(".").first
+    unless file.include? "modules" or f == 'skin'
+	    WSession.current_template = f
+	  end
+    
+    if file =~ /skin.liquid/
+    	Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
+    end
     template = Liquid::Template.parse(content)
     template.render(assigns, :registers => {:request => @request, :controller => self })              
   end

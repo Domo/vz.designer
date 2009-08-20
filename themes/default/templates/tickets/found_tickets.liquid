@@ -3,8 +3,6 @@
 <div id="found_tickets">
 		{% include 'modules/tickets_visualnav' -%}
 		{% include 'modules/tickets_feedback' -%}	
-		
-		<!-- h2>Found tickets</h2 -->
 
 		<div class="found-wrapper clearfix">
 		
@@ -20,14 +18,6 @@
 						<p><strong>Description: </strong> {{ event.description }}</p>
 						
 						<div class="found-ticket">			
-								<!-- h4>Enter Tickets and click next</h4 -->
-								<!-- 
-									<select onchange="showAvailabilityTime(this)">
-									{% for at in ats -%}
-										<option value="{{ at.id }}">{{ at.time }}</option>  
-									{% endfor %}
-									</select>
-								-->
 								{% for at in ats -%} 
 								<fieldset>
 								<legend>{{ at.time }}: {{ at.name }}</legend>
@@ -37,14 +27,6 @@
 									<form action="{{ html.terms_and_conditions_action }}" method="post">
 										
 										{% unless at.name == '' -%}  
-												<!-- 
-												Name {{ at.id }} {{ at.weekday }} <br />
-												{{ at.name }}<br />
-												
-												Date: {{ booking.day | format_date_to: 'eu' }}<br />
-												Time: {{ at.time_frame }}<br />
-												<br />
-												-->
 												<div class="found-items clearfix">
 												{% for ticket in at.tickets %}
 														<div class="found-item">
@@ -78,12 +60,6 @@
 								 <div id="price"> </div>
 						</div><!-- found-ticket -->
 
-
-
 				</div><!-- found-text -->
-				
-				
-				
 		</div><!-- End found-wrapper -->
-		
 </div><!-- End found_tickets -->

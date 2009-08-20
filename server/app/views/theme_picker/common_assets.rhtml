@@ -1,0 +1,15 @@
+<h2>Common Assets</h3>
+<p><a href="/dashboard">back</a></p>
+<p>These are files which are already included in our system. Feel free to use them in your skins!</p>
+<table>
+	<tr>
+	<th>Filename</th>
+	<th>Include Tag</th>
+	</tr>	
+	<% for file in @assets %>
+ 		<tr>
+ 			<td><a href="/common/<%= @v + "/" + file %>"><%= file %></a></td>
+ 			<td>{{ "<%= file %>" | common_asset: "<%= @v %>" }}</td>
+ 		</tr>
+	<% end %>
+</table>
