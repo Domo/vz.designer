@@ -1,7 +1,5 @@
 require 'servlet'
 require 'wsession'
-require 'rubygems'
-require 'ruby-debug'
 
 class VisionServlet < Servlet      
 	
