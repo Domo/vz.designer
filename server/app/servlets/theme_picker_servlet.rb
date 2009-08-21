@@ -93,6 +93,8 @@ class ThemePickerServlet < Servlet
 	    cookie.path = '/'
 	    @response.cookies.push(cookie)
 		end
+		FileUtils.rm_rf(to + '/images/thumbnail.png')
+		FileUtils.rm_rf(to + '/info.yml')
 
     Dir[to + '/**/.svn'].each do |svndir|
       FileUtils.rm_rf(svndir)
@@ -155,16 +157,35 @@ class ThemePickerServlet < Servlet
 	def get_skin_info
 		skin = @params['from']
 		skin_dir = File.join(THEMES, skin)
-		info_file = YAML::load(File.open(File.join(skin_dir, 'info.yml'))) rescue ""
+		info_file_path = File.join(skin_dir, 'info.yml')
+		info_file = YAML::load(File.open(info_file_path)) rescue ""
 		skin_info_description = ""
 	  if info_file
 		  skin_info_name = info_file[:name] || skin
-		  skin_info_description = info_file[:description] || ''
+		  skin_info_description = info_file[:description] || "None, yet"
 	  end
 	  tag = '<span class="caption">Name:</span><br />' + skin_info_name
 	  tag += "<br />"
 	  tag += '<span class="caption">Description:</span><br />' + skin_info_description
+	  
+	  thumbnail = File.join(skin_dir, "images", "thumbnail.png")
+		if File.exists? thumbnail
+			tag += "<br />"
+			tag += '<span class="caption">Thumbnail:</span><br /><img src="/dashboard/get_skin_thumbnail?skin=' + skin + '">'
+		end
+		tag += '<p>This skin has no info-file yet. It will be created when you export the skin.</p>' unless File.exists? info_file_path
 	  render :text => tag
+	end
+	
+	def get_skin_thumbnail
+		skin_dir = File.join(THEMES, @params['skin'])
+		file = "#{skin_dir}/images/thumbnail.png"
+  	file = file.gsub("/", "\\") if RUBY_PLATFORM.include?("win")
+  	
+		@response['Content-Type'] = mime_types[File.extname(file)[1..-1]]         
+      File.open(file, "rb") do |fp|
+   			render :text => fp.read
+      end
 	end
     
   private

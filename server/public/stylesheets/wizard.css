@@ -38,6 +38,7 @@ code {
   border-bottom: 5px solid #fff;
   background: #ffd200 url(../images/logo.gif) no-repeat;
   height: 330px;
+  position: relative;
 }
 
 #tasks {
@@ -127,4 +128,9 @@ img { border: 0; }
 
 #skin-information .caption {
 	font-weight: bold;
+}
+
+#skin-information img {
+	margin-top: 10px;
+	width: 220px;
 }

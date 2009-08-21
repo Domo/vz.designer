@@ -1,5 +1,7 @@
 require 'servlet'
 require 'wsession'
+require 'rubygems'
+require 'ruby-debug'
 
 class SkinAssetServlet < Servlet      
 
@@ -24,17 +26,22 @@ class SkinAssetServlet < Servlet
   
   def before_filter
     cookie = @request.cookies.find { |c| c.name == 'theme' }
+    theme_from_params = @params['skin']
     
-    if cookie.nil?
+  	if cookie.nil? and themes_from_params.nil?
       redirect_to '/dashboard/'
     end
     
-    @theme = cookie.value
+    unless cookie.nil?
+    	@theme = cookie.value
+    else
+    	@theme = theme_from_params
+    end
   end
 
   
   def path_scan
-    @params['file'] = @request.path_info    
+    @params['file'] = @request.path_info
     @action_name = 'index'      
   end
   
