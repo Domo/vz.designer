@@ -133,4 +133,5 @@ img { border: 0; }
 #skin-information img {
 	margin-top: 10px;
 	width: 220px;
+	cursor: pointer;
 }

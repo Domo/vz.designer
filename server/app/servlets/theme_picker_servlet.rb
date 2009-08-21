@@ -171,10 +171,19 @@ class ThemePickerServlet < Servlet
 	  thumbnail = File.join(skin_dir, "images", "thumbnail.png")
 		if File.exists? thumbnail
 			tag += "<br />"
-			tag += '<span class="caption">Thumbnail:</span><br /><img src="/dashboard/get_skin_thumbnail?skin=' + skin + '">'
+			tag += '<span class="caption">Thumbnail:</span><br />'
+			thumbnail_url = '/dashboard/get_skin_thumbnail?skin=' + skin
+			modalbox_code = '/dashboard/show_skin_thumbnail?skin=' + skin
+			modalbox = "Modalbox.show('" + modalbox_code + "', {title: 'Thumbnail', width: 750});"
+			tag += '<img src="' + thumbnail_url +'" onclick="' + modalbox + '">'
 		end
 		tag += '<p>This skin has no info-file yet. It will be created when you export the skin.</p>' unless File.exists? info_file_path
 	  render :text => tag
+	end
+	
+	def show_skin_thumbnail
+		skin = @params['skin']
+		@thumbnail = '/dashboard/get_skin_thumbnail?skin=' + skin
 	end
 	
 	def get_skin_thumbnail
