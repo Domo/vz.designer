@@ -1,7 +1,6 @@
 require 'servlet'
 require 'wsession'
-require 'rubygems'
-require 'ruby-debug'
+
 
 class SkinAssetServlet < Servlet      
 
