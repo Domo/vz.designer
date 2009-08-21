@@ -13,7 +13,7 @@
 	
 	<body>
 
-    <div id="wizard" style="text-align:center;margin: 70px auto;">
+    <div id="wizard" style="text-align:center;margin: 70px auto; position: relative;">
       <h2>Create a new skin</h2>
       <p>Choose a name for your new skin and choose the existing one which should serve as a base.</p>
       
@@ -24,11 +24,12 @@
             <label for="name">Duplicate this skin</label>
           </dt>
           <dd>
-            <select name="from" id="from" onchange="new Ajax.Updater('type', '/dashboard/get_available_template_types', { parameters: { from: $F('from') }});">
+            <select name="from" id="from" onchange="new Ajax.Updater('type', '/dashboard/get_available_template_types', { parameters: { from: $F('from') }});new Ajax.Updater('skin_description', '/dashboard/get_skin_info', { parameters: { from: $F('from') }});">
               <% @themes.each do |theme| %>
               	<option value="<%= theme %>"><%= theme %></option> 
               <% end %>        
-            </select>    
+            </select>
+            </span>
           </dd>
         <dt><label for="type">set it's application type to</label></dt>
         <dd>
@@ -45,6 +46,14 @@
       </dl>
       </form>
       </div>
+      <div id="skin-information">
+      	<h2>Source skin information</h2>
+	    	<span id="skin_description">
+	        <script type="text/javascript">
+	      		new Ajax.Updater('skin_description', '/dashboard/get_skin_info', { parameters: { from: $F('from') }});
+	      	</script>
+	      </span>
+  		</div>
     </div>
     
     <script type="text/javascript">

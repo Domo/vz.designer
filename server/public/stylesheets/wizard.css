@@ -112,3 +112,19 @@ img { border: 0; }
 * html .cfix {height: 1%;}
 .cfix {display: block;}
 /* End hide from IE-mac */
+
+#skin-information {
+	position: absolute;
+	top: -15px;
+	right: 0px;
+	height: 100%;
+	width: 250px;
+	text-align: left;
+	background-color: #F2F2F2;
+	border: 5px solid #FFFFFF;
+	padding: 10px;
+}
+
+#skin-information .caption {
+	font-weight: bold;
+}

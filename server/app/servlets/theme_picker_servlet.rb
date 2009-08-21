@@ -151,6 +151,21 @@ class ThemePickerServlet < Servlet
 		options = options.join
 		render :text => options
 	end
+	
+	def get_skin_info
+		skin = @params['from']
+		skin_dir = File.join(THEMES, skin)
+		info_file = YAML::load(File.open(File.join(skin_dir, 'info.yml'))) rescue ""
+		skin_info_description = ""
+	  if info_file
+		  skin_info_name = info_file[:name] || skin
+		  skin_info_description = info_file[:description] || ''
+	  end
+	  tag = '<span class="caption">Name:</span><br />' + skin_info_name
+	  tag += "<br />"
+	  tag += '<span class="caption">Description:</span><br />' + skin_info_description
+	  render :text => tag
+	end
     
   private
   
