@@ -63,7 +63,7 @@ class ThemePickerServlet < Servlet
       return
     end
     
-    to_param = @params['to'].gsub(/[ :()+]/, "_")
+    to_param = @params['to'].gsub(/[ !"§$%&()=+]/, "_")
     
     from  = THEMES + "/#{@params['from']}"
     to    = THEMES + "/#{to_param}"    
@@ -127,7 +127,6 @@ class ThemePickerServlet < Servlet
   
   def create
     @themes = available_themes
-    @types = [{:name => 'Rooms', :option => 'rooms'}, {:name => 'Events', :option => 'events'}, {:name => 'Rooms and Events', :option => 'roomsevents'}]
   end
   
   def common_assets
@@ -135,8 +134,29 @@ class ThemePickerServlet < Servlet
   	@assets = Dir[ROOT + "/public/common/" + @v + "/**/*"]
   	@assets = @assets.map {|x| x.gsub(ROOT + "/public/common/" + @v + "/", "") unless File.directory? x}.compact
 	end
+	
+	def get_available_template_types
+		skin = @params['from']
+		skin_dir = File.join(THEMES, skin)
+		options = []
+		if File.exists? File.join(skin_dir, "templates", "skin.liquid")
+			options << create_option("Rooms", "rooms")
+		end
+		if File.exists? File.join(skin_dir, "templates", "tickets")
+			options << create_option("Events", "events")
+		end
+		if options.size == 2
+			options << create_option("Rooms and Events", "roomsevents")
+		end
+		options = options.join
+		render :text => options
+	end
     
   private
+  
+  def create_option name, option
+  	'<option value="' + option + '">' + name + '</option>'
+	end
   
   def available_themes
     Dir[THEMES + '/*'].collect do |theme|
