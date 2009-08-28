@@ -62,7 +62,8 @@ class VisionServlet < Servlet
 									{ :name => 'show_property_images', :caption => 'Properties have images (used nowhere atm)', :for => 'availability' },
 									{ :name => 'dont_show_room_images', :caption => 'Rooms have <b>no</b> images', :for => 'availability' },
 									{ :name => 'show_website_discount', :caption => 'Show Website Discount', :for => 'search_tickets'},
-									{ :name => 'rates_are_ticket_rates', :caption => 'Rates are Ticket Rates (for Rooms&Events)', :for => 'availability, occupancy, checkout, confirmation'}
+									{ :name => 'rates_are_ticket_rates', :caption => 'Rates are Ticket Rates (for Rooms&Events)', :for => 'availability, occupancy, checkout, confirmation'},
+									{ :name => 'events_deposit_charged', :caption => 'Show deposit for bookings.', :for => 'terms_and_conditions, payment_details, confirmation'}
 		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact

@@ -1,6 +1,6 @@
 class WSession
 	
-	cattr_accessor :current_template
+	cattr_accessor :current_template, :options
 	
 	#'Session'-Funktionen
 	

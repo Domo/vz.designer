@@ -30,4 +30,10 @@
           <td class="go-right active2"><strong>Total cost:</strong></td>
           <td class="go-right active2">{{ booking.total_price | format_money: '&euro;' }}</td>
         </tr>
+        {% if booking.deposit_charged? %}
+	        <tr>
+	        	<td><strong>Deposit</strong></td>
+	        	<td>{{ booking.deposit | format_money: '&euro;' }}</td>
+	        </tr>
+        {% endif %}
       </table>

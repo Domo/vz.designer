@@ -21,9 +21,9 @@ class LiquidServlet < Servlet
 	    WSession.current_template = f
 	  end
     
-    if file =~ /skin.liquid/
+#    if file =~ /skin.liquid/
     	Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
-    end
+#    end
     template = Liquid::Template.parse(content)
     template.render(assigns, :registers => {:request => @request, :controller => self })              
   end

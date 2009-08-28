@@ -1,12 +1,14 @@
 class Booking
 	
+	require "wsession"
+	
 	def my_name
 		"Booking"
 	end
 	
 	require 'database'
 	
-	attr_accessor :date, :id, :payment_type, :assigned_tickets, :total_price, :created_on
+	attr_accessor :date, :id, :payment_type, :assigned_tickets, :total_price, :created_on, :deposit_amount
 
 	def initialize()
 		self.date = Time.random.to_us_date
@@ -20,6 +22,7 @@ class Booking
 			self.assigned_tickets << [t, q]
 			self.total_price += t.price * q
 		end
+		self.deposit_amount = self.total_price - (rand(self.total_price.to_i-5)+1)
 		self.created_on = Time.random
 	end
 	
@@ -69,5 +72,20 @@ class Booking
 	
 	def table_headers_for_calendar
 		"<thead><tr class='weekdays head-days'><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>"
+	end
+	
+	def get_charged_price
+		if WSession.options.include? "events_deposit_charged"
+			return self.deposit_amount
+		end
+		return self.total_price
+	end
+	
+	def deposit
+		@booking.get_charged_price
+	end
+	
+	def open_payment_amount
+		self.total_price - self.deposit
 	end
 end

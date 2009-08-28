@@ -217,6 +217,7 @@ class ThemeServlet < LiquidServlet
     build_global_assigns
     
     Rate.options = @options
+    WSession.options = @options
     
     @nights = @params[:nights] || rand(5) + 1
 

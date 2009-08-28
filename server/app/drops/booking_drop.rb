@@ -163,6 +163,18 @@ class BookingDrop < Liquid::Drop
   def booked_at
     @booking.created_on
   end
+  
+  def deposit_charged?
+  	(not @booking.total_price == @booking.get_charged_price)
+	end
+	
+	def deposit
+		@booking.get_charged_price
+	end
+	
+	def open_payment_amount
+		@booking.open_payment_amount
+	end
 
   private
     def events
