@@ -209,6 +209,8 @@ function updatePrice(element) {
     Element.hide(elements[i].id);
   }
   
+  var price = "";
+  
   Element.show(element.id + "_totalcost");
   elements = document.getElementsByClassName(element.id + "_ticketselector");
   total = 0.0;
