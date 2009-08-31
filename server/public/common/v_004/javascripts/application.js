@@ -204,24 +204,24 @@ function card_cvv(select_card, text_cvv) {
 
 function updatePrice(element) {
   
-	    elements = document.getElementsByClassName("pricecontainer");
-	    for (i=0;i<elements.length;i++) {
-	      Element.hide(elements[i].id);
-	    }
-	    
-	    Element.show(element.id + "_totalcost");
-	    elements = document.getElementsByClassName(element.id + "_ticketselector");
-	    total = 0.0;
-	    for (i=0;i<elements.length;i++) {
-	      price = elements[i].title;
-	      element = elements[i];
-	      options = element.options;
-	      counter = options[element.selectedIndex].value;
-	      total = total + counter * element.title;
-	    }
-	    $(element.id + "_price").innerHTML =  " &euro;" + round(total,2);
-	    if (total == 0) {Element.hide(element.id + "_totalcost");}
-	  }
+  elements = document.getElementsByClassName("pricecontainer");
+  for (i=0;i<elements.length;i++) {
+    Element.hide(elements[i].id);
+  }
+  
+  Element.show(element.id + "_totalcost");
+  elements = document.getElementsByClassName(element.id + "_ticketselector");
+  total = 0.0;
+  for (i=0;i<elements.length;i++) {
+    price = elements[i].title;
+    element = elements[i];
+    options = element.options;
+    counter = options[element.selectedIndex].value;
+    total = total + counter * element.title;
+  }
+  $(element.id + "_price").innerHTML =  " &euro;" + round(total,2);
+  if (total == 0) {Element.hide(element.id + "_totalcost");}
+}
   
   function round(x, n) {
     if (n < 1 || n > 14) return false;
