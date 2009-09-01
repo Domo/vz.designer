@@ -74,7 +74,7 @@
 						</fieldset><!-- end of Personal details -->
 						
 						<fieldset>
-							<legend>Special Request</legend>        
+							<legend>Comments / Special Request</legend>        
 							<p class="clearfix">
 								<label for="booking[special_request]">Special requests</label>
 								<textarea name="booking[special_request]" cols="20" rows="5" id="booking[special_request]" type="text"></textarea>
@@ -107,7 +107,7 @@
 					
 							<p id="cvv_text" class="clearfix">
 										<label for="creditcard_verification_value">CVV</label>
-									<input id="creditcard_verification_value" class="validate-number" type="text" size="10" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" />
+									<input id="creditcard_verification_value" class="required validate-number" type="text" size="10" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" />
 									<span class="whatsthis"><a href="javascript:void(0);" onclick="Modalbox.show($('cvv_popup'),{title:'What\'s CVV Number?',width: 600});">What's CVV Number?</a></span>
 									<!-- span class="hint">Do not insert spaces. CCV (Card Code Verification) is a three-digit number on the back printed of your credit card. American Express has a four-digit number on the front.</span -->
 							</p>
