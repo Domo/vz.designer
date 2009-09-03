@@ -1,6 +1,4 @@
 require 'open-uri'
-require 'rubygems'
-require 'ruby-debug'
 
 module Vision
   extend self
