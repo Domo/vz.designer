@@ -1,4 +1,5 @@
 require 'servlet'
+require 'version'
 
 class ThemePickerServlet < Servlet      
 	
@@ -21,6 +22,7 @@ class ThemePickerServlet < Servlet
   
   def index
     @themes = available_themes
+    Vision.verify_latest_version
   end
   
   def zip_theme
@@ -114,17 +116,6 @@ class ThemePickerServlet < Servlet
   
   def export_theme
     @theme = @params['theme']
-  end
-  
-  def update_readme
-    @theme = @params['theme']    
-    
-    File.open(THEMES + "/#{@theme}/README", 'w+') do |fp|
-      fp << @params['readme']
-    end
-    
-    @readme = @params['readme']
-    render :action => "export_theme"
   end
   
   def create
