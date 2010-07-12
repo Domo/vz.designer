@@ -198,3 +198,76 @@ function disableAllSubmitButtons(aForm)
 	       }	       
 		   return true;
      }
+     
+ //This function is from DHTML Calendar (http://www.dynarch.com/projects/calendar/)
+function createElement(type, parent) {
+	var el = null;
+	if (document.createElementNS) {
+		// use the XHTML namespace; IE won't normally get here unless
+		// _they_ "fix" the DOM2 implementation.
+		el = document.createElementNS("http://www.w3.org/1999/xhtml", type);
+	} else {
+		el = document.createElement(type);
+	}
+	if (typeof parent != "undefined") {
+		document.getElementById(parent).appendChild(el);
+	}
+	return el;
+};
+function destroyElement(element, parent) {
+   obj = document.getElementById(element);
+   document.getElementById(parent).removeChild(obj);
+}
+
+
+
+     
+// Parameters:
+//	sElementID: ID of the element you want to shade
+//	bShow: Shade or brighten the element, true = shade, false = brighten
+//	sStyleSheet: You can insert the class of your own stylesheet, otherwise a standard style is used. You don´t have
+//		to set sStyleSheet when you want to remove the shade.
+//	example: shadeElement('testdiv', true, 'superClassName');
+function shadeElement(sElementID, bShow, sStyleSheet) {
+	if (document.getElementById(sElementID).style.position == "relative") {
+		if (bShow == true) {
+			if (document.getElementById(sElementID + "_lightbox")) {
+				var lightbox = document.getElementById(sElementID + "_lightbox");
+			}
+			else {
+				var lightbox = createElement("div", sElementID);
+				lightbox.id = sElementID + "_lightbox";
+				lightbox.innerHTML = " ";
+			}
+			if (typeof sStyleSheet != "undefined") {
+				lightbox.className = sStyleSheet;
+			}
+			else {
+				lightbox.style.position = "absolute";
+				lightbox.style.top = 0;
+				lightbox.style.bottom = 0;
+				lightbox.style.left = 0;
+				lightbox.style.right = 0;
+				lightbox.style.backgroundColor = "#000";
+				lightbox.style.opacity = 0.8;
+				lightbox.style.zIndex = 2000;
+				lightbox.style.display = "block";
+				lightbox.style.filter = "alpha(opacity = 80)"; // IE
+				lightbox.style.width = "100%"; //Stupid IE
+				lightbox.style.height = document.getElementById(sElementID).offsetHeight; // &&&!§&!§"$&!!! IE
+				document.getElementById(sElementID).style.zoom = 1; //Force "hasLayout" for containing div in IE
+			}
+		}
+		else {
+			if (document.getElementById(sElementID + "_lightbox")) {
+				destroyElement(sElementID + "_lightbox", sElementID);
+			}
+		}
+	}
+	else {
+		alert('The position-attribute of your chosen div is not "relative",  but it has to be relative.');
+	}
+}
+
+
+

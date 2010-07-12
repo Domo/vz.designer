@@ -8,6 +8,7 @@ rails_monitor.*
 vendor/*/.svn
 test/*/.svn
 
+*~
 
 # ignore generated docs
 doc/api*

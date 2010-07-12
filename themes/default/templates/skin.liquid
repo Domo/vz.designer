@@ -68,15 +68,15 @@
 
 			<!-- BOOKING -->
 			<div id="content">
-					{% if (step == '1') -%}
+					{% if current_template == "index" -%}
 						{% include 'modules/search' -%} 
 					{% endif -%}
 
-					{% if (step == '2') -%}
+					{% current_template == "availability" -%}
 						{% include 'modules/search' -%} 
 					{% endif -%}
 
-					{% if (step == '3') -%}
+					{% current_template == "occupancy" -%}
 						{% include 'modules/search' -%} 
 					{% endif -%}
 
