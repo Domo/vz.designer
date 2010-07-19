@@ -32,6 +32,8 @@ class ThemeServlet < LiquidServlet
 	
 	def index
 		@step = '1'
+		@current_template = "index"
+		
 		if template_type == 'rooms'
     	render :type => :liquid
     else
@@ -52,6 +54,8 @@ class ThemeServlet < LiquidServlet
   	drop = RateSearchDrop.new(property, rate_search_container)
   	
   	@rate_search_drops << drop
+    
+		@current_template = "availability"
 
   	render :type => :liquid, :action => 'availability'
 	end
@@ -60,6 +64,9 @@ class ThemeServlet < LiquidServlet
 		@step = '3'
 		event = Database.find(:random, :events)
 		@event = event.name
+		    
+    @current_template = "availability"
+		
 		render :type => :liquid
 	end
 	
@@ -67,6 +74,9 @@ class ThemeServlet < LiquidServlet
 		@step = '4'
 		@customer = CustomerDrop.new(Database.find(:random, :customers))
 		@creditcard = CreditcardDrop.new
+		
+		@current_template = "checkout"
+		
 		render :type => :liquid
 	end
 	
@@ -80,6 +90,9 @@ class ThemeServlet < LiquidServlet
 			@contact = ContactDrop.new(Database.find(:random, :contacts))
 			@customer = CustomerDrop.new(Database.find(:random, :customers))
 			@reservations = [ReservationDrop.new(Database.find(:random, :reservations))]
+			
+			@current_template = "confirmation"
+			
 			render :type => :liquid
 		else
 			@step = '4'
@@ -221,7 +234,8 @@ class ThemeServlet < LiquidServlet
     
     @nights = @params[:nights] || rand(5) + 1
 
-    @template     = @action_name
+    @template = @action_name
+    
     @handle       = @params['handle'] if @params['handle']
     @current_page = @params['handle'] == 'paginated-sale' ? 5 : 1 
     

@@ -15,7 +15,6 @@ class LiquidServlet < WEBrick::HTTPServlet::AbstractServlet
     
     @request.path_info =~ /(\w+)$/
     @action = $1 || 'index'    
-    
     @assigns = send(@action) if respond_to?(@action)    
 
     @response['Content-Type'] = "text/html"

@@ -82,11 +82,11 @@
 						{% include 'modules/search' -%} 
 					{% endif -%}
 
-					{% current_template == "availability" -%}
+					{% if current_template == "availability" -%}
 						{% include 'modules/search' -%} 
 					{% endif -%}
 
-					{% current_template == "occupancy" -%}
+					{% if current_template == "occupancy" -%}
 						{% include 'modules/search' -%} 
 					{% endif -%}
 

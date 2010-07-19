@@ -47,6 +47,10 @@ class StandardFiltersTest < Test::Unit::TestCase
     assert_equal '&lt;strong&gt;', @filters.h('<strong>')    
   end
   
+  def test_escape_once
+    assert_equal '&lt;strong&gt;', @filters.escape_once(@filters.escape('<strong>'))
+  end
+  
   def test_truncatewords
     assert_equal 'one two three', @filters.truncatewords('one two three', 4)
     assert_equal 'one two...', @filters.truncatewords('one two three', 2)
@@ -57,6 +61,7 @@ class StandardFiltersTest < Test::Unit::TestCase
   def test_strip_html
     assert_equal 'test', @filters.strip_html("<div>test</div>")    
     assert_equal 'test', @filters.strip_html("<div id='test'>test</div>")    
+    assert_equal '', @filters.strip_html("<script type='text/javascript'>document.write('some stuff');</script>")    
     assert_equal '', @filters.strip_html(nil)    
   end
   
@@ -67,6 +72,13 @@ class StandardFiltersTest < Test::Unit::TestCase
   
   def test_sort
     assert_equal [1,2,3,4], @filters.sort([4,3,2,1])    
+    assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}], @filters.sort([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+  end
+  
+  def test_map
+    assert_equal [1,2,3,4], @filters.map([{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}], 'a')
+    assert_template_result 'abc', "{{ ary | map:'foo' | map:'bar' }}",
+      'ary' => [{'foo' => {'bar' => 'a'}}, {'foo' => {'bar' => 'b'}}, {'foo' => {'bar' => 'c'}}]
   end
   
   def test_date
@@ -85,7 +97,7 @@ class StandardFiltersTest < Test::Unit::TestCase
 
     assert_equal '07/05/2006', @filters.date("2006-07-05 10:00:00", "%m/%d/%Y")    
     
-    assert_equal "07/16/2004", @filters.date("Fri Jul 16 01:00:00 EDT 2004", "%m/%d/%Y")
+    assert_equal "07/16/2004", @filters.date("Fri Jul 16 01:00:00 2004", "%m/%d/%Y")
     
     assert_equal nil, @filters.date(nil, "%B")    
   end
@@ -109,6 +121,10 @@ class StandardFiltersTest < Test::Unit::TestCase
     assert_equal 'a a a', @filters.remove_first("a a a a", 'a ')        
     assert_template_result 'a a a', "{{ 'a a a a' | remove_first: 'a ' }}"
   end
+  
+  def test_pipes_in_string_arguments 
+    assert_template_result 'foobar', "{{ 'foo|bar' | remove: '|' }}"
+  end
                                                                                      
   def test_strip_newlines
     assert_template_result 'abc', "{{ source | strip_newlines }}", 'source' => "a\nb\nc"
@@ -116,6 +132,31 @@ class StandardFiltersTest < Test::Unit::TestCase
   
   def test_newlines_to_br
     assert_template_result "a<br />\nb<br />\nc", "{{ source | newline_to_br }}", 'source' => "a\nb\nc"
+  end
+  
+  def test_plus
+    assert_template_result "2", "{{ 1 | plus:1 }}"
+    assert_template_result "2.0", "{{ '1' | plus:'1.0' }}"
+  end
+  
+  def test_minus
+    assert_template_result "4", "{{ input | minus:operand }}", 'input' => 5, 'operand' => 1
+    assert_template_result "2.3", "{{ '4.3' | minus:'2' }}"
+  end
+  
+  def test_times
+    assert_template_result "12", "{{ 3 | times:4 }}"
+    assert_template_result "0", "{{ 'foo' | times:4 }}"
+    assert_template_result "6.3", "{{ '2.1' | times:3 }}"
+    assert_template_result "6", "{{ '2.1' | times:3 | replace: '.','-' | plus:0}}"
+  end    
+  
+  def test_divided_by
+    assert_template_result "4", "{{ 12 | divided_by:3 }}"
+    assert_template_result "4", "{{ 14 | divided_by:3 }}"
+    assert_template_result "4.66666666666667", "{{ 14 | divided_by:'3.0' }}"
+    assert_template_result "5", "{{ 15 | divided_by:3 }}"
+    assert_template_result "Liquid error: divided by 0", "{{ 5 | divided_by:0 }}"
   end
   
   def test_append
@@ -128,6 +169,10 @@ class StandardFiltersTest < Test::Unit::TestCase
     assigns = {'a' => 'bc', 'b' => 'a' }
     assert_template_result('abc',"{{ a | prepend: 'a'}}",assigns)        
     assert_template_result('abc',"{{ a | prepend: b}}",assigns)        
+  end
+  
+  def test_cannot_access_private_methods
+    assert_template_result('a',"{{ 'a' | to_number }}")
   end
   
 end

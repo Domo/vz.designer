@@ -42,7 +42,7 @@ module Liquid
       full_path = full_path(template_path)
       raise FileSystemError, "No such template '#{template_path}'" unless File.exists?(full_path)
       
-      File.read(full_path).gsub('!= blank', "!= ''")
+      File.read(full_path)
     end
     
     def full_path(template_path)

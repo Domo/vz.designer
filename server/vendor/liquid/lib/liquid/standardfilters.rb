@@ -29,6 +29,10 @@ module Liquid
       CGI.escapeHTML(input) rescue input
     end
     
+    def escape_once(input)
+      ActionView::Helpers::TagHelper.escape_once(input) rescue input
+    end
+    
     alias_method :h, :escape
     
     # Truncate a string down to x characters
@@ -48,7 +52,7 @@ module Liquid
     end
     
     def strip_html(input)
-      input.to_s.gsub(/<.*?>/, '')
+      input.to_s.gsub(/<script.*?<\/script>/, '').gsub(/<.*?>/, '')
     end       
     
     # Remove all newlines from the string
@@ -63,9 +67,27 @@ module Liquid
     end
 
     # Sort elements of the array
-    def sort(input)
-      [input].flatten.sort
+    # provide optional property with which to sort an array of hashes or drops
+    def sort(input, property = nil)
+      ary = [input].flatten
+      if property.nil?
+        ary.sort
+      elsif ary.first.respond_to?('[]') and !ary.first[property].nil?
+        ary.sort {|a,b| a[property] <=> b[property] }
+      elsif ary.first.respond_to?(property)
+        ary.sort {|a,b| a.send(property) <=> b.send(property) }
+      end
     end               
+    
+    # map/collect on a given property
+    def map(input, property)
+      ary = [input].flatten
+      if ary.first.respond_to?('[]') and !ary.first[property].nil?
+        ary.map {|e| e[property] }
+      elsif ary.first.respond_to?(property)
+        ary.map {|e| e.send(property) }
+      end
+    end
             
     # Replace occurrences of a string with another
     def replace(input, string, replacement = '')
@@ -85,7 +107,7 @@ module Liquid
     # remove the first occurrences of a substring
     def remove_first(input, string)
       input.to_s.sub(string, '')      
-    end                         
+    end             
                               
     # add one string to another
     def append(input, string)
@@ -136,16 +158,13 @@ module Liquid
         return input.to_s
       end
       
-      date = case input
-      when String
-        Time.parse(input)
-      when Date, Time, DateTime
-        input
+      date = input.is_a?(String) ? Time.parse(input) : input
+      
+      if date.respond_to?(:strftime)
+        date.strftime(format.to_s)
       else
-        return input
+        input
       end
-              
-      date.strftime(format.to_s)
     rescue => e 
       input
     end
@@ -166,6 +185,39 @@ module Liquid
     #  
     def last(array)
       array.last if array.respond_to?(:last)
+    end
+    
+    # addition
+    def plus(input, operand)
+      to_number(input) + to_number(operand)
+    end
+    
+    # subtraction
+    def minus(input, operand)
+      to_number(input) - to_number(operand)
+    end
+    
+    # multiplication
+    def times(input, operand)
+      to_number(input) * to_number(operand)
+    end
+    
+    # division
+    def divided_by(input, operand)
+      to_number(input) / to_number(operand)
+    end
+    
+    private
+    
+    def to_number(obj)
+      case obj
+      when Numeric
+        obj
+      when String
+        (obj.strip =~ /^\d+\.\d+$/) ? obj.to_f : obj.to_i
+      else
+        0
+      end
     end
     
   end

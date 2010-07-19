@@ -44,10 +44,6 @@ class ConditionTest < Test::Unit::TestCase
     assert_evalutes_false "'bob'", 'contains', "'---'"
   end
 
-  def test_contains_fails_on_nil
-    assert_evalutes_false "a", 'contains', "'anything'"
-  end
-
   def test_contains_works_on_arrays
     @context = Liquid::Context.new
     @context['array'] = [1,2,3,4,5]
@@ -62,6 +58,12 @@ class ConditionTest < Test::Unit::TestCase
     
     assert_evalutes_false "array", 'contains', '"1"'        
     
+  end  
+
+  def test_contains_returns_false_for_nil_operands
+    @context = Liquid::Context.new
+    assert_evalutes_false "not_assigned", 'contains', '0'
+    assert_evalutes_false "0", 'contains', 'not_assigned'
   end  
 
   def test_or_condition     
