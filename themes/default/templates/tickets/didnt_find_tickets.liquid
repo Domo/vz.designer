@@ -14,15 +14,6 @@
 						{{ booking.format_calendar }}
 					</div><!-- event_calendar_wrapper -->
 				
-					<div id="ticketslist">
-						<h2>Events list</h2>
-						<ul>
-							{% for event in events %}
-								<li><a href="/ticket_booking/calendar_overview/?event_id={{ event.id }}" {% if event.is_selected %}id="active" {% endif %}>{{ event.name }}</a></li>
-							{% endfor %}
-						</ul>
-					</div>
-				
 					<div id="calendar_cont">
 						{{ calendar }}
 					</div>
