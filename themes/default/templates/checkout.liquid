@@ -87,6 +87,18 @@
 						<textarea id="special_request" rows="5" cols="" name="special_request" style="width: 50%;"> </textarea>
 				</p>
 			</fieldset>
+			
+			{% if rate_search_container.has_questions %}
+				<fieldset>
+					<legend>Questions</legend>
+					{% for question in rate_search_container.questions %}
+						<p class="clearfix">
+							<label>{{ question.question }}</label>
+							{{ question.answer }}
+						</p>
+					{% endfor %}
+				</fieldset>
+			{% endif %}
 		
 			<fieldset>
 				<legend>Payment Details</legend>

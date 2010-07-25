@@ -25,6 +25,17 @@
 		
 					</div>
 					<!-- end BE-details -->
+					
+					
+						{% if booking.has_questions %}
+							<div class="confirmation-details">
+								<h3>Questions</h3>
+								{% for question in booking.questions %}
+									<p>{{ question.question }}: {{ question.answer }}</p>
+								{% endfor %}
+							</div>
+						{% endif %}
+					
 
 					<div class="confirmation-cart">
 						<h3>Tickets Ordered</h3>

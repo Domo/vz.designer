@@ -250,6 +250,20 @@ class RateSearchDrop < Liquid::Drop
     text
   end  
   
+  
+  def questions
+    questions = []
+    for poll in @rate_search_container.questions
+      questions << PollDrop.new(poll)
+    end
+    
+    return questions
+  end
+  
+  def has_questions
+  	@rate_search_container.has_questions
+  end
+  
   private
     #checks all rate drops for availability
     def rates_available rates

@@ -24,6 +24,18 @@
 		{% endfor -%}
 	</div>
 	
+	{% for reservation in reservations %}
+		{% if reservation.has_questions %}
+		<h2>Questions</h2>
+		<div class="box">
+		
+			{% for q in reservation.questions %}
+				<p><strong>{{	q.question }}</strong>{{ q.answer }}</p>
+			{% endfor %}
+		</div>
+		{% endif %}
+	{% endfor %}
+	
 	<h2>Customer Details</h2>
 	<div class="box">
 		<p class="clearfix"><strong>First name:</strong>{{ contact.first_name }}</p>

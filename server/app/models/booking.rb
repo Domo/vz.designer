@@ -7,8 +7,9 @@ class Booking
 	end
 	
 	require 'database'
+	require 'event_availability'
 	
-	attr_accessor :date, :id, :payment_type, :assigned_tickets, :total_price, :created_on, :deposit_amount
+	attr_accessor :date, :id, :payment_type, :assigned_tickets, :total_price, :created_on, :deposit_amount, :event_availability
 
 	def initialize()
 		self.date = Time.random.to_us_date
@@ -24,7 +25,9 @@ class Booking
 		end
 		self.deposit_amount = self.total_price - (rand(self.total_price.to_i-5)+1)
 		self.created_on = Time.random
+		self.event_availability = EventAvailability.new
 	end
+	
 	
 	def event_selected
 		Database.find(:random, :events).id
@@ -88,4 +91,18 @@ class Booking
 	def open_payment_amount
 		self.total_price - self.deposit
 	end
+	
+	def questions
+		q = []
+		if WSession.options.include? "booking_has_questions"
+			q << {:question => "test question 1", :answer => "test answer 1"}
+			q << {:question => "test question 2", :answer => "test answer 2"}
+		end
+		
+		return q
+	end	
+	
+	def has_questions
+		(not questions.empty?)
+	end	
 end

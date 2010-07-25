@@ -60,6 +60,16 @@ module Database
 						ev["max_tickets"] = rand(10)+5
 				end
 			end
+		when :polls
+			if _result.is_a?(Hash)
+				_result["answers"] = ["Answer 1", "Answer 2", "Answer 3"] if poll["answer_type"] == "dropdown"
+			else
+				for poll in _result
+						if poll["answer_type"] == "dropdown"
+							poll["answers"] = ["Answer 1", "Answer 2", "Answer 3"]
+						end
+				end
+			end
 		when :customers
 			if _result.is_a?(Hash)
 				c = self.find(:random, :contacts)

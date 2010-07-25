@@ -1,3 +1,5 @@
+require 'poll_drop'
+
 class EventAvailabilityDrop < Liquid::Drop
 
   #param players used for golf stuff
@@ -72,4 +74,18 @@ class EventAvailabilityDrop < Liquid::Drop
     
     return @times
   end
+  
+  def questions
+    questions = []
+    for poll in @source.polls
+      questions << PollDrop.new(poll)
+    end
+    
+    return questions
+  end
+  
+  def has_questions
+    (not @source.polls.empty?)
+  end
+  
 end

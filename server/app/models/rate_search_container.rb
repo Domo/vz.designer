@@ -2,6 +2,7 @@ class RateSearchContainer
 	require 'database'
 	require 'rate'
 	require 'servlet'
+	require "wsession"
 	
 	def my_name
 		"RateSearchContainer"
@@ -46,6 +47,19 @@ class RateSearchContainer
 	
 	def rates
 		rates = Database.find(:condition, :rates, ["property_id", @property.id]).map {|r| Rate.new(r, @options)}
+	end
+	
+	def questions
+		q = []
+		if WSession.options.include? "booking_has_questions"
+			q = Database.find(:all, :polls)
+		end
+		
+		return q
+	end
+	
+	def has_questions
+		(not questions.empty?)
 	end
 
 end

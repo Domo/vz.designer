@@ -1,4 +1,8 @@
 class ReservationDrop < Liquid::Drop
+
+	require "wsession"
+	require "poll_answer_drop"
+
   def initialize(_reservation)
     @reservation = _reservation
   end
@@ -66,6 +70,19 @@ class ReservationDrop < Liquid::Drop
   def special_request
     return @reservation.special_request if not @reservation.special_request.nil?
     return ""
+  end
+  
+  def questions
+  	q = []
+  	if WSession.options.include? "booking_has_questions"
+			q << {:question => "test question 1", :answer => "test answer 1"}
+			q << {:question => "test question 2", :answer => "test answer 2"}
+		end
+  	return q.map {|p| PollAnswerDrop.new(p)}
+  end
+  
+  def has_questions
+  	(not questions.empty?)
   end
   
 end

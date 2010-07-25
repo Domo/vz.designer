@@ -524,3 +524,25 @@ event_availabilities:
   name: 'Morning Show'
 -
   name: 'Lunch Show'
+
+polls:
+-
+  id: 1
+  question: 'Dropdown Question'
+  answers: ''
+  answer_type: 'dropdown'
+-
+  id: 2
+  question: 'calendar question'
+  answer_type: 'calendar'
+  answers: ''
+-
+  id: 3
+  question: 'Textarea question'
+  answers: ''
+  answer_type: 'memo'
+-
+  id: 4
+  question: 'Text field question'
+  answers: ''
+  answer_type: 'text'

@@ -1,4 +1,6 @@
 require 'database'
+require 'poll_answer_drop'
+require 'event_availability_drop'
 
 class BookingDrop < Liquid::Drop
   def initialize(_booking, _property, _event_property = nil)
@@ -35,11 +37,7 @@ class BookingDrop < Liquid::Drop
   end
 
   def event_availability
-    if @booking.pa_selected
-      EventAvailabilityDrop.new(EventAvailabilityTime.find(@booking.pa_selected).event_availability)
-    else
-      EventAvailabilityDrop.new(@booking.booked_tickets.first.assigned_ticket.event_availability_time.event_availability)
-    end    
+    EventAvailabilityDrop.new(@booking.event_availability)
   end
 
   def payment_due_to
@@ -155,9 +153,9 @@ class BookingDrop < Liquid::Drop
   end
   
   def terms_and_conditions
-	terms = @booking.event_availability.event.terms_and_conditions
-    terms = CustomerSetting.first.terms_conditions if terms.blank?
-	terms
+		terms = @booking.event_availability.event.terms_and_conditions
+		  terms = CustomerSetting.first.terms_conditions if terms.blank?
+		terms
   end
 
   def booked_at
@@ -174,6 +172,17 @@ class BookingDrop < Liquid::Drop
 	
 	def open_payment_amount
 		@booking.open_payment_amount
+	end
+	
+	def questions
+	 	q = []
+		unless @booking.questions.empty?
+      q = @booking.questions.map {|p| PollAnswerDrop.new(p)}
+    end
+	end	
+	
+	def has_questions
+		@booking.has_questions
 	end
 
   private
