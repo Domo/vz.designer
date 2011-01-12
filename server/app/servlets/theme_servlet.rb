@@ -26,22 +26,67 @@ require 'customer_setting_drop'
 require 'customer_setting_events_drop'
 require 'wsession'
 require 'rate'
+require 'voucher'
+require "voucher_drop"
+require "order"
+require "order_drop"
+require "error_drop"
 
 class ThemeServlet < LiquidServlet
 	layout 'skin'
 	
+	#------------------------------------------------------------
+	#          Actions for more than one template type
+	#------------------------------------------------------------
+	
+	# The /-action
+	# Used by Rooms and Events, Vouchers go to /list
+	#----------------------------------------------------------------------------
 	def index
 		@step = '1'
 		@current_template = "index"
 		
-		if template_type == 'rooms'
+		case template_type
+		when "rooms"
     	render :type => :liquid
-    else
+    when "events"
     	render :type => :liquid, :action => 'tickets/search_tickets', :layout => 'tickets/skin'
+    when "vouchers"
+      redirect_to "/list"
     end
   end
   
-  #Rooms actions
+  # The /confirmation action in skins
+  # Used by Rooms, Events and Vouchers
+  #----------------------------------------------------------------------------
+  def confirmation
+    @current_template = "confirmation"
+    
+    case template_type
+    when "rooms"
+      @step = '5'
+      @contact = ContactDrop.new(Database.find(:random, :contacts))
+      @customer = CustomerDrop.new(Database.find(:random, :customers))
+      @reservations = [ReservationDrop.new(Database.find(:random, :reservations))]      
+      render :type => :liquid
+    when "events"
+      @step = '4'
+      @contact = ContactDrop.new(Database.find(:random, :contacts))
+      @customer = CustomerDrop.new(Database.find(:random, :customers))
+      render :type => :liquid, :action => 'tickets/confirmation', :layout => 'tickets/skin'
+    when "vouchers"
+      build_vouchers_cart
+      cu = Database.find(:random, :customers)
+      @customer = CustomerDrop.new(cu)
+      @contact = ContactDrop.new(cu.main_contact)
+      @order = OrderDrop.new(Order.new)
+      render :type => :liquid, :action => 'vouchers/confirmation', :layout => 'vouchers/skin'
+    end
+  end
+  
+  #------------------------------------------------------------
+  #                       Rooms Actions
+  #------------------------------------------------------------
   
   def availability
   	@step = '2'
@@ -71,38 +116,36 @@ class ThemeServlet < LiquidServlet
 	end
 	
 	def checkout
-		@step = '4'
-		@customer = CustomerDrop.new(Database.find(:random, :customers))
-		@creditcard = CreditcardDrop.new
-		
-		@current_template = "checkout"
-		
-		render :type => :liquid
+	  case template_type
+	  when "vouchers"
+	    @current_action = "ssl_checkout"
+      build_vouchers_cart
+      
+      if WSession.options.include? "records_have_errors"
+        cu = Database.find(:random, :customers)
+        @customer = CustomerDrop.new(cu)
+        @contact = ContactDrop.new(cu.main_contact)
+      end
+      
+      render :type => :liquid, :action => 'vouchers/checkout', :layout => 'vouchers/skin'
+	  else
+  		@step = '4'
+  		@customer = CustomerDrop.new(Database.find(:random, :customers))
+  		@creditcard = CreditcardDrop.new
+  		
+  		@current_template = "checkout"
+  		
+  		render :type => :liquid
+    end
 	end
 	
 	def process_reservation
 		redirect_to '/confirmation'
 	end
 	
-	def confirmation
-		if template_type == 'rooms'
-			@step = '5'
-			@contact = ContactDrop.new(Database.find(:random, :contacts))
-			@customer = CustomerDrop.new(Database.find(:random, :customers))
-			@reservations = [ReservationDrop.new(Database.find(:random, :reservations))]
-			
-			@current_template = "confirmation"
-			
-			render :type => :liquid
-		else
-			@step = '4'
-			@contact = ContactDrop.new(Database.find(:random, :contacts))
-			@customer = CustomerDrop.new(Database.find(:random, :customers))
-			render :type => :liquid, :action => 'tickets/confirmation', :layout => 'tickets/skin'
-		end
-	end
-	
-	#Events actions
+  #------------------------------------------------------------
+  #              Events actions
+  #------------------------------------------------------------
 	
 	def search_tickets
 		@step = '2'
@@ -137,7 +180,33 @@ class ThemeServlet < LiquidServlet
 		redirect_to confirmation
 	end
 	
-	#static page
+	#------------------------------------------------------------
+	#                  Voucher actions
+	#------------------------------------------------------------
+	
+	def list
+	  @current_action = "list"
+    vouchers = []
+    5.times do
+      vouchers << Voucher.new(Database.find(:random, :vouchers))
+    end
+
+	  @vouchers = vouchers.map {|v| VoucherDrop.new(v)}
+    build_vouchers_cart
+    
+	  render :type => :liquid, :action => 'vouchers/list', :layout => 'vouchers/skin'
+	end
+	
+	def ajax_add_voucher
+	  build_vouchers_cart
+    @current_action = "list"
+    
+    render :type => :liquid, :action => "modules/_vouchers_cart", :layout => 'none'
+	end
+	
+	#------------------------------------------------------------
+	#              Static page display
+	#------------------------------------------------------------
 	
 	def static_page
 		page = "static/" + @params["page"]
@@ -297,6 +366,8 @@ class ThemeServlet < LiquidServlet
     @html = HtmlDrop.new(htmloptions)
     
     @flash = FlashDrop.new(build_flash)
+    @flashd = @flash
+    
     @arrival_date = Time.new.strftime("%d.%m.%Y")
     
     @properties = Database.find(:all, :properties).collect {|p| PropertyDrop.new(p) }
@@ -353,6 +424,7 @@ class ThemeServlet < LiquidServlet
   def path_scan
     
     matches = @request.path_info.gsub(/\+/,' ').scan(/\/([\w\s\-\.\+]+)/).flatten
+    matches.delete("web_vouchers")
     puts "matches: #{matches.inspect}"
     @action_name      = matches[0] if matches[0]
     @params['handle'] = matches[1] if matches[1]
@@ -369,8 +441,34 @@ class ThemeServlet < LiquidServlet
   end
   
   
-  private
-  
+#------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                       private
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+  # This functions builds a basic vouchers cart
+  #----------------------------------------------------------------------------
+  def build_vouchers_cart
+    @cart_vouchers = []
+    @total_price = 0
+    @cart_contains_vouchers = false
+    @total_quantity = 0
+    
+    if WSession.options.include? "cart_contains_vouchers"
+      ((rand 7)+1).times do
+        v = Voucher.new(Database.find(:random, :vouchers))
+        @total_quantity += v.quantity
+        @total_price += v.price * v.quantity
+        @cart_vouchers << VoucherDrop.new(v)
+      end
+      @cart_contains_vouchers = true
+      @individual_cart_vouchers = [@cart_vouchers]
+    end
+    
+    
+    @currency = "&euro;"
+    @clear_cart_onclick = VoucherDrop.clear_cart_onclick  
+  end
+
   def build_images_for_occupancy_selects
   	images = {:adults => [], :children => []}
 		@params['adults'].to_i.times do

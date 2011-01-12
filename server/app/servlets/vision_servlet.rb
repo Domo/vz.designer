@@ -40,6 +40,8 @@ class VisionServlet < Servlet
   end
   
 
+  # The values for the Template pack select
+  #----------------------------------------------------------------------------
 	def template_types_for_view
 		tt = {}
 		if File.exists?(theme_template_path + '/skin.liquid')
@@ -48,6 +50,9 @@ class VisionServlet < Servlet
 		if File.exists?(theme_template_path + '/tickets')
 			tt[:events] = 'Events-Templates'
 		end
+		if File.exists?(theme_template_path + '/vouchers')
+      tt[:vouchers] = 'Voucher-Templates'
+    end
 		return tt
 	end
 	
@@ -59,12 +64,16 @@ class VisionServlet < Servlet
 	
 	def options_for_template
 		options =  [{ :name => 'show_rate_images', :caption => 'Rates have images', :for => 'availability' },
-									{ :name => 'show_property_images', :caption => 'Properties have images (used nowhere atm)', :for => 'availability' },
-									{ :name => 'dont_show_room_images', :caption => 'Rooms have <b>no</b> images', :for => 'availability' },
-									{ :name => 'show_website_discount', :caption => 'Show Website Discount', :for => 'search_tickets'},
-									{ :name => 'rates_are_ticket_rates', :caption => 'Rates are Ticket Rates (for Rooms&Events)', :for => 'availability, occupancy, checkout, confirmation'},
-									{ :name => 'events_deposit_charged', :caption => 'Show deposit for bookings.', :for => 'terms_and_conditions, payment_details, confirmation'},
-									{ :name => "booking_has_questions", :caption => "Booking has questions", :for => "confirmation, payment_details, checkout"}
+									{ :name => 'show_property_images', :system_types => "rooms, events, vouchers", :caption => 'Properties have images (used nowhere atm)', :for => 'availability' },
+									{ :name => 'dont_show_room_images', :system_types => "rooms", :caption => 'Rooms have <b>no</b> images', :for => 'availability' },
+									{ :name => 'show_website_discount', :system_types => "events", :caption => 'Show Website Discount', :for => 'search_tickets'},
+									{ :name => 'rates_are_ticket_rates', :system_types => "rooms", :caption => 'Rates are Ticket Rates (for Rooms&Events)', :for => 'availability, occupancy, checkout, confirmation'},
+									{ :name => 'events_deposit_charged', :system_types => "events", :caption => 'Show deposit for bookings.', :for => 'terms_and_conditions, payment_details, confirmation'},
+									{ :name => "booking_has_questions", :system_types => "events", :caption => "Booking has questions", :for => "confirmation, payment_details, checkout"},
+									{ :name => "voucher_images", :system_types => "vouchers", :caption => "Vouchers have images", :for => "list, checkout"},
+									{ :name => "cart_contains_vouchers", :system_types => "vouchers", :caption => "Shopping Cart contains vouchers", :for => "list, checkout"},
+									{ :name => "vouchers_have_recipients", :system_types => "vouchers", :caption => "Cart Vouchers have recipients", :for => "checkout"},
+									{ :name => 'records_have_errors', :system_types => "rooms, events, vouchers", :caption => 'Server validation failed for input', :for => 'checkout' }   									
 		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact
@@ -75,10 +84,12 @@ class VisionServlet < Servlet
 		available_templates = [["Cookie.destroy('#{@params['action']}'); window.location.reload();", "#{WSession.current_template}.liquid"]]
     
 		#static templates
-		available_templates << ['', '---- Static Templates ----'] 
-    Dir["#{theme_template_path}/static/*.liquid"].each do |f|
-      variant = File.basename(f, File.extname(f))
-      available_templates << ["window.location='#{variant}.html';", "#{variant}.liquid"]
+		if File.exists?("#{theme_template_path}/static")
+  		available_templates << ['', '---- Static Templates ----'] 
+      Dir["#{theme_template_path}/static/*.liquid"].each do |f|
+        variant = File.basename(f, File.extname(f))
+        available_templates << ["window.location='#{variant}.html';", "#{variant}.liquid"]
+      end
     end
     
     available_templates << ['', '-------------']      
@@ -108,6 +119,11 @@ class VisionServlet < Servlet
        ['/payment_details', 'Payment Details Page'], 
        ['/confirmation', 'Confirmation Page'], 
        ['/search_tickets?act=didnt_find_tickets', 'Did not find tickets page']
+       ],
+      :vouchers => [
+        ['/list', "Voucher list"],
+        ['/checkout?options_cart_contains_vouchers=1', "Customer Details and Recipients"],
+        ['/confirmation?options_cart_contains_vouchers=1', "Confirmation Page"]
        ]
     }
     

@@ -1,318 +1,56 @@
- <div style="padding: 0 1em;">
-  {% if flash.error != blank -%}
-  <h2 class="flash-error">{{ flash.error }}</h2>
-  {% endif -%}
-  {% if flash.warning != blank -%}
-  <h2 class="flash-warning">{{ flash.warning }}</h2>
-  {% endif -%}
-  {% if flash.notice != blank -%}
-  <h2 class="flash-notice">{{ flash.notice }}</h2>
-  {% endif -%}
-  </div
-<br />
+<div style="padding: 0 1em;">
+  {{ flashd | render_flash }}
+  {% assign record = customer %}
+  {% assign record_name = "Customer Details" %}
+  {% include 'modules/errors' %}
+  {% assign record_name = "Contact Details" %}
+  {% assign record = contact %}
+  {% include 'modules/errors' %}
+</div>
 
 <div id="booking-summary" class="narrow">
-  <div class="grey-box">
-    <h2>Selected Vouchers</h2>
-    
-    <table cellpadding="3" cellspacing="0">
-      {% for voucher in selected_vouchers%}
-        <tr>
-          <th style="width: 180px;">{{ voucher.name }}</th>
-          <td>Quantity: {{ voucher.quantity }}, Price: {{ (voucher.price) | format_money: '&euro;' }}</td>
-        </tr>
-      {% endfor %}
-      <tr>
-        <th class="total"><strong>Total cost:</strong></th>
-        <td class="total count-money"><strong>{{ total_price | format_money: '&euro;' }}</strong></td>
-      </tr>
-    </table>
-    
+  <div class="boxbe">
+    <div id="shopping-cart">
+      {% include 'modules/vouchers_cart' %}      
   </div>
 </div><!-- booking-summary  -->
 
+<div id="personal-details" class="narrow">
+  <div class="boxbe" id="vouchers_recipients">
+    {% include 'modules/vouchers_recipients' %}
+  </div>
+</div>
 
-<form action="/web_vouchers/process_payment" class="common-form" method="post">
-
-
+<form action="{{ html.process_validation_action }}" class="common-form" method="post" id="booking-form">
 
 <div id="personal-details" class="narrow">
-  <div class="grey-box">
-    <br/><br/>
+  <div class="boxbe">
+    
    <h2 class="subtitle">Personal Details</h2>
-        <table cellpadding="3">
-         <tr>
-    		    <th><label>First name</label><label style="color: red;width:20px;">*</label></th>
-    		    <td>
-    		      <input id="contact_first_name" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
-    		      <br style="clear: both;" />
-              <div class="formError">{{ contact | error_messages_on: 'first_name' }}</div>
-    		    </td>
-    		  </tr>
-    		     
-    			<tr><th><label for="contact_last_name">Last name<label style="color: red;width:20px;">*</label></th>
-      			<td>
-      			  <input id="contact_last_name" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
-      			  <br style="clear: both;" />
-              <div class="formError">{{ contact | error_messages_on: 'last_name' }}</div>
-      			</td>
-    			</tr>
-    			
-    			<tr><th><label for="customer_name">Company name</th>
-    			  <td>
-    			    <input id="customer_name" type="text" size="30" name="customer[name]" value="{{ customer.name }}" />
-    			  </td>
-    		  </tr>
-    		  	  
-    		  <tr><th><label for="customer_address1">Address 1<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="customer_address1" type="text" size="30" name="customer[address1]" value="{{ customer.address1 }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ customer | error_messages_on: 'address1' }}</div>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr>
-    		    <th><label for="customer_address2">Address 2</th>
-      		  <td>
-      		    <input id="customer_address2" type="text" size="30" name="customer[address2]" value="{{ customer.address2 }}"/>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr><th><label for="customer_city">City<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="customer_city" type="text" size="30" name="customer[city]" value="{{ customer.city }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ customer | error_messages_on: 'city' }}</div>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr><th><label for="customer_postcode">Postcode<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="customer_postcode" type="text" size="30" name="customer[postcode]" value="{{ customer.postcode }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ customer | error_messages_on: 'postcode' }}</div>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr>
-    		  	<th><label for="customer_country">Country</th>
-    		  	<td>
-    		  	  <select id="customer_country" style="width: 70%;" name="customer[country]">
-    		  		 {{ customer.country_options_for_select }}
-    		  	  </select>
-    		  	</td>
-    		  </tr>
-    		  
-    		  <tr><th><label for="contact_email">Email<label style="color: red;width:20px;">*</label></th>
-    			  <td>
-    			    <input id="contact_email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
-    			    <br style="clear: both;" />
-              <div class="formError">{{ contact | error_messages_on: 'email' }}</div>
-    			  </td>
-    			</tr>
-    		     
-    		  <tr><th><label for="contact_phone">Phone<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="contact_phone" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ contact | error_messages_on: 'phone' }}</div>
-      		  </td>
-    		  </tr>
-    		  		  
-    		  <tr>
-    		  	<th><label for="contact_ezine">Ezine</th>
-    		  	<td>
-    		  		<input id="contact_ezine" type="checkbox" value="{{ contact.ezine }}" style="width: 14px;" name="contact[ezine]"/>
-              <input type="hidden" value="{{ contact.ezine }}" name="contact[ezine]"/>
-              <input type="hidden" name="contact[contact_type]" value="Main contact" />
-    		  	  <span class="help">Newsletter in form of email.</span>
-    		  	</td>
-    		  </tr>
-        </table>
+      {% include 'modules/customer_details' %}
   </div>
 </div><!-- personal-details -->
-
-
-   
-<div id="personal-details" class="narrow">
-  <div class="grey-box">
-
-   <h2 class="subtitle">Receipient Details</h2>
-        <table cellpadding="3">
-      <tr>
-        <td colspan="2">
-          <a href="#" onclick="copy_personal_details(); return false;">Copy Personal Details</a>
-        </td>
-      </tr>        	
-			
-         <tr>
-    		    <th><label for="r_contact_first_name">First name<label style="color: red;width:20px;">*</label></th>
-    		    <td>
-    		      <input id="r_contact_first_name" type="text" size="30" name="r_contact[first_name]" value="{{ r_contact.first_name }}" />
-    		      <br style="clear: both;" />
-              <div class="formError">{{ recipient | error_messages_on: 'first_name' }}</div>
-    		    </td>
-    		  </tr>
-    		     
-    			<tr><th><label for="r_contact_last_name">Last name<label style="color: red;width:20px;">*</label></th>
-      			<td>
-      			  <input id="r_contact_last_name" type="text" size="30" name="r_contact[last_name]" value="{{ r_contact.last_name }}" />
-      			  <br style="clear: both;" />
-              <div class="formError">{{ recipient | error_messages_on: 'last_name' }}</div>
-      			</td>
-    			</tr>
-
-    		  <tr><th><label for="customer_address1">Address 1<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="recipient_address1" type="text" size="30" name="recipient[address1]" value="{{ recipient.address1 }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ customer | error_messages_on: 'address1' }}</div>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr>
-    		    <th><label for="recipient_address2">Address 2</th>
-      		  <td>
-      		    <input id="recipient_address2" type="text" size="30" name="recipient[address2]" value="{{ recipient.address2 }}"/>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr><th><label for="recipient_city">City<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="recipient_city" type="text" size="30" name="recipient[city]" value="{{ recipient.city }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ customer | error_messages_on: 'city' }}</div>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr><th><label for="recipient_postcode">Postcode<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="recipient_postcode" type="text" size="30" name="recipient[postcode]" value="{{ recipient.postcode }}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ customer | error_messages_on: 'postcode' }}</div>
-      		  </td>
-    		  </tr>
-    		  
-    		  <tr>
-    		  	<th><label for="recipient_country">Country</th>
-    		  	<td>
-    		  	  <select id="recipient_country" style="width: 70%;" name="recipient[country]">
-    		  		 {{ recipient.country_options_for_select }}
-    		  	  </select>
-    		  	</td>
-    		  </tr>
-    		  
-    		  <tr><th><label for="r_contact_email">Email<label style="color: red;width:20px;">*</label></th>
-    			  <td>
-    			    <input id="r_contact_email" type="text" size="30" name="r_contact[email]"  value="{{ r_contact.email}}" />
-    			    <br style="clear: both;" />
-              <div class="formError">{{ recipient | error_messages_on: 'email' }}</div>
-    			  </td>
-    			</tr>
-    		     
-    		  <tr><th><label for="r_contact_phone">Phone<label style="color: red;width:20px;">*</label></th>
-      		  <td>
-      		    <input id="r_contact_phone" type="text" size="30" name="r_contact[phone]" value="{{ r_contact.phone}}" />
-      		    <br style="clear: both;" />
-              <div class="formError">{{ recipient | error_messages_on: 'phone' }}</div>
-      		  </td>
-    		  </tr>
-        </table>
-  </div>
-</div><!-- personal-details -->
-
-<script>
-  function copy_personal_details() {
-    $('r_contact_first_name').value = $('contact_first_name').value;
-    $('r_contact_last_name').value = $('contact_last_name').value;
-    $('recipient_address1').value = $('customer_address1').value;
-    $('recipient_address2').value = $('customer_address2').value;
-    $('recipient_city').value = $('customer_city').value;
-    $('recipient_postcode').value = $('customer_postcode').value;
-    $('recipient_country').selectedIndex = $('customer_country').selectedIndex;
-    $('r_contact_email').value = $('contact_email').value;
-    $('r_contact_phone').value = $('contact_phone').value;
-  }
-</script>
-
 
 
 
     <div id="credit-details" class="narrow">
-    <div class="grey-box">
+    <div class="boxbe">
       <h2 class="subtitle">Payment Details</h2>
-      <table cellpadding="3">
-        <tr>
-          <th><label>Card type:</label></th>
-          <td>
-            <select id="creditcard_type" onclick="card_cvv('creditcard_type','cvv_number'); return false;" name="creditcard[type]">
-              <option value="master">Mastercard</option>
-              <option value="laser">Laser</option>
-              <option value="visa">Visa</option>
-              <option value="american_express">American Express</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <th><label>First name on card:</label><label style="color: red;width:20px;">*</label></th>
-          <td>
-            <input id="creditcard_first_name" type="text" size="30" name="creditcard[first_name]" value="{{ creditcard.first_name }}" />
-            <br style="clear: both;" />
-            <div class="formError">{{ creditcard | error_messages_on: 'first_name' }}</div>
-          </td>
-        </tr>
-        <tr>
-          <th><label>Last name on card:</label><label style="color: red;width:20px;">*</label></th>
-          <td>
-            <input id="creditcard_last_name" type="text" size="30" name="creditcard[last_name]" value="{{ creditcard.last_name }}" />
-            <br style="clear: both;" />
-            <div class="formError">{{ creditcard | error_messages_on: 'last_name' }}</div>
-          </td>
-        </tr>
-        <tr>
-          <th><label>Card number:</label><label style="color: red;width:20px;">*</label></th>
-          <td>
-            <input id="creditcard_number" type="text" size="30" name="creditcard[number]" value="{{ creditcard.number }}" />
-            (no spaces)
-            <br style="clear: both;" />
-            <div class="formError">{{ creditcard | error_messages_on: 'number' }}</div>
-          </td>
-        </tr>
-        <tr id="cvv_number">
-          <th><label>CVV:</label><label style="color: red;width:20px;">*</label></th>
-          <td>
-            <input id="creditcard_verification_value" type="text" size="30" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" />
-            (no spaces)
-          </td>
-        </tr>
-        <tr>
-          <th>&nbsp;</th>
-          <td style="font-style: italic;">
-            <span style="padding-right: 5em;">Month</span>Year
-          </td>
-        </tr>
-        <tr>
-          <th><label>Expiry date:</label><label style="color: red;width:20px;">*</label></th>
-          <td style="{% if creditcard.error_on_date %}style='border: 2px solid red;'{% endif %}">
-            <select id="creditcard_month" style="width: 95px;" name="creditcard[month]">
-              {{ creditcard.options_for_months }}
-            </select>
-            <select id="creditcard_year" style="width: 70px;" name="creditcard[year]">
-              {{ creditcard.options_for_years }}
-            </select>
-          </td>
-        </tr>
-      </table>
+        {% include 'modules/creditcard_details' %}
     </div><!-- .grey-box -->
   </div><!-- credit-details -->
+  
+  <script type="text/javascript">
+    {{ "booking-form" | javascript_validation }}
+    CreditCardOptions['cvv_field'] = 'cvv_text';
+    CreditCardOptions['image_path'] = '{{ "images/" | common_asset: "v_003" }}';
+    CreateCreditCardTypeChecker("creditcard_number");
+  </script>
 
-<script type="text/javascript">
-  card_cvv('creditcard_type','cvv_number');
-</script>
+
     
     <div class="procced" style="text-align: center; margin: 20px 0;">
-      <input type="image" src="/skin/images/continue_button.gif" alt="Continue to summary" />
-    </div>
+     <button value="Update Search" type="submit" style="padding: 8px 30px; font-size: 14px; background-color: #2e94d4; color: rgb(255, 255, 255); font-weight: bold; text-transform: uppercase; -moz-border-radius: 5px; border-radius: 5px;">Continue to summary</button>
+      </div>
     
 </form>

@@ -50,7 +50,9 @@
 	  		<fieldset>
 	  			<legend>Template options</legend>
 	  			<% for option in @template_options %>
-	  			<% next unless option[:for].include? @current_template %>
+	  			<% next unless option[:for].split(", ").include? @current_template %>
+	  			<% next unless option[:system_types].split(", ").include? @current_template_type %>
+	  			<%# next unless option[:for].include? @current_template %>
 	  			<input type="checkbox"<%= ' checked="checked"' if @params.keys.include? option[:name] %> name="options_<%= option[:name] %>" id="<%= option[:name] %>" value="1"><label for="<%= option[:name] %>"><%= option[:caption] %></label> <br />
 	  		<% end %>
 	  		</fieldset>

@@ -1,7 +1,7 @@
 class FlashDrop < Liquid::Drop
   
   def initialize(flash)
-    @flash = flash || {:error => '', :notice => ''}
+    @flash = flash || {}
   end
   
   def message
@@ -30,5 +30,4 @@ class FlashDrop < Liquid::Drop
   def has_flash
     @flash[:notice] || @flash[:warning] || @flash[:error]
   end
-  
 end

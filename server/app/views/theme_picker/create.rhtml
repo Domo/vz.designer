@@ -26,20 +26,18 @@
             <label for="name">Duplicate this skin</label>
           </dt>
           <dd>
-            <select name="from" id="from" onchange="new Ajax.Updater('type', '/dashboard/get_available_template_types', { parameters: { from: $F('from') }});new Ajax.Updater('skin_description', '/dashboard/get_skin_info', { parameters: { from: $F('from') }});">
+            <select name="from" id="from" onchange="new Ajax.Updater('available_functions', '/dashboard/get_available_template_types', { parameters: { from: $F('from') }});new Ajax.Updater('skin_description', '/dashboard/get_skin_info', { parameters: { from: $F('from') }});">
               <% @themes.each do |theme| %>
               	<option value="<%= theme %>"><%= theme %></option> 
               <% end %>        
             </select>
             </span>
           </dd>
-        <dt><label for="type">set it's application type to</label></dt>
-        <dd>
-        	<select name="type" id="type">
+        <dt><label for="type">set its available functions</label></dt>
+        <dd id="available_functions">
           	<script type="text/javascript">
-          		new Ajax.Updater('type', '/dashboard/get_available_template_types', { parameters: { from: $F('from') }});
+          		new Ajax.Updater('available_functions', '/dashboard/get_available_template_types', { parameters: { from: $F('from') }});
           	</script>
-          </select>    
       	</dd>
         <dt><label for="name">and name it this</label></dt>
         <dd><input type="text" name="to" value="" id="name" class="big required validate-alphanum" /></dd>

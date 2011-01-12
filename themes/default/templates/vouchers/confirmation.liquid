@@ -4,7 +4,7 @@
     <h1><span>Confirmation</span></h1>
     <h4>Dear customer</h4>
     <p>
-      Thank you for purchasing a gift voucher for Finnstown Hotel. We look forward to welcoming the bearer of this voucher to Finnstown Hotel.<br /><br />
+      Thank you for purchasing a GAA Museum Gift Voucher. We look forward to welcoming the bearer of this voucher to the GAA Museum.<br /><br />
 
       An email confirmation has been sent to the email address supplied.<br /><br />
       
@@ -13,8 +13,7 @@
       A Gift vouchers will be sent to the delivery address supplied.<br /> 
     </p>
     <h2>
-      Order Reference:&nbsp;&nbsp;
-      #{{ order.id }}
+      Order Reference:&nbsp;&nbsp; {{ order.full_reference }}
     </h2>
   </div>
 </div><!-- confirmation -->
@@ -24,9 +23,8 @@
 <div id="booking-summary" class="narrow">
   <div class="grey-box">
     <h2>Booked vouchers</h2>
-    
-    
-      {% for voucher in selected_vouchers%}
+ 
+      {% for voucher in cart_vouchers %}
       <h2 class="subtitle">{{ voucher.name }}</h2>
       <table cellpadding="3" cellspacing="0">
         <tr>

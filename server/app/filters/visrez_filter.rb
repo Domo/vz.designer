@@ -146,6 +146,59 @@ module VisrezFilter
     input == 1 ? singular : plural
   end
   
+  # Helper method to create an ajax responder
+  #----------------------------------------------------------------------------
+  def ajax_responder(onCall, onComplete)
+    js = "<script type=\"text/javascript\">"
+    js << "Ajax.Responders.register({"
+    js << "onCreate: function() {"
+    js << onCall
+    js << "},"
+    js << "onComplete: function() {"
+    js << onComplete
+    js << "}});"
+    js << "</script>"
+    
+    return js
+  end
+  
+  # creates a form validation with default options for the given form id
+  #----------------------------------------------------------------------------
+  def javascript_validation(form_id, options = "immediate: true")
+    tag = <<-eos 
+        new Validation('#{form_id}', {#{options}});
+    eos
+  end
+  
+  # Creates field focus color changing effects for the given form
+  #----------------------------------------------------------------------------
+  def field_focus_colors(form_id)
+    '"CreateFieldFocusColorChanges("#{form_id}");'    
+  end
+  
+  # Renders the given flashdrop
+  #----------------------------------------------------------------------------
+  def render_flash(flash, element_type = "h2")
+    def start_tag(t, element_type)
+      "<#{element_type} class=\"flash-#{t}\">"  
+    end
+    
+    end_tag = "</#{element_type}>"
+    tag = ""
+
+    unless flash.notice.blank?
+      tag += start_tag("notice", element_type) + flash.notice + end_tag
+    end
+    unless flash.warning.blank?
+      tag += start_tag("warning", element_type) + flash.warning + end_tag
+    end 
+    unless flash.error.blank?
+      tag += start_tag("error", element_type) + flash.error + end_tag
+    end  
+    
+    return tag
+  end
+  
   private
   
   def get_google_include(wanted)

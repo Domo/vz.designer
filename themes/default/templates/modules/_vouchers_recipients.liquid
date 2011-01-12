@@ -1,0 +1,48 @@
+<h2 class="subtitle">Recipients <a href="#" onclick="$('voucher_recipients_table').toggle(); $('voucher__').toggle(); return false">Set one recipient for all vouchers</a></h2>
+
+<div id="recipient_forms">
+  {% for voucher_array in individual_cart_vouchers %}
+    {% for voucher in voucher_array %}
+      {% include 'modules/vouchers_recipient_form' %}
+    {% endfor %}
+  {% endfor %}
+</div>
+
+<div id="single_recipient_form">
+  {% include 'modules/vouchers_recipient_form' %}
+</div>
+
+<table id="voucher_recipients_table">
+  <thead>
+    <th>Voucher</th>
+    <th>Recipient</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for voucher_array in individual_cart_vouchers %}
+      {% for voucher in voucher_array %}
+        <tr>
+          <td>{{ voucher.name }}</td>
+          <td>
+            {% if voucher.has_recipient %}
+              {{ voucher.customer.name }}
+            {% else %}
+              No recipient set yet
+            {% endif %}
+          </td>
+          <td><a href="#" onclick="$('voucher_{{ voucher.id }}_{{ forloop.index0 }}').toggle(); $('voucher_recipients_table').toggle(); return false">Edit Recipient</a></td>
+        </tr>
+      {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  function copy_form_details(form1_id, form1_prefix, form2_id, form2_prefix) {
+    for (i = 0; i < $(form1_id).getInputs().size(); i++) {
+      element_in_other_form = $($(form1_id).getInputs()[i].id.gsub(form1_prefix, form2_prefix));
+      if (element_in_other_form != null)
+        element_in_other_form.value = $(form1_id).getInputs()[i].value;
+    }
+  }
+</script>

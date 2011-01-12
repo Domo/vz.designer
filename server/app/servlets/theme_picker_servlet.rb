@@ -81,23 +81,43 @@ class ThemePickerServlet < Servlet
     
     FileUtils.cp_r(from, to)
     
-    case @params['type']
-  	when "rooms"
+    params = correct_hashed_params
+
+    #Delete all Files which are not used in the current system
+    unless params["functions"].keys.include? "rooms"
+      Dir[to + '/templates/*.liquid'].each do |rooms_template|
+        FileUtils.rm_rf(rooms_template)
+      end
+      FileUtils.rm_rf(to + '/templates/static')
+    end
+    
+    unless params["functions"].keys.include? "events"
   		FileUtils.rm_rf(to + '/templates/tickets')
-  		FileUtils.rm_rf(to + '/templates/golf')
-  		FileUtils.rm_rf(to + '/templates/vouchers')
-		when "events"
-			Dir[to + '/templates/*.liquid'].each do |rooms_template|
-				FileUtils.rm_rf(rooms_template)
-			end
-			FileUtils.rm_rf(to + '/templates/static')
-			cookie = WEBrick::Cookie.new('template_type', 'events')
-	    cookie.path = '/'
-	    @response.cookies.push(cookie)
-		end
+  		Dir[to + '/templates/modules/_tickets_*.liquid'].each do |events_module|
+        FileUtils.rm_rf(events_module)
+      end
+  	end
+  	
+  	unless params["functions"].keys.include? "vouchers"
+  	  FileUtils.rm_rf(to + '/templates/vouchers')
+  	  Dir[to + '/templates/modules/_vouchers_*.liquid'].each do |voucher_module|
+        FileUtils.rm_rf(voucher_module)
+      end
+  	end
+  	
+  	unless params["functions"].keys.include? "golf"
+  	  FileUtils.rm_rf(to + '/templates/golf')
+  	end
+  	
+		cookie = WEBrick::Cookie.new('template_type', params["functions"].keys.first)
+	  cookie.path = '/'
+	  @response.cookies.push(cookie)
+
+    #Delete the info file and the thumbnail, the new skin should get its own
 		FileUtils.rm_rf(to + '/images/thumbnail.png')
 		FileUtils.rm_rf(to + '/info.yml')
-
+    
+    #Eventuelles SVN-Verzeichnis loeschen
     Dir[to + '/**/.svn'].each do |svndir|
       FileUtils.rm_rf(svndir)
     end
@@ -128,20 +148,22 @@ class ThemePickerServlet < Servlet
   	@assets = @assets.map {|x| x.gsub(ROOT + "/public/common/" + @v + "/", "") unless File.directory? x}.compact
 	end
 	
+	# Creates an array with all available template functions
+	#----------------------------------------------------------------------------
 	def get_available_template_types
 		skin = @params['from']
 		skin_dir = File.join(THEMES, skin)
 		options = []
 		if File.exists? File.join(skin_dir, "templates", "skin.liquid")
-			options << create_option("Rooms", "rooms")
+			options << create_checkbox("functions", "rooms", "Rooms", "validate-one-required")
 		end
 		if File.exists? File.join(skin_dir, "templates", "tickets")
-			options << create_option("Events", "events")
+			options << create_checkbox("functions", "events", "Events", "validate-one-required")
 		end
-		if options.size == 2
-			options << create_option("Rooms and Events", "roomsevents")
+		if File.exists? File.join(skin_dir, "templates", "vouchers")
+		  options << create_checkbox("functions", "vouchers", "Vouchers", "validate-one-required")
 		end
-		options = options.join
+		options = options.join("<br />")
 		render :text => options
 	end
 	
@@ -187,11 +209,33 @@ class ThemePickerServlet < Servlet
    			render :text => fp.read
       end
 	end
-    
-  private
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                       private
+#------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  # This server does not create hashes from params like functions[function] = 1
+  #----------------------------------------------------------------------------
+  def correct_hashed_params
+    params = {}
+    @params.each do |key, value|
+      if key.scan(/([a-zA-Z]*)\[([a-zA-Z]*)\]/).size > 0
+        r = key.scan(/([a-zA-Z]*)\[([a-zA-Z]*)\]/).first
+        params[r.first] = {} if params[r.first].nil?
+        params[r.first][r.last] = value
+      else
+        params[key] = value
+      end
+    end
+    return params
+  end
   
   def create_option name, option
   	'<option value="' + option + '">' + name + '</option>'
+	end
+	
+	def create_checkbox(name, value, caption, classnames = "")
+	  "<input type=\"checkbox\" name=\"#{name}[#{value}]\" value=\"1\" class=\"#{classnames}\" />#{caption}"
 	end
   
   def available_themes

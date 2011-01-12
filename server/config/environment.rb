@@ -67,6 +67,10 @@ class String
 	def to_date
 		Date.parse(self)
 	end
+	
+	def blank?
+	  self.nil? || self == ""
+	end
 end
 
 class Time

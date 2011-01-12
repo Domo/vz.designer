@@ -46,4 +46,18 @@ class ContactDrop < Liquid::Drop
     @contact.ezine == true ? 'Yes' : 'No'
   end
   
+  def position
+    @contact.position
+  end
+  
+  # Creates ErrorDrops for all available errors on this contact
+  #----------------------------------------------------------------------------
+  def field_errors
+    @contact.errors.map {|e| ErrorDrop.new(e)}
+  end
+  
+  def has_errors
+    return (not @contact.errors.empty?)
+  end
+  
 end

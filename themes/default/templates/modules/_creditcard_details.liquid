@@ -1,0 +1,38 @@
+<p class="clearfix">
+  <label for="creditcard_first_name">First name on card</label>
+  <input id="creditcard_first_name" class="required" type="text" size="29" name="creditcard[first_name]" value="{{ creditcard.first_name }}" />
+</p>
+
+<p class="clearfix">
+  <label for="creditcard_last_name">Last name on card</label>
+  <input id="creditcard_last_name" class="required" type="text" size="29" name="creditcard[last_name]" value="{{ creditcard.last_name }}" />
+</p>
+    
+<p class="clearfix">
+  <label for="creditcard_number">Card number</label>
+  <img src="{{ "images/ico_card_none.png" | common_asset }}" id="creditcard_image" alt="credit card type"/>
+  <input id="creditcard_number" class="required validate-number validate-luhn"  type="text" size="29" name="creditcard[number]" value="{{ creditcard.number }}" style=" width:160px" /> 
+  <input type="hidden" name="creditcard[type]" id="creditcard_type" />
+</p>
+
+<p id="cvv_text" class="clearfix">
+  <label for="creditcard_verification_value">CVV</label>
+  <input id="creditcard_verification_value" class="required validate-number" type="text" size="10" name="creditcard[verification_value]"  value="{{ creditcard.verification_value }}" />
+
+  <span class="whatsthis">
+    <a href="javascript:void(0);" onclick="Modalbox.show($('cvv_popup'),{title:'What\'s CVV Number?',width: 600});">What's CVV Number?</a>
+  </span>
+</p>
+
+<div id="cvv_popup"  style="display:none;">
+  <p>CVV2 is an extra 3-4 digit number located on your credit card and is used to help prevent credit card fraud. It is in no way associated with your credit card's PIN number. We request that you include this number for security purposes. Visa, Mastercard, Discover.</p>
+  <p>Your CVV2 number can be located on the back of your credit card. It is a 3 digit number located in the top-right corner of the signature box. Please refer to the images below for more information. American Express: Your CVV2 number can be located on the front of your credit card. </p>
+  <p>It is a 4 digit number located directly to the upper-right of your credit card number. Please refer to the images below for more information.</p>
+  <p><img src="{{ "images/cvv2.gif" | common_asset: common_version }}" alt="cvv2" /></p>
+</div>
+
+<p class="clearfix">
+  <label for="creditcard_month">Expiry Date</label>
+  <select id="creditcard_month" style="width: 95px;" name="creditcard[month]">{{ creditcard.options_for_months }}</select>
+  <select id="creditcard_year" style="width: 70px;" name="creditcard[year]">{{ creditcard.options_for_years }}</select>
+</p>

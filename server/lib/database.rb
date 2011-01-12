@@ -4,6 +4,7 @@ require 'room_type_image'
 require 'rate_room_type'
 require 'rate'
 require 'ticket'
+require "wsession"
 
 module Database
   
@@ -84,14 +85,32 @@ module Database
 						ev["fullname"] = c.first_name + " " + c.last_name
 				end
 			end
+		when :vouchers
+		  if _result.is_a?(Hash)
+        _result["images"] = []
+      else
+        for rec in _result
+            rec["images"] = []
+        end
+      end
   	end
   	
   	if _result.is_a?(Hash)
   		_result["my_name"] = 'Database => ' + _table.to_s
+  		if WSession.options && WSession.options.include?("records_have_errors")
+  		  _result["errors"] = [["field_with_error", "I am a validation error :)"]]
+  		else
+  		  _result["errors"] = []
+  		end
   		return _result.to_mod
   	else
   		puts 'mapping table ' + _table.to_s
   		for r in _result
+  		  if WSession.options && WSession.options.include?("records_have_errors")
+  		    r["errors"] = [["field_with_error", "I am a validation error :)"]]
+  		  else
+  		    r["errors"] = []
+  		  end
   			r["my_name"] = 'Database => ' + _table.to_s
   		end
   		return _result.map { |r| r.to_mod }

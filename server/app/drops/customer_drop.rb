@@ -55,9 +55,9 @@ class CustomerDrop < Liquid::Drop
     countries = ["Please select something", "Ireland", "England", "Scottland"]
     tag = ""
     for country in countries
-    	tag << '<option value="' + country.downcase + '">' + country + '</option>'
-    end
-    return tag
+      tag << '<option value="' + country.downcase + '">' + country + '</option>'
+     end
+     return tag
   end
   
   def contacts
@@ -67,5 +67,24 @@ class CustomerDrop < Liquid::Drop
   def contact_phone
     @customer.contacts.first.phone rescue @customer.phone
   end
+  
+  def main_contact_full_name
+    @customer.main_contact.fullname
+  end
+  
+  # Creates ErrorDrops for all available errors
+  #----------------------------------------------------------------------------
+  def field_errors
+    @customer.errors.map {|e| ErrorDrop.new(e)}
+  end
+  
+  def has_errors
+    return (not @customer.errors.empty?)
+  end
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                       private
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
   
 end

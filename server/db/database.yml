@@ -546,3 +546,20 @@ polls:
   question: 'Text field question'
   answers: ''
   answer_type: 'text'
+
+vouchers:
+-
+  id: 1
+  name: 'Test Voucher 1'
+  description: "this is a test description"
+  price: 5.00
+-
+  id: 1
+  name: 'Test Voucher 2'
+  description: "this is a test description"
+  price: 3.00
+-
+  id: 1
+  name: 'Test Voucher 2'
+  description: "this is a test description"
+  price: 7.00
