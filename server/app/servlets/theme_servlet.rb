@@ -198,6 +198,7 @@ class ThemeServlet < LiquidServlet
 	end
 	
 	def ajax_add_voucher
+	  WSession.options << "cart_contains_vouchers"
 	  build_vouchers_cart
     @current_action = "list"
     
@@ -275,8 +276,11 @@ class ThemeServlet < LiquidServlet
 	
 	def available_template_types
 		types = []
+		
 		types << "rooms" if File.exists? File.join(template_path, "skin.liquid")
 		types << "events" if File.exists? File.join(template_path, "tickets")
+		types << "vouchers" if File.exists? File.join(template_path, "vouchers")
+		
 		cookie = WEBrick::Cookie.new('template_type', types.first)
     cookie.path = '/'
     @response.cookies.push(cookie)
