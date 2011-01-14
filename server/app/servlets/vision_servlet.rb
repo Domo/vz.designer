@@ -59,7 +59,8 @@ class VisionServlet < Servlet
 	def options_for_action
 		return [{ :name => 'show_error', :caption => 'Show an error notification' },
 								 { :name => 'show_notice', :caption => 'Show a notification' },
-								 { :name => 'show_warning', :caption => 'Show a warning notification' }]
+								 { :name => 'show_warning', :caption => 'Show a warning notification' },
+								 { :name => 'records_have_errors', :caption "Server validation failed for input" }]
 	end
 	
 	def options_for_template
@@ -73,7 +74,7 @@ class VisionServlet < Servlet
 									{ :name => "voucher_images", :system_types => "vouchers", :caption => "Vouchers have images", :for => "list, checkout"},
 									{ :name => "cart_contains_vouchers", :system_types => "vouchers", :caption => "Shopping Cart contains vouchers", :for => "list, checkout"},
 									{ :name => "vouchers_have_recipients", :system_types => "vouchers", :caption => "Cart Vouchers have recipients", :for => "checkout"},
-									{ :name => 'records_have_errors', :system_types => "rooms, events, vouchers", :caption => 'Server validation failed for input', :for => 'checkout' }   									
+									{ :name => 'records_have_errors', :system_types => "vouchers", :caption => 'Vouchers have usage codes', :for => 'confirmation' } 							
 		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact

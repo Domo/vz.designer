@@ -7,7 +7,7 @@ class VoucherDrop < Liquid::Drop
   end
   
   def self.clear_cart_onclick
-    "new Ajax.Updater('shopping-cart', '/web_vouchers/ajax_clear_cart', {asynchronous:true, evalScripts:true}); return false;"
+    "window.location.href = '/'; return false"
   end
   
   def initialize(voucher, recipient = nil)
@@ -16,7 +16,7 @@ class VoucherDrop < Liquid::Drop
   end
   
   def code
-    @voucher.is_a? SoldVoucher ? @voucher.code : ""    
+    @voucher.code.nil? ? "" : @voucher.code
   end
   
   def id
