@@ -1,4 +1,3 @@
-
 ROOT =    File.expand_path(File.dirname(__FILE__) + '/../')
 THEMES =  File.expand_path(ROOT + '/../themes')
 
@@ -10,17 +9,6 @@ $LOAD_PATH.unshift(ROOT + '/vendor/rubyzip/lib')
 $LOAD_PATH.unshift(ROOT + '/lib')
 $LOAD_PATH.unshift(ROOT + '/app/models')
 $LOAD_PATH.unshift(ROOT + '/app/filters')
-$LOAD_PATH.unshift(ROOT + '/vendor/gems/ruby-debug-0.10.4/cli')
-
-#Load ruby-debug-base based on operating system
-case RUBY_PLATFORM 
-when /linux/
-  $LOAD_PATH.unshift(ROOT + '/vendor/gems/ruby-debug-base-0.10.4/lib')
-when /win/
-  $LOAD_PATH.unshift(ROOT + '/vendor/win/gems/ruby-debug-base-0.10.4-x86-mswin32/lib')
-end
-
-puts "vision is running on #{RUBY_PLATFORM}"
 
 require 'webrick'
 require 'yaml'
@@ -35,8 +23,6 @@ require 'paginate'
 require 'comment_form'
 require 'active_support/json'
 require 'date'
-require 'ruby-debug-base'
-require 'ruby-debug'
 
 require File.dirname(__FILE__) + '/version'
 
@@ -49,7 +35,6 @@ end
 
 Liquid::Template.register_tag('paginate', Paginate)
 Liquid::Template.register_tag('form', CommentForm)
-
 
 # Require mount points. thats where the servlets of this server are setup
 require File.dirname(__FILE__) + '/mounts'
