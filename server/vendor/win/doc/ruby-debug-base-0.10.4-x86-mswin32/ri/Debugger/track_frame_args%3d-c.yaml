@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Setting to <tt>true</tt> will make the debugger save argument info on calls.
+full_name: Debugger::track_frame_args=
+is_singleton: true
+name: track_frame_args=
+params: |
+  Debugger.track_frame_args = bool
+
+visibility: public

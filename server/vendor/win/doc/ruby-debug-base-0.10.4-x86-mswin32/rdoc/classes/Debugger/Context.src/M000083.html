@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>stop_frame= (Debugger::Context)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *   call-seq:
+ *      context.stop_frame(frame)
+ *
+ *   Stops when a frame with number +frame+ is activated. Implements +finish+ and +next+ commands.
+ */
+static VALUE
+context_stop_frame(VALUE self, VALUE frame)
+{
+    debug_context_t *debug_context;
+
+    debug_check_started();
+    Data_Get_Struct(self, debug_context_t, debug_context);
+    if(FIX2INT(frame) &lt; 0 &amp;&amp; FIX2INT(frame) &gt;= debug_context-&gt;stack_size)
+        rb_raise(rb_eRuntimeError, &quot;Stop frame is out of range.&quot;);
+    debug_context-&gt;stop_frame = debug_context-&gt;stack_size - FIX2INT(frame);
+
+    return frame;
+}</pre>
+</body>
+</html>

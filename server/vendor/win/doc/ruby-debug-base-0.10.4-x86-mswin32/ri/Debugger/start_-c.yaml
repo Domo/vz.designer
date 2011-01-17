@@ -1,0 +1,25 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This method is internal and activates the debugger. Use Debugger.start (from <tt>lib/ruby-debug-base.rb</tt>) instead.
+- !ruby/struct:SM::Flow::P 
+  body: The return value is the value of !Debugger.started? <em>before</em> issuing the <tt>start</tt>; That is, <tt>true</tt> is returned, unless debugger was previously started.
+- !ruby/struct:SM::Flow::P 
+  body: "If a block is given, it starts debugger and yields to block. When the block is finished executing it stops the debugger with Debugger.stop method. Inside the block you will probably want to have a call to Debugger.debugger. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Debugger.start{debugger; foo}  # Stop inside of foo\n"
+- !ruby/struct:SM::Flow::P 
+  body: Also, ruby-debug only allows one invocation of debugger at a time; nested Debugger.start's have no effect and you can't use this inside the debugger itself.
+- !ruby/struct:SM::Flow::P 
+  body: <em>Note that if you want to completely remove the debugger hook, you must call Debugger.stop as many times as you called Debugger.start method.</em>
+full_name: Debugger::start_
+is_singleton: true
+name: start_
+params: |
+  Debugger.start_ -> bool
+  Debugger.start_ { ... } -> bool
+
+visibility: public

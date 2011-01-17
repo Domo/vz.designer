@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>tracing= (Debugger::Context)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *   call-seq:
+ *      context.tracing = bool
+ *
+ *   Controls the tracing for this context.
+ */
+static VALUE
+context_set_tracing(VALUE self, VALUE value)
+{
+    debug_context_t *debug_context;
+
+    debug_check_started();
+
+    Data_Get_Struct(self, debug_context_t, debug_context);
+    if(RTEST(value))
+        CTX_FL_SET(debug_context, CTX_FL_TRACING);
+    else
+        CTX_FL_UNSET(debug_context, CTX_FL_TRACING);
+    return value;
+}</pre>
+</body>
+</html>

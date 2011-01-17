@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The code inside of the block is escaped from the debugger.
+full_name: Debugger::skip
+is_singleton: true
+name: skip
+params: |
+  Debugger.skip { block } -> obj or nil
+
+visibility: public

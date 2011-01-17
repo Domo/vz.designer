@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This method disables the debugger. It returns <tt>true</tt> if the debugger is disabled, otherwise it returns <tt>false</tt>.
+- !ruby/struct:SM::Flow::P 
+  body: <em>Note that if you want to complete remove the debugger hook, you must call Debugger.stop as many times as you called Debugger.start method.</em>
+full_name: Debugger::stop
+is_singleton: true
+name: stop
+params: |
+  Debugger.stop -> bool
+
+visibility: public

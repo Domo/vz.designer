@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns <tt>true</tt> the debugger is started.
+full_name: Debugger::started?
+is_singleton: true
+name: started?
+params: |
+  Debugger.started? -> bool
+
+visibility: public

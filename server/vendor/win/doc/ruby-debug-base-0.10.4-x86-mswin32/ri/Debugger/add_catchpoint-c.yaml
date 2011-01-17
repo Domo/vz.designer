@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets catchpoint. Returns the string passed.
+full_name: Debugger::add_catchpoint
+is_singleton: true
+name: add_catchpoint
+params: |
+  Debugger.catchpoint(string) -> string
+
+visibility: public

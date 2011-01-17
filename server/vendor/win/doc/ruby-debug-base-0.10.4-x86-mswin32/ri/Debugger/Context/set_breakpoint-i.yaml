@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets a context-specific temporary breakpoint, which can be used to implement 'Run to Cursor' debugger function. When this breakpoint is reached, it will be cleared out.
+- !ruby/struct:SM::Flow::P 
+  body: <em>source</em> is a name of a file or a class. <em>pos</em> is a line number or a method name if <em>source</em> is a class name. <em>condition</em> is a string which is evaluated to <tt>true</tt> when this breakpoint is activated.
+full_name: Debugger::Context#set_breakpoint
+is_singleton: false
+name: set_breakpoint
+params: |
+  context.set_breakpoint(source, pos, condition = nil) -> breakpoint
+
+visibility: public

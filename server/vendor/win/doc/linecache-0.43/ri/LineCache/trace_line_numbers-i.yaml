@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Return an Array of breakpoints in filename. The list will contain an entry for each distinct line event call so it is possible (and possibly useful) for a line number appear more than once.
+full_name: LineCache#trace_line_numbers
+is_singleton: false
+name: trace_line_numbers
+params: (filename, reload_on_change=false)
+visibility: public

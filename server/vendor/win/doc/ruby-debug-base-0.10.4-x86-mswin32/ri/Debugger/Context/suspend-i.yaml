@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Suspends the thread when it is running.
+full_name: Debugger::Context#suspend
+is_singleton: false
+name: suspend
+params: |
+  context.suspend -> nil
+
+visibility: public

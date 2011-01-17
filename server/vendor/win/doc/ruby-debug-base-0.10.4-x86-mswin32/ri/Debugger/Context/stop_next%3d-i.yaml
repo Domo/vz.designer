@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Stops the current context after a number of <tt>steps</tt> are made. <tt>force</tt> parameter (if true) ensures that the cursor moves from the current line.
+full_name: Debugger::Context#stop_next=
+is_singleton: false
+name: stop_next=
+params: |
+  context.step(steps, force = false)
+
+visibility: public

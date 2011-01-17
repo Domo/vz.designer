@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Adds a new breakpoint. <em>source</em> is a name of a file or a class. <em>pos</em> is a line number or a method name if <em>source</em> is a class name. <em>condition</em> is a string which is evaluated to <tt>true</tt> when this breakpoint is activated.
+full_name: Debugger::add_breakpoint
+is_singleton: true
+name: add_breakpoint
+params: |
+  Debugger.add_breakpoint(source, pos, condition = nil) -> breakpoint
+
+visibility: public

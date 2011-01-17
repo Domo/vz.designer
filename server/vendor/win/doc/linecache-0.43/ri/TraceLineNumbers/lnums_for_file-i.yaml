@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Return an array of lines numbers that could be stopped at given a file name of a Ruby program.
+full_name: TraceLineNumbers#lnums_for_file
+is_singleton: false
+name: lnums_for_file
+params: (file)
+visibility: public

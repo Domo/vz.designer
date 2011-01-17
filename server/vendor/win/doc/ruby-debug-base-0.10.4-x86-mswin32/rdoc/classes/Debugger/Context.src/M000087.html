@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>suspend (Debugger::Context)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *   call-seq:
+ *      context.suspend -&gt; nil
+ *
+ *   Suspends the thread when it is running.
+ */
+static VALUE
+context_suspend(VALUE self)
+{
+    debug_context_t *debug_context;
+
+    debug_check_started();
+
+    Data_Get_Struct(self, debug_context_t, debug_context);
+    if(CTX_FL_TEST(debug_context, CTX_FL_SUSPEND))
+        rb_raise(rb_eRuntimeError, &quot;Already suspended.&quot;);
+    context_suspend_0(debug_context);
+    return Qnil;
+}</pre>
+</body>
+</html>

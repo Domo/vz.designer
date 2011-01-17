@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the sym of the called method.
+full_name: Debugger::Context#frame_id
+is_singleton: false
+name: frame_id
+params: |
+  context.frame_method(frame_position=0) -> sym
+
+visibility: public

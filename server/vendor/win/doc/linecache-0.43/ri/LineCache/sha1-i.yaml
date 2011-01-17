@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Return SHA1 of filename.
+full_name: LineCache#sha1
+is_singleton: false
+name: sha1
+params: (filename)
+visibility: public

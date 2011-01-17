@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>stop_reason (Debugger::Context)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *   call-seq:
+ *      context.stop_reason -&gt; sym
+ *   
+ *   Returns the reason for the stop. It maybe of the following values:
+ *   :initial, :step, :breakpoint, :catchpoint, :post-mortem
+ */
+static VALUE
+context_stop_reason(VALUE self)
+{
+    debug_context_t *debug_context;
+    char * sym_name;
+
+    debug_check_started();
+
+    Data_Get_Struct(self, debug_context_t, debug_context);
+    
+    switch(debug_context-&gt;stop_reason)
+    {
+        case CTX_STOP_STEP:
+            sym_name = &quot;step&quot;;
+            break;
+        case CTX_STOP_BREAKPOINT:
+            sym_name = &quot;breakpoint&quot;;
+            break;
+        case CTX_STOP_CATCHPOINT:
+            sym_name = &quot;catchpoint&quot;;
+            break;
+        case CTX_STOP_NONE:
+        default:
+            sym_name = &quot;none&quot;;
+    }
+    if(CTX_FL_TEST(debug_context, CTX_FL_DEAD))
+        sym_name = &quot;post-mortem&quot;;
+    
+    return ID2SYM(rb_intern(sym_name));
+}</pre>
+</body>
+</html>

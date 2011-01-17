@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>frame_args_info (Debugger::Context)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *   call-seq:
+ *      context.frame_args_info(frame_position=0) -&gt; list 
+        if track_frame_args or nil otherwise
+ *
+ *   Returns info saved about call arguments (if any saved).
+ */
+static VALUE
+context_frame_args_info(int argc, VALUE *argv, VALUE self)
+{
+    VALUE frame;
+    debug_context_t *debug_context;
+
+    debug_check_started();
+    frame = optional_frame_position(argc, argv);
+    Data_Get_Struct(self, debug_context_t, debug_context);
+
+    return RTEST(track_frame_args) ? GET_FRAME-&gt;arg_ary : Qnil;
+}</pre>
+</body>
+</html>

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: LineCache#cached_script?
+is_singleton: false
+name: cached_script?
+params: (filename)
+visibility: public

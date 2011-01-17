@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Resumes the thread from the suspended mode.
+full_name: Debugger::Context#resume
+is_singleton: false
+name: resume
+params: |
+  context.resume -> nil
+
+visibility: public

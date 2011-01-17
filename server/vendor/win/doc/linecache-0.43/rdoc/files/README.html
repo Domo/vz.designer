@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Mon Jan 17 21:35:08 +0100 2011</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/LineCache.html">LineCache</a> - Module to read and cache lines of a file</h1>
+<h2>Summary</h2>
+<pre>
+  require 'linecache'
+  lines = LineCache::getlines('/tmp/myruby.rb')
+  # The following lines have same effect as the above.
+  $: &lt;&lt; '/tmp'
+  Dir.chdir('/tmp') {lines = LineCache::getlines('myruby.rb')
+
+  line = LineCache::getline('/tmp/myruby.rb', 6)
+  # Note lines[6] == line (if /tmp/myruby.rb has 6 lines)
+
+  LineCache::clear_file_cache
+  LineCache::clear_file_cache('/tmp/myruby.rb')
+  LineCache::update_cache   # Check for modifications of all cached files.
+</pre>
+<h2>Credits</h2>
+<pre>
+  This is a port of the module of the same name from the Python distribution.
+
+  The idea for how TraceLineNumbers works, and some code was taken
+  from ParseTree by Ryan Davis.
+</pre>
+<h2>Other stuff</h2>
+<table>
+<tr><td valign="top">Author:</td><td>Rocky Bernstein &lt;rockyb@rubyforge.net&gt;
+
+</td></tr>
+<tr><td valign="top">License:</td><td>Copyright (c) 2007, 2008 Rocky Bernstein Released under the GNU GPL 2
+license
+
+</td></tr>
+</table>
+<h2>Warranty</h2>
+<p>
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+</p>
+<p>
+$Id: README 63 2008-03-04 22:47:26Z rockyb $
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

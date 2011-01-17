@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: LineCache#remap_file
+is_singleton: false
+name: remap_file
+params: (from_file, to_file)
+visibility: public

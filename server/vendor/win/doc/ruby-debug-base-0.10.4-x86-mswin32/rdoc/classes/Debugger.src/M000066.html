@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>resume (Debugger)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *   call-seq:
+ *      Debugger.resume -&gt; Debugger
+ *
+ *   Resumes all contexts.
+ */
+static VALUE
+debug_resume(VALUE self)
+{
+    VALUE current, context;
+    VALUE saved_crit;
+    VALUE context_list;
+    debug_context_t *debug_context;
+    int i;
+
+    debug_check_started();
+
+    saved_crit = rb_thread_critical;
+    rb_thread_critical = Qtrue;
+    context_list = debug_contexts(self);
+
+    thread_context_lookup(rb_thread_current(), &amp;current, NULL);
+    for(i = 0; i &lt; RARRAY(context_list)-&gt;len; i++)
+    {
+        context = rb_ary_entry(context_list, i);
+        if(current == context)
+            continue;
+        Data_Get_Struct(context, debug_context_t, debug_context);
+        context_resume_0(debug_context);
+    }
+    rb_thread_critical = saved_crit;
+
+    rb_thread_schedule();
+
+    return self;
+}</pre>
+</body>
+</html>

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Steps over a <tt>steps</tt> number of times. Make step over operation on <tt>frame</tt>, by default the current frame. <tt>force</tt> parameter (if true) ensures that the cursor moves from the current line.
+full_name: Debugger::Context#step_over
+is_singleton: false
+name: step_over
+params: |
+  context.step_over(steps, frame = nil, force = false)
+
+visibility: public
