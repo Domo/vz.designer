@@ -60,7 +60,7 @@ class VisionServlet < Servlet
 		return [{ :name => 'show_error', :caption => 'Show an error notification' },
 								 { :name => 'show_notice', :caption => 'Show a notification' },
 								 { :name => 'show_warning', :caption => 'Show a warning notification' },
-								 { :name => 'records_have_errors', :caption "Server validation failed for input" }]
+								 { :name => 'records_have_errors', :caption => "Server validation failed for input" }]
 	end
 	
 	def options_for_template

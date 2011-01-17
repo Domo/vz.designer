@@ -7,6 +7,8 @@ $LOAD_PATH.unshift(ROOT + '/app/drops')
 $LOAD_PATH.unshift(ROOT + '/app/tags')
 $LOAD_PATH.unshift(ROOT + '/vendor/liquid/lib')
 $LOAD_PATH.unshift(ROOT + '/vendor/rubyzip/lib')
+$LOAD_PATH.unshift(ROOT + '/vendor/gems/ruby-debug-base-0.10.4/lib')
+$LOAD_PATH.unshift(ROOT + '/vendor/gems/ruby-debug-0.10.4/cli')
 $LOAD_PATH.unshift(ROOT + '/lib')
 $LOAD_PATH.unshift(ROOT + '/app/models')
 $LOAD_PATH.unshift(ROOT + '/app/filters')
@@ -25,6 +27,7 @@ require 'paginate'
 require 'comment_form'
 require 'active_support/json'
 require 'date'
+require 'ruby-debug'
 
 require File.dirname(__FILE__) + '/version'
 
