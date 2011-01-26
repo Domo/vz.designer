@@ -13,11 +13,24 @@ class Order
   end
   
   def total_price
-    rand(10000)+1.05
+    return @total if @total
+    @total = rand(10000)+1.05
   end
   
   def booking_fee
     return rand(5)
+  end
+  
+  def booking_fee?
+    return WSession.options.include? "booking_fee"
+  end
+  
+  def deposit
+    total_price * 0.3
+  end
+  
+  def deposit?
+    return WSession.options.include? "deposit_charged"
   end
   
   # Returns the currently set voucher prefix and self.id (like Booking references)

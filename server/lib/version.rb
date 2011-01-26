@@ -23,5 +23,5 @@ module Vision
   end
 end
 
-Vision.version        = '4.2.2'
+Vision.version        = '4.2.3'
 Vision.server_path		= 'http://admin.middleeu.visrez.com/queries/vision_version'

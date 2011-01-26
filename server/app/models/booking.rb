@@ -78,7 +78,7 @@ class Booking
 	end
 	
 	def get_charged_price
-		if WSession.options.include? "events_deposit_charged"
+		if WSession.options.include? "deposit_charged"
 			return self.deposit_amount
 		end
 		return self.total_price

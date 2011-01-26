@@ -29,7 +29,7 @@
       <table cellpadding="3" cellspacing="0">
         <tr>
           <th>{{ voucher.thumb_tag }}</th>
-          <td>Quantity: {{ voucher.quantity }}, Price: {{ (voucher.quantity * voucher.price) | format_money: '&euro;' }}</td>
+          <td>Price: {{ voucher.price) | format_money: '&euro;' }}</td>
         </tr>
       </table>
       {% endfor %}

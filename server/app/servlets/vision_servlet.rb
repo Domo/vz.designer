@@ -69,12 +69,13 @@ class VisionServlet < Servlet
 									{ :name => 'dont_show_room_images', :system_types => "rooms", :caption => 'Rooms have <b>no</b> images', :for => 'availability' },
 									{ :name => 'show_website_discount', :system_types => "events", :caption => 'Show Website Discount', :for => 'search_tickets'},
 									{ :name => 'rates_are_ticket_rates', :system_types => "rooms", :caption => 'Rates are Ticket Rates (for Rooms&Events)', :for => 'availability, occupancy, checkout, confirmation'},
-									{ :name => 'events_deposit_charged', :system_types => "events", :caption => 'Show deposit for bookings.', :for => 'terms_and_conditions, payment_details, confirmation'},
+									{ :name => 'deposit_charged', :system_types => "events, vouchers", :caption => 'Booking has Deposit', :for => 'terms_and_conditions, payment_details, confirmation, checkout, list'},
 									{ :name => "booking_has_questions", :system_types => "events", :caption => "Booking has questions", :for => "confirmation, payment_details, checkout"},
 									{ :name => "voucher_images", :system_types => "vouchers", :caption => "Vouchers have images", :for => "list, checkout"},
 									{ :name => "cart_contains_vouchers", :system_types => "vouchers", :caption => "Shopping Cart contains vouchers", :for => "list, checkout"},
 									{ :name => "vouchers_have_recipients", :system_types => "vouchers", :caption => "Cart Vouchers have recipients", :for => "checkout"},
-									{ :name => 'records_have_errors', :system_types => "vouchers", :caption => 'Vouchers have usage codes', :for => 'confirmation' } 							
+									{ :name => 'records_have_errors', :system_types => "vouchers", :caption => 'Vouchers have usage codes', :for => 'confirmation' },
+									{ :name => 'booking_fee', :system_types => "events, vouchers", :caption => 'Booking fee included', :for => 'terms_and_conditions, payment_details, confirmation, checkout, list'},
 		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact

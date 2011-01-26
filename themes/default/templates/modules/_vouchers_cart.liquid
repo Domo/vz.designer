@@ -26,14 +26,29 @@
               {% endif %}
           </tr>
         {% endfor %}
-            
+                    
         <!-- Total price row -->
         <tr class="cart-total-price">
-          <td colspan="2"></td>
+          <td colspan="2">
+            <strong>Total</strong>
+          	{% if order.booking_fee_included %}
+          		+ Booking Fee ({{ order.booking_fee | format_money: currency }})
+          	{% endif %}
+         	</td>
           <td>{{ total_quantity }}</td>
           <td>{{ total_price | format_money: currency }}</td>
           <td></td>
         </tr>
+        
+        <!-- Deposit row -->
+        {% if order.deposit_taken %}        
+          <tr class="cart-deposit">
+            <td colspan="2"><strong>Deposit</strong></td>
+            <td>{{ total_quantity }}</td>
+            <td>{{ order.deposit | format_money: currency }}</td>
+            <td></td>
+          </tr>
+        {% endif %}
       </tbody>
     </table>
 

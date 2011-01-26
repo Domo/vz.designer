@@ -20,8 +20,16 @@ class OrderDrop < Liquid::Drop
     @order.booking_fee
   end
   
-  def contains_booking_fee
-    @order.booking_fee > 0
+  def booking_fee_included
+    @order.booking_fee?
+  end
+  
+  def deposit
+    @order.deposit
+  end
+  
+  def deposit_taken
+    @order.deposit?
   end
   
   # Returns the currently set voucher prefix and self.id (like Booking references)

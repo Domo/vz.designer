@@ -22,23 +22,19 @@
 </div>
 
 <form action="{{ html.process_validation_action }}" class="common-form" method="post" id="booking-form">
+	<div id="personal-details" class="narrow">
+		<div class="boxbe">
+			<h2 class="subtitle">Personal Details</h2>
+	    {% include 'modules/customer_details' %}
+		</div>
+	</div>
 
-<div id="personal-details" class="narrow">
-  <div class="boxbe">
-    
-   <h2 class="subtitle">Personal Details</h2>
-      {% include 'modules/customer_details' %}
-  </div>
-</div><!-- personal-details -->
-
-
-
-    <div id="credit-details" class="narrow">
-    <div class="boxbe">
-      <h2 class="subtitle">Payment Details</h2>
-        {% include 'modules/creditcard_details' %}
-    </div><!-- .grey-box -->
-  </div><!-- credit-details -->
+	<div id="credit-details" class="narrow">
+		<div class="boxbe">
+		  <h2 class="subtitle">Payment Details</h2>
+		    {% include 'modules/creditcard_details' %}
+		</div><!-- .grey-box -->
+	</div><!-- credit-details -->
   
   <script type="text/javascript">
     {{ "booking-form" | javascript_validation }}

@@ -79,7 +79,6 @@ class ThemeServlet < LiquidServlet
       cu = Database.find(:random, :customers)
       @customer = CustomerDrop.new(cu)
       @contact = ContactDrop.new(cu.main_contact)
-      @order = OrderDrop.new(Order.new)
       render :type => :liquid, :action => 'vouchers/confirmation', :layout => 'vouchers/skin'
     end
   end
@@ -456,6 +455,8 @@ class ThemeServlet < LiquidServlet
     @total_price = 0
     @cart_contains_vouchers = false
     @total_quantity = 0
+    
+    @order ||= OrderDrop.new(Order.new)
     
     if WSession.options.include? "cart_contains_vouchers"
       ((rand 7)+1).times do
