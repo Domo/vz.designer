@@ -1,5 +1,4 @@
 class Voucher
-  
   def initialize(record)
     @record = record
   end
