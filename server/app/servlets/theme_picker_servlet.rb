@@ -88,6 +88,9 @@ class ThemePickerServlet < Servlet
       Dir[to + '/templates/*.liquid'].each do |rooms_template|
         FileUtils.rm_rf(rooms_template)
       end
+      FileUtils.rm_rf(to + '/templates/modules/_availability.liquid')
+      FileUtils.rm_rf(to + '/templates/modules/_search.liquid')
+      FileUtils.rm_rf(to + '/templates/modules/_visualnav.liquid')
       FileUtils.rm_rf(to + '/templates/static')
     end
     
