@@ -28,9 +28,20 @@ class Booking
 		self.event_availability = EventAvailability.new
 	end
 	
+	def full_reference
+	  "REFERENCE_PREFIX" + self.id.to_s
+	end
 	
 	def event_selected
 		Database.find(:random, :events).id
+	end
+	
+	def booking_fee
+	  WSession.options.include?("booking_fee") ? rand(4) + 1 : 0
+	end
+	
+	def booking_fee?
+	  booking_fee > 0
 	end
 	
 	def format_calendar

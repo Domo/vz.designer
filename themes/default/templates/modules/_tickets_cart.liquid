@@ -1,39 +1,67 @@
-      <table cellpadding="0" cellspacing="0" id="BE-resume">
-      	<tr>
-          <td class="first-row">Day:</td>
-          <td class="go-right">{{ booking.day | format_date_to: 'eu' }}</td>
-        </tr>
-        <tr>
-          <td>Event:</td>
-          <td class="go-right">{{ booking.event.name }}</td>
-        </tr>
-        <tr>
-          <td>Location:</td>
-          <td class="go-right">{{ booking.event.location }}</td>
-        </tr>
-        <!--tr>
-          <td>Time:</td>
-          <td class="aright">{{ booking.time.time }}</td>
-        </tr -->
-        {% for ticket in booking.requested_tickets %}
-        	<tr>
-        		<td>{{ ticket.full_ticket_information }}</td>
-        		<td class="go-right">{{ ticket.total_price | format_money: '&euro;' }}</td>
-        	</tr>
+<table cellpadding="0" cellspacing="0" id="BE-resume">
+	<tr>
+    <td class="first-row">Date:</td>
+    <td class="go-right">{{ booking.date | format_date_to: 'eu' }}</td>
+  </tr>
+  <tr>
+    <td>Event:</td>
+    <td class="go-right">{{ booking.event.name }}</td>
+  </tr>
+  <tr>
+    <td>Location:</td>
+    <td class="go-right">{{ booking.event.location }}</td>
+  </tr>
+  <!--tr>
+    <td>Time:</td>
+    <td class="aright">{{ booking.time.time }}</td>
+  </tr -->
+  {% for ticket in booking.requested_tickets %}
+  	<tr>
+  		<td>{{ ticket.full_ticket_information }}</td>
+  		<td class="go-right">{{ ticket.total_price | format_money: '&euro;' }}</td>
+  	</tr>
+  {% endfor %}
+  
+  {% if booking.booking_fee_included %}
+    <tr>
+      <td class="aright active1">Booking fee:</td>
+      <td class="aright active1">{{ booking.booking_fee | format_money: '&euro;' }}</td>
+    </tr>
+  {% endif %}  
+  
+  {% if booking.has_event_discount %}
+    <tr>
+      <td class="aright active1">Event Discount:</td>
+      <td class="aright active1">{{ booking.event_discount | format_money: '&euro;' }}</td>
+    </tr>
+  {% endif %}
+  
+  {% if booking.is_a_package_booking %}
+    <tr>
+      <td class="aright active1">Included Events:</td>
+      <td class="aright active1">
+        {% for event in booking.package_events %}
+          {{ event.name }} <br />
         {% endfor %}
-        
-        <!-- tr>
-          <td class="aright active1">Booking fee:</td>
-          <td class="aright active1">{{ booking.booking_fee | format_money: '&euro;' }}</td>
-        </tr-->
-        <tr>
-          <td class="go-right active2"><strong>Total cost:</strong></td>
-          <td class="go-right active2">{{ booking.total_price | format_money: '&euro;' }}</td>
-        </tr>
-        {% if booking.deposit_charged? %}
-	        <tr>
-	        	<td><strong>Deposit</strong></td>
-	        	<td>{{ booking.deposit | format_money: '&euro;' }}</td>
-	        </tr>
-        {% endif %}
-      </table>
+      </td>
+    </tr>
+    
+    {% if booking.has_package_discount %}
+      <tr>
+        <td class="aright active1">Package Discount:</td>
+        <td class="aright active1">{{ booking.package_discount | format_money: '&euro;' }}</td>
+      </tr>
+    {% endif %}  
+  {% endif %}
+  
+  <tr>
+    <td class="go-right active2"><strong>Total cost:</strong></td>
+    <td class="go-right active2">{{ booking.total_price | format_money: '&euro;' }}</td>
+  </tr>
+  {% if booking.deposit_charged? %}
+    <tr>
+    	<td><strong>Deposit</strong></td>
+    	<td>{{ booking.deposit | format_money: '&euro;' }}</td>
+    </tr>
+  {% endif %}
+</table>

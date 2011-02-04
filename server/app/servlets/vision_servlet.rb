@@ -76,6 +76,9 @@ class VisionServlet < Servlet
 									{ :name => "vouchers_have_recipients", :system_types => "vouchers", :caption => "Cart Vouchers have recipients", :for => "checkout"},
 									{ :name => 'records_have_errors', :system_types => "vouchers", :caption => 'Vouchers have usage codes', :for => 'confirmation' },
 									{ :name => 'booking_fee', :system_types => "events, vouchers", :caption => 'Booking fee included', :for => 'terms_and_conditions, payment_details, confirmation, checkout, list'},
+									{ :name => 'booking_package_discount', :system_types => "events", :caption => "Booking has package discount", :for => "payment_details"},
+									{ :name => 'booking_event_discount', :system_types => "events", :caption => "Booking has event discount", :for => "payment_details"},
+									{ :name => 'booking_is_package_booking', :system_types => "events", :caption => "Booked event is a package", :for => "payment_details"}
 		]
 		
 		return options.map {|o| o if o[:for].include?(@current_template)}.compact

@@ -131,6 +131,14 @@ class BookingDrop < Liquid::Drop
     @booking.booking_fee
   end  
   
+  def booking_fee_included
+    @booking.booking_fee?
+  end
+  
+  def full_reference
+    @booking.full_reference
+  end
+  
   def format_calendar
     @booking.format_calendar
   end
@@ -184,8 +192,81 @@ class BookingDrop < Liquid::Drop
 	def has_questions
 		@booking.has_questions
 	end
+	
+	#***************************************************
+	#*                 Package System                  *
+	#***************************************************
+	
+	# Returns true if the booked event is a package
+	#----------------------------------------------------------------------------
+	def is_a_package_booking
+	  return WSession.options.include? "booking_is_package_booking"
+	end
+	
+	# Returns a few events
+	#----------------------------------------------------------------------------
+	def package_events
+	  events = []
+	  
+	  if is_a_package_booking
+	    (rand(5)+1).times do
+	      events << EventDrop.new(Database.find(:random, :events))
+	    end
+	  end
+	  
+	  return events
+	end
+	
+	#***************************************************
+  #*                   Discounts                     *
+  #***************************************************
+  
+  # Returns true if either a fixed or percentage amount is set for the package
+  #----------------------------------------------------------------------------
+  def has_package_discount
+    return WSession.options.include? "booking_package_discount"
+  end
+  
+  # Returns the discount amount (fixed amount or % * ticket_prices)
+  #----------------------------------------------------------------------------
+  def package_discount
+    rand(10)
+  end
+  
+  # Returns the percentage value (or 0 if none set)
+  #----------------------------------------------------------------------------
+  def package_discount_percentage
+    rand(100)
+  end
 
-  private
+  # Returns the fixed deposit value (or 0 if none set)
+  #----------------------------------------------------------------------------
+  def package_discount_amount
+    rand(100) 
+  end
+  
+  # Returns true if a time-based event discount was used
+  #----------------------------------------------------------------------------
+  def has_event_discount
+    return WSession.options.include? "booking_event_discount"
+  end
+  
+  # Returns the event discount amount
+  #----------------------------------------------------------------------------
+  def event_discount
+    rand(4) + 0.25
+  end
+  
+  # Returns total_price - event_discount
+  #----------------------------------------------------------------------------
+  def price_with_event_discount
+    rand(50) + 0.75
+  end
+	
+#------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                       private
+#------------------------------------------------------------------------------------------------------------------------------------------------
+	
     def events
       settings = WebReservationSetting.find(:first, :conditions => ["property_id=? and is_hidden=0", @property.id])
       properties = []
