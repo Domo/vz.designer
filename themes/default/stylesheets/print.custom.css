@@ -1,5 +1,9 @@
 /* CSS Document */
 /* CSS Document */
 #search,
-#visualnav,
+#visualnav, #skiplinks,
 button#print{ display:none;}
+
+.printer { display: none; }
+
+#booking-summery {  } 

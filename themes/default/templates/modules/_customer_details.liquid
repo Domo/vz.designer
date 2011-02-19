@@ -4,56 +4,48 @@
   }
 </style>
 <fieldset>
-
 <p class="clearfix">
-  <label for="contact_first_name">First name</label>
-  <input id="contact_first_name" class="required" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
+			<label for="contact_first_name">First name</label>
+			<input id="contact_first_name" class="required" type="text" size="30" name="contact[first_name]" value="{{ contact.first_name }}" />
 </p>
-      
 <p class="clearfix">
-  <label for="contact_last_name">Last name</label>
-  <input id="contact_last_name" class="required" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
+			<label for="contact_last_name">Last name</label>
+			<input id="contact_last_name" class="required" type="text" size="30" name="contact[last_name]" value="{{ contact.last_name }}" />
 </p>
-              
 <p class="clearfix">
-  <label for="customer_address1">Address 1</label>
-  <input id="customer_address1" class="required" type="text" size="30" name="customer[address1]" value="{{ customer.address1 }}" />
+			<label for="customer_address1">Address 1</label>
+			<input id="customer_address1" class="required" type="text" size="30" name="customer[address1]" value="{{ customer.address1 }}" />
 </p>
-              
 <p class="clearfix">
-  <label for="customer_address2">Address 2</label>
-  <input id="customer_address2" type="text" size="30" name="customer[address2]" value="{{ customer.address2 }}"/>
+			<label for="customer_address2">Address 2</label>
+			<input id="customer_address2" type="text" size="30" name="customer[address2]" value="{{ customer.address2 }}"/>
 </p>
-    
 <p class="clearfix">
-  <label for="customer_city">City</label>
-  <input id="customer_city" class="required" type="text" size="30" name="customer[city]" value="{{ customer.city }}" />
-</p>  
-
-<p class="clearfix">
-  <label for="customer_postcode">Postcode</label>
-  <input id="customer_postcode" class="required" type="text" size="30" name="customer[postcode]" value="{{ customer.postcode }}" />
-</p>  
-
-<p class="clearfix">
-  <label for="customer_country">Country</label>
-  <select id="customer_country" name="customer[country]" class="required validate-selection">{{ customer.country_options_for_select }}</select>
+			<label for="customer_city">City</label>
+			<input id="customer_city" class="required" type="text" size="30" name="customer[city]" value="{{ customer.city }}" />
 </p>
-
 <p class="clearfix">
-  <label for="contact_email">Email</label>
-  <input id="contact_email" class="required validate-email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
-</p>  
-  
-<p class="clearfix">
-  <label for="contact_phone">Phone</label>
-  <input id="contact_phone" class="required validate-number" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
+			<label for="customer_postcode">Postcode</label>
+			<input id="customer_postcode" class="required" type="text" size="30" name="customer[postcode]" value="{{ customer.postcode }}" />
 </p>
-
+<p class="clearfix">
+			<label for="customer_country">Country</label>
+			<select id="customer_country" name="customer[country]" class="required validate-selection">
+						{{ customer.country_options_for_select }}
+			</select>
+</p>
+<p class="clearfix">
+			<label for="contact_email">Email</label>
+			<input id="contact_email" class="required validate-email" type="text" size="30" name="contact[email]" value="{{ contact.email }}" />
+</p>
+<p class="clearfix">
+			<label for="contact_phone">Phone</label>
+			<input id="contact_phone" class="required validate-number" type="text" size="30" name="contact[phone]"  value="{{ contact.phone }}" />
+</p>
 <p class="clearfix" id="contact-ezine">
-  <label for="contact_ezine">To accept updates and news</label>
-  <input id="contact_ezine" class="checkbox" type="checkbox" checked="checked" value="1" name="contact[ezine]" />
-  <input type="hidden" value="{{ contact.ezine }}" name="contact[ezine]"/>
-  <input type="hidden" name="contact[contact_type]" value="Main contact" />
+			<label for="contact_ezine">To accept updates and news</label>
+			<input id="contact_ezine" class="checkbox" type="checkbox" checked="checked" value="1" name="contact[ezine]" />
+			<input type="hidden" value="{{ contact.ezine }}" name="contact[ezine]"/>
+			<input type="hidden" name="contact[contact_type]" value="Main contact" />
 </p>
 </fieldset>

@@ -1,28 +1,40 @@
 <form id="voucher_{{ voucher.id }}_{{ forloop.index0 }}" onsubmit="{{ voucher_update_recipient_onsubmit }}" style="display: none">
-  <h2 class="subtitle">{{ voucher.name }}{% unless voucher %}Global recipient{% endunless %}</h2> 
-  <a href="#" onclick="copy_form_details('booking-form', 'customer', 'voucher_{{ voucher.id }}_{{ forloop.index0 }}', 'recipient_{{ voucher.id }}_{{ forloop.index0 }}'); copy_form_details('booking-form', 'contact', 'voucher_{{ voucher.id }}_{{ forloop.index0 }}', 'recipient_{{ voucher.id }}_{{ forloop.index0 }}');return false">Copy from customer</a>
-  
-  <input type="hidden" name="voucher_index" value="{{ forloop.index0 }}" />
-  <input type="hidden" name="voucher_id" value="{{ voucher.id }}" />
-  <table> 
-    <tbody>
-      <tr>
-        <td>First Name</td>
-        <td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_first_name"name="recipient[first_name]" value="{{ voucher.contact.first_name }}" /></td>
-      </tr>
-      <tr>
-        <td>Last Name</td>
-        <td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_last_name" name="recipient[last_name]" value="{{ voucher.contact.last_name }}" /></td>
-      </tr>
-      <tr>
-        <td>Address</td>
-        <td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_address1" name="recipient[address1]" value="{{ voucher.customer.address1 }}" /></td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="submit">Set recipient</button> or <a href="#" onclick="$('voucher_{{ voucher.id }}_{{ forloop.index0 }}').toggle(); $('voucher_recipients_table').toggle(); return false">Cancel</a>
+			<h2 class="subtitle">{{ voucher.name }}{% unless voucher %}Global recipient{% endunless %}</h2>
+			<a href="#" onclick="copy_form_details('booking-form', 'customer', 'voucher_{{ voucher.id }}_{{ forloop.index0 }}', 'recipient_{{ voucher.id }}_{{ forloop.index0 }}'); copy_form_details('booking-form', 'contact', 'voucher_{{ voucher.id }}_{{ forloop.index0 }}', 'recipient_{{ voucher.id }}_{{ forloop.index0 }}');return false">Copy from customer</a>
+			<input type="hidden" name="voucher_index" value="{{ forloop.index0 }}" />
+			<input type="hidden" name="voucher_id" value="{{ voucher.id }}" />
+			<table class="single_recipient">
+						<tbody>
+									<tr>
+												<td>First Name</td>
+												<td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_first_name"name="recipient[first_name]" value="{{ voucher.contact.first_name }}" /></td>
+									</tr>
+									<tr>
+												<td>Last Name</td>
+												<td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_last_name" name="recipient[last_name]" value="{{ voucher.contact.last_name }}" /></td>
+									</tr>
+									<tr>
+												<td>Address</td>
+												<td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_address1" name="recipient[address1]" value="{{ voucher.customer.address1 }}" /></td>
+									</tr>
+									<tr>
+												<td>Postcode</td>
+												<td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_postcode" name="recipient[postcode]" value="{{ voucher.customer.postcode }}" /></td>
+									</tr>
+									<tr>
+												<td>City</td>
+												<td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_city" name="recipient[city]" value="{{ voucher.customer.city }}" /></td>
+									</tr>
+									<tr>
+												<td>Email (for Confirmation)</td>
+												<td><input id="recipient_{{ voucher.id }}_{{ forloop.index0 }}_email" name="recipient[email]" value="{{ voucher.customer.email }}" /></td>
+									</tr>
+						</tbody>
+			</table>
+			<button type="submit">Set recipient</button>
+			or <a href="#" onclick="$('voucher_{{ voucher.id }}_{{ forloop.index0 }}').toggle(); $('voucher_recipients_table').toggle(); return false">Cancel</a>
 </form>
-
 <script type="text/javascript">
   {{ "voucher_" | append: voucher.id | append: "_" | append: forloop.index0 | javascript_validation }}
 </script>
+

@@ -1,34 +1,17 @@
-<div id="booking">
-  <h1>Vouchers</h1>  
-
-  {% for voucher in vouchers %}
-  <div class="boxbe">
-   
-      <h2 class="subtitle"><span>{{ voucher.name }}</span></h2>
-          <div class="voucher_left" >
-            {{ voucher.description }}  
-            <p>
-            <div style="Font-size: 30px;">{{ voucher.price | format_money: '&euro;' }}</div><br/>
-         <!--    <a href="#shopping-card" onclick="new Ajax.Updater('shopping-card', '/web_vouchers/ajax_add_voucher/{{ voucher.id }}', {asynchronous:true, evalScripts:true, onComplete:function(request){window.scrollBy(0, 20000)}}); return false;">Purchase Voucher</a> -->
-            <p>
-            {{ voucher.amount_select }}<button style="padding: 8px 30px; font-size: 14px; background-color: #2e94d4; color: rgb(255, 255, 255); font-weight: bold; text-transform: uppercase; -moz-border-radius: 5px; border-radius: 5px; " href="#shopping-card" onclick="{{ voucher.add_voucher_amount_onclick }}" value="Update Search">Buy Voucher</button> </p>
-            </p>
-          </div>
-          
-          <div class="voucher_right">
-    {{ voucher.original_image_tag }}
-    
-    </div>
-  
+<h1>Vouchers</h1>
+<div id="vouchers_container"> {% for voucher in vouchers %}
+			<div id="vouchers">
+						<h3>{{ voucher.name }}</h3>
+						{{ voucher.original_image_tag }}
+						<p>{{ voucher.description }}</p>
+						<p>{{ voucher.price | format_money: '&euro;' }}
+									{{ voucher.amount_select }}</p>
+						<button href="#shopping-card" onclick="{{ voucher.add_voucher_amount_onclick }}" value="Update Search">Add Voucher</button>
+			</div>
+			{% endfor %} </div>
+<div id="cart">
+			<h1>Selected Vouchers</h1>
+			<div id="shopping-cart" class="clearfix"> {% include 'modules/vouchers_cart' %} </div>
+			<!-- end of shopping card -->
 </div>
-      
-  {% endfor %}
-  <br style="clear: both"/>
-  <div id="cart" class="grey-box">
-    <h1>Selected Vouchers</h1>
-    <div id="shopping-cart" class="clearfix">
-      {% include 'modules/vouchers_cart' %}
-    </div><!-- end of shopping card -->
-  </div>
-
-</div>
+<div style="clear:both; width:50%"></div>

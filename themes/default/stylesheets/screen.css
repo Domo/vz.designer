@@ -88,7 +88,7 @@ input.validation-passed {} /* impossible to use that!
 								padding-right:30px;
 							*/
 
-#checkout .validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_003/images/ico_error.png") no-repeat scroll 0 center;padding-left:22px;}
+.validation-advice {color:#f00;float:left;margin-left:5px;line-height:23px;background:transparent url("https://ssl_assets.visrez.com/roomsandevents/common/v_003/images/ico_error.png") no-repeat scroll 0 center;padding-left:22px;}
 #checkout input#terms_conditions.validation-failed {border:5px solid #ff6666; outline:5px solid #ff6666}
 #checkout #advice-required-terms_conditions {text-indent:-5000em; display:none;}
 .focusonelement {background-color: #FFF7C0;}

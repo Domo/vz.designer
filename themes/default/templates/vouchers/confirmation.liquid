@@ -1,49 +1,40 @@
 <br />
 <div id="confirmation" class="narrow">
-  <div class="grey-box">
-    <h1><span>Confirmation</span></h1>
-    <h4>Dear customer</h4>
-    <p>
-      Thank you for purchasing a GAA Museum Gift Voucher. We look forward to welcoming the bearer of this voucher to the GAA Museum.<br /><br />
-
-      An email confirmation has been sent to the email address supplied.<br /><br />
-      
-      Please retain this email for your records.<br /><br />
-      
-      A Gift vouchers will be sent to the delivery address supplied.<br /> 
-    </p>
-    <h2>
-      Order Reference:&nbsp;&nbsp; {{ order.full_reference }}
-    </h2>
-  </div>
-</div><!-- confirmation -->
-
-
+			<h1>Confirmation</h1>
+			<div class="grey-box">
+						<h4>Dear customer</h4>
+						<p> Thank you for purchasing a GAA Museum Gift Voucher. We look forward to welcoming the bearer of this voucher to the GAA Museum.<br />
+									<br />
+									An email confirmation has been sent to the email address supplied.<br />
+									<br />
+									Please retain this email for your records.<br />
+									<br />
+									A Gift voucher(s) will be sent to the delivery address supplied.<br />
+						</p>
+						<h2> Order Reference:&nbsp;&nbsp; {{ order.full_reference }} </h2>
+			</div>
+</div>
+<!-- confirmation -->
 <br />
 <div id="booking-summary" class="narrow">
-  <div class="grey-box">
-    <h2>Booked vouchers</h2>
- 
-      {% for voucher in cart_vouchers %}
-      <h2 class="subtitle">{{ voucher.name }}</h2>
-      <table cellpadding="3" cellspacing="0">
-        <tr>
-          <th>{{ voucher.thumb_tag }}</th>
-          <td>Price: {{ voucher.price) | format_money: '&euro;' }}</td>
-        </tr>
-      </table>
-      {% endfor %}
-      <table>
-      <tr>
-        <th class="total"><label>Total cost:</label></th>
-        <td class="total count-money">{{ total_price | format_money: '&euro;' }}</td>
-      </tr>
-    </table>
-    
-  </div>
-</div><!-- booking-summary  -->
-
-<br />
-<div style="text-align: center; padding: 0 20px;" class="print-hide">
-    <a class="printer" href="#" onclick="window.print();">Print this page</a>
+			<h1>Booked vouchers</h1>
+			<div class="grey-box"> {% for voucher in cart_vouchers %}
+						<h2 class="subtitle">{{ voucher.name }}</h2>
+						<table cellpadding="3" cellspacing="0">
+									<tr>
+												<th>{{ voucher.thumb_tag }}</th>
+												<td>Price: {{ voucher.price) | format_money: '&euro;' }}</td>
+									</tr>
+						</table>
+						{% endfor %}
+						<table class="confirmation_total">
+									<tr>
+												<th class="total"><label>Total cost:</label></th>
+												<td class="total count-money">{{ total_price | format_money: '&euro;' }}</td>
+									</tr>
+						</table>
+			</div>
 </div>
+<!-- booking-summary  -->
+<br />
+<div style="text-align: center; padding: 0 20px;" class="print-hide"> <a class="printer" href="#" onclick="window.print();">Print this page</a> </div>

@@ -1,52 +1,50 @@
-<div style="padding: 0 1em;">
-  {{ flashd | render_flash }}
-  {% assign record = customer %}
-  {% assign record_name = "Customer Details" %}
-  {% include 'modules/errors' %}
-  {% assign record_name = "Contact Details" %}
-  {% assign record = contact %}
-  {% include 'modules/errors' %}
-</div>
-
+<div style="padding: 0 1em;"> {{ flashd | render_flash }}
+			{% assign record = customer %}
+			{% assign record_name = "Customer Details" %}
+			{% include 'modules/errors' %}
+			{% assign record_name = "Contact Details" %}
+			{% assign record = contact %}
+			{% include 'modules/errors' %} </div>
 <div id="booking-summary" class="narrow">
-  <div class="boxbe">
-    <div id="shopping-cart">
-      {% include 'modules/vouchers_cart' %}      
-  </div>
-</div><!-- booking-summary  -->
-
-<div id="personal-details" class="narrow">
-  <div class="boxbe" id="vouchers_recipients">
-    {% include 'modules/vouchers_recipients' %}
-  </div>
+<div class="checkout">
+			<h1>Choosen Vouchers</h1>
+			<div id="shopping-cart"> {% include 'modules/vouchers_cart' %} </div>
+</div>
+<!-- booking-summary  -->
+<div id="voucher_recipients_box" class="narrow">
+			<h1>Select Voucher Recipients</h1>
+			<div class="boxbe" id="vouchers_recipients"> {% include 'modules/vouchers_recipients' %} </div>
+			<div class="procced" style="text-align: center; margin: 20px 0;">
+            <button onclick="$('voucher_recipients_box').toggle(); $('booking-form').toggle(); return false">Personal Details »</button>
+      </div>  
 </div>
 
-<form action="{{ html.process_validation_action }}" class="common-form" method="post" id="booking-form">
-	<div id="personal-details" class="narrow">
-		<div class="boxbe">
-			<h2 class="subtitle">Personal Details</h2>
-	    {% include 'modules/customer_details' %}
-		</div>
-	</div>
+<form action="{{ html.process_validation_action }}" class="common-form" method="post" style="display: none" id="booking-form">
+			<div id="personal-details" class="narrow">
+						<div class="boxbe">
+									<h1 class="subtitle">Personal Details</h1>
+									{% include 'modules/customer_details' %} </div>
+			</div>
+			<div id="credit-details" class="narrow">
+						<div class="boxbe">
+									<h1 class="subtitle">Payment Details</h1>
+									<fieldset>
+									{% include 'modules/creditcard_details' %}
+									</fieldset>
+						</div>
+						<!-- .grey-box -->
+			</div>
+			
+			<!-- credit-details -->
+    	<script type="text/javascript">
+        {{ "booking-form" | javascript_validation }}
+        CreditCardOptions['cvv_field'] = 'cvv_text';
+        CreditCardOptions['image_path'] = '{{ "images/" | common_asset: "v_003" }}';
+        CreateCreditCardTypeChecker("creditcard_number");
+      </script>
 
-	<div id="credit-details" class="narrow">
-		<div class="boxbe">
-		  <h2 class="subtitle">Payment Details</h2>
-		    {% include 'modules/creditcard_details' %}
-		</div><!-- .grey-box -->
-	</div><!-- credit-details -->
-  
-  <script type="text/javascript">
-    {{ "booking-form" | javascript_validation }}
-    CreditCardOptions['cvv_field'] = 'cvv_text';
-    CreditCardOptions['image_path'] = '{{ "images/" | common_asset: "v_003" }}';
-    CreateCreditCardTypeChecker("creditcard_number");
-  </script>
-
-
-    
-    <div class="procced" style="text-align: center; margin: 20px 0;">
-     <button value="Update Search" type="submit" style="padding: 8px 30px; font-size: 14px; background-color: #2e94d4; color: rgb(255, 255, 255); font-weight: bold; text-transform: uppercase; -moz-border-radius: 5px; border-radius: 5px;">Continue to summary</button>
-      </div>
-    
+			<div class="procced" style="text-align: center; margin: 20px 0;">
+          <button onclick="$('voucher_recipients_box').toggle(); $('booking-form').toggle(); return false">Recipients «</button> or 
+          <button value="Update Search" type="submit">CONTINUE TO SUMMARY</button>
+			</div>		
 </form>

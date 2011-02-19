@@ -1,80 +1,70 @@
 <!-- Shopping Cart -->
+
 {% if cart_contains_vouchers %}
-  <form action="{{ html.checkout_action }}" class="common-form" method="post">
-    <table id="vouchers_cart_table">
-      <thead>
-        <tr>
-          <th>Voucher</th>
-          <th>Single Price</th>
-          <th>Quantity</th>
-          <th>Sub-total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for voucher in cart_vouchers %}
-          <tr id="voucher-{{ voucher.id }}">
-            <td>{{ voucher.name }}</td>
-            <td>{{ voucher.price | format_money: currency }}</td>
-            <td>{{ voucher.quantity }}</td>
-            <td>{{ voucher.price_for_quantity | format_money: currency }}</td>
-            <td>
-              {% if current_action == "list" %}
-                <a href="#" onclick="{{ voucher.add_voucher_onclick }}" title="Add one more voucher">+</a>
-                <a href="#" onclick="{{ voucher.decrease_voucher_onclick }}" title="Remove one voucher">-</a>
-                <a href="#" onclick="{{ voucher.remove_voucher_onclick }}" title="Remove all vouchers of this type">-a</a>
-              {% endif %}
-          </tr>
-        {% endfor %}
-                    
-        <!-- Total price row -->
-        <tr class="cart-total-price">
-          <td colspan="2">
-            <strong>Total</strong>
-          	{% if order.booking_fee_included %}
-          		+ Booking Fee ({{ order.booking_fee | format_money: currency }})
-          	{% endif %}
-         	</td>
-          <td>{{ total_quantity }}</td>
-          <td>{{ total_price | format_money: currency }}</td>
-          <td></td>
-        </tr>
-        
-        <!-- Deposit row -->
-        {% if order.deposit_taken %}        
-          <tr class="cart-deposit">
-            <td colspan="2"><strong>Deposit</strong></td>
-            <td>{{ total_quantity }}</td>
-            <td>{{ order.deposit | format_money: currency }}</td>
-            <td></td>
-          </tr>
-        {% endif %}
-      </tbody>
-    </table>
-
-    <!-- Hide proceed-button if we already left the vouchers list -->
-    {% if current_action == "list" %}
-      <div class="proceed">
-        <button type="submit">Proceed</button>
-      </div>
-    {% endif %}
-  </form>
-
-  <a href="#" onclick="{{ clear_cart_onclick }}">Cancel Selection</a>
-  {% if current_action != "list" %} - <a href="/web_vouchers/list">Edit Cart</a> {% endif %}
+<form action="{{ html.checkout_action }}" class="common-form" method="post">
+			<table id="vouchers_cart_table">
+						<thead>
+									<tr>
+												<th>Voucher</th>
+												<th>Single Price</th>
+												<th>Quantity</th>
+												<th>Sub-total</th>
+												<th></th>
+									</tr>
+						</thead>
+						<tbody>
+						
+						{% for voucher in cart_vouchers %}
+						<tr id="voucher-{{ voucher.id }}">
+									<td>{{ voucher.name }}</td>
+									<td>{{ voucher.price | format_money: currency }}</td>
+									<td><a href="#" onclick="{{ voucher.add_voucher_onclick }}" title="Add one more voucher"><img src="{{ "/images/add.png" alt="add" | asset_url }}" /></a>{{ voucher.quantity }} <a href="#" onclick="{{ voucher.decrease_voucher_onclick }}" title="Remove one voucher"><img src="{{ "/images/remove.png" alt="remove" | asset_url }}" /></a></td>
+									<td>{{ voucher.price_for_quantity | format_money: currency }}</td>
+									<td> {% if current_action == "list" %}<a href="#" onclick="{{ voucher.remove_voucher_onclick }}" title="Remove all vouchers of this type"><img src="{{ "/images/remove_all.png" alt="remove_all" | asset_url }}" /></a> {% endif %} 
+						</tr>
+						{% endfor %}
+						<!-- Total price row -->
+						<tr class="cart-total-price">
+									<td colspan="2"><strong>Total</strong> {% if order.booking_fee_included %}
+												+ Booking Fee ({{ order.booking_fee | format_money: currency }})
+												{% endif %} </td>
+									<td>{{ total_quantity }}</td>
+									<td>{{ total_price | format_money: currency }}</td>
+									<td></td>
+						</tr>
+						<!-- Deposit row -->
+						{% if order.deposit_taken %}
+						<tr class="cart-deposit">
+									<td colspan="2"><strong>Deposit</strong></td>
+									<td>{{ total_quantity }}</td>
+									<td>{{ order.deposit | format_money: currency }}</td>
+									<td></td>
+						</tr>
+						{% endif %}
+						</tbody>
+						
+			</table>
+			<!-- Hide proceed-button if we already left the vouchers list -->
+			{% if current_action == "list" %}
+			<div class="proceed">
+						<button type="submit">Proceed</button>
+			</div>
+			{% endif %}
+</form>
+<a href="#" onclick="{{ clear_cart_onclick }}">Cancel Selection</a> {% if current_action != "list" %} - <a href="/web_vouchers/list">Edit Cart</a> {% endif %}
 
   {% if changed_voucher_id %}
-    <script>
+<script>
         new Effect.Highlight("voucher-{{changed_voucher_id}}",{duration:1.5});
     </script>
-  {% endif %}
+{% endif %}
   
 {% else %}
   Your shopping cart is empty.
-  <!-- If we already left the list and the shopping cart is empty, go back -->
-  {% if current_action != "list" %}
-    <script type="text/javascript">
+<!-- If we already left the list and the shopping cart is empty, go back -->
+{% if current_action != "list" %}
+<script type="text/javascript">
       window.location.href = "/web_vouchers/list";
     </script>
-  {% endif %}
 {% endif %}
+{% endif %} 

@@ -50,9 +50,10 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 	    /* top & bottom margin based on font size */ 
 	    margin:1em 0; 
 	} 
-	h1,h2,h3,h4,h5,h6,strong { 
+	h1,h2,h3,h4,h5,h6 { 
 	    /*bringing boldness back to headers and the strong element*/ 
 	    font-weight:bold;  
+		 color:#8BA021;
 	} 
 	abbr,acronym { 
 	    /*indicating to users that more info is available */ 
@@ -85,7 +86,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 	} 
 	th,td { 
 	    /*borders and padding to make the table readable*/ 
-	    border:1px solid #000; 
+	   
 	    padding:.5em; 
 	} 
 	th { 
@@ -104,8 +105,6 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 	    margin-bottom:1em; 
 	} 
 /*  BASE.css */ 
-
-
 
 
 /* Clear floats */
@@ -127,15 +126,6 @@ img		{border:0;display:block;} /* Mozilla: no margini sotto le IMG per STRICT DO
 #skiplinks {display:none;} 
 hr { display:none;}
 .hide,.alt {display:none;}
-
-/* FONTS  */
-body {font: normal normal normal 80%/normal "Trebuchet MS", Arial, Verdana; }
-h1 {}
-h2 {}
-h3 {}
-a 	{text-decoration:underline;}
-a:hover 	{ text-decoration:none;}
-/* FONTS  */
 
 /* png24 works on line only. I deleted black.gif from images folder. 
 #wrapped { behavior: url("/iepngfix.htc") }
@@ -164,3 +154,7 @@ body { background-color:#fff}
 #footer {padding-top:25px; padding-bottom:15px; text-align:center; color:#666;  background:transparent url("../images/website/footer_bg.png") no-repeat left bottom;}
 #footer p {margin:0; font-size:0.9em;}
 
+a { color:#0099FF; text-decoration:none; }
+a:hover { color:#FFFFFF; background:#0099FF;  }
+
+h1 a:hover { background:none;  }

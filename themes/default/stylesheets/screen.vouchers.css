@@ -1,0 +1,36 @@
+
+/* VOUCHER LIST */
+#vouchers_list { width:100%; border:1px solid #000; }
+#vouchers { margin-bottom:20px; }
+#cart {width: 45%; float:right; }
+#vouchers img { float:left; margin:10px; }
+
+/* CHECKOUT */
+.boxbe fieldset {background: none repeat scroll 0 0 #EEEEEE;border: 1px solid #CCCCCC;}
+.boxbe fieldset {margin-bottom: 30px;padding: 10px;}
+.boxbe label {float: left;line-height: 23px;padding-left: 5px;width: 180px;}
+.boxbe input, .boxbe select, .boxbe textarea {float: left;padding: 3px 4px;width: 200px;}
+
+/* Recipient */
+.single_recipient { background:#EEE; border: 1px solid #ccc; width:100%; }
+.single_recipient td { text-align:left; }
+
+/* Vouchers Cart Table */
+#vouchers_container { float:left; width:50%; }
+#vouchers_cart_table { border: 1px solid #ccc; width:100%; }
+#vouchers_cart_table th, td {  text-align:center; border:0;  }
+#vouchers_cart_table th { background:#9cb033; color:#FFFFFF; }
+#vouchers_cart_table .cart-total-price { background:#8ba021; color:#FFFFFF; border-top:1px solid #ccc;}
+
+/* Voucher Recipients Table */
+#voucher_recipients_table { width: 100%; border: 1px solid #ccc; }
+#voucher_recipients_table th, td { border: 0;}
+#voucher_recipients_table th { background:#9cb033; color:#FFFFFF; }
+
+/* confirmation page */
+.grey-box { background: #eee; border: 1px solid #ccc; padding:10px; }
+.grey-box img { border:1px solid #ccc; }
+
+.confirmation_total { }
+
+button { padding: 8px 30px; font-size: 14px; background-color: #2e94d4; color: rgb(255, 255, 255); font-weight: bold; text-transform: uppercase; -moz-border-radius: 5px; border-radius: 5px; }
